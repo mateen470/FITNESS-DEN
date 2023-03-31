@@ -31,7 +31,12 @@ const utilityFunctions = {
             message: "FORBIDDEN!!",
           });
         }
-        return user;
+        const newAccessToken = createNewAccessToken(user);
+        return await res.status(200).json({
+          success: true,
+          message: "ACCESS GRANTED!!",
+          data: newAccessToken,
+        });
       }
     );
   },
@@ -48,6 +53,12 @@ const utilityFunctions = {
   passwordVerification: async (providedPassword, verifiedPassword) => {
     return bcrypt.compare(providedPassword, verifiedPassword);
   },
+};
+
+const createNewAccessToken = (user) => {
+  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET_KEY, {
+    expiresIn: "5m",
+  });
 };
 
 module.exports = utilityFunctions;

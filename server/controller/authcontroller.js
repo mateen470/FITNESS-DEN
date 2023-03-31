@@ -175,7 +175,7 @@ const AuthControllerFucntions = {
   },
   RefreshAccessToken: async (req, res) => {
     try {
-      const accessTicket = await req.cookie.refreshToken;
+      const accessTicket = await req.cookies.refreshToken;
 
       if (!accessTicket) {
         return await res.status(400).json({
@@ -184,21 +184,38 @@ const AuthControllerFucntions = {
         });
       }
 
-      const refreshTokenVerification =
-        await utilityFunctions.verifyRefreshtoken(accessTicket);
-      const { user } = refreshTokenVerification;
-
-      const newAccessToken = await utilityFunctions.creatAccessToken(user);
-
-      return await res.status(200).json({
-        success: true,
-        message: "ACCESS GRANTED",
-        data: newAccessToken,
-      });
+      refreshTokenVerification = await utilityFunctions.verifyRefreshtoken(
+        accessTicket
+      );
     } catch (error) {
       return await res.status(500).json({
         success: false,
         message: `UNAUTHORIZED!! ${error.message}`,
+      });
+    }
+  },
+  LogOut: async (req, res) => {
+    try {
+      const accessCookie = await req.cookies.refreshToken;
+      if (!accessCookie) {
+        return await res.status(400).json({
+          success: false,
+          message: "CAN'T LOGOUT!!",
+        });
+      }
+      await res.clearCookie("refreshToken", {
+        httpOnly: true,
+        secure: true,
+        sameSite: "None",
+      });
+      return await res.status(200).json({
+        success: true,
+        message: "LOGOUT SUCCESSFULL!!",
+      });
+    } catch (error) {
+      return await res.status(500).json({
+        success: false,
+        message: `FAILED TO LOGOUT!! ${error.message}`,
       });
     }
   },
