@@ -26,7 +26,7 @@ const AuthControllerFucntions = {
         return await res
           .status(400)
           .json({ success: false, message: "USER ALREADY EXIST!!" });
-      } else if (password.length < 8) {
+      } else if (password.length <= 8) {
         return await res.status(400).json({
           success: false,
           message: "PASSWORD SHOULD BE MORE THAN 8 CHARACTERS !!",
@@ -105,7 +105,74 @@ const AuthControllerFucntions = {
       });
     }
   },
-  LogIn: async (req, res) => {},
+  LogIn: async (req, res) => {
+    try {
+      const { email, password } = req.body;
+
+      if (!email || !password) {
+        return await res
+          .status(400)
+          .json({ success: false, message: "PLEASE FILL IN ALL FIELDS!!" });
+      }
+
+      if (!utilityFunctions.emailSyntaxChecker(email)) {
+        return await res.status(400).json({
+          success: false,
+          message: "INVALID EMAIL",
+        });
+      }
+
+      const verifiedUser = await User.findOne({ email });
+
+      if (!verifiedUser) {
+        return await res.status(400).json({
+          success: false,
+          message: "EMAIL DOES NOT EXIST PLEASE SIGNUP!!",
+        });
+      } else if (password.length <= 8) {
+        return await res.status(400).json({
+          success: false,
+          message: "PASSWORD SHOULD BE MORE THAN 8 CHARACTERS !!",
+        });
+      }
+
+      const verifiedPassword = await utilityFunctions.passwordVerification(
+        password,
+        verifiedUser.password
+      );
+
+      if (!verifiedPassword) {
+        return await res.status(400).json({
+          success: false,
+          message: "INCORRECT PASSWORD!!",
+        });
+      }
+
+      const accessToken = await utilityFunctions.creatAccessToken(verifiedUser);
+      const refreshToken = await utilityFunctions.creatRefreshToken(
+        verifiedUser
+      );
+
+      await res.cookie("refreshToken", refreshToken, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "None",
+        // path: "/fitness-den/refreshToken",
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+      });
+
+      return await res.staus(200).json({
+        success: true,
+        message: "SIGNIN PROCESS SUCCESSFULL!!",
+        data: accessToken,
+      });
+    } catch (error) {
+      return await res.status(500).json({
+        success: false,
+        message: `SIGNIN PROCESS FAILED!! ${error.message}`,
+      });
+    }
+  },
   RefreshAccessToken: async (req, res) => {},
   ForgotPassword: async (req, res) => {},
   ResetPassword: async (req, res) => {},
