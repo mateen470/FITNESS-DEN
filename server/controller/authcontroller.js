@@ -173,7 +173,35 @@ const AuthControllerFucntions = {
       });
     }
   },
-  RefreshAccessToken: async (req, res) => {},
+  RefreshAccessToken: async (req, res) => {
+    try {
+      const accessTicket = await req.cookie.refreshToken;
+
+      if (!accessTicket) {
+        return await res.status(400).json({
+          success: false,
+          message: `UNAUTHORIZED!! ${error.message}`,
+        });
+      }
+
+      const refreshTokenVerification =
+        await utilityFunctions.verifyRefreshtoken(accessTicket);
+      const { user } = refreshTokenVerification;
+
+      const newAccessToken = await utilityFunctions.creatAccessToken(user);
+
+      return await res.status(200).json({
+        success: true,
+        message: "ACCESS GRANTED",
+        data: newAccessToken,
+      });
+    } catch (error) {
+      return await res.status(500).json({
+        success: false,
+        message: `UNAUTHORIZED!! ${error.message}`,
+      });
+    }
+  },
   ForgotPassword: async (req, res) => {},
   ResetPassword: async (req, res) => {},
 };

@@ -20,6 +20,21 @@ const utilityFunctions = {
       expiresIn: "7d",
     });
   },
+  verifyRefreshtoken: async (token) => {
+    jwt.verify(
+      token,
+      process.env.REFRESH_TOKEN_SECRET_KEY,
+      async (error, user) => {
+        if (error) {
+          return await res.status(403).json({
+            success: false,
+            message: "FORBIDDEN!!",
+          });
+        }
+        return user;
+      }
+    );
+  },
   emailSyntaxChecker: async (email) => {
     const emailChecker =
       /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
