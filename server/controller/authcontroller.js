@@ -1,6 +1,6 @@
 import User from "../model/schema.js";
-import utilityFunctions from "../utility/utilityfunctions";
-import { sendEmail } from "../email/sendemail/js";
+import utilityFunctions from "../utility/utilityfunctions.js";
+import { sendEmail } from "../email/sendemail.js";
 
 const AuthControllerFunctions = {
   SignUp: async (req, res) => {
