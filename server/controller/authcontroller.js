@@ -219,7 +219,61 @@ const AuthControllerFucntions = {
       });
     }
   },
-  ForgotPassword: async (req, res) => {},
+  ForgotPassword: async (req, res) => {
+    try {
+      const { email } = req.body;
+
+      if (!utilityFunctions.emailSyntaxChecker(email)) {
+        return await res.status(400).json({
+          success: false,
+          message: "INVALID EMAIL",
+        });
+      }
+
+      const verifiedEmail = await User.findOne({ email });
+      if (!verifiedEmail) {
+        return await res.status(400).json({
+          success: false,
+          message: "EMAIL DOES NOT EXIST!!",
+        });
+      }
+
+      const accessTokenForgotPassword = await utilityFunctions.creatAccessToken(
+        { id: verifiedEmail.id }
+      );
+
+      const clientSideResetPasswordPageLink = `${process.env.CLIENT_SIDE_URL}/fitness-den/reset-password/${accessTokenForgotPassword}`;
+
+      const message = ` <div style="max-width: 700px; margin:auto; border: 10px solid #ddd; padding: 50px 20px; font-size: 110%;">
+      <h2 style="text-align: center; text-transform: uppercase;color: teal;">Welcome to the ✮FITNESS DEN✮</h2>
+      <p>
+          Just click the button below to reset your password.
+      </p>
+      
+      <a href=${clientSideResetPasswordPageLink} style="background: blue; text-decoration: none; color: white; padding: 10px 20px; margin: 10px 0; display: inline-block;">RESET PASSWORD!</a>
+  
+      <p>If the button doesn't work for any reason, you can also click on the link below:</p>
+  
+      <div>${clientSideResetPasswordPageLink}</div>
+      </div>`;
+
+      sendEmail({
+        to: verifiedEmail.email,
+        subject: "PASSWORD RESET REQUEST",
+        text: message,
+      });
+
+      return await res.status(200).json({
+        success: true,
+        message: "RESET PASSWORD LINK SENT TO THE PROVIDED EMAIL!!",
+      });
+    } catch (error) {
+      return await res.status(500).json({
+        success: false,
+        message: `FORGOT PASSWORD PROCESS FAILED!! ${error.message}`,
+      });
+    }
+  },
   ResetPassword: async (req, res) => {},
 };
 
