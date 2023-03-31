@@ -2,7 +2,7 @@ import User from "../model/schema.js";
 import utilityFunctions from "../utility/utilityfunctions";
 import { sendEmail } from "../email/sendemail/js";
 
-const AuthControllerFucntions = {
+const AuthControllerFunctions = {
   SignUp: async (req, res) => {
     try {
       const { name, email, password } = req.body;
@@ -302,4 +302,4 @@ const AuthControllerFucntions = {
   },
 };
 
-module.exports = AuthControllerFucntions;
+module.exports = AuthControllerFunctions;
