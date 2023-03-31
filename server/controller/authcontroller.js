@@ -274,7 +274,32 @@ const AuthControllerFucntions = {
       });
     }
   },
-  ResetPassword: async (req, res) => {},
+  ResetPassword: async (req, res) => {
+    try {
+      const { password } = req.body;
+      const updatedHashedPassword = await utilityFunctions.passwordHashing(
+        password
+      );
+
+      await User.findOneAndUpdate(
+        {
+          _id: req.user.id,
+        },
+        {
+          password: updatedHashedPassword,
+        }
+      );
+      return await res.status(200).json({
+        success: true,
+        message: "PASSWORD HAS BEEN SUCCESSFULLY UPDATED!!",
+      });
+    } catch (error) {
+      return await res.status(500).json({
+        success: false,
+        message: `RESET PASSWORD PROCESS FAILED!! ${error.message}`,
+      });
+    }
+  },
 };
 
 module.exports = AuthControllerFucntions;
