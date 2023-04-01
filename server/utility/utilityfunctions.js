@@ -1,5 +1,5 @@
-import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 const utilityFunctions = {
   creatActivationToken: async (newUser) => {
@@ -46,8 +46,8 @@ const utilityFunctions = {
     return emailChecker.test(email);
   },
   passwordHashing: async (password) => {
-    const salt = bcrypt.genSalt(10);
-    const newHashedPassword = bcrypt.hash(password, salt);
+    const salt = await bcrypt.genSalt(10);
+    const newHashedPassword = await bcrypt.hash(password, salt);
     return newHashedPassword;
   },
   passwordVerification: async (providedPassword, verifiedPassword) => {

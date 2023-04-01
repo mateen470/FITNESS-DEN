@@ -1,10 +1,10 @@
-import nodemailer from "nodemailer";
+const nodemailer = require("nodemailer");
 
 const sendEmail = (payload) => {
   const emailCarrier = nodemailer.createTransport({
-    service: process.env.EMAIL_SERVICE,
+    service:'gmail',
     auth: {
-      user: process.env.EMAIL_USERNAME,
+      user: process.env.EMAIL_FROM,
       pass: process.env.EMAIL_PASSWORD,
     },
   });
@@ -13,12 +13,15 @@ const sendEmail = (payload) => {
     from: process.env.EMAIL_FROM,
     to: payload.to,
     subject: payload.subject,
-    html: paylaod.text,
+    html: payload.text,
   };
 
   emailCarrier.sendMail(mailPayload, function (err, info) {
-    if (err) console.log(err);
-    console.log("EMAIL SENT SUCCESSFULLY!!", info);
+    if (err) {
+      console.log("EMAIL SENDING FAILED!!", err);
+    } else {
+      console.log("EMAIL SENT!!", info);
+    }
   });
 };
 

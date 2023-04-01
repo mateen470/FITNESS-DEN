@@ -1,7 +1,7 @@
-import express from "express";
+const express = require("express");
 const router = express.Router();
-import AuthControllerFunctions from "../controller/authcontroller.js";
-import middleWare from "../middleware/middleware.js";
+const AuthControllerFunctions = require("../controller/authcontroller");
+const middleWare = require("../middleware/middleware");
 
 router.post("/signup", AuthControllerFunctions.SignUp);
 router.post("/activation", AuthControllerFunctions.AccountActivation);

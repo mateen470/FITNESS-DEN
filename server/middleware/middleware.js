@@ -1,9 +1,9 @@
-import jwt from "jsonwebtoken";
+const jwt = require("jsonwebtoken");
 
 const middleWare = {
   tokenVerificationOfResetPasswordPage: async (req, res, next) => {
     try {
-      const token = await req.headers("Authorization");
+      const token = await req.headers.authorization;
 
       if (!token) {
         return await res.status(400).json({

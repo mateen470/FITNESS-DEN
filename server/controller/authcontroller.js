@@ -1,6 +1,6 @@
-import User from "../model/schema.js";
-import utilityFunctions from "../utility/utilityfunctions.js";
-import { sendEmail } from "../email/sendemail.js";
+const User = require("../model/schema");
+const utilityFunctions = require("../utility/utilityfunctions");
+const sendEmail = require("../email/sendemail");
 
 const AuthControllerFunctions = {
   SignUp: async (req, res) => {
@@ -31,22 +31,21 @@ const AuthControllerFunctions = {
           success: false,
           message: "PASSWORD SHOULD BE MORE THAN 8 CHARACTERS !!",
         });
-      }
+      } else {
+        const hashedPassword = await utilityFunctions.passwordHashing(password);
 
-      const hashedPassword = await utilityFunctions.passwordHashing(password);
+        newUserData = {
+          name,
+          email,
+          password: hashedPassword,
+        };
+        const activationToken = await utilityFunctions.creatActivationToken(
+          newUserData
+        );
 
-      newUserData = {
-        name,
-        email,
-        password: hashedPassword,
-      };
+        const clientSideActivationPageLink = `${process.env.CLIENT_SIDE_URL}/fitness-den/activation/${activationToken}`;
 
-      const activationToken = await utilityFunctions.creatActivationToken(
-        newUserData
-      );
-      const clientSideActivationPageLink = `${process.env.CLIENT_SIDE_URL}/fitness-den/activation/${activationToken}`;
-
-      const message = `<div style="max-width: 700px; margin:auto; border: 10px solid #ddd; padding: 50px 20px; font-size: 110%;">
+        const message = `<div style="max-width: 700px; margin:auto; border: 10px solid #ddd; padding: 50px 20px; font-size: 110%;">
       <h2 style="text-align: center; text-transform: uppercase;color: teal;">Welcome to the ✮FITNESS DEN✮</h2>
       <p>Congratulations! You're almost set to start using ✮FITNESS DEN✮
           Just click the button below to validate your email address.
@@ -60,17 +59,18 @@ const AuthControllerFunctions = {
       </div>
   `;
 
-      await sendEmail({
-        to: newUserData.email,
-        subject: "Email Verification ",
-        text: message,
-      });
+        await sendEmail({
+          to: newUserData.email,
+          subject: "Email Verification ",
+          text: message,
+        });
 
-      return await res.status(200).json({
-        success: true,
-        message: "SIGNUP PROCESS SUCCESFULL !!",
-        user: newUserData,
-      });
+        return await res.status(200).json({
+          success: true,
+          message: "SIGNUP PROCESS SUCCESFULL !!",
+          user: newUserData,
+        });
+      }
     } catch (error) {
       return await res.status(500).json({
         success: false,
@@ -148,10 +148,14 @@ const AuthControllerFunctions = {
         });
       }
 
-      const accessToken = await utilityFunctions.creatAccessToken(verifiedUser);
-      const refreshToken = await utilityFunctions.creatRefreshToken(
-        verifiedUser
-      );
+      const accessToken = await utilityFunctions.creatAccessToken({
+        id: verifiedUser.id,
+      });
+      const refreshToken = await utilityFunctions.creatRefreshToken({
+        id: verifiedUser.id,
+        name: verifiedUser.name,
+        role: verifiedUser.role,
+      });
 
       await res.cookie("refreshToken", refreshToken, {
         httpOnly: true,
@@ -161,7 +165,7 @@ const AuthControllerFunctions = {
         maxAge: 7 * 24 * 60 * 60 * 1000,
       });
 
-      return await res.staus(200).json({
+      return await res.status(200).json({
         success: true,
         message: "SIGNIN PROCESS SUCCESSFULL!!",
         data: accessToken,
@@ -175,12 +179,12 @@ const AuthControllerFunctions = {
   },
   RefreshAccessToken: async (req, res) => {
     try {
-      const accessTicket = await req.cookies.refreshToken;
+      accessTicket = await req.cookies.refreshToken;
 
       if (!accessTicket) {
         return await res.status(400).json({
           success: false,
-          message: `UNAUTHORIZED!! ${error.message}`,
+          message: "UNAUTHORIZED!!",
         });
       }
 
@@ -196,13 +200,6 @@ const AuthControllerFunctions = {
   },
   LogOut: async (req, res) => {
     try {
-      const accessCookie = await req.cookies.refreshToken;
-      if (!accessCookie) {
-        return await res.status(400).json({
-          success: false,
-          message: "CAN'T LOGOUT!!",
-        });
-      }
       await res.clearCookie("refreshToken", {
         httpOnly: true,
         secure: true,

@@ -1,7 +1,13 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
 
-mongoose.connect(process.env.DATABASE).then(()=>{
-    console.log("DATABASE CONNECTED SUCCESSFULLY!!")
-}).catch((error)=>{
-    console.log("FAILED TO CONNECT TO DATABASE",error)
-})
+dotenv.config();
+
+mongoose
+  .connect(process.env.DATABASE)
+  .then(() => {
+    console.log("DATABASE CONNECTED SUCCESSFULLY!!");
+  })
+  .catch((error) => {
+    console.log("FAILED TO CONNECT TO DATABASE", error);
+  });
