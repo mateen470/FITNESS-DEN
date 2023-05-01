@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useRef } from "react";
 import Hero from "../../components/home-sections/Hero";
-import { Box, Container } from "@mui/material";
+import Services from "../../components/home-sections/Services";
+import { Box } from "@mui/material";
 const Home = () => {
+  const sectionRef = useRef(null);
+
+  const scrollToSection = () => {
+    sectionRef.current.scrollIntoView({ behavior: "smooth" });
+  };
   return (
     <Box>
-      <Hero />
+      <Hero scrollToSection={scrollToSection} />
+      <Box ref={sectionRef}>
+        <Services />
+      </Box>
     </Box>
   );
 };

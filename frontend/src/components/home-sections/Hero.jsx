@@ -1,21 +1,14 @@
 import Typography from "@mui/material/Typography";
 import React, { useEffect, useState } from "react";
-import { Box, Container } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { Box, Button, Container } from "@mui/material";
 import { motion } from "framer-motion";
-
+import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 import bannerImage from "../../assets/banner.svg";
 import NavBar from "./NavBar";
 
-const Hero = () => {
+const Hero = ({ scrollToSection }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [width, setWidth] = useState(window.innerWidth);
-  const aspectRatio = 1;
-  const minHeight = Math.max(
-    width * aspectRatio,
-    (40 * window.innerHeight) / 100
-  );
-
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoaded(true);
@@ -37,7 +30,8 @@ const Hero = () => {
         backgroundRepeat: "no-repeat",
         backgroundSize: "100% auto",
         minWidth: "100%",
-        minHeight: `${minHeight}px`,
+        minHeight: `55vw`,
+        mb: 0,
       }}
     >
       {isLoaded && (
@@ -64,7 +58,7 @@ const Hero = () => {
               <Typography
                 color={"white"}
                 display={"inline-block"}
-                sx={{ fontSize: "5vw" }}
+                sx={{ fontSize: "5vw", textShadow: "3px 0px 0px purple" }}
               >
                 own your
                 <Typography
@@ -74,6 +68,7 @@ const Hero = () => {
                     backgroundClip: "text",
                     webkitBackgroundClip: "text",
                     color: "transparent",
+                    textShadow: "none",
                   }}
                   color={"white"}
                   display={"inline-block"}
@@ -87,6 +82,28 @@ const Hero = () => {
           </motion.div>
         </>
       )}
+      <Box
+        sx={{
+          textAlign: "center",
+          position: "absolute",
+          bottom: "35px",
+          left: "45%",
+        }}
+      >
+        <Button
+          onClick={scrollToSection}
+          sx={{
+            color: "white",
+            textTransform: "none",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          Explore More
+          <KeyboardDoubleArrowDownIcon />
+        </Button>
+      </Box>
     </Container>
   );
 };
