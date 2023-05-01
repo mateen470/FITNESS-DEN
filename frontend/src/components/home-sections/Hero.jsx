@@ -2,11 +2,19 @@ import Typography from "@mui/material/Typography";
 import React, { useEffect, useState } from "react";
 import { Box, Container } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import bannerImage from "../../assets/banner.svg";
 import { motion } from "framer-motion";
+
+import bannerImage from "../../assets/banner.svg";
+import NavBar from "./NavBar";
 
 const Hero = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [width, setWidth] = useState(window.innerWidth);
+  const aspectRatio = 1;
+  const minHeight = Math.max(
+    width * aspectRatio,
+    (40 * window.innerHeight) / 100
+  );
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -15,117 +23,69 @@ const Hero = () => {
 
     return () => clearTimeout(timer);
   }, []);
-
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   return (
     <Container
       sx={{
+        position: "relative",
         backgroundImage: `url(${bannerImage})`,
-        backgroundPosition: "center",
+        backgroundPosition: "top center",
         backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-        width: "100%",
-        height: "100vh",
+        backgroundSize: "100% auto",
+        minWidth: "100%",
+        minHeight: `${minHeight}px`,
       }}
     >
       {isLoaded && (
-        <motion.div
-          initial={{ x: -200, y: 150 }}
-          animate={{ x: 10, y: 150 }}
-          transition={{ duration: 1, type: "spring", bounce: 0.6 }}
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-start",
-          }}
-        >
-          <Box>
-            <Typography
-              variant="h2"
-              color={"white"}
-              fontFamily="Lato, sans-serif"
-              display={"inline-block"}
-            >
-              Own Your
-              <Typography
-                style={{
-                  backgroundImage: "linear-gradient(#790D83, #7A5CFF)",
-                  backgroundClip: "text",
-                  webkitBackgroundClip: "text",
-                  color: "transparent",
-                }}
-                variant="h1"
-                color={"white"}
-                fontFamily="Lato, sans-serif"
-                display={"inline-block"}
-                ml={1}
-              >
-                Fitness
-              </Typography>
-            </Typography>
-            <Typography
-              variant="h5"
-              color={"white"}
-              fontFamily="Lato, sans-serif"
-              ml={1}
-            >
-              The All-in-One Solution for a Fit and Healthy You!
-            </Typography>
+        <>
+          <NavBar />
+          <motion.div
+            initial={{ x: -50, opacity: 0 }}
+            animate={{ y: 10, x: width > 1400 ? "7rem" : "5rem", opacity: 1 }}
+            transition={{ duration: 1, type: "spring", bounce: 0.6 }}
+            style={{ minHeight: "100%" }}
+          >
             <Box
               sx={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                transform: "rotate(90deg)",
+                transformOrigin: "top left",
                 display: "flex",
                 alignItems: "center",
-                gap: 2,
-                mt: 5,
-                ml: 15,
+                justifyContent: "flex-start",
               }}
             >
-              <NavLink>
+              <Typography
+                color={"white"}
+                display={"inline-block"}
+                sx={{ fontSize: "5vw" }}
+              >
+                own your
                 <Typography
-                  sx={{
-                    backgroundImage:
-                      "linear-gradient(to left,#790D83, #7A5CFF)",
-                    display: "inline-block",
-                    px: 2,
-                    py: 0.5,
-                    borderRadius: 1,
-                    textAlign: "center",
-                    transition: "scale 0.3s ease",
-                    "&:hover": {
-                      scale: "0.9 !important",
-                    },
+                  style={{
+                    background:
+                      " linear-gradient( rgba(92, 58, 180, 1) ,rgba(134, 69, 252, 1) ) ",
+                    backgroundClip: "text",
+                    webkitBackgroundClip: "text",
+                    color: "transparent",
                   }}
-                  variant="h6"
                   color={"white"}
-                  fontFamily="Lato, sans-serif"
+                  display={"inline-block"}
+                  ml={1}
+                  sx={{ fontSize: "5vw" }}
                 >
-                  Join Now!
+                  FITNESS
                 </Typography>
-              </NavLink>
-              <NavLink>
-                <Typography
-                  variant="h6"
-                  color={"white"}
-                  fontFamily="Lato, sans-serif"
-                  sx={{
-                    backgroundImage:
-                      "linear-gradient(to left,#790D83, #7A5CFF)",
-                    display: "inline-block",
-                    px: 2,
-                    py: 0.5,
-                    borderRadius: 1,
-                    textAlign: "center",
-                    transition: "scale 0.3s ease",
-                    "&:hover": {
-                      scale: "0.9 !important",
-                    },
-                  }}
-                >
-                  Explore Services
-                </Typography>
-              </NavLink>
+              </Typography>
             </Box>
-          </Box>
-        </motion.div>
+          </motion.div>
+        </>
       )}
     </Container>
   );
