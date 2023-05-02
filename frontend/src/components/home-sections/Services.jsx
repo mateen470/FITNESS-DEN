@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Box,
   Card,
@@ -8,7 +8,6 @@ import {
   Grid,
   Paper,
   Container,
-  CardMedia,
 } from "@mui/material";
 import blogCard from "../../assets/blogCard.svg";
 import blogSide from "../../assets/blogSide.svg";
@@ -112,8 +111,6 @@ const CustomCard = ({ data }) => {
           height: "100%",
           padding: 2,
           cursor: "pointer",
-          borderTopRightRadius: "20%",
-          borderBottomLeftRadius: "20%",
           background: "rgba(255, 255, 255, 0.336)",
         }}
       >
@@ -127,7 +124,13 @@ const CustomCard = ({ data }) => {
         </CardContent>
       </Card>
 
-      <Modal open={isExpanded} onClose={handleClose} sx={{ border: "none" }}>
+      <Modal
+        open={isExpanded}
+        onClose={handleClose}
+        sx={{
+          outline: "none", // Add this line
+        }}
+      >
         <Paper
           sx={{
             position: "fixed",
@@ -142,6 +145,7 @@ const CustomCard = ({ data }) => {
             backgroundImage: `url(${data.cardImage})`,
             backgroundPosition: "center",
             backgroundSize: "cover",
+            elevation: 0,
           }}
           onClick={handleClose}
         >
@@ -157,6 +161,16 @@ const CustomCard = ({ data }) => {
   );
 };
 const Services = () => {
+  useEffect(() => {
+    preloadImages();
+  }, []);
+
+  const preloadImages = () => {
+    cardsData.forEach((data) => {
+      const img = new Image();
+      img.src = data.cardImage;
+    });
+  };
   return (
     <Container>
       <Typography color={"white"} variant="h2" textAlign={"center"} my={4}>
