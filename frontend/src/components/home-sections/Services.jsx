@@ -269,6 +269,7 @@ const Services = () => {
                 >
                   <img
                     src={data.sideImage}
+                    alt="CARD IMAGES"
                     style={{
                       width: index === 0 ? "300px" : "250px",
                       height: index === 0 ? "200px" : "250px",
@@ -289,6 +290,7 @@ const Services = () => {
                 >
                   <img
                     src={data.sideImage}
+                    alt="CARD IMAGES"
                     style={{
                       width: index === 1 || index === 5 ? "300px" : "250px",
                       height: index === 1 || index === 5 ? "300px" : "250px",
