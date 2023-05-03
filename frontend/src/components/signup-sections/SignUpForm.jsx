@@ -1,22 +1,35 @@
 import React, { useState } from "react";
 import { Typography, Box } from "@mui/material";
 import { NavLink } from "react-router-dom";
-
+import axios from "axios";
 const SignUpForm = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
   });
-
+  const { name, email, password } = formData;
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
-    // Send formData to backend
+    try {
+      console.log(name, email, password);
+      const registerRequest = await axios.post(
+        "http://localhost:5000/fitness-den/signup",
+        {
+          name,
+          email,
+          password,
+        }
+      );
+      console.log(registerRequest.message);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

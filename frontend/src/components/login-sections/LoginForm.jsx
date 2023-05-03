@@ -1,21 +1,30 @@
 import React, { useState } from "react";
 import { Typography, Box } from "@mui/material";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-
+  const { email, password } = formData;
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
-    // Send formData to backend
+    try {
+      const loginRequest = await axios.post(
+        "http://localhost:5000/fitness-den/login",
+        { email, password }
+      );
+      console.log(loginRequest);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

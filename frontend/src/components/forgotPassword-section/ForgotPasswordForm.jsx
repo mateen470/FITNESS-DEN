@@ -1,18 +1,27 @@
 import React, { useState } from "react";
 import { Box, Container, Typography } from "@mui/material";
+import axios from "axios";
 const ForgotPasswordForm = () => {
   const [formData, setFormData] = useState({
     email: "",
   });
-
+  const { email } = formData;
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
-    // Send formData to backend
+    try {
+      const forgotPasswordRequest = await axios.post(
+        "http://localhost:5000/fitness-den/forgotPassword",
+        { email }
+      );
+      console.log(forgotPasswordRequest);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <Container

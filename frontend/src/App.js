@@ -5,6 +5,7 @@ import SignUp from "./pages/auth/SignUp";
 import Login from "./pages/auth/LogIn";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import ResetPassword from "./pages/auth/ResetPassword";
+import ActivationPage from "./pages/auth/ActivationPage";
 const App = () => {
   return (
     <>
@@ -13,7 +14,14 @@ const App = () => {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgot" element={<ForgotPassword />} />
-        <Route path="/reset" element={<ResetPassword />} />
+        <Route
+          path="/fitness-den/reset-password/:accessTokenForgotPassword"
+          element={<ResetPassword />}
+        />
+        <Route
+          path="/fitness-den/activation/:activationToken"
+          element={<ActivationPage />}
+        />
       </Routes>
     </>
   );

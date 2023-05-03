@@ -1,18 +1,32 @@
 import React, { useState } from "react";
 import { Box, Container, Typography } from "@mui/material";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 const ResetPasswordForm = () => {
   const [formData, setFormData] = useState({
     password: "",
   });
-
+  const { password } = formData;
+  const { accessTokenForgotPassword } = useParams();
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
-    // Send formData to backend
+    try {
+      const resetPassResponse = await axios.post(
+        "http://localhost:5000/fitness-den/resetPassword",
+        { password },
+        {
+          headers: { Authorization: accessTokenForgotPassword },
+        }
+      );
+      console.log(resetPassResponse);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <Container
@@ -38,7 +52,7 @@ const ResetPasswordForm = () => {
         <input
           type="string"
           placeholder="enter new Password"
-          name="email"
+          name="password"
           value={formData.password}
           onChange={handleInputChange}
           style={{
