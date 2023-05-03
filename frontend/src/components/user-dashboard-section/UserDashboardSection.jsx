@@ -8,7 +8,6 @@ const UserDashboardSection = () => {
         const { data } = await axios.get(
           "http://localhost:5000/fitness-den/auth-user"
         );
-        // setName(data.data.name);
         console.log(data);
       } catch (error) {
         console.log(error);
