@@ -39,7 +39,7 @@ const LogIn = () => {
           </Typography>
         </NavLink>
       </Box>
-      <Grid xs={4}>
+      <Grid xs={4} item>
         <img
           src={loginImage}
           alt="HERO IMAGE"
@@ -52,6 +52,7 @@ const LogIn = () => {
       </Grid>
       <Grid
         xs={8}
+        item
         sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
       >
         <LoginForm />

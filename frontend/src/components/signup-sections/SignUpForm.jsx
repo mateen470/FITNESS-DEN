@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { Typography, Box } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
-const LoginForm = () => {
+const SignUpForm = () => {
   const [formData, setFormData] = useState({
+    name: "",
     email: "",
     password: "",
   });
@@ -27,8 +28,34 @@ const LoginForm = () => {
       }}
     >
       <Typography fontSize={"7vw"} color={"white"}>
-        Welcome Back!
+        Be a Member!
       </Typography>
+      <Box
+        sx={{
+          mt: 3,
+          minWidth: "70%",
+          display: "flex",
+          justifyContent: "center",
+          borderBottom: "2px solid white",
+        }}
+      >
+        <input
+          type="string"
+          placeholder="Name"
+          name="name"
+          value={formData.name}
+          onChange={handleInputChange}
+          style={{
+            minWidth: "100%",
+            padding: "10px",
+            color: "white",
+            backgroundColor: "transparent",
+            outline: "none",
+            border: "none",
+            fontSize: "1.7vw",
+          }}
+        />
+      </Box>
       <Box
         sx={{
           mt: 3,
@@ -81,20 +108,6 @@ const LoginForm = () => {
           }}
         />
       </Box>
-      <Box sx={{ mt: 2 }}>
-        <NavLink to={"/forgot"}>
-          <Typography
-            fontFamily={"Comme, sans-serif"}
-            color={"white"}
-            sx={{
-              borderBottom: "2px solid white",
-              fontSize: "1.5vw",
-            }}
-          >
-            Forgot Password?
-          </Typography>
-        </NavLink>
-      </Box>
       <Box
         sx={{
           border: "2px solid white",
@@ -126,7 +139,7 @@ const LoginForm = () => {
             },
           }}
         >
-          SignIn
+          Join
         </Typography>
       </Box>
       <Box sx={{ mt: 2 }}>
@@ -135,12 +148,12 @@ const LoginForm = () => {
           color={"white"}
           sx={{ fontSize: "1.5vw" }}
         >
-          Don't have an account?
+          already have an account?
           <NavLink
-            to={"/signup"}
+            to={"/login"}
             style={{ borderBottom: "2px solid white", fontSize: "1.5vw" }}
           >
-            Sign Up
+            LogIn
           </NavLink>
         </Typography>
       </Box>
@@ -148,4 +161,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default SignUpForm;
