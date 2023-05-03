@@ -2,6 +2,7 @@ import React from "react";
 import ForgotPasswordForm from "../../components/forgotPassword-section/ForgotPasswordForm";
 import { Box, Container, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
+import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 
 const ForgotPassword = () => {
   return (

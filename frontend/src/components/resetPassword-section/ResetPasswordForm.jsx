@@ -37,7 +37,7 @@ const ResetPasswordForm = () => {
       >
         <input
           type="string"
-          placeholder="please provide your Email"
+          placeholder="enter new Password"
           name="email"
           value={formData.password}
           onChange={handleInputChange}
