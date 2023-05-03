@@ -59,7 +59,7 @@ const ResetPasswordForm = () => {
             minWidth: "100%",
             padding: "10px",
             color: "white",
-            backgroundColor: "transparent",
+            backgroundColor: "none",
             outline: "none",
             border: "none",
             fontSize: "1.7vw",

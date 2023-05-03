@@ -64,7 +64,7 @@ const BMI = () => {
             onChange={(e) => setHeight(e.target.value)}
             style={{
               minWidth: "80vh",
-              background: "transparent",
+              background: "none",
               color: "white",
               outline: "none",
               border: "none",
@@ -81,7 +81,7 @@ const BMI = () => {
             onChange={(e) => setWeight(e.target.value)}
             style={{
               minWidth: "80vh",
-              background: "transparent",
+              background: "none",
               color: "white",
               outline: "none",
               border: "none",

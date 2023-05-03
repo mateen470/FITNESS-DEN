@@ -53,6 +53,9 @@ const utilityFunctions = {
   passwordVerification: async (providedPassword, verifiedPassword) => {
     return bcrypt.compare(providedPassword, verifiedPassword);
   },
+  accessTokenVerification: async (token) => {
+    return jwt.verify(token, process.env.ACCESS_TOKEN_SECRET_KEY);
+  },
 };
 
 const createNewAccessToken = (user) => {

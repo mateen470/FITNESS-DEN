@@ -160,8 +160,6 @@ const AuthControllerFunctions = {
       await res.cookie("refreshToken", refreshToken, {
         httpOnly: true,
         secure: true,
-        sameSite: "None",
-        // path: "/fitness-den/refreshToken",
         maxAge: 7 * 24 * 60 * 60 * 1000,
       });
 
@@ -177,9 +175,45 @@ const AuthControllerFunctions = {
       });
     }
   },
+  AuthenticatedUser: async (req, res) => {
+    try {
+      const accessToken = req.header("Authorization")?.split(" ")[1] || "";
+      if (!accessToken) {
+        return await res.status(400).json({
+          success: false,
+          message: "UNAUTHORIZED!! NO TOKEN FOUND",
+        });
+      }
+      accessTokenVerified = await utilityFunctions.accessTokenVerification(
+        accessToken
+      );
+      const authenticatedUser = await User.findOne({
+        _id: accessTokenVerified.id,
+      });
+      if (!authenticatedUser) {
+        return await res.status(401).json({
+          success: false,
+          message: "UNAUTHORIZED!! USER IS NOT VALID",
+        });
+      }
+
+      const { password, ...data } = authenticatedUser;
+
+      return await res.status(200).json({
+        success: true,
+        message: "DATA SENT!!",
+        data: data,
+      });
+    } catch (error) {
+      return await res.status(500).json({
+        success: false,
+        message: `UNAUTHORIZED!! ${error.message}`,
+      });
+    }
+  },
   RefreshAccessToken: async (req, res) => {
     try {
-      accessTicket = await req.cookies.refreshToken;
+      accessTicket = await req.cookies["refreshToken"];
 
       if (!accessTicket) {
         return await res.status(400).json({

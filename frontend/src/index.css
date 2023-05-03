@@ -33,3 +33,12 @@ a {
 ::-webkit-input-placeholder {
   color: white;
 }
+input {
+  background-color: transparent;
+}
+input::selection {
+  background-color: transparent;
+}
+input::-moz-selection {
+  background-color: transparent;
+}

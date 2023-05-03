@@ -6,6 +6,7 @@ import Login from "./pages/auth/LogIn";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import ResetPassword from "./pages/auth/ResetPassword";
 import ActivationPage from "./pages/auth/ActivationPage";
+import UserDashboardPage from "./pages/dashboard/user-dashboard/UserDashboardPage";
 const App = () => {
   return (
     <>
@@ -14,6 +15,7 @@ const App = () => {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgot" element={<ForgotPassword />} />
+        <Route path="/user" element={<UserDashboardPage />} />
         <Route
           path="/fitness-den/reset-password/:accessTokenForgotPassword"
           element={<ResetPassword />}

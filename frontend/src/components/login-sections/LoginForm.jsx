@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Typography, Box } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const LoginForm = () => {
@@ -8,6 +8,7 @@ const LoginForm = () => {
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
   const { email, password } = formData;
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -17,13 +18,17 @@ const LoginForm = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
-      const loginRequest = await axios.post(
+      const { data } = await axios.post(
         "http://localhost:5000/fitness-den/login",
-        { email, password }
+        { email, password },
+        { withCredentials: true }
       );
-      console.log(loginRequest);
+      axios.defaults.headers.common["Authorization"] = `Bearer ${data.data}`;
+
+      navigate("/user");
+      console.log(data.message);
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   };
 
@@ -57,7 +62,7 @@ const LoginForm = () => {
             minWidth: "100%",
             padding: "10px",
             color: "white",
-            backgroundColor: "transparent",
+            backgroundColor: "none",
             outline: "none",
             border: "none",
             fontSize: "1.7vw",
@@ -83,7 +88,7 @@ const LoginForm = () => {
             minWidth: "100%",
             padding: "10px",
             color: "white",
-            backgroundColor: "transparent",
+            backgroundColor: "none",
             outline: "none",
             border: "none",
             fontSize: "1.7vw",

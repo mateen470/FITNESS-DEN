@@ -7,6 +7,7 @@ router.post("/signup", AuthControllerFunctions.SignUp);
 router.post("/activation", AuthControllerFunctions.AccountActivation);
 router.post("/login", AuthControllerFunctions.LogIn);
 router.post("/refreshtoken", AuthControllerFunctions.RefreshAccessToken);
+router.get("/auth-user", AuthControllerFunctions.AuthenticatedUser);
 router.post("/logout", AuthControllerFunctions.LogOut);
 router.post("/forgotpassword", AuthControllerFunctions.ForgotPassword);
 router.post(
