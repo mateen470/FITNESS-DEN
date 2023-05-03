@@ -183,7 +183,7 @@ const NavBar = () => {
             width: 100,
           }}
         >
-          <NavLink>
+          <NavLink to={"/login"}>
             <Typography
               color={"white"}
               fontFamily={"Rubik, sans-serif"}

@@ -4,6 +4,7 @@ import Services from "../../components/home-sections/Services";
 import FeaturedProducts from "../../components/home-sections/FeaturedProducts";
 import FeaturedBlogs from "../../components/home-sections/FeaturedBlogs";
 import BMI from "../../components/home-sections/BMI";
+import Footer from "../../components/home-sections/Footer";
 import { Box } from "@mui/material";
 const Home = () => {
   const sectionRef = useRef(null);
@@ -20,6 +21,7 @@ const Home = () => {
       <FeaturedProducts />
       <FeaturedBlogs />
       <BMI />
+      <Footer />
     </Box>
   );
 };

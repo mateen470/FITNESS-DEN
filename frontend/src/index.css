@@ -30,3 +30,6 @@ a {
   color: inherit;
   text-decoration: none;
 }
+::-webkit-input-placeholder {
+  color: white;
+}
