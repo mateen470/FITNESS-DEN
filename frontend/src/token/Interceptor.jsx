@@ -8,16 +8,15 @@ axios.interceptors.response.use(
     if (error.response.status === 400 && !refresh) {
       refresh = true;
 
-      const response = await axios.post(
+      const { data } = await axios.post(
         "refreshtoken",
         {},
         { withCredentials: true }
       );
-
-      if (response.status === 200) {
-        axios.defaults.headers.common[
-          "Authorization"
-        ] = `Bearer ${response.data}`;
+      console.log(data);
+      if (data.success) {
+        console.log("here");
+        axios.defaults.headers.common["Authorization"] = `Bearer ${data.data}`;
         return axios(error.config);
       }
     }

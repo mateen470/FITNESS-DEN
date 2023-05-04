@@ -186,7 +186,7 @@ const AuthControllerFunctions = {
       }
       accessTokenVerified = await utilityFunctions.accessTokenVerification(
         accessToken
-      );
+        );
       const authenticatedUser = await User.findOne({
         _id: accessTokenVerified.id,
       });
@@ -214,15 +214,15 @@ const AuthControllerFunctions = {
   RefreshAccessToken: async (req, res) => {
     try {
       accessTicket = await req.cookies["refreshToken"];
-
       if (!accessTicket) {
         return await res.status(400).json({
           success: false,
           message: "UNAUTHORIZED!!",
         });
       }
-
       refreshTokenVerification = await utilityFunctions.verifyRefreshtoken(
+        req,
+        res,
         accessTicket
       );
     } catch (error) {

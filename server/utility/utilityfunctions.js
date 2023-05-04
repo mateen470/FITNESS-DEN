@@ -20,7 +20,7 @@ const utilityFunctions = {
       expiresIn: "7d",
     });
   },
-  verifyRefreshtoken: async (token) => {
+  verifyRefreshtoken: async (req, res, token) => {
     jwt.verify(
       token,
       process.env.REFRESH_TOKEN_SECRET_KEY,
@@ -31,7 +31,13 @@ const utilityFunctions = {
             message: "FORBIDDEN!!",
           });
         }
-        const newAccessToken = createNewAccessToken(user);
+        const userWithoutExp = {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          role: user.role,
+        };
+        const newAccessToken = createNewAccessToken(userWithoutExp);
         return await res.status(200).json({
           success: true,
           message: "ACCESS GRANTED!!",

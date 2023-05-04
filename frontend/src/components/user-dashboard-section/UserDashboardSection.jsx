@@ -8,9 +8,7 @@ const UserDashboardSection = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const getUser = await axios.get(
-          "auth-user"
-        );
+        const getUser = await axios.get("auth-user");
         setName(getUser.data.data._doc.name);
         setEmail(getUser.data.data._doc.email);
         if (getUser.data.data._doc.role === 1) {
