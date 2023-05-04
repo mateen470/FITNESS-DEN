@@ -13,9 +13,7 @@ axios.interceptors.response.use(
         {},
         { withCredentials: true }
       );
-      console.log(data);
       if (data.success) {
-        console.log("here");
         axios.defaults.headers.common["Authorization"] = `Bearer ${data.data}`;
         return axios(error.config);
       }
