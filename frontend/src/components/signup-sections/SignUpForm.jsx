@@ -19,7 +19,7 @@ const SignUpForm = () => {
     try {
       console.log(name, email, password);
       const registerRequest = await axios.post(
-        "http://localhost:5000/fitness-den/signup",
+        "signup",
         {
           name,
           email,

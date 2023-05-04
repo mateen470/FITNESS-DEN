@@ -15,7 +15,7 @@ const ForgotPasswordForm = () => {
     event.preventDefault();
     try {
       const forgotPasswordRequest = await axios.post(
-        "http://localhost:5000/fitness-den/forgotPassword",
+        "forgotPassword",
         { email }
       );
       console.log(forgotPasswordRequest);

@@ -17,7 +17,7 @@ const ResetPasswordForm = () => {
     event.preventDefault();
     try {
       const resetPassResponse = await axios.post(
-        "http://localhost:5000/fitness-den/resetPassword",
+        "resetPassword",
         { password },
         {
           headers: { Authorization: accessTokenForgotPassword },

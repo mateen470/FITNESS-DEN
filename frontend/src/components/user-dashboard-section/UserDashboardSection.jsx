@@ -9,7 +9,7 @@ const UserDashboardSection = () => {
     const getData = async () => {
       try {
         const getUser = await axios.get(
-          "http://localhost:5000/fitness-den/auth-user"
+          "auth-user"
         );
         setName(getUser.data.data._doc.name);
         setEmail(getUser.data.data._doc.email);

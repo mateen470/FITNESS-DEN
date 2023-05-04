@@ -19,7 +19,7 @@ const LoginForm = () => {
     event.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/fitness-den/login",
+        "login",
         { email, password },
         { withCredentials: true }
       );

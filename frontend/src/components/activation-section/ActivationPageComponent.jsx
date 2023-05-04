@@ -9,7 +9,7 @@ const ActivationPageComponent = () => {
       const activateEmail = async () => {
         try {
           const activation = await axios.post(
-            "http://localhost:5000/fitness-den/activation",
+            "activation",
             { activationToken }
           );
           console.log(activation);
