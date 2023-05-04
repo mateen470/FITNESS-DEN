@@ -1,21 +1,33 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const UserDashboardSection = () => {
-  const [name, setName] = useState("NOT LOGGED IN!!");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const navigate = useNavigate();
   useEffect(() => {
     const getData = async () => {
       try {
-        const { data } = await axios.get(
+        const getUser = await axios.get(
           "http://localhost:5000/fitness-den/auth-user"
         );
-        console.log(data);
+        setName(getUser.data.data._doc.name);
+        setEmail(getUser.data.data._doc.email);
+        if (getUser.data.data._doc.role === 1) {
+          navigate("/admin");
+        }
       } catch (error) {
         console.log(error);
       }
     };
     getData();
   }, []);
-  return <div>{name}</div>;
+  return (
+    <div>
+      {name}
+      <p>{email}</p>
+    </div>
+  );
 };
 
 export default UserDashboardSection;
