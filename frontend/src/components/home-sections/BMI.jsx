@@ -13,7 +13,7 @@ const BMI = () => {
   };
 
   return (
-    <Container
+    <Box
       sx={{
         mt: 10,
         position: "relative",
@@ -63,7 +63,7 @@ const BMI = () => {
             value={height}
             onChange={(e) => setHeight(e.target.value)}
             style={{
-              minWidth: "80vh",
+              minWidth: "80%",
               background: "none",
               color: "white",
               outline: "none",
@@ -80,7 +80,7 @@ const BMI = () => {
             value={weight}
             onChange={(e) => setWeight(e.target.value)}
             style={{
-              minWidth: "80vh",
+              minWidth: "80%",
               background: "none",
               color: "white",
               outline: "none",
@@ -97,8 +97,8 @@ const BMI = () => {
           p: 1,
           px: 2,
           mt: 3,
-          height: 40,
-          width: 140,
+          height: "3.5vw",
+          width: "9.5vw",
           cursor: "pointer",
         }}
       >
@@ -108,11 +108,13 @@ const BMI = () => {
           fontWeight={600}
           sx={{
             background: " black",
-            height: 40,
-            width: 150,
-            pt: 1,
-            ml: -4.5,
-            textAlign: "center",
+            fontSize: "1.3vw",
+            height: "3.5vw",
+            width: "10vw",
+            ml: -4.3,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
             transition: "scale 0.3s ease-in-out",
             "&:hover": {
               scale: "0.95 !important",
@@ -123,7 +125,7 @@ const BMI = () => {
           Calculate BMI
         </Typography>
       </Box>
-    </Container>
+    </Box>
   );
 };
 

@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Box,
-  Container,
-  Grid,
-  List,
-  ListItem,
-  Typography,
-} from "@mui/material";
+import { Box, Grid, List, ListItem, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import EmailIcon from "@mui/icons-material/Email";
@@ -40,7 +33,7 @@ const Footer = () => {
   ];
   return (
     <footer>
-      <Container
+      <Box
         sx={{
           background: "black",
           minWdith: "100%",
@@ -118,7 +111,7 @@ const Footer = () => {
             </Box>
           </Grid>
         </Grid>
-      </Container>
+      </Box>
     </footer>
   );
 };

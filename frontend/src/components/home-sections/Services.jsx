@@ -133,7 +133,7 @@ const CustomCard = ({ data }) => {
             {data.title}
           </Typography>
           <Typography
-            fontSize={"1rem"}
+            fontSize={"1.2rem"}
             color={"white"}
             textAlign={"left"}
             fontFamily={"Comme, sans-serif"}
@@ -156,8 +156,7 @@ const CustomCard = ({ data }) => {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: "70%",
-            minHeight: "80%",
+            minWidth: "80%",
             padding: 2,
             overflowY: "auto",
             border: "none",
@@ -173,7 +172,7 @@ const CustomCard = ({ data }) => {
             {data.title}
           </Typography>
           <Typography
-            variant="h6"
+            fontSize={"1.4rem"}
             color={"black"}
             textAlign={"center"}
             fontFamily={"Comme, sans-serif"}
@@ -250,6 +249,7 @@ const Services = () => {
           alignItems: "center",
           justifyContent: "center",
         }}
+        rowSpacing={2}
       >
         {cardsData.map((data, index) => (
           <React.Fragment key={data.id}>

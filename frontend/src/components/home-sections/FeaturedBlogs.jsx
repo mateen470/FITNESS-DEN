@@ -15,7 +15,6 @@ import motivate from "../../assets/motivate.svg";
 import yoga from "../../assets/yoga.svg";
 import rest from "../../assets/rest.svg";
 const FeaturedBlogs = () => {
-  
   const blogsData = [
     {
       title: "5 Ways to Stay Motivated During Your Workouts",
@@ -24,7 +23,7 @@ const FeaturedBlogs = () => {
     },
     {
       title: "The Benefits of Yoga for Stress Relief",
-      desc: "In this article, we explore the ways in which practicing yoga can help reduce stress and anxiety. From breathing techniques to meditation, we share all of the tips on how to use yoga to calm your mind and improve your mental health alongside your pysical health",
+      desc: "We explore the ways in which practicing yoga can help reduce stress and anxiety. From breathing techniques to meditation, we share all of the tips on how to use yoga to calm your mind and improve your mental health alongside your pysical health",
       image: yoga,
     },
     {
@@ -57,7 +56,12 @@ const FeaturedBlogs = () => {
                   height="250"
                   image={cardData.image}
                 />
-                <Typography variant="h5" color={"black"} textAlign={"center"} mt={2}>
+                <Typography
+                  variant="h5"
+                  color={"black"}
+                  textAlign={"center"}
+                  mt={2}
+                >
                   {cardData.title}
                 </Typography>
                 <CardContent>
