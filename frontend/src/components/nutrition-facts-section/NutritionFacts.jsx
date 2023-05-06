@@ -79,7 +79,9 @@ const NutritionFacts = () => {
       {showModal ? (
         <Nutrients data={NutritionValues} setShowModal={setShowModal} />
       ) : (
-        <img src={nutrition} alt="nutrition" style={{ maxHeight: "70vh" }} />
+        <Box sx={{ mt: -6 }}>
+          <img src={nutrition} alt="nutrition" style={{ maxHeight: "70vh" }} />
+        </Box>
       )}
     </Container>
   );
