@@ -153,7 +153,7 @@ const NavBar = () => {
           </NavLink>
         </Box>
         <Box>
-          <NavLink>
+          <NavLink to={"/nutrition-facts"}>
             <Typography
               color={"white"}
               fontFamily={"Rubik, sans-serif"}

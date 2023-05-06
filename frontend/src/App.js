@@ -9,6 +9,7 @@ import ActivationPage from "./pages/auth/ActivationPage";
 import UserDashboardPage from "./pages/dashboard/user-dashboard/UserDashboardPage";
 import AdminDashboard from "./pages/dashboard/admin-dashboard/AdminDashboard";
 import Map from "./pages/map/MapPage";
+import NutritionFactsPage from "./pages/nutritionFacts/NutritionFactsPage"
 const App = () => {
   return (
     <>
@@ -28,6 +29,7 @@ const App = () => {
           element={<ActivationPage />}
         />
         <Route path="/map" element={<Map />} />
+        <Route path="/nutrition-facts" element={<NutritionFactsPage />} />
       </Routes>
     </>
   );
