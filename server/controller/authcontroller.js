@@ -1,4 +1,4 @@
-const User = require("../model/schema");
+const User = require("../model/auth-schema");
 const utilityFunctions = require("../utility/utilityfunctions");
 const sendEmail = require("../email/sendemail");
 
