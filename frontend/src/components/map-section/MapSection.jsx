@@ -160,6 +160,7 @@ const MapSection = () => {
             sx={{
               display: "flex",
               alignItems: "center",
+              justifyContent: "center",
               pl: 1,
               pr: 3,
             }}
@@ -167,6 +168,7 @@ const MapSection = () => {
             <table
               style={{
                 marginBottom: "5rem",
+                borderCollapse: "collapse",
               }}
             >
               <thead>
@@ -177,6 +179,8 @@ const MapSection = () => {
                       fontSize: "1.8rem",
                       color: "white",
                       fontWeight: "bold",
+                      borderBottom: "3px solid black",
+                      paddingBottom: "5px",
                     }}
                   >
                     Name
@@ -187,6 +191,8 @@ const MapSection = () => {
                       fontSize: "1.8rem",
                       color: "white",
                       fontWeight: "bold",
+                      borderBottom: "3px solid black",
+                      paddingBottom: "5px",
                     }}
                   >
                     Address
@@ -197,6 +203,8 @@ const MapSection = () => {
                       fontSize: "1.8rem",
                       color: "white",
                       fontWeight: "bold",
+                      borderBottom: "3px solid black",
+                      paddingBottom: "5px",
                     }}
                   >
                     Rating
@@ -205,10 +213,13 @@ const MapSection = () => {
               </thead>
               <tbody>
                 {places.map((place) => (
-                  <tr key={place.id}>
+                  <tr
+                    key={place.id}
+                    style={{ borderBottom: "1px solid white" }}
+                  >
                     <td
                       style={{
-                        padding: "0.5rem 2rem 0.5rem 1rem",
+                        padding: "0.5rem",
                         fontFamily: "Comme, sans-serif",
                         fontSize: "1.3rem",
                         color: "white",
@@ -232,6 +243,7 @@ const MapSection = () => {
                         fontFamily: "Comme, sans-serif",
                         fontSize: "1.3rem",
                         color: "white",
+                        textAlign: "center",
                       }}
                     >
                       {place.rating || "N/A"}

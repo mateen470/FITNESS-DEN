@@ -1,10 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../assets/logo.svg";
 import { NavLink } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 const NavBar = () => {
   const [displayDropDown, setDisplayDropDown] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <Box
@@ -19,7 +30,7 @@ const NavBar = () => {
         sx={{
           display: "flex",
           justifyContent: "flex-start",
-          gap: 1,
+          gap: "1vw",
           mt: 1,
         }}
       >
@@ -41,13 +52,14 @@ const NavBar = () => {
               display: "flex",
               alignItems: "center",
               gap: 0.5,
-              mb: 0.5,
               mt: 3,
               ml: 1,
+              mr: windowWidth > 1200 ? "1.5vw" : "1vw",
             }}
+            fontSize={"1.8vw"}
             onClick={() => setDisplayDropDown(!displayDropDown)}
           >
-            Our Plans <KeyboardArrowDownIcon />
+            Our Plans <KeyboardArrowDownIcon sx={{ fontSize: "1.8vw" }} />
           </Typography>
           {displayDropDown && (
             <Box
@@ -60,16 +72,16 @@ const NavBar = () => {
                 flexDirection: "column",
                 opacity: 0.9,
                 borderRadius: 1,
-                position: "absolute",
-                top: 60,
               }}
             >
               <NavLink>
                 <Typography
                   color={"white"}
+                  fontFamily={"Comme, sans-serif"}
+                  fontWeight={800}
                   sx={{
                     p: 0.5,
-                    fontSize: "14px",
+                    fontSize: "1.5vw",
                     "&:hover": {
                       scale: "0.95 !important",
                     },
@@ -81,9 +93,11 @@ const NavBar = () => {
               <NavLink>
                 <Typography
                   color={"white"}
+                  fontFamily={"Comme, sans-serif"}
+                  fontWeight={800}
                   sx={{
                     p: 0.5,
-                    fontSize: "14px",
+                    fontSize: "1.5vw",
                     "&:hover": {
                       scale: "0.95 !important",
                     },
@@ -101,6 +115,7 @@ const NavBar = () => {
               color={"white"}
               fontFamily={"Rubik, sans-serif"}
               fontWeight={600}
+              fontSize={"1.8vw"}
               sx={{
                 p: 0.5,
                 px: 2,
@@ -120,6 +135,7 @@ const NavBar = () => {
               color={"white"}
               fontFamily={"Rubik, sans-serif"}
               fontWeight={600}
+              fontSize={"1.8vw"}
               sx={{
                 p: 0.5,
                 px: 2,
@@ -139,6 +155,7 @@ const NavBar = () => {
               color={"white"}
               fontFamily={"Rubik, sans-serif"}
               fontWeight={600}
+              fontSize={"1.8vw"}
               sx={{
                 p: 0.5,
                 px: 2,
@@ -158,6 +175,7 @@ const NavBar = () => {
               color={"white"}
               fontFamily={"Rubik, sans-serif"}
               fontWeight={600}
+              fontSize={"1.8vw"}
               sx={{
                 p: 0.5,
                 px: 2,
@@ -172,40 +190,42 @@ const NavBar = () => {
           </NavLink>
         </Box>
       </Box>
-      <Box>
-        <Box
-          sx={{
-            border: "1px solid pink",
-            p: 1,
-            px: 2,
-            mt: 3,
-            height: 40,
-            width: 100,
-          }}
-        >
-          <NavLink to={"/login"}>
-            <Typography
-              color={"white"}
-              fontFamily={"Rubik, sans-serif"}
-              fontWeight={600}
-              sx={{
-                backgroundImage:
-                  " linear-gradient( to right, rgba(92, 58, 180, 1) ,rgba(134, 69, 252, 1) ) ",
-                height: 40,
-                width: 110,
-                pt: 1,
-                ml: -4.5,
-                textAlign: "center",
-                transition: "scale 0.3s ease-in-out",
-                "&:hover": {
-                  scale: "0.95 !important",
-                },
-              }}
-            >
-              SignIn
-            </Typography>
-          </NavLink>
-        </Box>
+      <Box
+        sx={{
+          border: "1px solid pink",
+          p: 1,
+          px: 2,
+          mt: 3,
+          height: "4vw",
+          width: "8.5vw",
+          cursor: "pointer",
+        }}
+      >
+        <NavLink to={"/login"}>
+          <Typography
+            color={"black"}
+            fontFamily={"Comme, sans-serif"}
+            sx={{
+              backgroundImage:
+                " linear-gradient( to right, rgba(92, 58, 180, 1) ,rgba(134, 69, 252, 1) ) ",
+              fontSize: "1.7vw",
+              height: "3.8vw",
+              width: "9vw",
+              ml: -4.5,
+              display: "flex",
+              justifyContent: "center",
+              color: "white",
+              alignItems: "center",
+              transition: "scale 0.3s ease-in-out",
+              fontWeight: "bold",
+              "&:hover": {
+                scale: "0.95 !important",
+              },
+            }}
+          >
+            SignIn
+          </Typography>
+        </NavLink>
       </Box>
     </Box>
   );

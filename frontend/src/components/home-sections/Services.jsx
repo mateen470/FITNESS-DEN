@@ -129,7 +129,12 @@ const CustomCard = ({ data }) => {
           <LaunchIcon />
         </Typography>
         <CardContent>
-          <Typography variant="h4" color={"white"} textAlign={"center"}>
+          <Typography
+            variant="h4"
+            color={"white"}
+            textAlign={"center"}
+            fontWeight={600}
+          >
             {data.title}
           </Typography>
           <Typography
@@ -168,7 +173,12 @@ const CustomCard = ({ data }) => {
           }}
           onClick={handleClose}
         >
-          <Typography variant="h3" component="div" textAlign={"center"}>
+          <Typography
+            variant="h3"
+            component="div"
+            textAlign={"center"}
+            fontWeight={600}
+          >
             {data.title}
           </Typography>
           <Typography

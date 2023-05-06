@@ -1,6 +1,6 @@
 import React from "react";
 import { Typography, Box, Container } from "@mui/material";
-
+import NutritionFacts from "./NutritionFacts";
 const NutritionFactsSection = () => {
   return (
     <Container
@@ -19,6 +19,7 @@ const NutritionFactsSection = () => {
       >
         Find Nutritional Facts
       </Typography>
+      <NutritionFacts />
     </Container>
   );
 };

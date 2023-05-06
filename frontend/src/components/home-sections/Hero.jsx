@@ -20,7 +20,7 @@ const Hero = ({ scrollToSection }) => {
       }}
     >
       <NavBar />
-      <Box
+      {/* <Box
         sx={{
           ml: "6vw",
           transform: "rotate(90deg)",
@@ -58,7 +58,7 @@ const Hero = ({ scrollToSection }) => {
             FITNESS
           </Typography>
         </Typography>
-      </Box>
+      </Box> */}
       <Box
         sx={{
           textAlign: "center",
@@ -75,10 +75,11 @@ const Hero = ({ scrollToSection }) => {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            fontSize: "1.5vw",
           }}
         >
           Explore More
-          <KeyboardDoubleArrowDownIcon />
+          <KeyboardDoubleArrowDownIcon sx={{ fontSize: "2vw" }} />
         </Button>
       </Box>
     </Container>
