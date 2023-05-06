@@ -33,7 +33,7 @@ const BMI = () => {
         color={"white"}
         variant="h2"
         textAlign={"center"}
-        sx={{ display: "flex", alignItems: "center" }}
+        sx={{ display: "flex", alignItems: "center" , fontWeight: 800}}
       >
         BMI
         {bmi > 0 ? (

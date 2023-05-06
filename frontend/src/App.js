@@ -8,6 +8,7 @@ import ResetPassword from "./pages/auth/ResetPassword";
 import ActivationPage from "./pages/auth/ActivationPage";
 import UserDashboardPage from "./pages/dashboard/user-dashboard/UserDashboardPage";
 import AdminDashboard from "./pages/dashboard/admin-dashboard/AdminDashboard";
+import Map from "./pages/map/MapPage";
 const App = () => {
   return (
     <>
@@ -26,6 +27,7 @@ const App = () => {
           path="/fitness-den/activation/:activationToken"
           element={<ActivationPage />}
         />
+        <Route path="/map" element={<Map />} />
       </Routes>
     </>
   );

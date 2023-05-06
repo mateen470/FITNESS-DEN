@@ -134,7 +134,7 @@ const NavBar = () => {
           </NavLink>
         </Box>
         <Box>
-          <NavLink>
+          <NavLink to={"/map"}>
             <Typography
               color={"white"}
               fontFamily={"Rubik, sans-serif"}

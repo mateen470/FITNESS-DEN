@@ -33,22 +33,27 @@ const Hero = ({ scrollToSection }) => {
         <Typography
           color={"white"}
           display={"inline-block"}
-          sx={{ fontSize: "5vw", textShadow: "3px 0px 0px purple" }}
+          sx={{
+            fontSize: "5vw",
+            textShadow: "3px 0px 0px purple",
+            fontWeight: 800,
+          }}
         >
           own your
           <Typography
-            style={{
+            sx={{
               background:
                 " linear-gradient( rgba(92, 58, 180, 1) ,rgba(134, 69, 252, 1) ) ",
               backgroundClip: "text",
               webkitBackgroundClip: "text",
               color: "transparent",
               textShadow: "none",
+              fontWeight: 800,
+              fontSize: "5vw",
             }}
             color={"white"}
             display={"inline-block"}
             ml={1}
-            sx={{ fontSize: "5vw" }}
           >
             FITNESS
           </Typography>

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import LoginForm from "../../components/login-sections/LoginForm";
 import { Box, Grid, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import loginImage from "../../assets/loginPage.svg";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
+import loginImage from "../../assets/loginPage.svg";
 const LogIn = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);

@@ -238,7 +238,7 @@ const Services = () => {
         variant="h2"
         textAlign={"center"}
         my={4}
-        sx={{ textShadow: "3px 0px 0px purple" }}
+        sx={{ textShadow: "3px 0px 0px purple", fontWeight: 800 }}
       >
         What we Offer!
       </Typography>

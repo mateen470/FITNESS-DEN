@@ -41,7 +41,7 @@ const FeaturedBlogs = () => {
         textAlign={"center"}
         mt={10}
         mb={4}
-        sx={{ textShadow: "3px 0px 0px purple" }}
+        sx={{ textShadow: "3px 0px 0px purple", fontWeight: 800 }}
       >
         Our Latest Blogs
       </Typography>
