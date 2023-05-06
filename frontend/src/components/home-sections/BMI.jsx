@@ -33,15 +33,26 @@ const BMI = () => {
         color={"white"}
         variant="h2"
         textAlign={"center"}
-        sx={{ display: "flex", alignItems: "center" , fontWeight: 800}}
+        sx={{ display: "flex", alignItems: "center", fontWeight: 800 }}
       >
         BMI
         {bmi > 0 ? (
-          <Typography color={"white"} variant="h2" textAlign={"center"}>
+          <Typography
+            color={"white"}
+            variant="h2"
+            textAlign={"center"}
+            fontWeight={800}
+          >
             : {bmi.toFixed(1)}
           </Typography>
         ) : (
-          <Typography color={"white"} variant="h2" textAlign={"center"} ml={1}>
+          <Typography
+            color={"white"}
+            variant="h2"
+            textAlign={"center"}
+            ml={1}
+            fontWeight={800}
+          >
             Calculator
           </Typography>
         )}

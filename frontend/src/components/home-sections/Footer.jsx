@@ -24,11 +24,11 @@ const Footer = () => {
     },
     {
       name: "Find Gym Nearby",
-      path: "/",
+      path: "/map",
     },
     {
       name: "Find Nutrition Value of Food",
-      path: "/",
+      path: "/nutrition-facts",
     },
   ];
   return (
@@ -49,7 +49,7 @@ const Footer = () => {
               justifyContent: "center",
             }}
           >
-            <Typography variant="h3" color={"white"}>
+            <Typography variant="h3" color={"white"} fontWeight={800}>
               Fitness Den
             </Typography>
           </Grid>
@@ -64,7 +64,7 @@ const Footer = () => {
             }}
           >
             <List>
-              <Typography variant="h4" color={"white"}>
+              <Typography variant="h4" color={"white"} fontWeight={600}>
                 Our Services
               </Typography>
               {services.map((item, index) => {

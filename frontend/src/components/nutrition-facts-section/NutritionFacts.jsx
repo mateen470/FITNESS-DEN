@@ -3,6 +3,7 @@ import axios from "axios";
 import Nutrients from "./Nutrients";
 import { Box, Container } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import nutrition from "../../assets/nutrition.svg";
 
 const NutritionFacts = () => {
   const [searchText, setSearchText] = useState("");
@@ -44,7 +45,7 @@ const NutritionFacts = () => {
       <Box
         sx={{
           my: 5,
-          px: 1,
+          px: "2vw",
           width: "40%",
           display: "flex",
           justifyContent: "center",
@@ -75,8 +76,10 @@ const NutritionFacts = () => {
           onClick={handleSubmit}
         />
       </Box>
-      {showModal && (
+      {showModal ? (
         <Nutrients data={NutritionValues} setShowModal={setShowModal} />
+      ) : (
+        <img src={nutrition} alt="nutrition" style={{ maxHeight: "70vh" }} />
       )}
     </Container>
   );
