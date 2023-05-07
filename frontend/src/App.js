@@ -1,5 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+
 import Home from "./pages/home/Home";
 import SignUp from "./pages/auth/SignUp";
 import Login from "./pages/auth/LogIn";
@@ -9,10 +11,11 @@ import ActivationPage from "./pages/auth/ActivationPage";
 import UserDashboardPage from "./pages/dashboard/user-dashboard/UserDashboardPage";
 import AdminDashboard from "./pages/dashboard/admin-dashboard/AdminDashboard";
 import Map from "./pages/map/MapPage";
-import NutritionFactsPage from "./pages/nutritionFacts/NutritionFactsPage"
+import NutritionFactsPage from "./pages/nutritionFacts/NutritionFactsPage";
 const App = () => {
   return (
     <>
+      <ToastContainer position="top-center" />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />
