@@ -27,7 +27,7 @@ const UserDashboardSection = () => {
       <p>{name}</p>
       <p>{email}</p>
       <NavLink to={"/view-diet-plan"}>ViewDietPlan</NavLink>
-      <NavLink to={"/view-workout-plann"}>ViewWorkoutPlan</NavLink>
+      <NavLink to={"/view-workout-plan"}>ViewWorkoutPlan</NavLink>
     </div>
   );
 };
