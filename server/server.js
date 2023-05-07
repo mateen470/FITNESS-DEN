@@ -3,7 +3,8 @@ const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
 const cors = require("cors");
 require("./database/connection");
-const router = require("./router/authroutes");
+const authRouter = require("./router/authroutes");
+const workoutPlanRouter = require("./router/workoutroutes");
 
 dotenv.config();
 const PORT = process.env.PORT || 5000;
@@ -25,7 +26,8 @@ app.use(
 
 app.use(express.json());
 app.use(cookieParser());
-app.use("/fitness-den", router);
+app.use("/fitness-den", authRouter);
+app.use("/fitness-den/workout", workoutPlanRouter);
 
 app.get("/", (req, res) => {
   res.json("SERVER STARTED");
