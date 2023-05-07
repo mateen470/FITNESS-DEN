@@ -14,6 +14,6 @@ router.post("/", async (req, res) => {
     currency: "pkr",
     metadata: { "Product Name": ProductName },
   });
-  res.status(200).json(paymentIntent.client_secret);
+  return res.status(200).json(paymentIntent.client_secret);
 });
 module.exports = router;
