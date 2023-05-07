@@ -18,6 +18,8 @@ import DietPlanFormPage from "./pages/dietPlan/DietPlanFormPage";
 import WorkoutPlanPage from "./pages/workoutPlan/WorkoutPlanPage";
 import WorkoutPlanFormPage from "./pages/workoutPlan/WorkoutPlanFormPage";
 import PaymentPage from "./pages/payment/PaymentPage";
+import ViewDietPlan from "./pages/dietPlan/ViewDietPlanPage";
+import ViewWorkoutPlan from "./pages/workoutPlan/ViewWorkoutPlanPage";
 
 const App = () => {
   return (
@@ -38,6 +40,8 @@ const App = () => {
         <Route path="/diet-plan-form" element={<DietPlanFormPage />} />
         <Route path="/workout-plan-form" element={<WorkoutPlanFormPage />} />
         <Route path="/payment" element={<PaymentPage />} />
+        <Route path="/view-diet-plan" element={<ViewWorkoutPlan />} />
+        <Route path="/view-workout-plan" element={<ViewDietPlan />} />
         <Route
           path="/fitness-den/reset-password/:accessTokenForgotPassword"
           element={<ResetPassword />}

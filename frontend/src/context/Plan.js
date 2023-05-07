@@ -24,7 +24,7 @@ export const PlanSlice = createSlice({
       axios
         .post("/workout/completed-workout-plan", state.Plan)
         .then((res) => {
-          console.log(res.data);
+          console.log(res.data.data);
           toast.success("PLAN SUBMITTED SUCCESSFULLY!!");
         })
         .catch((error) => {

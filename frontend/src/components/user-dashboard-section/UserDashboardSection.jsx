@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 const UserDashboardSection = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -24,8 +24,10 @@ const UserDashboardSection = () => {
   }, [navigate]);
   return (
     <div>
-      {name}
+      <p>{name}</p>
       <p>{email}</p>
+      <NavLink to={"/view-diet-plan"}>ViewDietPlan</NavLink>
+      <NavLink to={"/view-workout-plann"}>ViewWorkoutPlan</NavLink>
     </div>
   );
 };
