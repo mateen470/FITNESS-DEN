@@ -1,11 +1,12 @@
 import React from "react";
-import NutritionFactsSection from "../../components/nutrition-facts-section/NutritionFactsSection";
-import { Box, Container, Typography } from "@mui/material";
+import DietPlanSection from "../../components/dietplan-section/DietPlanSection";
+import { Box, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
-const NutritionFactsPage = () => {
+
+const DietPlanPage = () => {
   return (
-    <Container>
+    <>
       <Box sx={{ position: "absolute", top: 0, left: 5 }}>
         <NavLink to={"/"}>
           <Typography
@@ -17,9 +18,9 @@ const NutritionFactsPage = () => {
           </Typography>
         </NavLink>
       </Box>
-      <NutritionFactsSection />
-    </Container>
+      <DietPlanSection />;
+    </>
   );
 };
 
-export default NutritionFactsPage;
+export default DietPlanPage;

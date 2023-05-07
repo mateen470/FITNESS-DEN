@@ -13,13 +13,15 @@ const UserDashboardSection = () => {
         setEmail(getUser.data.data._doc.email);
         if (getUser.data.data._doc.role === 1) {
           navigate("/admin");
+        } else if (getUser.data.data._doc.role === 2) {
+          navigate("/trainer");
         }
       } catch (error) {
         console.log(error);
       }
     };
     getData();
-  }, []);
+  }, [navigate]);
   return (
     <div>
       {name}

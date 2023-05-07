@@ -35,7 +35,7 @@ const NavBar = () => {
         }}
       >
         <Box>
-          <img src={logo} style={{ width: "90px", height: "90px" }} />
+          <img src={logo} style={{ width: "90px", height: "90px" }} alt="logo" />
         </Box>
         <Box
           sx={{
@@ -74,7 +74,7 @@ const NavBar = () => {
                 borderRadius: 1,
               }}
             >
-              <NavLink>
+              <NavLink to={"/workout-plans"}>
                 <Typography
                   color={"white"}
                   fontFamily={"Comme, sans-serif"}
@@ -90,7 +90,7 @@ const NavBar = () => {
                   Workout Plans
                 </Typography>
               </NavLink>
-              <NavLink>
+              <NavLink to={"/diet-plans"}>
                 <Typography
                   color={"white"}
                   fontFamily={"Comme, sans-serif"}

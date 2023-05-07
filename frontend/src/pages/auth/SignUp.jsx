@@ -49,7 +49,7 @@ const SignUp = () => {
       <Grid xs={5} item>
         <img
           src={signUpImage}
-          alt="HERO IMAGE"
+          alt="HERO"
           style={{
             height: "99vh",
             width: windowWidth < 1200 && windowHeight > 700 ? "50vw" : "auto",

@@ -8,11 +8,11 @@ const Footer = () => {
   const services = [
     {
       name: "Workout Plans",
-      path: "/",
+      path: "/workout-plans",
     },
     {
       name: "Diet Plans",
-      path: "/",
+      path: "/diet-plans",
     },
     {
       name: "Gym Essentials Store",

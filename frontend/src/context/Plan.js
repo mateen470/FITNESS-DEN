@@ -22,13 +22,13 @@ export const PlanSlice = createSlice({
     },
     SubmitPlan: (state) => {
       axios
-        .post("http://localhost:8000/workoutplans/plan", state.Plan)
+        .post("/workout/completed-workout-plan", state.Plan)
         .then((res) => {
           console.log(res.data);
-          toast.success("PLAN SUBMITTED SUCCESSFULLY");
+          toast.success("PLAN SUBMITTED SUCCESSFULLY!!");
         })
         .catch((error) => {
-          toast.error("THERE WAS ERROR SUBMITTING PLAN");
+          toast.error("THERE WAS ERROR SUBMITTING PLAN!!");
         });
     },
   },
