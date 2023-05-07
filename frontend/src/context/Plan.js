@@ -1,0 +1,40 @@
+import { createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
+import { toast } from "react-toastify";
+
+const initialState = {
+  Plan: [],
+  WeeklyPlan: [],
+};
+
+export const PlanSlice = createSlice({
+  name: "Plan",
+  initialState,
+  reducers: {
+    AddWeeklyPlan: (state, action) => {
+      state.WeeklyPlan = [...state.WeeklyPlan, action.payload];
+    },
+    EmptyWeeklyPlan: (state) => {
+      state.WeeklyPlan = [];
+    },
+    AddPlan: (state) => {
+      state.Plan = [...state.Plan, [state.WeeklyPlan]];
+    },
+    SubmitPlan: (state) => {
+      axios
+        .post("http://localhost:8000/workoutplans/plan", state.Plan)
+        .then((res) => {
+          console.log(res.data);
+          toast.success("PLAN SUBMITTED SUCCESSFULLY");
+        })
+        .catch((error) => {
+          toast.error("THERE WAS ERROR SUBMITTING PLAN");
+        });
+    },
+  },
+});
+
+export const { AddPlan, AddWeeklyPlan, EmptyWeeklyPlan, SubmitPlan } =
+  PlanSlice.actions;
+
+export default PlanSlice.reducer;
