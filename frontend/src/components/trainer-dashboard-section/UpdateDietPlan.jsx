@@ -28,8 +28,8 @@ const UpdateDietPlan = () => {
   const ReqId = Ids.ReqId;
   const FetchPlanToUpdate = () => {
     axios
-      .get("diet/plan/" + PlanID)
-      .then((res) => setPlanToUpdate(res.data));
+      .get("diet/diet-update-request/" + PlanID)
+      .then((res) => setPlanToUpdate(res.data.data));
   };
 
   useEffect(FetchPlanToUpdate, []);
@@ -60,15 +60,13 @@ const UpdateDietPlan = () => {
   };
 
   const SubmitUpdatedPlan = () => {
-    axios
-      .post("diet/plan/" + PlanID, PlanToUpdate)
-      .then((res) => {
-        console.log(res.data);
-        toast.success("PLAN UPDATED SUCCESSFULLY");
-        axios
-          .delete("diet/updateDietPlan/" + ReqId)
-          .then((res) => console.log(res.data));
-      });
+    axios.post("diet/update-diet-plan/" + PlanID, PlanToUpdate).then((res) => {
+      console.log(res.data.data);
+      toast.success("PLAN UPDATED SUCCESSFULLY");
+      axios
+        .delete("diet/diet-update-request/" + ReqId)
+        .then((res) => console.log(res.data.data));
+    });
   };
 
   const handleSubmit = (e) => {

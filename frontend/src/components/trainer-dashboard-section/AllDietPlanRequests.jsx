@@ -19,8 +19,8 @@ const AllDietPlanRequests = () => {
   const [DietPlanRequests, setDietPlanRequests] = useState([]);
   const FetchDietPlanRequests = () => {
     axios
-      .get("diet/")
-      .then((res) => setDietPlanRequests(res.data));
+      .get("diet/all-new-diet-requests")
+      .then((res) => setDietPlanRequests(res.data.data));
   };
   useEffect(FetchDietPlanRequests, []);
 

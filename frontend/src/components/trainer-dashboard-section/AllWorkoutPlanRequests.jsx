@@ -18,8 +18,8 @@ const AllWorkoutPlanRequests = () => {
   const [WorkoutPlanRequests, setWorkoutPlanRequests] = useState([]);
   const FetchWorkoutPlanRequests = () => {
     axios
-      .get("http://localhost:8000/workoutplans/")
-      .then((res) => setWorkoutPlanRequests(res.data));
+      .get("workout/all-new-workout-requests")
+      .then((res) => setWorkoutPlanRequests(res.data.data));
   };
   useEffect(FetchWorkoutPlanRequests, []);
 
@@ -54,5 +54,5 @@ const AllWorkoutPlanRequests = () => {
       </Table>
     </Container>
   );
-}
-export default AllWorkoutPlanRequests
+};
+export default AllWorkoutPlanRequests;

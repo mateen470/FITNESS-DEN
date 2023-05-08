@@ -75,8 +75,8 @@ const CreateDietPlan = () => {
     dispatch(AddDietPlan(weeklyDietPlan));
     dispatch(SubmitDietPlan());
     axios
-      .delete("diet/" + Request._id)
-      .then((res) => console.log(res));
+      .delete("diet/diet-request/" + Request._id)
+      .then((res) => console.log(res.data));
     navigate("/allDietPlanRequest");
   };
 

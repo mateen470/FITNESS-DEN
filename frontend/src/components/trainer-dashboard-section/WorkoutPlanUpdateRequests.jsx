@@ -20,8 +20,8 @@ const WorkoutPlanUpdateRequests = () => {
 
   const FetchRequests = () => {
     axios
-      .get("http://localhost:8000/workoutplans/updatePlans")
-      .then((res) => setRequest(res.data));
+      .get("workout/all-workout-update-request")
+      .then((res) => setRequest(res.data.data));
   };
   useEffect(FetchRequests, []);
 

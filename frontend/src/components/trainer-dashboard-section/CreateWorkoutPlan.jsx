@@ -80,7 +80,7 @@ const CreateWorkoutPlan = () => {
     dispatch(EmptyExcercise());
     dispatch(SubmitPlan());
     axios
-      .delete("http://localhost:8000/workoutplans/" + Request._id)
+      .delete("workout/workout-request/" + Request._id)
       .then((res) => console.log(res));
     navigate("/allWorkoutPlanRequest");
   };

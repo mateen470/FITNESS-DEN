@@ -130,17 +130,15 @@ const UpdateWorkoutPlan = () => {
   const SubmitUpdatedPlan = () => {
     let id = FetchedPlan.Plan._id;
     axios
-      .post("http://localhost:8000/workoutplans/plan/" + id, {
+      .post("workout/update-workout-plan/" + id, {
         singleDayPlan,
       })
       .then((res) => {
-        console.log(res.data);
+        console.log(res.data.data);
         toast.success("PLAN UPDATED SUCCESSFULLY");
         axios
-          .delete(
-            "http://localhost:8000/workoutplans/updatePlans/" + FetchedPlan._id
-          )
-          .then((res) => console.log(res));
+          .delete("workout/workout-update-request/" + FetchedPlan._id)
+          .then((res) => console.log(res.data));
       })
       .catch("THERE WAS ERROR UPDATING");
   };
