@@ -21,10 +21,10 @@ const ViewDietPlanDetails = () => {
         </Typography>
       )}
       <Button>
-        <Link to="/dietPlan">Create Plan</Link>
+        <Link to="/create-diet-plan">Create Plan</Link>
       </Button>
     </Container>
   );
 };
 
-export default ViewDietPlanDetails
+export default ViewDietPlanDetails;

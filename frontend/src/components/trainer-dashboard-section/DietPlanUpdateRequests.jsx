@@ -64,7 +64,7 @@ const DietPlanUpdateRequests = () => {
                           )
                         )
                       }
-                      to="/updateDietPlan"
+                      to="/update-diet-plan"
                     >
                       Update
                     </Link>

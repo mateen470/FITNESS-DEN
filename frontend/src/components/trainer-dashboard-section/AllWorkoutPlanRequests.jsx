@@ -35,13 +35,13 @@ const AllWorkoutPlanRequests = () => {
         </TableHead>
         <TableBody>
           {WorkoutPlanRequests.map((item, index) => (
-            <TableRow>
+            <TableRow key={index}>
               <TableCell>{item._id}</TableCell>
               <TableCell>{item.title}</TableCell>
               <TableCell>
                 <Button>
                   <Link
-                    to="/viewWorkoutPlanDetails"
+                    to="/view-workout-plan-details"
                     onClick={() => dispatch(AddWorkoutPlanDetails(item))}
                   >
                     View Detail

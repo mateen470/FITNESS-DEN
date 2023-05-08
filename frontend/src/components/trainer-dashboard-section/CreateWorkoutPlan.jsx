@@ -82,7 +82,7 @@ const CreateWorkoutPlan = () => {
     axios
       .delete("workout/workout-request/" + Request._id)
       .then((res) => console.log(res));
-    navigate("/allWorkoutPlanRequest");
+    navigate("/all-workout-plan-req");
   };
 
   const handleSubmit = () => {

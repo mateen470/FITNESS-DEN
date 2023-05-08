@@ -20,6 +20,18 @@ import WorkoutPlanFormPage from "./pages/workoutPlan/WorkoutPlanFormPage";
 import PaymentPage from "./pages/payment/PaymentPage";
 import ViewDietPlan from "./pages/dietPlan/ViewDietPlanPage";
 import ViewWorkoutPlan from "./pages/workoutPlan/ViewWorkoutPlanPage";
+import AllDietPlanRequests from "./components/trainer-dashboard-section/AllDietPlanRequests";
+import AllWorkoutPlanRequests from "./components/trainer-dashboard-section/AllWorkoutPlanRequests";
+import CreateDietPlan from "./components/trainer-dashboard-section/CreateDietPlan";
+import CreateWorkoutPlan from "./components/trainer-dashboard-section/CreateWorkoutPlan";
+import DietPlanUpdateRequests from "./components/trainer-dashboard-section/DietPlanUpdateRequests";
+import Exercise from "./components/trainer-dashboard-section/Exercise";
+import UpdateDietPlan from "./components/trainer-dashboard-section/UpdateDietPlan";
+import UpdateWorkoutPlan from "./components/trainer-dashboard-section/UpdateWorkoutPlan";
+import ViewDietPlanDetails from "./components/trainer-dashboard-section/ViewDietPlanDetails";
+import ViewWorkoutPlanDetails from "./components/trainer-dashboard-section/ViewWorkoutPlanDetails";
+import WorkoutPlanUpdateRequests from "./components/trainer-dashboard-section/WorkoutPlanUpdateRequests";
+import WorkoutPlanFormat from "./components/trainer-dashboard-section/WorkoutPlanFormat";
 
 const App = () => {
   return (
@@ -42,6 +54,35 @@ const App = () => {
         <Route path="/payment" element={<PaymentPage />} />
         <Route path="/view-diet-plan" element={<ViewWorkoutPlan />} />
         <Route path="/view-workout-plan" element={<ViewDietPlan />} />
+        <Route path="/all-diet-plan-req" element={<AllDietPlanRequests />} />
+        <Route path="/create-diet-plan" element={<CreateDietPlan />} />
+        <Route path="/create-workout-plan" element={<CreateWorkoutPlan />} />
+        <Route path="/update-diet-plan" element={<UpdateDietPlan />} />
+        <Route path="/update-workout-plan" element={<UpdateWorkoutPlan />} />
+        <Route path="/exercise" element={<Exercise />} />
+        <Route path="/workout-plan-format" element={<WorkoutPlanFormat />} />
+        <Route
+          path="/all-workout-plan-req"
+          element={<AllWorkoutPlanRequests />}
+        />
+        <Route
+          path="/diet-plan-update-req"
+          element={<DietPlanUpdateRequests />}
+        />
+        <Route
+          path="/workout-plan-update-req"
+          element={<WorkoutPlanUpdateRequests />}
+        />
+
+        <Route
+          path="/view-diet-plan-details"
+          element={<ViewDietPlanDetails />}
+        />
+        <Route
+          path="/view-workout-plan-details"
+          element={<ViewWorkoutPlanDetails />}
+        />
+
         <Route
           path="/fitness-den/reset-password/:accessTokenForgotPassword"
           element={<ResetPassword />}

@@ -32,9 +32,9 @@ const ViewWorkoutPlanDetails = () => {
         </Typography>
       )}
       <Button>
-        <Link to="/plan">Create Plan</Link>
+        <Link to="/create-workout-plan">Create Plan</Link>
       </Button>
     </Container>
   );
 };
-export default ViewWorkoutPlanDetails
+export default ViewWorkoutPlanDetails;

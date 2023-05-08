@@ -86,7 +86,7 @@ const WorkoutPlanFormat = () => {
       {Excercise.map((item, index) => {
         return (
           <>
-            <Typography>
+            <Typography key={index}>
               Name:{item.Name} Number of Sets:{item.Sets} Number of repetetions:
               {item.Reps} Video Link For Demo:{item.DemoLink}
             </Typography>

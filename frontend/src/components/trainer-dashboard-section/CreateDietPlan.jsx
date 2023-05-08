@@ -77,7 +77,7 @@ const CreateDietPlan = () => {
     axios
       .delete("diet/diet-request/" + Request._id)
       .then((res) => console.log(res.data));
-    navigate("/allDietPlanRequest");
+    navigate("/all-diet-plan-req");
   };
 
   const handleSubmit = () => {

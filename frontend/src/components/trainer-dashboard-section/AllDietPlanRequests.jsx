@@ -79,7 +79,7 @@ const AllDietPlanRequests = () => {
                   <Button variant="contained">
                     <Link
                       style={{ textDecoration: "none", color: "white" }}
-                      to="/viewDietPlanDetails"
+                      to="/view-diet-plan-details"
                       onClick={() => dispatch(AddDietPlanDetails(item))}
                     >
                       View Detail

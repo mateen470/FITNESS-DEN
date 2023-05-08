@@ -48,7 +48,11 @@ const WorkoutPlanUpdateRequests = () => {
                   </TableCell>
                   <TableCell>
                     <Button id={index} onClick={handleUpdate}>
-                      <Link id={index} onClick={handleUpdate} to="/updatePlan">
+                      <Link
+                        id={index}
+                        onClick={handleUpdate}
+                        to="/update-workout-plan"
+                      >
                         Update
                       </Link>
                     </Button>
