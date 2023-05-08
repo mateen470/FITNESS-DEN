@@ -1,4 +1,10 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { AddPhysicalInfo } from "../../context/PhysicalInfo";
+import { SetSelectedPlanToBuy } from "../../context/SelectedPlan";
+import axios from "axios";
 import {
   CardNumberElement,
   CardExpiryElement,
@@ -6,19 +12,10 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
-import axios from "axios";
-import { Button, Container, FormControl, TextField } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
-import { AddPhysicalInfo } from "../../context/PhysicalInfo";
-import { SetSelectedPlanToBuy } from "../../context/SelectedPlan";
+import { Button, Container, FormControl, Box, Typography } from "@mui/material";
 
 const PaymentSection = () => {
   const dispatch = useDispatch();
-  const [CardNumber, setCardNumber] = React.useState();
-  const [Cvc, setCvc] = React.useState();
-  const [Expiry, setExpiry] = React.useState();
   const PhysicalInfo = useSelector((state) => state.PhysicalInfo.PhysicalInfo);
   const SelectedPlan = useSelector(
     (state) => state.SelectedPlan.SelectedPlanToBuy
@@ -74,7 +71,6 @@ const PaymentSection = () => {
       }
     }
   };
-
   return (
     <Container
       sx={{
@@ -84,40 +80,18 @@ const PaymentSection = () => {
       }}
     >
       <FormControl sx={{ gap: "2rem" }}>
-        <TextField
-          label="Card Number"
-          InputLabelProps={{ shrink: true }}
-          variant="standard"
-          fullWidth
-          value={CardNumber}
-          InputProps={{
-            inputComponent: CardNumberElement,
-          }}
-          onChange={(e) => setCardNumber(e.target.value)}
-        />
-        <TextField
-          label="Card Expiry"
-          InputLabelProps={{ shrink: true }}
-          variant="standard"
-          fullWidth
-          value={Expiry}
-          InputProps={{
-            inputComponent: CardExpiryElement,
-          }}
-          onChange={(e) => setExpiry(e.target.value)}
-        />
-
-        <TextField
-          label="Card CVC"
-          InputLabelProps={{ shrink: true }}
-          variant="standard"
-          fullWidth
-          value={Cvc}
-          InputProps={{
-            inputComponent: CardCvcElement,
-          }}
-          onChange={(e) => setCvc(e.target.value)}
-        />
+        <Box>
+          <Typography variant="subtitle1">Card Number</Typography>
+          <CardNumberElement />
+        </Box>
+        <Box>
+          <Typography variant="subtitle1">Card Expiry</Typography>
+          <CardExpiryElement />
+        </Box>
+        <Box>
+          <Typography variant="subtitle1">Card CVC</Typography>
+          <CardCvcElement />
+        </Box>
         <Button variant="contained" onClick={handlePayment}>
           Confirm Payment
         </Button>

@@ -13,9 +13,7 @@ const TrainerDashboardSection = () => {
           gap: 1,
         }}
       >
-        <NavLink>WorkoutPlan Requests</NavLink>
         <NavLink>WorkoutPlan Update Requests</NavLink>
-        <NavLink>DietPlan Requests</NavLink>
         <NavLink>DietPlan Update Requests</NavLink>
         <NavLink>All WorkoutPlans</NavLink>
         <NavLink>All DietPlans</NavLink>
