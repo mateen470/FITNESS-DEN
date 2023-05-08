@@ -1,9 +1,11 @@
-import React from 'react'
-
+import React from "react";
+import TrainerDashboardSection from "../../../components/trainer-dashboard-section/TrainerDashboardSection";
 const TrainerDashboard = () => {
   return (
-    <div>TrainerDashboard</div>
-  )
-}
+    <>
+      <TrainerDashboardSection />
+    </>
+  );
+};
 
-export default TrainerDashboard
+export default TrainerDashboard;

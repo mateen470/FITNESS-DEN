@@ -35,7 +35,7 @@ const cardsData = [
       "Our workout plan service offers a comprehensive approach to help you achieve your fitness goals. Our expert trainers will design a customized program based on your individual needs, including your current fitness level, goals, and schedule. Our plans include a variety of exercises to target different muscle groups and provide a well-rounded fitness experience.",
     cardImage: workoutCard,
     sideImage: workoutSide,
-    path: "/",
+    path: "/workout-plans",
   },
   {
     id: 2,
@@ -45,7 +45,7 @@ const cardsData = [
     expandedContent: `Our diet plan service offers a comprehensive approach to help you achieve your health and wellness goals. Our expert nutritionists will design a customized program based on your individual needs, including your current diet, goals, and lifestyle. Our plans include a variety of options to accommodate different dietary preferences, including vegetarian and gluten-free options.`,
     cardImage: dietCard,
     sideImage: dietSide,
-    path: "/",
+    path: "/diet-plans",
   },
   {
     id: 3,
@@ -78,7 +78,7 @@ const cardsData = [
     `,
     cardImage: gymCard,
     sideImage: gymSide,
-    path: "/",
+    path: "/map",
   },
   {
     id: 6,
@@ -88,7 +88,7 @@ const cardsData = [
     expandedContent: `Our Nutritional Fact Finder tool is a powerful resource designed to help you make informed decisions about your diet. With this tool, you can easily find detailed nutritional information on a wide range of foods. Simply enter the food item you're curious about, and our tool will provide nutritional information. Armed with this information, you can make smarter choices about what you eat and ensure that you're getting the right balance of nutrients to support your health and fitness goals. Our Nutritional Fact Finder tool is a valuable resource for anyone looking to take control of their diet and achieve optimal health.`,
     cardImage: foodCard,
     sideImage: foodSide,
-    path: "/",
+    path: "/nutrition-facts",
   },
 ];
 
