@@ -1,5 +1,5 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -28,7 +28,7 @@ const UpdateDietPlan = () => {
   const ReqId = Ids.ReqId;
   const FetchPlanToUpdate = () => {
     axios
-      .get("http://localhost:8000/dietplans/plan/" + PlanID)
+      .get("diet/plan/" + PlanID)
       .then((res) => setPlanToUpdate(res.data));
   };
 
@@ -61,12 +61,12 @@ const UpdateDietPlan = () => {
 
   const SubmitUpdatedPlan = () => {
     axios
-      .post("http://localhost:8000/dietplans/plan/" + PlanID, PlanToUpdate)
+      .post("diet/plan/" + PlanID, PlanToUpdate)
       .then((res) => {
         console.log(res.data);
         toast.success("PLAN UPDATED SUCCESSFULLY");
         axios
-          .delete("http://localhost:8000/dietplans/updateDietPlan/" + ReqId)
+          .delete("diet/updateDietPlan/" + ReqId)
           .then((res) => console.log(res.data));
       });
   };

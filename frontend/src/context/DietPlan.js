@@ -22,7 +22,7 @@ export const DietPlanSlice = createSlice({
     },
     SubmitDietPlan: (state) => {
       axios
-        .post("/diet/completed-diet-plan", state.DietPlan)
+        .post("diet/completed-diet-plan", state.DietPlan)
         .then((res) => {
           console.log(res.data.data);
           toast.success("PLAN SUBMITTED SUCCESSFULLY!!");

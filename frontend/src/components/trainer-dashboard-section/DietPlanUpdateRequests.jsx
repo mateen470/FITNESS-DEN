@@ -1,5 +1,5 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { GetDietPlanId } from "../../context/UpdatePlan";
@@ -19,7 +19,7 @@ const DietPlanUpdateRequests = () => {
   const [DietPlanUpdateRequests, setDietPlanUpdateRequests] = useState([]);
   const FetchUpdateRequests = () => {
     axios
-      .get("http://localhost:8000/dietplans/updateDietPlan")
+      .get("diet/updateDietPlan")
       .then((res) => setDietPlanUpdateRequests(res.data));
   };
 

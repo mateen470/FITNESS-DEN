@@ -1,5 +1,5 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AddDietPlanDetails } from "../../context/DietPlanDetails";
@@ -19,7 +19,7 @@ const AllDietPlanRequests = () => {
   const [DietPlanRequests, setDietPlanRequests] = useState([]);
   const FetchDietPlanRequests = () => {
     axios
-      .get("http://localhost:8000/dietplans/")
+      .get("diet/")
       .then((res) => setDietPlanRequests(res.data));
   };
   useEffect(FetchDietPlanRequests, []);

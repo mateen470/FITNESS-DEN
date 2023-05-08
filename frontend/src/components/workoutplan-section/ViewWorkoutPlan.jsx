@@ -21,7 +21,7 @@ const ViewWorkoutPlan = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const handlePlan = () => {
     axios
-      .get("/workout/all-workout-plans")
+      .get("workout/all-workout-plans")
       .then((res) => setPlan(res.data.data));
   };
 

@@ -33,7 +33,7 @@ const PaymentSection = () => {
     };
 
     const response = await axios
-      .post("/payment", PaymentData)
+      .post("payment", PaymentData)
       .catch((err) => toast.error(err.message));
     if (response.status === 200) {
       const confirmPayment = await stripe.confirmCardPayment(response.data, {

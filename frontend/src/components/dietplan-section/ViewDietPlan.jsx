@@ -17,7 +17,7 @@ const ViewDietPlan = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [index, setIndex] = useState([]);
   const FetchDietPlan = () => {
-    axios.get("/diet/all-diet-plans").then((res) => setDietPlan(res.data.data));
+    axios.get("diet/all-diet-plans").then((res) => setDietPlan(res.data.data));
   };
 
   useEffect(FetchDietPlan, []);

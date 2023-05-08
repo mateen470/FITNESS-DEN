@@ -13,7 +13,7 @@ const WorkoutUpdateRequestModal = ({ modalOpen, setModalOpen, Plan }) => {
     if (!UpdateRequestValidation(Description)) {
       setModalOpen(!modalOpen);
       axios
-        .post("/workout/workout-update-request", {
+        .post("workout/workout-update-request", {
           Description: Description,
           Plan: Plan,
         })

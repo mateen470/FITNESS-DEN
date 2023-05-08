@@ -14,7 +14,7 @@ const DietPlanUpdateRequestModal = ({ modalOpen, setModalOpen, Plan }) => {
       setModalOpen(!modalOpen);
       const PlanId = Plan._id;
       axios
-        .post("/diet/diet-update-request", {
+        .post("diet/diet-update-request", {
           PlanId,
           UpdateDescription,
         })
