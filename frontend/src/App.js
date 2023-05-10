@@ -52,8 +52,8 @@ const App = () => {
         <Route path="/diet-plan-form" element={<DietPlanFormPage />} />
         <Route path="/workout-plan-form" element={<WorkoutPlanFormPage />} />
         <Route path="/payment" element={<PaymentPage />} />
-        <Route path="/view-diet-plan" element={<ViewWorkoutPlan />} />
-        <Route path="/view-workout-plan" element={<ViewDietPlan />} />
+        <Route path="/view-diet-plan" element={<ViewDietPlan/>} />
+        <Route path="/view-workout-plan" element={<ViewWorkoutPlan />} />
         <Route path="/all-diet-plan-req" element={<AllDietPlanRequests />} />
         <Route path="/create-diet-plan" element={<CreateDietPlan />} />
         <Route path="/create-workout-plan" element={<CreateWorkoutPlan />} />

@@ -27,7 +27,9 @@ const UpdateWorkoutPlan = () => {
   const FetchedPlan = useSelector(
     (state) => state.UpdatePlan.WorkoutPlanToUpdate
   );
-  const [singleDayPlan, setSingleDayPlan] = useState(FetchedPlan.Plan.Plan);
+  const [singleDayPlan, setSingleDayPlan] = useState(
+    FetchedPlan.Plan.WorkoutPlan
+  );
   const [PlanLength, setPlanLength] = useState();
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -84,14 +86,16 @@ const UpdateWorkoutPlan = () => {
       }
     }
   };
-
+  function deepCopy(obj) {
+    return JSON.parse(JSON.stringify(obj));
+  }
   const handleBodyPart = (e) => {
-    singleDayPlan[counter1][counter].BodyPart = e.target.value;
-    setSingleDayPlan([...singleDayPlan]);
+    const updatedSingleDayPlan = deepCopy(singleDayPlan);
+    updatedSingleDayPlan[counter1][counter].BodyPart = e.target.value;
+    setSingleDayPlan(updatedSingleDayPlan);
   };
 
   const handleSubmit = () => {
-    console.log(modalOpen);
     toast.error(
       WorkoutNameValidation(singleDayPlan[counter1][counter].BodyPart)
     );
@@ -134,11 +138,10 @@ const UpdateWorkoutPlan = () => {
         singleDayPlan,
       })
       .then((res) => {
-        console.log(res.data.data);
         toast.success("PLAN UPDATED SUCCESSFULLY");
         axios
           .delete("workout/workout-update-request/" + FetchedPlan._id)
-          .then((res) => console.log(res.data));
+          .then((res) => console.log(res.data.message));
       })
       .catch("THERE WAS ERROR UPDATING");
   };

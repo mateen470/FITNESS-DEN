@@ -65,7 +65,7 @@ const UpdateDietPlan = () => {
       toast.success("PLAN UPDATED SUCCESSFULLY");
       axios
         .delete("diet/diet-update-request/" + ReqId)
-        .then((res) => console.log(res.data.data));
+        .then((res) => console.log(res.data.message));
     });
   };
 

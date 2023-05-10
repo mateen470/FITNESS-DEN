@@ -20,7 +20,7 @@ const DietPlanUpdateRequests = () => {
   const FetchUpdateRequests = () => {
     axios
       .get("diet/all-diet-update-request")
-      .then((res) => setDietPlanUpdateRequests(res.data));
+      .then((res) => setDietPlanUpdateRequests(res.data.data));
   };
 
   useEffect(FetchUpdateRequests, []);

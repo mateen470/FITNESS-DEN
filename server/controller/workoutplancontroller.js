@@ -47,7 +47,9 @@ const WorkoutPlanControllerFunctions = {
     try {
       const data = new CompletedWorkoutPlanFromTrainer();
       req.body.map((item) =>
-        item.map((i) => data.CompletedWorkoutPlanFromTrainer.push(i))
+        item.map((i) => {
+          data.WorkoutPlan.push(i);
+        })
       );
       await data.save();
       return await res.status(200).json({
@@ -67,7 +69,7 @@ const WorkoutPlanControllerFunctions = {
       const updatedPlanData = await CompletedWorkoutPlanFromTrainer.findOne({
         _id: req.params.id,
       });
-      updatedPlanData.Plan = req.body.singleDayPlan;
+      updatedPlanData.WorkoutPlan = req.body.singleDayPlan;
       await updatedPlanData.save();
       return await res.status(200).json({
         success: true,

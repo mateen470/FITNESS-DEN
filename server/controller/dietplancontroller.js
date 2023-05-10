@@ -42,9 +42,7 @@ const DietPlanControllerFunctions = {
   SendCompletedPlanToUser: async (req, res) => {
     try {
       const data = new CompletedDietPlanFromTrainer();
-      req.body.map((item) =>
-        item.map((i) => data.CompletedDietPlanFromTrainer.push(i))
-      );
+      req.body.map((item) => item.map((i) => data.DietPlan.push(i)));
       await data.save();
       return await res.status(200).json({
         success: true,
