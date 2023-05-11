@@ -39,7 +39,7 @@ const LoginForm = () => {
         alignItems: "center",
       }}
     >
-      <Typography fontSize={"7vw"} color={"white"}>
+      <Typography fontSize={"7vw"} color={"white"} fontWeight={800}>
         Welcome Back!
       </Typography>
       <Box

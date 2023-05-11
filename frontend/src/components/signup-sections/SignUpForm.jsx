@@ -18,14 +18,11 @@ const SignUpForm = () => {
     event.preventDefault();
     try {
       console.log(name, email, password);
-      const registerRequest = await axios.post(
-        "signup",
-        {
-          name,
-          email,
-          password,
-        }
-      );
+      const registerRequest = await axios.post("signup", {
+        name,
+        email,
+        password,
+      });
       console.log(registerRequest.message);
     } catch (error) {
       console.log(error);
@@ -40,7 +37,7 @@ const SignUpForm = () => {
         alignItems: "center",
       }}
     >
-      <Typography fontSize={"7vw"} color={"white"}>
+      <Typography fontSize={"7vw"} color={"white"} fontWeight={800}>
         Be a Member!
       </Typography>
       <Box

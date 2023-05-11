@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Card,
@@ -93,7 +93,7 @@ const cardsData = [
 ];
 
 const CustomCard = ({ data }) => {
-  const [isExpanded, setIsExpanded] = React.useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const handleClick = () => {
     setIsExpanded(!isExpanded);

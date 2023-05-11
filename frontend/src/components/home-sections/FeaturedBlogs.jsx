@@ -61,6 +61,8 @@ const FeaturedBlogs = () => {
                   color={"black"}
                   textAlign={"center"}
                   mt={2}
+                  fontWeight={600}
+                  px={1}
                 >
                   {cardData.title}
                 </Typography>

@@ -1,67 +1,309 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import {
+  Container,
   Typography,
-  Button,
   Card,
-  CardActions,
   CardContent,
-  CardMedia,
   Grid,
   Box,
+  Paper,
+  Modal,
 } from "@mui/material";
 import { SetSelectedPlanToBuy } from "../../context/SelectedPlan";
+import LaunchIcon from "@mui/icons-material/Launch";
 import { useDispatch } from "react-redux";
+import dietbg from "../../assets/dietbg.svg";
+import keto from "../../assets/keto.svg";
+import mediterranean from "../../assets/mediterranean.svg";
+import muscleGain from "../../assets/muscleGain.svg";
+import vegan from "../../assets/vegan.svg";
+import weightLoss from "../../assets/weightLoss.svg";
 
 const DietPlanSection = () => {
   const dispatch = useDispatch();
   const AllPlans = [
     {
       Type: "Diet",
-      Image:
-        "https://www.uchicagomedicine.org/-/media/images/ucmc/forefront/general/universal/food-keto-universal-832x469.jpg?h=385&as=1&hash=9F46154F746543590C3183E8E98E260A",
       Title: "Keto Diet",
       Description:
         "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident,unde",
-      Price: 10000,
+      DetailedContent: "",
+      Price: 5000,
+      Image: keto,
     },
     {
       Type: "Diet",
-      Image:
-        "https://www.uchicagomedicine.org/-/media/images/ucmc/forefront/general/universal/food-keto-universal-832x469.jpg?h=385&as=1&hash=9F46154F746543590C3183E8E98E260A",
-      Title: "Keto Diet",
+      Title: "Fat Loss Diet",
       Description:
         "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident,unde",
-      Price: 10000,
+      DetailedContent: "",
+      Price: 5000,
+      Image: weightLoss,
+    },
+    {
+      Type: "Diet",
+      Title: "Muscle Gain Diet",
+      Description:
+        "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident,unde",
+      DetailedContent: "",
+      Price: 5000,
+      Image: muscleGain,
+    },
+    {
+      Type: "Diet",
+      Title: "Vegan Diet",
+      Description:
+        "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident,unde",
+      DetailedContent: "",
+      Price: 5000,
+      Image: vegan,
+    },
+    {
+      Type: "Diet",
+      Title: "Mediterranean Diet",
+      Description:
+        "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident,unde",
+      DetailedContent: "",
+      Price: 5000,
+      Image: mediterranean,
     },
   ];
-  return (
-    <Grid container>
-      <Box>
-        <Typography>Diet Plans</Typography>
-      </Box>
-      {AllPlans.map((item, index) => (
-        <Card key={index} sx={{ maxWidth: 345 }}>
-          <CardMedia sx={{ height: 340 }} image={item.Image} />
+
+  const CustomCard = ({ data, index }) => {
+    const [isExpanded, setIsExpanded] = useState(false);
+
+    const handleClick = () => {
+      setIsExpanded(!isExpanded);
+    };
+
+    const handleClose = () => {
+      setIsExpanded(false);
+    };
+
+    return (
+      <Box position="relative">
+        <Card
+          onClick={handleClick}
+          sx={{
+            width: "100%",
+            height: "100%",
+            padding: 2,
+            cursor: "pointer",
+            background: "rgba(255, 255, 255, 0.336)",
+          }}
+        >
+          <Typography
+            sx={{
+              position: "absolute",
+              right: 5,
+              top: 3,
+              opacity: 0.5,
+              display: "flex",
+              alignItems: "center",
+              color: "white",
+            }}
+          >
+            <LaunchIcon />
+          </Typography>
           <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              {item.Title}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {item.Description}
-            </Typography>
-            <Typography>{item.Price}/-PKR</Typography>
-          </CardContent>
-          <CardActions>
-            <Button
-              onClick={() => dispatch(SetSelectedPlanToBuy(AllPlans[index]))}
+            <Typography
+              variant="h4"
+              color={"white"}
+              textAlign={"center"}
+              fontWeight={600}
             >
-              <NavLink to="/diet-plan-form">Buy Plan</NavLink>
-            </Button>
-          </CardActions>
+              {data.Title}
+            </Typography>
+            <Typography
+              fontSize={"1.2rem"}
+              color={"white"}
+              textAlign={"left"}
+              fontFamily={"Comme, sans-serif"}
+            >
+              {data.Description}
+            </Typography>
+            <Typography
+              fontSize={"1.5rem"}
+              color={"white"}
+              textAlign={"center"}
+              fontWeight={800}
+            >
+              {data.Price} /- PKR
+            </Typography>
+          </CardContent>
         </Card>
-      ))}
-    </Grid>
+
+        <Modal
+          open={isExpanded}
+          onClose={handleClose}
+          sx={{
+            outline: "none",
+          }}
+        >
+          <Paper
+            sx={{
+              position: "fixed",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              minWidth: "80%",
+              padding: 2,
+              overflowY: "auto",
+              border: "none",
+              outline: "none",
+              backgroundImage: `url(${dietbg})`,
+              backgroundPosition: "center",
+              backgroundSize: "cover",
+              elevation: 0,
+            }}
+            onClick={handleClose}
+          >
+            <Typography
+              variant="h3"
+              component="div"
+              textAlign={"center"}
+              fontWeight={600}
+            >
+              {data.Title}
+            </Typography>
+            <Typography
+              fontSize={"1.4rem"}
+              color={"black"}
+              textAlign={"center"}
+              fontFamily={"Comme, sans-serif"}
+            >
+              {data.DetailedContent}
+            </Typography>
+            <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
+              <Box
+                sx={{
+                  border: "2px solid black",
+                  p: 1,
+                  px: 2,
+                  mt: 3,
+                  height: 40,
+                  width: 100,
+                }}
+                onClick={() => dispatch(SetSelectedPlanToBuy(AllPlans[index]))}
+              >
+                <NavLink to="/diet-plan-form">
+                  <Typography
+                    color={"white"}
+                    fontFamily={"Rubik, sans-serif"}
+                    fontWeight={600}
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      background: " black ",
+                      height: 40,
+                      width: 110,
+                      ml: -4.5,
+                      textAlign: "center",
+                      transition: "scale 0.3s ease-in-out",
+                      "&:hover": {
+                        scale: "0.95 !important",
+                      },
+                    }}
+                  >
+                    Buy Plan
+                  </Typography>
+                </NavLink>
+              </Box>
+            </Box>
+          </Paper>
+        </Modal>
+      </Box>
+    );
+  };
+
+  useEffect(() => {
+    preloadImages();
+  }, []);
+
+  const preloadImages = () => {
+    AllPlans.forEach((data) => {
+      const img = new Image();
+      img.src = data.Image;
+    });
+  };
+  return (
+    <Container>
+      <Typography
+        color={"white"}
+        variant="h2"
+        textAlign={"center"}
+        my={4}
+        sx={{ textShadow: "3px 0px 0px purple", fontWeight: 800 }}
+      >
+        Our DietPlans
+      </Typography>
+      <Grid
+        container
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          mt: 4,
+        }}
+        rowSpacing={2}
+      >
+        {AllPlans.map((data, index) => (
+          <React.Fragment key={data.id}>
+            {index % 2 === 0 ? (
+              <>
+                <Grid item xs={6}>
+                  <CustomCard data={data} index={index} />
+                </Grid>
+                <Grid
+                  item
+                  xs={6}
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <img
+                    src={data.Image}
+                    alt="CARD IMAGES"
+                    style={{
+                      width: "250px",
+                      height: "250px",
+                    }}
+                  />
+                </Grid>
+              </>
+            ) : (
+              <>
+                <Grid
+                  item
+                  xs={6}
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <img
+                    src={data.Image}
+                    alt="CARD IMAGES"
+                    style={{
+                      width: "250px",
+                      height: "250px",
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <CustomCard data={data} index={index} />
+                </Grid>
+              </>
+            )}
+          </React.Fragment>
+        ))}
+      </Grid>
+    </Container>
   );
 };
 export default DietPlanSection;
