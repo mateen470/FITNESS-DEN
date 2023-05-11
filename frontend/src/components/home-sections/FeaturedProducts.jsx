@@ -29,7 +29,7 @@ const FeaturedProducts = () => {
     },
     {
       title: "Foam Roller",
-      desc: "High-density foam roller for post-workout recovery, designed to alleviate muscle soreness and stiffness.",
+      desc: "High-density foam roller for post-workout recovery, made for muscle soreness and stiffness.",
       image: roller,
       price: "1000.00",
     },

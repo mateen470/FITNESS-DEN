@@ -23,12 +23,12 @@ const FeaturedBlogs = () => {
     },
     {
       title: "The Benefits of Yoga for Stress Relief",
-      desc: "We explore the ways in which practicing yoga can help reduce stress and anxiety. From breathing techniques to meditation, we share all of the tips on how to use yoga to calm your mind and improve your mental health alongside your pysical health",
+      desc: "We explore the ways in which practicing yoga can help reduce stress and anxiety. From breathing techniques to meditation, we share all of the tips on how to use yoga to calm your mind and improve your mental health.",
       image: yoga,
     },
     {
       title: "Why Rest Days Are Important for Fitness",
-      desc: "Rest days are often overlooked, but they're a crucial part of any fitness routine. In this article, we explain why rest days are important for your body and mind, and share tips on how to incorporate them into your workout schedule.",
+      desc: "Rest days are often overlooked, but they're a crucial part of any fitness routine. In this article, we explain why rest days are important for your body and mind, and share tips on how to incorporate them into your life.",
       image: rest,
     },
   ];
