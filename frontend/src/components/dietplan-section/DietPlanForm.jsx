@@ -3,7 +3,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ConfirmationModal from "../confirmation-model/ConfirmationModal";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { AddPhysicalInfo } from "../../context/PhysicalInfo";
 import { useNavigate } from "react-router-dom";
 import {
@@ -14,7 +14,6 @@ import {
 } from "../../Validations/DietPhysicalInfoValidation";
 import {
   Box,
-  Button,
   Container,
   FormControl,
   FormControlLabel,
@@ -57,8 +56,54 @@ const DietPlanForm = () => {
     )
       setModalOpen(true);
   };
+  const styles = {
+    textfield: {
+      "& .MuiInput-underline::before": {
+        borderBottom: " 1px solid white",
+      },
+      "& .MuiInput-underline::after": {
+        borderBottom: " 2px solid white",
+      },
+      "& .MuiInput-underline:hover:not(.Mui-disabled):before": {
+        borderBottomColor: "white",
+      },
+      "& .MuiInput-input": { color: "white" },
+      "& .MuiInputLabel-root": {
+        color: "white",
+      },
+      "& .MuiInputLabel-root.Mui-focused": { color: "white" },
+
+      "& .MuiTypography-root": {
+        color: "white",
+      },
+    },
+    Radio: {
+      "& .MuiSvgIcon-root": {
+        color: "white",
+      },
+      "& .MuiTypography-root": {
+        color: "white",
+      },
+    },
+    radioLabel: {
+      "&.MuiFormLabel-root.Mui-focused": {
+        color: "white",
+      },
+      "&.MuiFormLabel-root ": {
+        color: "white",
+      },
+    },
+  };
   return (
-    <Container>
+    <Container
+      sx={{
+        my: 4,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        minHeight: "100vh",
+      }}
+    >
       {modalOpen && (
         <ConfirmationModal
           modalOpen={modalOpen}
@@ -66,13 +111,25 @@ const DietPlanForm = () => {
           submitPlan={submitRequest}
         />
       )}
-      <Typography>Enter Physical Information</Typography>
-      <Box>
-        <FormControl>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+        }}
+      >
+        <Typography variant="h3" color={"white"} fontWeight={800}>
+          Enter Physical Information
+        </Typography>
+        <FormControl sx={{ gap: "2rem" }}>
           <TextField
+            sx={styles.textfield}
             className="ageInput"
             name="Age"
             type="number"
+            inputProps={{ min: 0 }}
+            variant="standard"
             label="Enter Age"
             onChange={(e) => setAge(e.target.value)}
             InputProps={{
@@ -82,9 +139,12 @@ const DietPlanForm = () => {
             }}
           />
           <TextField
+            sx={styles.textfield}
             className="weightInput"
             name="Weight"
             type="number"
+            inputProps={{ min: 0 }}
+            variant="standard"
             label="Enter Weight"
             onChange={(e) => setWeight(e.target.value)}
             InputProps={{
@@ -92,14 +152,26 @@ const DietPlanForm = () => {
             }}
           />
           <Box>
-            <FormLabel>Any Allergies or Medical History</FormLabel>
+            <FormLabel sx={styles.radioLabel}>
+              Any Allergies or Medical History
+            </FormLabel>
             <RadioGroup
               defaultValue={MedicalHistory}
               value={MedicalHistory}
               onChange={() => setMedicalHistory(!MedicalHistory)}
             >
-              <FormControlLabel value={true} control={<Radio />} label="Yes" />
-              <FormControlLabel value={false} control={<Radio />} label="No" />
+              <FormControlLabel
+                sx={styles.Radio}
+                value={true}
+                control={<Radio />}
+                label="Yes"
+              />
+              <FormControlLabel
+                sx={styles.Radio}
+                value={false}
+                control={<Radio />}
+                label="No"
+              />
             </RadioGroup>
           </Box>
           {MedicalHistory && (
@@ -110,7 +182,50 @@ const DietPlanForm = () => {
               onChange={(e) => setMedicalHistoryDes(e.target.value)}
             />
           )}
-          <Button onClick={handleSubmit}>Submit</Button>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              mb: 4,
+              mt: -2,
+            }}
+          >
+            <Box
+              sx={{
+                border: "2px solid white",
+                p: 1,
+                px: 2,
+                mt: 3,
+                height: "3.6vw",
+                width: "8vw",
+                cursor: "pointer",
+              }}
+              onClick={handleSubmit}
+            >
+              <Typography
+                color={"black"}
+                fontFamily={"Comme, sans-serif"}
+                sx={{
+                  background: "white",
+                  fontSize: "1.4vw",
+                  height: "3.4vw",
+                  width: "8.6vw",
+                  ml: -4.5,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  transition: "scale 0.3s ease-in-out",
+                  fontWeight: "bold",
+                  "&:hover": {
+                    scale: "0.95 !important",
+                  },
+                }}
+              >
+                Submit
+              </Typography>
+            </Box>
+          </Box>
         </FormControl>
       </Box>
     </Container>

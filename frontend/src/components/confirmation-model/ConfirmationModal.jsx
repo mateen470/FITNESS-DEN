@@ -60,4 +60,3 @@ const ConfirmationModal = ({ modalOpen, setModalOpen, submitPlan }) => {
 };
 
 export default ConfirmationModal;
-

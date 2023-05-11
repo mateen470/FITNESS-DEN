@@ -8,17 +8,17 @@ const WorkoutPlanFormPage = () => {
   return (
     <>
       <Box sx={{ position: "absolute", top: 0, left: 5 }}>
-        <NavLink to={"/"}>
+        <NavLink to={"/workout-plans"}>
           <Typography
             color={"white"}
             fontFamily={"Comme, sans-serif"}
             sx={{ display: "flex", alignItems: "center", fontSize: "1.7vw" }}
           >
-            <KeyboardDoubleArrowLeftIcon /> Home
+            <KeyboardDoubleArrowLeftIcon /> Back
           </Typography>
         </NavLink>
       </Box>
-      <WorkoutPlanForm />;
+      <WorkoutPlanForm />
     </>
   );
 };

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ConfirmationModal from "../confirmation-model/ConfirmationModal";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { AddPhysicalInfo } from "../../context/PhysicalInfo";
 import {
   AgeValidation,
@@ -18,8 +18,6 @@ import {
 } from "../../Validations/WorkoutPhysicalInfoValidation";
 import {
   Box,
-  Button,
-  Card,
   Container,
   FormControl,
   FormControlLabel,
@@ -43,10 +41,7 @@ const WorkoutPlanForm = () => {
   const [SurgeryDes, setSurgeryDes] = useState("");
   const [Equipments, setEquipments] = useState(false);
   const [EquipmentDes, setEquipmentsDes] = useState("");
-  const SelectedPlan = useSelector(
-    (state) => state.SelectedPlan.SelectedPlanToBuy
-  );
-  const [modalOpen, setModalOpen] = React.useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
 
   const submitRequest = () => {
@@ -130,7 +125,15 @@ const WorkoutPlanForm = () => {
     },
   };
   return (
-    <Container>
+    <Container
+      sx={{
+        my: 4,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        minHeight: "100vh",
+      }}
+    >
       {modalOpen && (
         <ConfirmationModal
           modalOpen={modalOpen}
@@ -138,16 +141,17 @@ const WorkoutPlanForm = () => {
           submitPlan={submitRequest}
         />
       )}
-      <Card
+      <Box
         sx={{
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           flexDirection: "column",
-          bgcolor: "#424242",
         }}
       >
-        <Typography variant="h4">Enter Physical Information</Typography>
+        <Typography variant="h3" color={"white"} fontWeight={800}>
+          Enter Physical Information
+        </Typography>
 
         <FormControl sx={{ gap: "2rem" }}>
           <TextField
@@ -282,11 +286,51 @@ const WorkoutPlanForm = () => {
               onChange={(e) => setEquipmentsDes(e.target.value)}
             />
           )}
-          <Button variant="contained" type="submit" onClick={handleSubmit}>
-            Submit
-          </Button>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              mb: 4,
+            }}
+          >
+            <Box
+              sx={{
+                border: "2px solid white",
+                p: 1,
+                px: 2,
+                mt: 3,
+                height: "3.6vw",
+                width: "8vw",
+                cursor: "pointer",
+              }}
+              onClick={handleSubmit}
+            >
+              <Typography
+                color={"black"}
+                fontFamily={"Comme, sans-serif"}
+                sx={{
+                  background: "white",
+                  fontSize: "1.4vw",
+                  height: "3.4vw",
+                  width: "8.6vw",
+                  ml: -4.5,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  transition: "scale 0.3s ease-in-out",
+                  fontWeight: "bold",
+                  "&:hover": {
+                    scale: "0.95 !important",
+                  },
+                }}
+              >
+                Submit
+              </Typography>
+            </Box>
+          </Box>
         </FormControl>
-      </Card>
+      </Box>
     </Container>
   );
 };
