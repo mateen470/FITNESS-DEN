@@ -69,7 +69,7 @@ const DietPlanSection = () => {
       Description:
         "The Mediterranean diet is a dietary pattern inspired by the traditional eating habits of countries bordering the Mediterranean Sea. It emphasizes the consumption of plant-based foods, such as fruits, vegetables, whole grains, legumes, and nuts, along with olive oil as the primary source of fat.",
       DetailedContent:
-        "The Mediterranean diet is a balanced eating pattern inspired by the traditional foods of Mediterranean countries. It emphasizes whole, minimally processed foods such as fruits, vegetables, whole grains, legumes, and nuts. Olive oil is a key component, providing healthy monounsaturated fats. Moderate amounts of fish, poultry, dairy, and eggs are included for protein and additional nutrients. Red meat and processed foods are limited. The Mediterranean diet is associated with numerous health benefits, including reduced risk of heart disease, certain cancers, and chronic conditions. Its rich nutrient profile and focus on wholesome foods make it a popular and well-researched dietary approach.",
+        "The Mediterranean diet is a balanced eating pattern inspired by the traditional foods of Mediterranean countries. It emphasizes whole, minimally processed foods such as fruits, vegetables, whole grains, legumes, and nuts. Olive oil is a key component, providing healthy monounsaturated fats. Moderate amounts of fish, poultry, dairy, and eggs are included for protein and additional nutrients. Red meat and processed foods are limited. ",
       Price: 5000,
       Image: mediterranean,
     },

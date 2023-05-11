@@ -40,7 +40,7 @@ const WorkoutPlanSection = () => {
       Description:
         "Cardiovascular training, also referred to as cardio or aerobic exercise, is a type of physical activity that elevates the heart rate and enhances cardiovascular endurance. It includes activities like running, swimming, cycling, and high-intensity interval training (HIIT). ",
       DetailedContent:
-        "Cardiovascular training, also known as cardio or aerobic exercise, involves engaging in activities that elevate the heart rate and improve cardiovascular endurance. These activities, such as running, swimming, cycling, or high-intensity interval training (HIIT), target large muscle groups and require sustained effort. By regularly participating in cardiovascular training, individuals can enhance their heart and lung function, improve circulation, increase stamina, and burn calories. It is a versatile form of exercise that can be adapted to different fitness levels and goals, offering numerous benefits for overall cardiovascular health and fitness improvement.",
+        "Cardiovascular training, also known as cardio or aerobic exercise, involves engaging in activities that elevate the heart rate and improve cardiovascular endurance. These activities, such as running, swimming, cycling, or high-intensity interval training (HIIT), target large muscle groups and require sustained effort. By regularly participating in cardiovascular training, individuals can enhance their heart and lung function, improve circulation, increase stamina, and burn calories. ",
       Price: 5000,
       Image: cardio,
     },
@@ -50,7 +50,7 @@ const WorkoutPlanSection = () => {
       Description:
         "Core training focuses on exercises designed to strengthen the muscles of the abdomen, lower back, and hips. By targeting these core muscles, including the rectus abdominis, obliques, transverse abdominis, and erector spinae, core training enhances stability, balance, and posture. ",
       DetailedContent:
-        "Core training encompasses exercises that specifically target and strengthen the muscles of the abdomen, lower back, and hips. By focusing on the core muscles, including the rectus abdominis, obliques, transverse abdominis, and erector spinae, core training improves stability, balance, and posture. Common core exercises include planks, crunches, Russian twists, bridges, and supermans, which engage these muscle groups. Regular core training not only enhances functional strength but also helps prevent injuries related to the core area and promotes better overall back health. Incorporating core training into a fitness routine can lead to improved physical performance and a more resilient core.",
+        "Core training encompasses exercises that specifically target and strengthen the muscles of the abdomen, lower back, and hips. By focusing on the core muscles, including the rectus abdominis, obliques, transverse abdominis, and erector spinae, core training improves stability, balance, and posture. Common core exercises include planks, crunches, Russian twists, bridges, and supermans, which engage these muscle groups. Regular core training not only enhances functional strength but also helps prevent injuries related to the core area and promotes better overall back health.",
       Price: 5000,
       Image: core,
     },
@@ -60,7 +60,7 @@ const WorkoutPlanSection = () => {
       Description:
         "Flexibility and mobility training involves exercises and practices that aim to improve the range of motion and movement capabilities of the body. It includes stretching, dynamic movements, and exercises targeting joint mobility and muscle flexibility.",
       DetailedContent:
-        "Flexibility and mobility training focuses on exercises and practices that improve the body's range of motion and movement capabilities. It involves stretching, dynamic movements, and exercises targeting joint mobility and muscle flexibility. By incorporating flexibility and mobility training into a fitness routine, individuals can enhance physical performance, prevent injuries, improve posture, and develop better movement patterns. Activities like yoga, Pilates, stretching routines, and specific mobility exercises are commonly used to promote flexibility and mobility. Regular practice of these exercises leads to increased flexibility, improved joint mobility, and overall functional fitness.",
+        "Flexibility and mobility training focuses on exercises and practices that improve the body's range of motion and movement capabilities. It involves stretching, dynamic movements, and exercises targeting joint mobility and muscle flexibility. By incorporating flexibility and mobility training into a fitness routine, individuals can enhance physical performance, prevent injuries, improve posture, and develop better movement patterns.",
       Price: 5000,
       Image: flex,
     },
@@ -70,7 +70,7 @@ const WorkoutPlanSection = () => {
       Description:
         "Balance and stability training involves exercises that challenge and improve the body's ability to maintain balance and stability. These exercises often utilize unstable surfaces or equipment like balance boards or stability balls.",
       DetailedContent:
-        "Balance and stability training focuses on exercises that challenge and improve the body's ability to maintain balance and stability. This type of training often involves using unstable surfaces or equipment like balance boards or stability balls. By engaging core muscles and improving proprioception, balance and stability exercises enhance coordination, posture, and overall stability. It include single-leg stands, heel-to-toe walks, balance board exercises, and stability ball movements. Regularly incorporating these exercises into a fitness routine can enhance athletic performance, prevent falls, and improve overall body control and stability.",
+        "Balance and stability training focuses on exercises that challenge and improve the body's ability to maintain balance and stability. This type of training often involves using unstable surfaces or equipment like balance boards or stability balls. By engaging core muscles and improving proprioception, balance and stability exercises enhance coordination, posture, and overall stability. ",
       Price: 5000,
       Image: balance,
     },
