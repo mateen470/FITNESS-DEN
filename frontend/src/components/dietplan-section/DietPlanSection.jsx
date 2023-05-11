@@ -27,8 +27,9 @@ const DietPlanSection = () => {
       Type: "Diet",
       Title: "Keto Diet",
       Description:
-        "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident,unde",
-      DetailedContent: "",
+        "The ketogenic diet, commonly known as the keto diet, is a low-carbohydrate, high-fat diet that aims to shift the body into a state of ketosis. It involves reducing carbohydrate intake to a minimum and increasing the consumption of healthy fats.",
+      DetailedContent:
+        "The ketogenic diet (keto diet) is a low-carbohydrate, high-fat eating plan that induces ketosis, where the body uses fat for fuel instead of glucose. It involves reducing carb intake (20-50g/day) and increasing fat intake (70-75% of calories), with moderate protein intake (20-25% of calories). Healthy fats like avocados, nuts, and oils are encouraged, while sugars, grains, and starchy foods are limited. Benefits may include weight loss and improved blood sugar control, but proper nutrient balance and professional guidance are crucial. ",
       Price: 5000,
       Image: keto,
     },
@@ -36,8 +37,9 @@ const DietPlanSection = () => {
       Type: "Diet",
       Title: "Fat Loss Diet",
       Description:
-        "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident,unde",
-      DetailedContent: "",
+        "A fat loss diet refers to a specific eating plan designed to promote weight loss by reducing body fat. It typically involves creating a calorie deficit by consuming fewer calories than the body needs to maintain its current weight.",
+      DetailedContent:
+        "A fat loss diet is an eating plan designed to facilitate weight loss by reducing body fat. It involves creating a calorie deficit by consuming fewer calories than the body requires. A balanced fat loss diet emphasizes whole, nutrient-dense foods while controlling portions and avoiding processed or high-calorie foods. It typically includes lean proteins, fruits, vegetables, whole grains, and healthy fats. Regular physical activity and a sustainable approach are essential for successful fat loss.",
       Price: 5000,
       Image: weightLoss,
     },
@@ -45,8 +47,9 @@ const DietPlanSection = () => {
       Type: "Diet",
       Title: "Muscle Gain Diet",
       Description:
-        "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident,unde",
-      DetailedContent: "",
+        "A muscle gain diet is a dietary approach focused on providing the body with the necessary nutrients and calories to support muscle growth and development. It typically involves consuming a surplus of calories, with an emphasis on high-quality protein sources to support muscle protein synthesis.",
+      DetailedContent:
+        "A muscle gain diet is a dietary approach aimed at increasing muscle mass and strength. It involves consuming a calorie surplus and prioritizing high-quality protein sources to support muscle protein synthesis. The diet typically includes lean proteins, complex carbohydrates, healthy fats, and proper hydration. Combined with regular strength training, the muscle gain diet optimizes muscle growth.",
       Price: 5000,
       Image: muscleGain,
     },
@@ -54,8 +57,9 @@ const DietPlanSection = () => {
       Type: "Diet",
       Title: "Vegan Diet",
       Description:
-        "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident,unde",
-      DetailedContent: "",
+        "A vegetarian or vegan diet is a dietary approach that excludes or minimizes the consumption of animal products. Vegetarians typically avoid meat, poultry, and seafood, while still incorporating dairy products and eggs into their diet.",
+      DetailedContent:
+        "A vegetarian or vegan diet excludes or minimizes the consumption of animal products. Vegetarians avoid meat but may consume dairy and eggs, while vegans eliminate all animal-derived products. These diets emphasize plant-based foods like fruits, vegetables, whole grains, legumes, nuts, and seeds. Proper planning ensures sufficient intake of nutrients like protein, iron, vitamin B12, and omega-3 fatty acids. Vegetarian and vegan diets are chosen for ethical, environmental, and health reasons.",
       Price: 5000,
       Image: vegan,
     },
@@ -63,8 +67,9 @@ const DietPlanSection = () => {
       Type: "Diet",
       Title: "Mediterranean Diet",
       Description:
-        "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident,unde",
-      DetailedContent: "",
+        "The Mediterranean diet is a dietary pattern inspired by the traditional eating habits of countries bordering the Mediterranean Sea. It emphasizes the consumption of plant-based foods, such as fruits, vegetables, whole grains, legumes, and nuts, along with olive oil as the primary source of fat.",
+      DetailedContent:
+        "The Mediterranean diet is a balanced eating pattern inspired by the traditional foods of Mediterranean countries. It emphasizes whole, minimally processed foods such as fruits, vegetables, whole grains, legumes, and nuts. Olive oil is a key component, providing healthy monounsaturated fats. Moderate amounts of fish, poultry, dairy, and eggs are included for protein and additional nutrients. Red meat and processed foods are limited. The Mediterranean diet is associated with numerous health benefits, including reduced risk of heart disease, certain cancers, and chronic conditions. Its rich nutrient profile and focus on wholesome foods make it a popular and well-researched dietary approach.",
       Price: 5000,
       Image: mediterranean,
     },
