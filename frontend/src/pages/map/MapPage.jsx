@@ -3,8 +3,11 @@ import { Box, Container, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import MapSection from "../../components/map-section/MapSection";
+import Footer from "../../components/home-sections/Footer";
+
 const MapPage = () => {
   return (
+    <>
     <Container>
       <Box sx={{ position: "absolute", top: 0, left: 5 }}>
         <NavLink to={"/"}>
@@ -19,6 +22,8 @@ const MapPage = () => {
       </Box>
       <MapSection />
     </Container>
+    <Footer />
+    </>
   );
 };
 

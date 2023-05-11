@@ -3,6 +3,7 @@ import DietPlanSection from "../../components/dietplan-section/DietPlanSection";
 import { Box, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
+import Footer from "../../components/home-sections/Footer";
 
 const DietPlanPage = () => {
   return (
@@ -18,7 +19,8 @@ const DietPlanPage = () => {
           </Typography>
         </NavLink>
       </Box>
-      <DietPlanSection />;
+      <DietPlanSection />
+      <Footer />
     </>
   );
 };

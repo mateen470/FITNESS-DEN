@@ -3,6 +3,7 @@ import WorkoutPlanSection from "../../components/workoutplan-section/WorkoutPlan
 import { Box, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
+import Footer from "../../components/home-sections/Footer";
 
 const WorkoutPlanPage = () => {
   return (
@@ -18,7 +19,8 @@ const WorkoutPlanPage = () => {
           </Typography>
         </NavLink>
       </Box>
-      <WorkoutPlanSection />;
+      <WorkoutPlanSection />
+      <Footer />
     </>
   );
 };
