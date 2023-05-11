@@ -20,7 +20,9 @@ const DietPlanPage = () => {
         </NavLink>
       </Box>
       <DietPlanSection />
-      <Footer />
+      <Box mt={4}>
+        <Footer />
+      </Box>
     </>
   );
 };

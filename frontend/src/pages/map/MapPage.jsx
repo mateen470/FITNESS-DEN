@@ -22,7 +22,9 @@ const MapPage = () => {
       </Box>
       <MapSection />
     </Container>
-    <Footer />
+    <Box mt={4}>
+        <Footer />
+      </Box>
     </>
   );
 };
