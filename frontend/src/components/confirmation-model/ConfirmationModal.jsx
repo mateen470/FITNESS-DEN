@@ -1,5 +1,5 @@
-import { Box, Button, Container, Typography } from "@mui/material";
 import React from "react";
+import { Box, Button, Typography } from "@mui/material";
 
 const ConfirmationModal = ({ modalOpen, setModalOpen, submitPlan }) => {
   const handleClick = () => {
@@ -7,7 +7,7 @@ const ConfirmationModal = ({ modalOpen, setModalOpen, submitPlan }) => {
     submitPlan();
   };
   return (
-    <Container
+    <Box
       sx={{
         position: "fixed",
         top: "0",
@@ -23,9 +23,9 @@ const ConfirmationModal = ({ modalOpen, setModalOpen, submitPlan }) => {
     >
       <Box
         sx={{
-          bgcolor: "grey",
-          height: "30%",
-          width: "30%",
+          background: "#29084d",
+          height: "12vw",
+          width: "25vw",
           position: "absolute",
           display: "flex",
           flexDirection: "column",
@@ -37,25 +37,53 @@ const ConfirmationModal = ({ modalOpen, setModalOpen, submitPlan }) => {
           bottom: "0",
           left: "0",
           right: "0",
+          zIndex: "3",
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        <Typography sx={{ color: "white" }}>Are You Sure?</Typography>
-        <Box sx={{ display: "flex", justifyContent: "space-around" }}>
-          <Button sx={{ bgcolor: "Green" }} onClick={handleClick}>
-            Yes
+        <Typography
+          fontSize={"1.7rem"}
+          color={"white"}
+          textAlign={"center"}
+          fontFamily={"Comme, sans-serif"}
+        >
+          Are You Sure?
+        </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-evenly",
+            alignItems: "center",
+          }}
+        >
+          <Button sx={{ bgcolor: "white", mx: 1 }} onClick={handleClick}>
+            <Typography
+              color={"black"}
+              fontSize={"1.2rem"}
+              fontFamily={"Comme, sans-serif"}
+              fontWeight={800}
+            >
+              Yes
+            </Typography>
           </Button>
           <Button
-            sx={{ bgcolor: "Red" }}
+            sx={{ bgcolor: "white", mx: 1 }}
             onClick={() => {
               setModalOpen(false);
             }}
           >
-            No
+            <Typography
+              color={"black"}
+              fontSize={"1.2rem"}
+              fontFamily={"Comme, sans-serif"}
+              fontWeight={800}
+            >
+              No
+            </Typography>
           </Button>
         </Box>
       </Box>
-    </Container>
+    </Box>
   );
 };
 

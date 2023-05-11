@@ -46,10 +46,13 @@ const PaymentSection = () => {
       if (confirmPayment.paymentIntent !== undefined) {
         if (confirmPayment.paymentIntent.status === "succeeded") {
           axios
-            .post(Type === "Workout" ? "workout/workoutform" : "diet/dietform", {
-              Title,
-              ...PhysicalInfo,
-            })
+            .post(
+              Type === "Workout" ? "workout/workoutform" : "diet/dietform",
+              {
+                Title,
+                ...PhysicalInfo,
+              }
+            )
             .then((res) => {
               console.log(res.data);
               toast.success(

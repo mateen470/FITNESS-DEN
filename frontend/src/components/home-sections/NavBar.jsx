@@ -35,7 +35,11 @@ const NavBar = () => {
         }}
       >
         <Box>
-          <img src={logo} style={{ width: "90px", height: "90px" }} alt="logo" />
+          <img
+            src={logo}
+            style={{ width: "90px", height: "90px" }}
+            alt="logo"
+          />
         </Box>
         <Box
           sx={{
@@ -65,7 +69,7 @@ const NavBar = () => {
             <Box
               sx={{
                 backgroundImage:
-                  " linear-gradient( rgba(29, 175, 253, 1) 50%,rgba(134, 69, 252, 1) 100% ) ",
+                  " linear-gradient( to bottom left, #29084d 20%, #830d5c80, #191919 ) ",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
