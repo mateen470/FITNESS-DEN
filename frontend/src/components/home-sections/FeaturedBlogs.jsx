@@ -7,7 +7,6 @@ import {
   Container,
   Grid,
   Typography,
-  Box,
 } from "@mui/material";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import { NavLink } from "react-router-dom";
@@ -18,7 +17,7 @@ const FeaturedBlogs = () => {
   const blogsData = [
     {
       title: "5 Ways to Stay Motivated During Your Workouts",
-      desc: "Feeling unmotivated to exercise? In this article, we share five practical tips to help you stay motivated and focused on your fitness goals, including setting small achievable goals, finding a workout buddy, and changing up your routine. ",
+      desc: "Feeling unmotivated to exercise? In this article, we share five practical tips to help you stay motivated and focused on your fitness goals, including setting small achievable goals and finding a workout buddy. ",
       image: motivate,
     },
     {
