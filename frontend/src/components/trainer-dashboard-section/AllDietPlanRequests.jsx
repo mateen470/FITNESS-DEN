@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AddDietPlanDetails } from "../../context/DietPlanDetails";
+import VisibilityRoundedIcon from "@mui/icons-material/VisibilityRounded";
+import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import {
+  Box,
   Button,
-  Card,
   Container,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableRow,
+  Typography,
 } from "@mui/material";
 
 const AllDietPlanRequests = () => {
@@ -26,71 +29,98 @@ const AllDietPlanRequests = () => {
 
   return (
     <Container>
-      <Card
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          bgcolor: "black",
-        }}
+      <Box sx={{ position: "absolute", top: 0, left: 5 }}>
+        <NavLink to={"/trainer"}>
+          <Typography
+            color={"white"}
+            fontFamily={"Comme, sans-serif"}
+            sx={{ display: "flex", alignItems: "center", fontSize: "1.7vw" }}
+          >
+            <KeyboardDoubleArrowLeftIcon /> Back
+          </Typography>
+        </NavLink>
+      </Box>
+      <Typography
+        fontSize={"4.5vw"}
+        color={"white"}
+        fontWeight={800}
+        textAlign={"center"}
+        my={4}
       >
-        <Table>
-          <TableHead>
-            <TableRow>
+        Current Diet Plan Requests
+      </Typography>
+      <Table sx={{ mb: 10 }}>
+        <TableHead>
+          <TableRow>
+            <TableCell
+              sx={{
+                color: "white",
+                fontWeight: "bold",
+                fontSize: "5vh",
+                fontFamily: "Comme, sans-serif",
+              }}
+            >
+              ID
+            </TableCell>
+            <TableCell
+              sx={{
+                color: "white",
+                fontWeight: "bold",
+                fontSize: "5vh",
+                fontFamily: "Comme, sans-serif",
+              }}
+            >
+              Plan Title
+            </TableCell>
+            <TableCell
+              sx={{
+                color: "white",
+                fontWeight: "bold",
+                fontSize: "5vh",
+                fontFamily: "Comme, sans-serif",
+              }}
+            >
+              Action
+            </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {DietPlanRequests.map((item, index) => (
+            <TableRow key={index}>
               <TableCell
                 sx={{
                   color: "white",
-                  textAlign: "center",
-                  fontWeight: "800",
+                  fontSize: "1.2rem",
+                  fontFamily: "Comme, sans-serif",
                 }}
               >
-                ID
+                {item._id}
               </TableCell>
               <TableCell
                 sx={{
                   color: "white",
-                  textAlign: "center",
-                  fontWeight: "800",
+                  fontSize: "1.2rem",
+                  fontFamily: "Comme, sans-serif",
                 }}
               >
-                Plan Title
+                {item.Title}
               </TableCell>
-              <TableCell
-                sx={{
-                  color: "white",
-                  textAlign: "center",
-                  fontWeight: "800",
-                }}
-              >
-                Action
+              <TableCell>
+                <Button>
+                  <NavLink
+                    to="/view-diet-plan-details"
+                    onClick={() => dispatch(AddDietPlanDetails(item))}
+                  >
+                    <VisibilityRoundedIcon
+                      sx={{ color: "white", fontSize: "2.5rem" }}
+                    />
+                  </NavLink>
+                </Button>
               </TableCell>
             </TableRow>
-          </TableHead>
-          <TableBody>
-            {DietPlanRequests.map((item, index) => (
-              <TableRow key={index}>
-                <TableCell sx={{ color: "white", textAlign: "center" }}>
-                  {item._id}
-                </TableCell>
-                <TableCell sx={{ color: "white", textAlign: "center" }}>
-                  {item.Title}
-                </TableCell>
-                <TableCell sx={{ textAlign: "center" }}>
-                  <Button variant="contained">
-                    <Link
-                      style={{ textDecoration: "none", color: "white" }}
-                      to="/view-diet-plan-details"
-                      onClick={() => dispatch(AddDietPlanDetails(item))}
-                    >
-                      View Detail
-                    </Link>
-                  </Button>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </Card>
+          ))}
+        </TableBody>
+      </Table>
     </Container>
   );
 };
