@@ -37,7 +37,7 @@ const ResetPasswordForm = () => {
         flexDirection: "column",
       }}
     >
-      <Typography fontSize={"7vw"} color={"white"}>
+      <Typography fontSize={"7vw"} color={"white"} fontWeight={800}>
         Reset Password
       </Typography>
       <Box

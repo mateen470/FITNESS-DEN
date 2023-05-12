@@ -1,5 +1,5 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import DietPlanUpdateRequestModal from "../update-req-modal/DietPlanUpdateRequestModal";
 import {
   Button,
@@ -24,19 +24,96 @@ const ViewDietPlan = () => {
   const handleDay = (index) => {
     switch (index) {
       case 0:
-        return <td>Monday</td>;
+        return (
+          <td
+            style={{
+              color: "white",
+              fontWeight: "bold",
+              fontSize: "1.8rem",
+              fontFamily: "Comme, sans-serif",
+            }}
+          >
+            Monday
+          </td>
+        );
       case 1:
-        return <td>Tuesday</td>;
+        return (
+          <td
+            style={{
+              color: "white",
+              fontWeight: "bold",
+              fontSize: "1.8rem",
+              fontFamily: "Comme, sans-serif",
+            }}
+          >
+            Tuesday
+          </td>
+        );
       case 2:
-        return <td>Wednesday</td>;
+        return (
+          <td
+            style={{
+              color: "white",
+              fontWeight: "bold",
+              fontSize: "1.8rem",
+              fontFamily: "Comme, sans-serif",
+            }}
+          >
+            Wednesday
+          </td>
+        );
       case 3:
-        return <td>Thursday</td>;
+        return (
+          <td
+            style={{
+              color: "white",
+              fontWeight: "bold",
+              fontSize: "1.8rem",
+              fontFamily: "Comme, sans-serif",
+            }}
+          >
+            Thursday
+          </td>
+        );
       case 4:
-        return <td>Friday</td>;
+        return (
+          <td
+            style={{
+              color: "white",
+              fontWeight: "bold",
+              fontSize: "1.8rem",
+              fontFamily: "Comme, sans-serif",
+            }}
+          >
+            Friday
+          </td>
+        );
       case 5:
-        return <td>Saturday</td>;
+        return (
+          <td
+            style={{
+              color: "white",
+              fontWeight: "bold",
+              fontSize: "1.8rem",
+              fontFamily: "Comme, sans-serif",
+            }}
+          >
+            Saturday
+          </td>
+        );
       case 6:
-        return <td>Sunday</td>;
+        return (
+          <td
+            style={{
+              color: "white",
+              fontWeight: "bold",
+              fontSize: "1.8rem",
+              fontFamily: "Comme, sans-serif",
+            }}
+          >
+            Sunday
+          </td>
+        );
       default:
         return <td></td>;
     }
@@ -54,15 +131,50 @@ const ViewDietPlan = () => {
         <>
           {item.DietPlan.map((i, key) => (
             <>
-              <Typography>Week {key + 1}</Typography>
+              <Typography
+                color={"white"}
+                fontSize={"5.5vh"}
+                fontFamily={"Comme, sans-serif"}
+                fontWeight={800}
+                key={key}
+              >
+                Week {key + 1}
+              </Typography>
 
               <Table>
                 <TableHead>
                   <TableRow>
                     <TableCell></TableCell>
-                    <TableCell>Breakfast</TableCell>
-                    <TableCell>Lunch</TableCell>
-                    <TableCell>Dinner</TableCell>
+                    <TableCell
+                      sx={{
+                        color: "white",
+                        fontWeight: "bold",
+                        fontSize: "2rem",
+                        fontFamily: "Comme, sans-serif",
+                      }}
+                    >
+                      Breakfast
+                    </TableCell>
+                    <TableCell
+                      sx={{
+                        color: "white",
+                        fontWeight: "bold",
+                        fontSize: "2rem",
+                        fontFamily: "Comme, sans-serif",
+                      }}
+                    >
+                      Lunch
+                    </TableCell>
+                    <TableCell
+                      sx={{
+                        color: "white",
+                        fontWeight: "bold",
+                        fontSize: "2rem",
+                        fontFamily: "Comme, sans-serif",
+                      }}
+                    >
+                      Dinner
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -70,9 +182,33 @@ const ViewDietPlan = () => {
                     <TableRow>
                       {handleDay(j)}
 
-                      <TableCell>{x.BreakFast}</TableCell>
-                      <TableCell>{x.Lunch}</TableCell>
-                      <TableCell>{x.Dinner}</TableCell>
+                      <TableCell
+                        sx={{
+                          color: "white",
+                          fontSize: "1.5rem",
+                          fontFamily: "Comme, sans-serif",
+                        }}
+                      >
+                        {x.BreakFast}
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          color: "white",
+                          fontSize: "1.5rem",
+                          fontFamily: "Comme, sans-serif",
+                        }}
+                      >
+                        {x.Lunch}
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          color: "white",
+                          fontSize: "1.5rem",
+                          fontFamily: "Comme, sans-serif",
+                        }}
+                      >
+                        {x.Dinner}
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -82,6 +218,11 @@ const ViewDietPlan = () => {
                 onClick={() => {
                   setIndex(idx);
                   setModalOpen(true);
+                }}
+                sx={{
+                  background: "white",
+                  color: "black",
+                  textAlign: "center",
                 }}
               >
                 Update Plan

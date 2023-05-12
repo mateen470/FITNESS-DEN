@@ -14,10 +14,9 @@ const ForgotPasswordForm = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
-      const forgotPasswordRequest = await axios.post(
-        "forgotPassword",
-        { email }
-      );
+      const forgotPasswordRequest = await axios.post("forgotPassword", {
+        email,
+      });
       console.log(forgotPasswordRequest);
     } catch (error) {
       console.log(error);
@@ -32,7 +31,7 @@ const ForgotPasswordForm = () => {
         flexDirection: "column",
       }}
     >
-      <Typography fontSize={"7vw"} color={"white"}>
+      <Typography fontSize={"7vw"} color={"white"} fontWeight={800}>
         Forgot Password
       </Typography>
       <Box

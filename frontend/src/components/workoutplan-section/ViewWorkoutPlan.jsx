@@ -48,7 +48,6 @@ const ViewWorkoutPlan = () => {
           Plan={Plan[index]}
         />
       )}
-
       {Plan.map((item, key) => (
         <>
           <Table>
