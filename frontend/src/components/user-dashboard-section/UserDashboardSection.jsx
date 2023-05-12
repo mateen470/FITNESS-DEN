@@ -40,13 +40,12 @@ const UserDashboardSection = () => {
           backdropFilter: "blur(10px)",
           boxShadow: "10px 10px 10px rgba(0, 0, 0, 0.1)",
           borderRadius: 3,
-          // backgroundImage: 'url("https://your-cdn-url.com/path-to-your/rough-texture.png")', // replace this with your CDN URL
-          backgroundSize: "cover",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           flexDirection: "column",
           gap: 1,
+          zIndex: 10,
         }}
       >
         <Typography

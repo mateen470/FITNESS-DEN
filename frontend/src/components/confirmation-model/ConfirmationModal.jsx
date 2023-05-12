@@ -56,7 +56,10 @@ const ConfirmationModal = ({ modalOpen, setModalOpen, submitPlan }) => {
             alignItems: "center",
           }}
         >
-          <Button sx={{ bgcolor: "white", mx: 1 }} onClick={handleClick}>
+          <Button
+            sx={{ bgcolor: "white", mx: 1, textTransform: "none" }}
+            onClick={handleClick}
+          >
             <Typography
               color={"black"}
               fontSize={"1.2rem"}
