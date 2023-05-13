@@ -18,11 +18,14 @@ export const DietPlanSlice = createSlice({
       state.WeeklyDietPlan = [];
     },
     AddDietPlan: (state) => {
-      state.DietPlan = [...state.DietPlan, [state.WeeklyDietPlan]];
+      state.DietPlan = [...state.DietPlan, state.WeeklyDietPlan];
     },
-    SubmitDietPlan: (state) => {
+    SubmitDietPlan: (state, action) => {
       axios
-        .post("diet/completed-diet-plan", state.DietPlan)
+        .post("diet/completed-diet-plan", {
+          IDofCurrentUser: action.payload,
+          DietPlan: state.DietPlan,
+        })
         .then((res) => {
           console.log(res.data.data);
           toast.success("PLAN SUBMITTED SUCCESSFULLY!!");

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Plan from "./WorkoutPlanFormat";
 import { EmptyExcercise } from "../../context/Excercise";
 import { useDispatch, useSelector } from "react-redux";
+import { setWorkoutPlanRequestsLength } from "../../context/CheckForNewPlanRequests";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ConfirmationModal from "../confirmation-model/ConfirmationModal";
@@ -32,6 +33,9 @@ const CreateWorkoutPlan = () => {
   const Excercise = useSelector((state) => state.Excercise.Excercise);
   const Request = useSelector(
     (state) => state.WorkoutPlanDetails.WorkoutPlanDetails
+  );
+  const CurrentWorkoutPlanRequestsLength = useSelector(
+    (state) => state.CheckForNewPlanRequests.WorkoutPlanRequestsLength
   );
   const [duration, setDuration] = useState();
   const [currentWeek, setCurrentWeek] = useState(1);
@@ -78,10 +82,14 @@ const CreateWorkoutPlan = () => {
     addWeeklyPlan();
     dispatch(AddPlan());
     dispatch(EmptyExcercise());
-    dispatch(SubmitPlan());
+    dispatch(SubmitPlan(Request.IDofCurrentUser));
     axios
       .delete("workout/workout-request/" + Request._id)
-      .then((res) => console.log(res));
+      .then(() =>
+        dispatch(
+          setWorkoutPlanRequestsLength(CurrentWorkoutPlanRequestsLength - 1)
+        )
+      );
     navigate("/all-workout-plan-req");
   };
 

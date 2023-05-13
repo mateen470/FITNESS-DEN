@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { setDietPlanRequestsLength } from "../../context/CheckForNewPlanRequests";
 import ConfirmationModal from "../confirmation-model/ConfirmationModal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -42,6 +43,9 @@ const CreateDietPlan = () => {
   const [flag, setFlag] = useState(false);
   const [flag1, setFlag1] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const CurrentDietPlanRequestsLength = useSelector(
+    (state) => state.CheckForNewPlanRequests.DietPlanRequestsLength
+  );
   const navigate = useNavigate();
   function handleClick(e) {
     e.preventDefault();
@@ -72,10 +76,12 @@ const CreateDietPlan = () => {
   const submitPlan = () => {
     dispatch(AddWeeklyDietPlan({ BreakFast, Lunch, Dinner }));
     dispatch(AddDietPlan(weeklyDietPlan));
-    dispatch(SubmitDietPlan());
+    dispatch(SubmitDietPlan(Request.IDofCurrentUser));
     axios
       .delete("diet/diet-request/" + Request._id)
-      .then((res) => console.log(res.data));
+      .then(() =>
+        dispatch(setDietPlanRequestsLength(CurrentDietPlanRequestsLength - 1))
+      );
     navigate("/all-diet-plan-req");
   };
 

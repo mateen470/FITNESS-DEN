@@ -18,16 +18,15 @@ export const PlanSlice = createSlice({
       state.WeeklyPlan = [];
     },
     AddPlan: (state) => {
-      state.Plan = [...state.Plan, [state.WeeklyPlan]];
+      state.Plan = [...state.Plan, state.WeeklyPlan];
     },
-    SubmitPlan: (state) => {
-      console.log("frontend1")
+    SubmitPlan: (state, action) => {
       axios
-        .post("workout/completed-workout-plan", state.Plan)
+        .post("workout/completed-workout-plan", {
+          IDofCurrentUser: action.payload,
+          WorkoutPlan: state.Plan,
+        })
         .then((res) => {
-          console.log("frontend2")
-          console.log(res.data.data);
-          console.log("frontend3")
           toast.success("PLAN SUBMITTED SUCCESSFULLY!!");
         })
         .catch((error) => {

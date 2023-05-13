@@ -6,6 +6,7 @@ const WorkoutPlanControllerFunctions = {
   WorkoutPlanFilledForm: async (req, res) => {
     try {
       const formData = new WorkoutPlanRequestFromUser();
+      formData.IDofCurrentUser = req.body.IDofCurrentUser;
       formData.title = req.body.Title;
       formData.age = req.body.Age;
       formData.height = req.body.Height;
@@ -46,11 +47,9 @@ const WorkoutPlanControllerFunctions = {
   SendCompletedPlanToUser: async (req, res) => {
     try {
       const data = new CompletedWorkoutPlanFromTrainer();
-      req.body.map((item) =>
-        item.map((i) => {
-          data.WorkoutPlan.push(i);
-        })
-      );
+      data.IDofCurrentUser = req.body.IDofCurrentUser;
+      req.body.WorkoutPlan.map((item) => data.WorkoutPlan.push(item));
+
       await data.save();
       return await res.status(200).json({
         success: true,
@@ -85,7 +84,9 @@ const WorkoutPlanControllerFunctions = {
   },
   GetAllCompletedPlans: async (req, res) => {
     try {
-      const allCompletedPlans = await CompletedWorkoutPlanFromTrainer.find();
+      const allCompletedPlans = await CompletedWorkoutPlanFromTrainer.findOne({
+        IDofCurrentUser: req.params.id,
+      });
       return await res.status(200).json({
         success: true,
         message: "ALL PLANS ARE FETCHED!!",

@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { setIsNewWorkoutPlanRequests } from "../../context/CheckForNewPlanRequests";
 import { AddWorkoutPlanDetails } from "../../context/WorkoutPlanDetails";
 import VisibilityRoundedIcon from "@mui/icons-material/VisibilityRounded";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
@@ -25,7 +26,10 @@ const AllWorkoutPlanRequests = () => {
       .get("workout/all-new-workout-requests")
       .then((res) => setWorkoutPlanRequests(res.data.data));
   };
-  useEffect(FetchWorkoutPlanRequests, []);
+  useEffect(() => {
+    FetchWorkoutPlanRequests();
+    dispatch(setIsNewWorkoutPlanRequests(false));
+  }, []);
 
   return (
     <Container>
@@ -47,7 +51,7 @@ const AllWorkoutPlanRequests = () => {
         textAlign={"center"}
         my={4}
       >
-        Current Workout Plan Requests
+        All Workout Plan Requests
       </Typography>
       <Table sx={{ mb: 10 }}>
         <TableHead>

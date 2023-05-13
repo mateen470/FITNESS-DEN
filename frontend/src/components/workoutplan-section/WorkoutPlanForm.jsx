@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ConfirmationModal from "../confirmation-model/ConfirmationModal";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AddPhysicalInfo } from "../../context/PhysicalInfo";
 import {
   AgeValidation,
@@ -42,11 +42,15 @@ const WorkoutPlanForm = () => {
   const [Equipments, setEquipments] = useState(false);
   const [EquipmentDes, setEquipmentsDes] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
+  const IDofCurrentUser = useSelector(
+    (state) => state.CurrentUser.CurrentUserID
+  );
   const navigate = useNavigate();
 
   const submitRequest = () => {
     dispatch(
       AddPhysicalInfo({
+        IDofCurrentUser,
         Age,
         Weight,
         Height,

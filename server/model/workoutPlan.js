@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const workoutPlan = new mongoose.Schema({
   WorkoutPlan: Array,
+  IDofCurrentUser: String,
 });
 
 const workoutPlanModel = new mongoose.model("WorkoutPlan", workoutPlan);

@@ -1,80 +1,139 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { setIsNewDietPlanUpdateRequests } from "../../context/CheckForNewPlanRequests";
 import { GetDietPlanId } from "../../context/UpdatePlan";
+import VisibilityRoundedIcon from "@mui/icons-material/VisibilityRounded";
+import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import {
   Button,
-  Card,
   Container,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableRow,
+  Box,
+  Typography,
 } from "@mui/material";
 
 const DietPlanUpdateRequests = () => {
   const dispatch = useDispatch();
   const [DietPlanUpdateRequests, setDietPlanUpdateRequests] = useState([]);
+
   const FetchUpdateRequests = () => {
     axios
       .get("diet/all-diet-update-request")
       .then((res) => setDietPlanUpdateRequests(res.data.data));
   };
-
-  useEffect(FetchUpdateRequests, []);
+  useEffect(() => {
+    FetchUpdateRequests();
+    dispatch(setIsNewDietPlanUpdateRequests(false));
+  }, []);
   return (
     <Container>
-      <Card
-        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+      <Box sx={{ position: "absolute", top: 0, left: 5 }}>
+        <NavLink to={"/trainer"}>
+          <Typography
+            color={"white"}
+            fontFamily={"Comme, sans-serif"}
+            sx={{ display: "flex", alignItems: "center", fontSize: "1.7vw" }}
+          >
+            <KeyboardDoubleArrowLeftIcon /> Back
+          </Typography>
+        </NavLink>
+      </Box>
+      <Typography
+        fontSize={"4.5vw"}
+        color={"white"}
+        fontWeight={800}
+        textAlign={"center"}
+        my={4}
       >
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell sx={{ textAlign: "center", fontWeight: "800" }}>
-                ID
+        All Diet Plan Update Requests
+      </Typography>
+      <Table sx={{ mb: 10 }}>
+        <TableHead>
+          <TableRow>
+            <TableCell
+              sx={{
+                color: "white",
+                fontWeight: "bold",
+                fontSize: "5vh",
+                fontFamily: "Comme, sans-serif",
+              }}
+            >
+              ID
+            </TableCell>
+            <TableCell
+              sx={{
+                color: "white",
+                fontWeight: "bold",
+                fontSize: "5vh",
+                fontFamily: "Comme, sans-serif",
+              }}
+            >
+              Description
+            </TableCell>
+            <TableCell
+              sx={{
+                color: "white",
+                fontWeight: "bold",
+                fontSize: "5vh",
+                fontFamily: "Comme, sans-serif",
+              }}
+            >
+              Action
+            </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {DietPlanUpdateRequests.map((item, index) => (
+            <TableRow key={index}>
+              <TableCell
+                sx={{
+                  color: "white",
+                  fontSize: "1.2rem",
+                  fontFamily: "Comme, sans-serif",
+                }}
+              >
+                {item._id}
               </TableCell>
-              <TableCell sx={{ textAlign: "center", fontWeight: "800" }}>
-                Description
+              <TableCell
+                sx={{
+                  color: "white",
+                  fontSize: "1.2rem",
+                  fontFamily: "Comme, sans-serif",
+                }}
+              >
+                {item.Description}
               </TableCell>
-              <TableCell sx={{ textAlign: "center", fontWeight: "800" }}>
-                Action
+              <TableCell>
+                <Button>
+                  <NavLink
+                    onClick={() =>
+                      dispatch(
+                        GetDietPlanId(
+                          JSON.stringify({
+                            PlanId: item.PlanID,
+                            ReqId: item._id,
+                          })
+                        )
+                      )
+                    }
+                    to="/update-diet-plan"
+                  >
+                    <VisibilityRoundedIcon
+                      sx={{ color: "white", fontSize: "2.5rem" }}
+                    />
+                  </NavLink>
+                </Button>
               </TableCell>
             </TableRow>
-          </TableHead>
-          <TableBody>
-            {DietPlanUpdateRequests.map((item, index) => (
-              <TableRow key={index}>
-                <TableCell sx={{ textAlign: "center" }}>{item._id}</TableCell>
-                <TableCell sx={{ textAlign: "center" }}>
-                  {item.Description}
-                </TableCell>
-                <TableCell sx={{ textAlign: "center" }}>
-                  <Button variant="contained">
-                    <Link
-                      style={{ textDecoration: "none", color: "white" }}
-                      onClick={() =>
-                        dispatch(
-                          GetDietPlanId(
-                            JSON.stringify({
-                              PlanId: item.PlanID,
-                              ReqId: item._id,
-                            })
-                          )
-                        )
-                      }
-                      to="/update-diet-plan"
-                    >
-                      Update
-                    </Link>
-                  </Button>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </Card>
+          ))}
+        </TableBody>
+      </Table>
     </Container>
   );
 };

@@ -56,7 +56,10 @@ const PaymentSection = () => {
               }
             )
             .then((res) => {
-              console.log(res.data);
+              axios.post("payment/allPayments", {
+                PlanType: Type,
+                PlanAmount: SelectedPlan.Price,
+              });
               toast.success(
                 "PAYMENT CONFIRMED. YOU WILL RECIEVE YOUR PLAN IN FEW DAYS"
               );

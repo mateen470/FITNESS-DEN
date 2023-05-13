@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setDietPlanUpdateRequestsLength } from "../../context/CheckForNewPlanRequests";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ConfirmationModal from "../confirmation-model/ConfirmationModal";
+import { NavLink } from "react-router-dom";
+import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
+
 import {
   BreakFastValidation,
   LunchValidation,
@@ -11,14 +15,18 @@ import {
 } from "../../Validations/DietPlanValidations";
 import {
   Button,
+  Box,
   Container,
   FormControl,
-  TextareaAutosize,
   Typography,
+  TextField,
 } from "@mui/material";
 
 const UpdateDietPlan = () => {
   const PlanToUpdateID = useSelector((state) => state.UpdatePlan.DietPlanId);
+  const CurrentDietPlanUpdateRequestsLength = useSelector(
+    (state) => state.CheckForNewPlanRequests.DietPlanUpdateRequestsLength
+  );
   const [PlanToUpdate, setPlanToUpdate] = useState([]);
   const [Counter, setCounter] = useState(0);
   const [Counter1, setCounter1] = useState(0);
@@ -32,6 +40,7 @@ const UpdateDietPlan = () => {
       .then((res) => setPlanToUpdate(res.data.data));
   };
 
+  const dispatch = useDispatch();
   useEffect(FetchPlanToUpdate, []);
 
   const handleNext = (e) => {
@@ -61,11 +70,16 @@ const UpdateDietPlan = () => {
 
   const SubmitUpdatedPlan = () => {
     axios.post("diet/update-diet-plan/" + PlanID, PlanToUpdate).then((res) => {
-      console.log(res.data.data);
       toast.success("PLAN UPDATED SUCCESSFULLY");
       axios
         .delete("diet/diet-update-request/" + ReqId)
-        .then((res) => console.log(res.data.message));
+        .then(() =>
+          dispatch(
+            setDietPlanUpdateRequestsLength(
+              CurrentDietPlanUpdateRequestsLength - 1
+            )
+          )
+        );
     });
   };
 
@@ -93,19 +107,96 @@ const UpdateDietPlan = () => {
   const handleDay = () => {
     switch (Counter) {
       case 0:
-        return <Typography>Monday</Typography>;
+        return (
+          <Typography
+            color={"white"}
+            fontFamily={"Comme, sans-serif"}
+            fontSize={"1.5rem"}
+            mt={1}
+            mb={3}
+            fontWeight={800}
+          >
+            Monday
+          </Typography>
+        );
       case 1:
-        return <Typography>Tuesday</Typography>;
+        return (
+          <Typography
+            color={"white"}
+            fontFamily={"Comme, sans-serif"}
+            fontSize={"1.5rem"}
+            mt={1}
+            mb={3}
+            fontWeight={800}
+          >
+            Tuesday
+          </Typography>
+        );
       case 2:
-        return <Typography>Wednesday</Typography>;
+        return (
+          <Typography
+            color={"white"}
+            fontFamily={"Comme, sans-serif"}
+            fontSize={"1.5rem"}
+            mt={1}
+            mb={3}
+            fontWeight={800}
+          >
+            Wednesday
+          </Typography>
+        );
       case 3:
-        return <Typography>Thursday</Typography>;
+        return (
+          <Typography
+            color={"white"}
+            fontFamily={"Comme, sans-serif"}
+            fontSize={"1.5rem"}
+            mt={1}
+            mb={3}
+            fontWeight={800}
+          >
+            Thursday
+          </Typography>
+        );
       case 4:
-        return <Typography>Friday</Typography>;
+        return (
+          <Typography
+            color={"white"}
+            fontFamily={"Comme, sans-serif"}
+            fontSize={"1.5rem"}
+            mt={1}
+            mb={3}
+            fontWeight={800}
+          >
+            Friday
+          </Typography>
+        );
       case 5:
-        return <Typography>Saturday</Typography>;
+        return (
+          <Typography
+            color={"white"}
+            fontFamily={"Comme, sans-serif"}
+            fontSize={"1.5rem"}
+            mt={1}
+            mb={3}
+            fontWeight={800}
+          >
+            Saturday
+          </Typography>
+        );
       case 6:
-        return <Typography>Sunday</Typography>;
+        return (
+          <Typography
+            color={"white"}
+            fontFamily={"Comme, sans-serif"}
+            fontSize={"1.5rem"}
+            mt={1}
+            mb={3}
+            fontWeight={800}
+          >
+            Sunday
+          </Typography>
+        );
       default:
         return <Typography> </Typography>;
     }
@@ -113,7 +204,35 @@ const UpdateDietPlan = () => {
 
   return (
     PlanToUpdate.length !== 0 && (
-      <Container>
+      <Container
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+          minHeight: "100vh",
+        }}
+      >
+        <Box sx={{ position: "absolute", top: 0, left: 5 }}>
+          <NavLink to={"/diet-plan-update-req"}>
+            <Typography
+              color={"white"}
+              fontFamily={"Comme, sans-serif"}
+              sx={{ display: "flex", alignItems: "center", fontSize: "1.7vw" }}
+            >
+              <KeyboardDoubleArrowLeftIcon /> Back
+            </Typography>
+          </NavLink>
+        </Box>
+        <Typography
+          fontSize={"4vw"}
+          color={"white"}
+          fontWeight={800}
+          textAlign={"center"}
+          my={4}
+        >
+          Update Diet Plan Request Form
+        </Typography>
         {modalOpen && (
           <ConfirmationModal
             modalOpen={modalOpen}
@@ -121,12 +240,42 @@ const UpdateDietPlan = () => {
             submitPlan={SubmitUpdatedPlan}
           />
         )}
-        <Typography>Week {Counter1 + 1}</Typography>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: 2,
+          }}
+        >
+          <Typography
+            color={"white"}
+            fontFamily={"Comme, sans-serif"}
+            fontSize={"1.7vw"}
+            fontWeight={800}
+          >
+            Week {Counter1 + 1}
+          </Typography>
+        </Box>
+
         {handleDay()}
-        <FormControl>
-          <Typography>BreakFast</Typography>
-          <TextareaAutosize
-            minRows={4}
+        <FormControl
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+          }}
+        >
+          <Typography
+            color={"white"}
+            fontFamily={"Comme, sans-serif"}
+            fontSize={"1.5vw"}
+            fontWeight={800}
+          >
+            BreakFast
+          </Typography>
+          <TextField
             name="BreakFast"
             value={PlanToUpdate.DietPlan[Counter1][Counter].BreakFast}
             onChange={(e) => {
@@ -134,32 +283,131 @@ const UpdateDietPlan = () => {
                 e.target.value;
               setPlanToUpdate({ ...PlanToUpdate });
             }}
+            sx={{
+              background: "none",
+              color: "white",
+              borderBottom: "1px solid white",
+              "& .MuiOutlinedInput-root": {
+                fontSize: "1.2rem",
+                "& fieldset": {
+                  borderWidth: "0",
+                },
+                "&:hover fieldset": {
+                  borderWidth: "0",
+                },
+                "&.Mui-focused fieldset": {
+                  borderWidth: "0",
+                },
+                "& .MuiOutlinedInput-input": {
+                  overflow: "auto",
+                  color: "white",
+                },
+              },
+            }}
           />
-          <Typography>Lunch</Typography>
-          <TextareaAutosize
-            minRows={4}
+          <Typography
+            color={"white"}
+            fontFamily={"Comme, sans-serif"}
+            fontSize={"1.5vw"}
+            fontWeight={800}
+          >
+            Lunch
+          </Typography>
+          <TextField
             name="Lunch"
             value={PlanToUpdate.DietPlan[Counter1][Counter].Lunch}
             onChange={(e) => {
               PlanToUpdate.DietPlan[Counter1][Counter].Lunch = e.target.value;
               setPlanToUpdate({ ...PlanToUpdate });
             }}
+            sx={{
+              background: "none",
+              color: "white",
+              borderBottom: "1px solid white",
+              "& .MuiOutlinedInput-root": {
+                fontSize: "1.2rem",
+                "& fieldset": {
+                  borderWidth: "0",
+                },
+                "&:hover fieldset": {
+                  borderWidth: "0",
+                },
+                "&.Mui-focused fieldset": {
+                  borderWidth: "0",
+                },
+                "& .MuiOutlinedInput-input": {
+                  overflow: "auto",
+                  color: "white",
+                },
+              },
+            }}
           />
-          <Typography>Dinner</Typography>
-          <TextareaAutosize
-            minRows={4}
+          <Typography
+            color={"white"}
+            fontFamily={"Comme, sans-serif"}
+            fontSize={"1.5vw"}
+            fontWeight={800}
+          >
+            Dinner
+          </Typography>
+          <TextField
             name="Dinner"
             value={PlanToUpdate.DietPlan[Counter1][Counter].Dinner}
             onChange={(e) => {
               PlanToUpdate.DietPlan[Counter1][Counter].Dinner = e.target.value;
               setPlanToUpdate({ ...PlanToUpdate });
             }}
+            sx={{
+              background: "none",
+              color: "white",
+              borderBottom: "1px solid white",
+              "& .MuiOutlinedInput-root": {
+                fontSize: "1.2rem",
+                "& fieldset": {
+                  borderWidth: "0",
+                },
+                "&:hover fieldset": {
+                  borderWidth: "0",
+                },
+                "&.Mui-focused fieldset": {
+                  borderWidth: "0",
+                },
+                "& .MuiOutlinedInput-input": {
+                  overflow: "auto",
+                  color: "white",
+                },
+              },
+            }}
           />
 
           {Counter === 6 && Counter1 === PlanToUpdate.DietPlan.length - 1 ? (
-            <Button onClick={handleSubmit}>Submit</Button>
+            <Button
+              sx={{ textTransform: "none", background: "white", mb: 10, mt: 5 }}
+              onClick={handleSubmit}
+            >
+              <Typography
+                color={"black"}
+                fontFamily={"Comme, sans-serif"}
+                fontSize={"1.5vw"}
+                fontWeight={800}
+              >
+                Submit
+              </Typography>
+            </Button>
           ) : (
-            <Button onClick={handleNext}>Next</Button>
+            <Button
+              sx={{ textTransform: "none", background: "white", mb: 10, mt: 5 }}
+              onClick={handleNext}
+            >
+              <Typography
+                color={"black"}
+                fontFamily={"Comme, sans-serif"}
+                fontSize={"1.5vw"}
+                fontWeight={800}
+              >
+                Next
+              </Typography>
+            </Button>
           )}
         </FormControl>
       </Container>

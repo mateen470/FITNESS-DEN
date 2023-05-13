@@ -32,6 +32,7 @@ import ViewDietPlanDetails from "./components/trainer-dashboard-section/ViewDiet
 import ViewWorkoutPlanDetails from "./components/trainer-dashboard-section/ViewWorkoutPlanDetails";
 import WorkoutPlanUpdateRequests from "./components/trainer-dashboard-section/WorkoutPlanUpdateRequests";
 import WorkoutPlanFormat from "./components/trainer-dashboard-section/WorkoutPlanFormat";
+import StatsForAdmin from "./components/stats-for-admin/StatsForAdmin"
 
 const App = () => {
   return (
@@ -60,6 +61,7 @@ const App = () => {
         <Route path="/update-diet-plan" element={<UpdateDietPlan />} />
         <Route path="/update-workout-plan" element={<UpdateWorkoutPlan />} />
         <Route path="/exercise" element={<Exercise />} />
+        <Route path="/stats-for-admin" element={<StatsForAdmin />} />
         <Route path="/workout-plan-format" element={<WorkoutPlanFormat />} />
         <Route
           path="/all-workout-plan-req"

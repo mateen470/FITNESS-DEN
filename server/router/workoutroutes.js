@@ -19,7 +19,7 @@ workoutRouter.post(
   WorkoutPlanControllerFunctions.UpdatePlan
 );
 workoutRouter.get(
-  "/all-workout-plans",
+  "/all-workout-plans/:id",
   WorkoutPlanControllerFunctions.GetAllCompletedPlans
 );
 workoutRouter.get(

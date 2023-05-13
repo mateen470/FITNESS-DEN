@@ -6,6 +6,8 @@ const DietPlanControllerFunctions = {
   DietPlanFilledForm: async (req, res) => {
     try {
       const formData = new DietPlanRequestFromUser();
+      formData.IDofCurrentUser = req.body.IDofCurrentUser;
+      console.log(req.body.IDofCurrentUser);
       formData.Title = req.body.Title;
       formData.Age = req.body.Age;
       formData.Weight = req.body.Weight;
@@ -42,7 +44,8 @@ const DietPlanControllerFunctions = {
   SendCompletedPlanToUser: async (req, res) => {
     try {
       const data = new CompletedDietPlanFromTrainer();
-      req.body.map((item) => item.map((i) => data.DietPlan.push(i)));
+      data.IDofCurrentUser = req.body.IDofCurrentUser;
+      req.body.DietPlan.map((item) => data.DietPlan.push(item));
       await data.save();
       return await res.status(200).json({
         success: true,
@@ -77,7 +80,9 @@ const DietPlanControllerFunctions = {
   },
   GetAllCompletedPlans: async (req, res) => {
     try {
-      const allCompletedPlans = await CompletedDietPlanFromTrainer.find();
+      const allCompletedPlans = await CompletedDietPlanFromTrainer.findOne({
+        IDofCurrentUser: req.params.id,
+      });
       return await res.status(200).json({
         success: true,
         message: "ALL PLANS ARE FETCHED!!",

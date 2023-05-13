@@ -9,6 +9,8 @@ import WorkoutPlanDetailsReducer from "./WorkoutPlanDetails";
 import DietPlanDetailsReducer from "./DietPlanDetails";
 import SelectedPlanReducer from "./SelectedPlan";
 import PhysicalInfoReducer from "./PhysicalInfo";
+import CurrentUserReducer from "./CurrentUser";
+import CheckForNewPlanRequestsReducer from "./CheckForNewPlanRequests";
 
 const persistConfig = {
   key: "root",
@@ -25,6 +27,8 @@ const reducer = combineReducers({
   DietPlanDetails: DietPlanDetailsReducer,
   SelectedPlan: SelectedPlanReducer,
   PhysicalInfo: PhysicalInfoReducer,
+  CurrentUser: CurrentUserReducer,
+  CheckForNewPlanRequests: CheckForNewPlanRequestsReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);

@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, NavLink } from "react-router-dom";
 import { Container, Box, Typography } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { AddCurrentUserId } from "../../context/CurrentUser";
+
 const UserDashboardSection = () => {
+  const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
@@ -10,6 +14,7 @@ const UserDashboardSection = () => {
     const getData = async () => {
       try {
         const getUser = await axios.get("auth-user");
+        dispatch(AddCurrentUserId(getUser.data.data._doc._id));
         setName(getUser.data.data._doc.name);
         setEmail(getUser.data.data._doc.email);
         if (getUser.data.data._doc.role === 1) {

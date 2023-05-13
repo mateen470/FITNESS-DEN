@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { setIsNewDietPlanRequests } from "../../context/CheckForNewPlanRequests";
 import { AddDietPlanDetails } from "../../context/DietPlanDetails";
 import VisibilityRoundedIcon from "@mui/icons-material/VisibilityRounded";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
@@ -25,7 +26,10 @@ const AllDietPlanRequests = () => {
       .get("diet/all-new-diet-requests")
       .then((res) => setDietPlanRequests(res.data.data));
   };
-  useEffect(FetchDietPlanRequests, []);
+  useEffect(() => {
+    FetchDietPlanRequests();
+    dispatch(setIsNewDietPlanRequests(false));
+  }, []);
 
   return (
     <Container>
@@ -47,7 +51,7 @@ const AllDietPlanRequests = () => {
         textAlign={"center"}
         my={4}
       >
-        Current Diet Plan Requests
+        All Diet Plan Requests
       </Typography>
       <Table sx={{ mb: 10 }}>
         <TableHead>

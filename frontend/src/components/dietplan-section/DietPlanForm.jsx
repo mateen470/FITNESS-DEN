@@ -3,7 +3,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ConfirmationModal from "../confirmation-model/ConfirmationModal";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AddPhysicalInfo } from "../../context/PhysicalInfo";
 import { useNavigate } from "react-router-dom";
 import {
@@ -33,11 +33,20 @@ const DietPlanForm = () => {
   const [Weight, setWeight] = useState();
   const [MedicalHistory, setMedicalHistory] = useState(false);
   const [MedicalHistoryDes, setMedicalHistoryDes] = useState("");
-  const [modalOpen, setModalOpen] = React.useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const IDofCurrentUser = useSelector(
+    (state) => state.CurrentUser.CurrentUserID
+  );
 
   const submitRequest = () => {
     dispatch(
-      AddPhysicalInfo({ Age, Weight, MedicalHistory, MedicalHistoryDes })
+      AddPhysicalInfo({
+        IDofCurrentUser,
+        Age,
+        Weight,
+        MedicalHistory,
+        MedicalHistoryDes,
+      })
     );
     navigate("/payment");
   };

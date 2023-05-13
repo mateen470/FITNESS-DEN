@@ -15,7 +15,7 @@ dietRouter.post(
   DietPlanControllerFunctions.UpdatePlan
 );
 dietRouter.get(
-  "/all-diet-plans",
+  "/all-diet-plans/:id",
   DietPlanControllerFunctions.GetAllCompletedPlans
 );
 dietRouter.get(

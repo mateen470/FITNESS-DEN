@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 const workoutPlanRequest = new mongoose.Schema({
+  IDofCurrentUser: String,
   title: String,
   age: Number,
   weight: Number,
@@ -13,5 +14,8 @@ const workoutPlanRequest = new mongoose.Schema({
   equipmentsDes: String,
 });
 
-const workoutPlanRequestModel = new mongoose.model("WorkoutPlanRequest", workoutPlanRequest);
+const workoutPlanRequestModel = new mongoose.model(
+  "WorkoutPlanRequest",
+  workoutPlanRequest
+);
 module.exports = workoutPlanRequestModel;
