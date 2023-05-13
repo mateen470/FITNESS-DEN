@@ -41,8 +41,7 @@ const ViewWorkoutPlanDetails = () => {
       </Typography>
       <Box
         sx={{
-          minHeight: "50vh",
-          minWidth: "80vh",
+          p: 3,
           backgroundColor: "rgba(255, 255, 255, 0.1)",
           backdropFilter: "blur(10px)",
           boxShadow: "10px 10px 10px rgba(0, 0, 0, 0.1)",

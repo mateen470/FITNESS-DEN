@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import { FetchExcercise } from "../../context/Excercise";
 import { useDispatch, useSelector } from "react-redux";
 import UpdateRequestModal from "../../components/update-req-modal/WorkoutUpdateRequestModal";
+import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
+import { NavLink } from "react-router-dom";
 import {
-  Button,
+  Box,
   Container,
   Table,
   TableBody,
@@ -47,25 +48,130 @@ const ViewWorkoutPlanPage = () => {
   const handleDay = (index) => {
     switch (index) {
       case 1:
-        return <TableCell>Monday</TableCell>;
+        return (
+          <TableCell
+            sx={{
+              color: "white",
+              fontWeight: "bold",
+              fontSize: "5vh",
+              fontFamily: "Comme, sans-serif",
+            }}
+          >
+            Monday
+          </TableCell>
+        );
       case 2:
-        return <TableCell>Tuesday</TableCell>;
+        return (
+          <TableCell
+            sx={{
+              color: "white",
+              fontWeight: "bold",
+              fontSize: "5vh",
+              fontFamily: "Comme, sans-serif",
+            }}
+          >
+            Tuesday
+          </TableCell>
+        );
       case 3:
-        return <TableCell>Wednesday</TableCell>;
+        return (
+          <TableCell
+            sx={{
+              color: "white",
+              fontWeight: "bold",
+              fontSize: "5vh",
+              fontFamily: "Comme, sans-serif",
+            }}
+          >
+            Wednesday
+          </TableCell>
+        );
       case 4:
-        return <TableCell>Thursday</TableCell>;
+        return (
+          <TableCell
+            sx={{
+              color: "white",
+              fontWeight: "bold",
+              fontSize: "5vh",
+              fontFamily: "Comme, sans-serif",
+            }}
+          >
+            Thursday
+          </TableCell>
+        );
       case 5:
-        return <TableCell>Friday</TableCell>;
+        return (
+          <TableCell
+            sx={{
+              color: "white",
+              fontWeight: "bold",
+              fontSize: "5vh",
+              fontFamily: "Comme, sans-serif",
+            }}
+          >
+            Friday
+          </TableCell>
+        );
       case 6:
-        return <TableCell>Saturday</TableCell>;
+        return (
+          <TableCell
+            sx={{
+              color: "white",
+              fontWeight: "bold",
+              fontSize: "5vh",
+              fontFamily: "Comme, sans-serif",
+            }}
+          >
+            Saturday
+          </TableCell>
+        );
       case 7:
-        return <TableCell>Sunday</TableCell>;
+        return (
+          <TableCell
+            sx={{
+              color: "white",
+              fontWeight: "bold",
+              fontSize: "5vh",
+              fontFamily: "Comme, sans-serif",
+            }}
+          >
+            Sunday
+          </TableCell>
+        );
       default:
         return <TableCell></TableCell>;
     }
   };
   return (
-    <Container>
+    <Container
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
+        minHeight: "100vh",
+      }}
+    >
+      <Box sx={{ position: "absolute", top: 0, left: 5 }}>
+        <NavLink to={"/user"}>
+          <Typography
+            color={"white"}
+            fontFamily={"Comme, sans-serif"}
+            sx={{ display: "flex", alignItems: "center", fontSize: "1.7vw" }}
+          >
+            <KeyboardDoubleArrowLeftIcon /> Back
+          </Typography>
+        </NavLink>
+      </Box>
+      <Typography
+        fontSize={"5vw"}
+        color={"white"}
+        fontWeight={800}
+        textAlign={"center"}
+        my={4}
+      >
+        Your Workout Plan!
+      </Typography>
       {modalOpen && (
         <UpdateRequestModal
           modalOpen={modalOpen}
@@ -75,12 +181,37 @@ const ViewWorkoutPlanPage = () => {
       )}
       {Plan.map((i, index) => (
         <>
-          <Typography>Week{index + 1}</Typography>
+          <Typography
+            color={"white"}
+            fontFamily={"Comme, sans-serif"}
+            fontWeight={800}
+            fontSize={"5vh"}
+          >
+            Week{index + 1}
+          </Typography>
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Day</TableCell>
-                <TableCell>Game</TableCell>
+                <TableCell
+                  sx={{
+                    color: "white",
+                    fontWeight: "bold",
+                    fontSize: "5vh",
+                    fontFamily: "Comme, sans-serif",
+                  }}
+                >
+                  Day
+                </TableCell>
+                <TableCell
+                  sx={{
+                    color: "white",
+                    fontWeight: "bold",
+                    fontSize: "5vh",
+                    fontFamily: "Comme, sans-serif",
+                  }}
+                >
+                  Exercise
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -88,7 +219,19 @@ const ViewWorkoutPlanPage = () => {
                 <TableRow>
                   {handleDay(x.Day)}
                   <TableCell onClick={() => handleClick(x.Week, x.Day)}>
-                    <Link to="/exercise">{x.BodyPart}</Link>
+                    <NavLink to="/exercise">
+                      <Typography
+                        sx={{
+                          color: "white",
+                          fontSize: "3.5vh",
+                          fontFamily: "Comme, sans-serif",
+                          borderBottom: "0.5px solid white",
+                          display: "inline-block",
+                        }}
+                      >
+                        {x.BodyPart}
+                      </Typography>
+                    </NavLink>
                   </TableCell>
                 </TableRow>
               ))}
@@ -96,14 +239,38 @@ const ViewWorkoutPlanPage = () => {
           </Table>
         </>
       ))}
-
-      <Button
-        onClick={() => {
-          setModalOpen(true);
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          mb: 10,
+          mt: 4,
         }}
       >
-        Update Plan
-      </Button>
+        <button
+          onClick={() => {
+            setModalOpen(true);
+          }}
+          style={{
+            background: "white",
+            borderRadius: "5px",
+            cursor: "pointer",
+            border: "none",
+          }}
+        >
+          <Typography
+            fontSize={"3.5vh"}
+            color={"black"}
+            fontWeight={800}
+            textAlign={"center"}
+            px={2}
+            py={1}
+          >
+            Update Plan
+          </Typography>
+        </button>
+      </Box>
     </Container>
   );
 };
