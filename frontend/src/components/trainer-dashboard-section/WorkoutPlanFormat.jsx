@@ -48,49 +48,219 @@ const WorkoutPlanFormat = () => {
   };
 
   return (
-    <Container>
+    <Container
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
+        mb: 5,
+      }}
+    >
       <Box>
         <form onSubmit={handleClick}>
-          <FormControl>
+          <FormControl
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "column",
+            }}
+          >
             <TextField
-              label="ExcerciseName"
+              placeholder="ExcerciseName"
               value={Name}
               onChange={(e) => setName(e.target.value)}
+              sx={{
+                background: "none",
+                color: "white",
+                borderBottom: "1px solid white",
+                "& .MuiOutlinedInput-root": {
+                  fontSize: "1.2rem",
+                  "& fieldset": {
+                    borderWidth: "0",
+                  },
+                  "&:hover fieldset": {
+                    borderWidth: "0",
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderWidth: "0",
+                  },
+                  "& .MuiOutlinedInput-input": {
+                    overflow: "auto",
+                    color: "white",
+                  },
+                },
+              }}
             />
 
             <TextField
-              label="Sets"
+              placeholder="Sets"
               value={Sets}
               type="number"
               onChange={(e) => setSets(e.target.value)}
+              sx={{
+                background: "none",
+                color: "white",
+                borderBottom: "1px solid white",
+                "& .MuiOutlinedInput-root": {
+                  fontSize: "1.2rem",
+                  "& fieldset": {
+                    borderWidth: "0",
+                  },
+                  "&:hover fieldset": {
+                    borderWidth: "0",
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderWidth: "0",
+                  },
+                  "& .MuiOutlinedInput-input": {
+                    overflow: "auto",
+                    color: "white",
+                  },
+                },
+              }}
             />
 
             <TextField
               value={Reps}
-              label="Reps"
+              placeholder="Reps"
               type="number"
               onChange={(e) => setReps(e.target.value)}
+              sx={{
+                background: "none",
+                color: "white",
+                borderBottom: "1px solid white",
+                "& .MuiOutlinedInput-root": {
+                  fontSize: "1.2rem",
+                  "& fieldset": {
+                    borderWidth: "0",
+                  },
+                  "&:hover fieldset": {
+                    borderWidth: "0",
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderWidth: "0",
+                  },
+                  "& .MuiOutlinedInput-input": {
+                    overflow: "auto",
+                    color: "white",
+                  },
+                },
+              }}
             />
 
             <TextField
               value={DemoLink}
-              label="Video Link For Demo"
+              placeholder="Video Link For Demo"
               type="url"
               onChange={(e) => setDemoLink(e.target.value)}
+              sx={{
+                background: "none",
+                color: "white",
+                borderBottom: "1px solid white",
+                "& .MuiOutlinedInput-root": {
+                  fontSize: "1.2rem",
+                  "& fieldset": {
+                    borderWidth: "0",
+                  },
+                  "&:hover fieldset": {
+                    borderWidth: "0",
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderWidth: "0",
+                  },
+                  "& .MuiOutlinedInput-input": {
+                    overflow: "auto",
+                    color: "white",
+                  },
+                },
+              }}
             />
           </FormControl>
-          <Button type="submit">Add Excercise</Button>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              my: 3,
+            }}
+          >
+            <Button
+              sx={{ textTransform: "none", background: "white" }}
+              type="submit"
+            >
+              <Typography
+                color={"black"}
+                fontFamily={"Comme, sans-serif"}
+                fontSize={"1.5vw"}
+                fontWeight={800}
+              >
+                Add Excercise
+              </Typography>
+            </Button>
+          </Box>
         </form>
       </Box>
-      <Typography>Added Excercises</Typography>
+      <Typography
+        color={"white"}
+        fontFamily={"Comme, sans-serif"}
+        fontSize={"1.5vw"}
+        fontWeight={800}
+        my={2}
+        borderBottom={"1px solid white"}
+      >
+        Added Excercises
+      </Typography>
       {Excercise.map((item, index) => {
         return (
-          <>
-            <Typography key={index}>
-              Name:{item.Name} Number of Sets:{item.Sets} Number of repetetions:
-              {item.Reps} Video Link For Demo:{item.DemoLink}
+          <Box
+            sx={{
+              backgroundColor: "rgba(255, 255, 255, 0.1)",
+              backdropFilter: "blur(10px)",
+              boxShadow: "10px 10px 10px rgba(0, 0, 0, 0.1)",
+              borderRadius: 3,
+              display: "flex",
+              alignItems: "center",
+              flexDirection: "column",
+              gap: 1,
+              p: 3,
+            }}
+          >
+            <Typography
+              key={index}
+              color={"white"}
+              fontFamily={"Comme, sans-serif"}
+              fontSize={"1.2vw"}
+            >
+              Name:{item.Name}
             </Typography>
-          </>
+            <Typography
+              key={index}
+              color={"white"}
+              fontFamily={"Comme, sans-serif"}
+              fontSize={"1.2vw"}
+            >
+              Number of Sets:{item.Sets}
+            </Typography>
+            <Typography
+              key={index}
+              color={"white"}
+              fontFamily={"Comme, sans-serif"}
+              fontSize={"1.2vw"}
+            >
+              Number of repetetions:
+              {item.Reps}
+            </Typography>
+            <Typography
+              key={index}
+              color={"white"}
+              fontFamily={"Comme, sans-serif"}
+              fontSize={"1.2vw"}
+            >
+              Video Link For Demo:{item.DemoLink}
+            </Typography>
+          </Box>
         );
       })}
     </Container>

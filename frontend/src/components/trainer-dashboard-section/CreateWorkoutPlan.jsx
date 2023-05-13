@@ -6,8 +6,9 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ConfirmationModal from "../confirmation-model/ConfirmationModal";
 import { DurationValidation } from "../../Validations/DurationValidation";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import axios from "axios";
+import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import {
   AddPlan,
   AddWeeklyPlan,
@@ -26,7 +27,6 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-
 const CreateWorkoutPlan = () => {
   const dispatch = useDispatch();
   const Excercise = useSelector((state) => state.Excercise.Excercise);
@@ -99,7 +99,35 @@ const CreateWorkoutPlan = () => {
   };
 
   return (
-    <Container>
+    <Container
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
+        minHeight: "100vh",
+      }}
+    >
+      <Box sx={{ position: "absolute", top: 0, left: 5 }}>
+        <NavLink to={"/view-workout-plan-details"}>
+          <Typography
+            color={"white"}
+            fontFamily={"Comme, sans-serif"}
+            sx={{ display: "flex", alignItems: "center", fontSize: "1.7vw" }}
+          >
+            <KeyboardDoubleArrowLeftIcon /> Back
+          </Typography>
+        </NavLink>
+      </Box>
+      <Typography
+        fontSize={"4vw"}
+        color={"white"}
+        fontWeight={800}
+        textAlign={"center"}
+        my={4}
+      >
+        Workout Plan Creation Form
+      </Typography>
       {modalOpen && (
         <ConfirmationModal
           modalOpen={modalOpen}
@@ -108,24 +136,85 @@ const CreateWorkoutPlan = () => {
         />
       )}
       {!flag1 && (
-        <Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: 2,
+          }}
+        >
           <TextField
-            label="Select Duration"
+            placeholder="Select Duration"
             type="number"
             onChange={(e) => setDuration(e.target.value)}
             InputProps={{
               endAdornment: (
-                <InputAdornment position="end">Weeks</InputAdornment>
+                <InputAdornment position="end">
+                  <Typography
+                    color={"white"}
+                    fontFamily={"Comme, sans-serif"}
+                    fontWeight={800}
+                  >
+                    Weeks
+                  </Typography>
+                </InputAdornment>
               ),
             }}
+            sx={{
+              background: "none",
+              color: "white",
+              borderBottom: "1px solid white",
+              "& .MuiOutlinedInput-root": {
+                fontSize: "1.2rem",
+                "& fieldset": {
+                  borderWidth: "0",
+                },
+                "&:hover fieldset": {
+                  borderWidth: "0",
+                },
+                "&.Mui-focused fieldset": {
+                  borderWidth: "0",
+                },
+                "& .MuiOutlinedInput-input": {
+                  overflow: "auto",
+                  color: "white",
+                },
+              },
+            }}
           />
-          <Button onClick={fixDuration}>Set Duration</Button>
+          <Button
+            sx={{ textTransform: "none", background: "white" }}
+            onClick={fixDuration}
+          >
+            <Typography
+              color={"black"}
+              fontFamily={"Comme, sans-serif"}
+              fontSize={"1.7vw"}
+              fontWeight={800}
+            >
+              Set Duration
+            </Typography>
+          </Button>
         </Box>
       )}
       {flag1 && (
         <>
-          <Typography>Week {currentWeek}</Typography>
-          <Typography>
+          <Typography
+            color={"white"}
+            fontFamily={"Comme, sans-serif"}
+            fontSize={"1.5rem"}
+            fontWeight={800}
+          >
+            Week {currentWeek}
+          </Typography>
+          <Typography
+            color={"white"}
+            fontFamily={"Comme, sans-serif"}
+            fontSize={"1.5rem"}
+            my={1}
+            fontWeight={800}
+          >
             {currentDay === 1
               ? "Monday"
               : currentDay === 2
@@ -144,16 +233,61 @@ const CreateWorkoutPlan = () => {
           </Typography>
 
           <TextField
-            label="Workout Name"
+            placeholder="Workout Name"
             value={BodyPart}
+            sx={{
+              background: "none",
+              color: "white",
+              borderBottom: "1px solid white",
+              "& .MuiOutlinedInput-root": {
+                fontSize: "1.2rem",
+                "& fieldset": {
+                  borderWidth: "0",
+                },
+                "&:hover fieldset": {
+                  borderWidth: "0",
+                },
+                "&.Mui-focused fieldset": {
+                  borderWidth: "0",
+                },
+                "& .MuiOutlinedInput-input": {
+                  overflow: "auto",
+                  color: "white",
+                },
+              },
+            }}
             onChange={(e) => setBodyPart(e.target.value)}
           />
 
           <Plan />
           {flag ? (
-            <Button onClick={handleSubmit}>Submit Plan</Button>
+            <Button
+              sx={{ textTransform: "none", background: "white", mb: 10 }}
+              onClick={handleSubmit}
+            >
+              <Typography
+                color={"black"}
+                fontFamily={"Comme, sans-serif"}
+                fontSize={"1.5vw"}
+                fontWeight={800}
+              >
+                Submit Plan
+              </Typography>
+            </Button>
           ) : (
-            <Button onClick={handleClick}>Next</Button>
+            <Button
+              sx={{ textTransform: "none", background: "white", mb: 10 }}
+              onClick={handleClick}
+            >
+              <Typography
+                color={"black"}
+                fontFamily={"Comme, sans-serif"}
+                fontSize={"1.5vw"}
+                fontWeight={800}
+              >
+                Next
+              </Typography>
+            </Button>
           )}
         </>
       )}

@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import ConfirmationModal from "../confirmation-model/ConfirmationModal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
+import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import axios from "axios";
 import {
   AddDietPlan,
@@ -18,14 +19,12 @@ import {
 } from "../../Validations/DietPlanValidations";
 import { DurationValidation } from "../../Validations/DurationValidation";
 import {
+  Box,
   Button,
-  Card,
   Container,
   FormControl,
-  FormLabel,
   InputAdornment,
   TextField,
-  TextareaAutosize,
   Typography,
 } from "@mui/material";
 
@@ -97,31 +96,36 @@ const CreateDietPlan = () => {
     if (!DurationValidation(duration)) setFlag1(true);
   };
 
-  const styles = {
-    textfield: {
-      "& .MuiInput-underline::before": {
-        borderBottom: " 1px solid white",
-      },
-      "& .MuiInput-underline::after": {
-        borderBottom: " 2px solid white",
-      },
-      "& .MuiInput-underline:hover:not(.Mui-disabled):before": {
-        borderBottomColor: "white",
-      },
-
-      "& .MuiInput-input": { color: "white" },
-      "& .MuiInputLabel-root": {
-        color: "white",
-      },
-
-      "& .MuiTypography-root": {
-        color: "white",
-      },
-    },
-  };
-
   return (
-    <Container>
+    <Container
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
+        minHeight: "100vh",
+      }}
+    >
+      <Box sx={{ position: "absolute", top: 0, left: 5 }}>
+        <NavLink to={"/view-diet-plan-details"}>
+          <Typography
+            color={"white"}
+            fontFamily={"Comme, sans-serif"}
+            sx={{ display: "flex", alignItems: "center", fontSize: "1.7vw" }}
+          >
+            <KeyboardDoubleArrowLeftIcon /> Back
+          </Typography>
+        </NavLink>
+      </Box>
+      <Typography
+        fontSize={"4vw"}
+        color={"white"}
+        fontWeight={800}
+        textAlign={"center"}
+        my={4}
+      >
+        Diet Plan Creation Form
+      </Typography>
       <ToastContainer position="top-center" />
       {modalOpen && (
         <ConfirmationModal
@@ -130,91 +134,221 @@ const CreateDietPlan = () => {
           submitPlan={submitPlan}
         />
       )}
-      <Card
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          bgcolor: "black",
-        }}
-      >
-        {!flag1 && (
-          <>
-            <TextField
-              type="number"
-              sx={styles.textfield}
-              inputProps={{ min: 0 }}
-              variant="standard"
-              className="durationInput"
-              name="Duration"
-              label="Select Plan Duration"
-              onChange={(e) => {
-                setDuration(e.target.value);
-              }}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">Weeks</InputAdornment>
-                ),
-              }}
-            />
-            <Button variant="contained" size="small" onClick={fixDuration}>
+      {!flag1 && (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: 2,
+          }}
+        >
+          <TextField
+            type="number"
+            inputProps={{ min: 0 }}
+            className="durationInput"
+            name="Duration"
+            placeholder="Select Plan Duration"
+            onChange={(e) => {
+              setDuration(e.target.value);
+            }}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <Typography
+                    color={"white"}
+                    fontFamily={"Comme, sans-serif"}
+                    fontWeight={800}
+                  >
+                    Weeks
+                  </Typography>
+                </InputAdornment>
+              ),
+            }}
+            sx={{
+              background: "none",
+              color: "white",
+              borderBottom: "1px solid white",
+              "& .MuiOutlinedInput-root": {
+                fontSize: "1.2rem",
+                "& fieldset": {
+                  borderWidth: "0",
+                },
+                "&:hover fieldset": {
+                  borderWidth: "0",
+                },
+                "&.Mui-focused fieldset": {
+                  borderWidth: "0",
+                },
+                "& .MuiOutlinedInput-input": {
+                  overflow: "auto",
+                  color: "white",
+                },
+              },
+            }}
+          />
+          <Button
+            sx={{ textTransform: "none", background: "white" }}
+            onClick={fixDuration}
+          >
+            <Typography
+              color={"black"}
+              fontFamily={"Comme, sans-serif"}
+              fontSize={"1.7vw"}
+              fontWeight={800}
+            >
               Set Duration
-            </Button>
-          </>
-        )}
-
-        {flag1 && (
-          <FormControl sx={{ gap: "2rem", width: "70%" }}>
-            <Typography sx={{ color: "white" }} variant="h4">
-              Week {currentWeek}
             </Typography>
-            <Typography variant="h5" sx={{ color: "white" }}>
-              {currentDay === 1
-                ? "Monday"
-                : currentDay === 2
-                ? "Tuesday"
-                : currentDay === 3
-                ? "Wednesday"
-                : currentDay === 4
-                ? "Thursday"
-                : currentDay === 5
-                ? "Friday"
-                : currentDay === 6
-                ? "Saturday"
-                : currentDay === 7
-                ? "Sunday"
-                : ""}
-            </Typography>
-            <FormLabel sx={{ color: "white" }}>BreakFast</FormLabel>
-            <TextareaAutosize
-              minRows={4}
-              onChange={(e) => setBreakFast(e.target.value)}
-            />
+          </Button>
+        </Box>
+      )}
 
-            <FormLabel sx={{ color: "white" }}>Lunch</FormLabel>
-            <TextareaAutosize
-              minRows={4}
-              onChange={(e) => setLunch(e.target.value)}
-            />
-
-            <FormLabel sx={{ color: "white" }}>Dinner</FormLabel>
-            <TextareaAutosize
-              minRows={4}
-              onChange={(e) => setDinner(e.target.value)}
-            />
-
-            {flag ? (
-              <Button variant="contained" onClick={handleSubmit}>
+      {flag1 && (
+        <FormControl
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+          }}
+        >
+          <Typography
+            color={"white"}
+            fontFamily={"Comme, sans-serif"}
+            fontSize={"1.5rem"}
+            fontWeight={800}
+          >
+            Week {currentWeek}
+          </Typography>
+          <Typography
+            color={"white"}
+            fontFamily={"Comme, sans-serif"}
+            fontSize={"1.5rem"}
+            my={1}
+            fontWeight={800}
+          >
+            {currentDay === 1
+              ? "Monday"
+              : currentDay === 2
+              ? "Tuesday"
+              : currentDay === 3
+              ? "Wednesday"
+              : currentDay === 4
+              ? "Thursday"
+              : currentDay === 5
+              ? "Friday"
+              : currentDay === 6
+              ? "Saturday"
+              : currentDay === 7
+              ? "Sunday"
+              : ""}
+          </Typography>
+          <TextField
+            placeholder="BreakFast"
+            onChange={(e) => setBreakFast(e.target.value)}
+            sx={{
+              background: "none",
+              color: "white",
+              borderBottom: "1px solid white",
+              "& .MuiOutlinedInput-root": {
+                fontSize: "1.2rem",
+                "& fieldset": {
+                  borderWidth: "0",
+                },
+                "&:hover fieldset": {
+                  borderWidth: "0",
+                },
+                "&.Mui-focused fieldset": {
+                  borderWidth: "0",
+                },
+                "& .MuiOutlinedInput-input": {
+                  overflow: "auto",
+                  color: "white",
+                },
+              },
+            }}
+          />
+          <TextField
+            placeholder="Lunch"
+            onChange={(e) => setLunch(e.target.value)}
+            sx={{
+              background: "none",
+              color: "white",
+              borderBottom: "1px solid white",
+              "& .MuiOutlinedInput-root": {
+                fontSize: "1.2rem",
+                "& fieldset": {
+                  borderWidth: "0",
+                },
+                "&:hover fieldset": {
+                  borderWidth: "0",
+                },
+                "&.Mui-focused fieldset": {
+                  borderWidth: "0",
+                },
+                "& .MuiOutlinedInput-input": {
+                  overflow: "auto",
+                  color: "white",
+                },
+              },
+            }}
+          />
+          <TextField
+            placeholder="Dinner"
+            onChange={(e) => setDinner(e.target.value)}
+            sx={{
+              background: "none",
+              color: "white",
+              borderBottom: "1px solid white",
+              "& .MuiOutlinedInput-root": {
+                fontSize: "1.2rem",
+                "& fieldset": {
+                  borderWidth: "0",
+                },
+                "&:hover fieldset": {
+                  borderWidth: "0",
+                },
+                "&.Mui-focused fieldset": {
+                  borderWidth: "0",
+                },
+                "& .MuiOutlinedInput-input": {
+                  overflow: "auto",
+                  color: "white",
+                },
+              },
+            }}
+          />
+          {flag ? (
+            <Button
+              sx={{ textTransform: "none", background: "white", mb: 10, mt: 5 }}
+              onClick={handleSubmit}
+            >
+              <Typography
+                color={"black"}
+                fontFamily={"Comme, sans-serif"}
+                fontSize={"1.5vw"}
+                fontWeight={800}
+              >
                 Submit Plan
-              </Button>
-            ) : (
-              <Button variant="contained" onClick={handleClick}>
+              </Typography>
+            </Button>
+          ) : (
+            <Button
+              sx={{ textTransform: "none", background: "white", mb: 10, mt: 5 }}
+              onClick={handleClick}
+            >
+              <Typography
+                color={"black"}
+                fontFamily={"Comme, sans-serif"}
+                fontSize={"1.5vw"}
+                fontWeight={800}
+              >
                 Next
-              </Button>
-            )}
-          </FormControl>
-        )}
-      </Card>
+              </Typography>
+            </Button>
+          )}
+        </FormControl>
+      )}
     </Container>
   );
 };

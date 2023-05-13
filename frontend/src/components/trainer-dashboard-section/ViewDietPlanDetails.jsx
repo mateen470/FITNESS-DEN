@@ -166,7 +166,6 @@ const ViewDietPlanDetails = () => {
                 fontFamily: "Comme, sans-serif",
               }}
             >
-              {" "}
               {Details.MedicalHistoryDes}
             </Typography>
           </Typography>
