@@ -15,6 +15,7 @@ const Exercise = () => {
         alignItems: "center",
         flexDirection: "column",
         minHeight: "100vh",
+        pb: 10,
       }}
     >
       <Box sx={{ position: "absolute", top: 0, left: 5 }}>
@@ -51,19 +52,39 @@ const Exercise = () => {
             gap: 1,
             zIndex: 10,
             p: 3,
+            my: 2,
           }}
         >
-          <Typography fontSize={"1.4rem"} color={"white"} fontWeight={800}>
+          <Typography
+            fontSize={"1.4rem"}
+            color={"white"}
+            fontWeight={800}
+            fontFamily={"Comme, sans-serif"}
+          >
             Name: {i.Name}
           </Typography>
-          <Typography fontSize={"1.4rem"} color={"white"} fontWeight={800}>
+          <Typography
+            fontSize={"1.4rem"}
+            color={"white"}
+            fontWeight={800}
+            fontFamily={"Comme, sans-serif"}
+          >
             Number of Sets: {i.Sets}
           </Typography>
-          <Typography fontSize={"1.4rem"} color={"white"} fontWeight={800}>
+          <Typography
+            fontSize={"1.4rem"}
+            color={"white"}
+            fontWeight={800}
+            fontFamily={"Comme, sans-serif"}
+          >
             Number of Repititions: {i.Reps}
           </Typography>
           <NavLink>
-            <Typography fontSize={"1.4rem"} color={"white"}>
+            <Typography
+              fontSize={"1.4rem"}
+              color={"white"}
+              fontFamily={"Comme, sans-serif"}
+            >
               Demo: {i.DemoLink}
             </Typography>
           </NavLink>

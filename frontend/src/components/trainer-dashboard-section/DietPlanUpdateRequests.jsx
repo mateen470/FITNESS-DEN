@@ -94,7 +94,7 @@ const DietPlanUpdateRequests = () => {
               <TableCell
                 sx={{
                   color: "white",
-                  fontSize: "1.2rem",
+                  fontSize: "2rem",
                   fontFamily: "Comme, sans-serif",
                 }}
               >
@@ -103,7 +103,7 @@ const DietPlanUpdateRequests = () => {
               <TableCell
                 sx={{
                   color: "white",
-                  fontSize: "1.2rem",
+                  fontSize: "5vh",
                   fontFamily: "Comme, sans-serif",
                 }}
               >
@@ -125,7 +125,7 @@ const DietPlanUpdateRequests = () => {
                     to="/update-diet-plan"
                   >
                     <VisibilityRoundedIcon
-                      sx={{ color: "white", fontSize: "2.5rem" }}
+                      sx={{ color: "white", fontSize: "6vh" }}
                     />
                   </NavLink>
                 </Button>

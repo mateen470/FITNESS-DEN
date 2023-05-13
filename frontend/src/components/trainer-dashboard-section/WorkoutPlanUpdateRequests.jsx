@@ -92,7 +92,7 @@ const WorkoutPlanUpdateRequests = () => {
                     className="requestDescriotion"
                     sx={{
                       color: "white",
-                      fontSize: "1.2rem",
+                      fontSize: "5vh",
                       fontFamily: "Comme, sans-serif",
                     }}
                   >
@@ -106,7 +106,7 @@ const WorkoutPlanUpdateRequests = () => {
                         to="/update-workout-plan"
                       >
                         <VisibilityRoundedIcon
-                          sx={{ color: "white", fontSize: "2.5rem" }}
+                          sx={{ color: "white", fontSize: "6vh" }}
                         />
                       </NavLink>
                     </Button>

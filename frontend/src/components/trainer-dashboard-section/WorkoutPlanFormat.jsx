@@ -225,6 +225,7 @@ const WorkoutPlanFormat = () => {
               flexDirection: "column",
               gap: 1,
               p: 3,
+              mb: 2,
             }}
           >
             <Typography

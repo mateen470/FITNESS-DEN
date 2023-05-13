@@ -94,7 +94,7 @@ const AllWorkoutPlanRequests = () => {
               <TableCell
                 sx={{
                   color: "white",
-                  fontSize: "1.2rem",
+                  fontSize: "5vh",
                   fontFamily: "Comme, sans-serif",
                 }}
               >
@@ -103,7 +103,7 @@ const AllWorkoutPlanRequests = () => {
               <TableCell
                 sx={{
                   color: "white",
-                  fontSize: "1.2rem",
+                  fontSize: "5vh",
                   fontFamily: "Comme, sans-serif",
                 }}
               >
@@ -116,7 +116,7 @@ const AllWorkoutPlanRequests = () => {
                     onClick={() => dispatch(AddWorkoutPlanDetails(item))}
                   >
                     <VisibilityRoundedIcon
-                      sx={{ color: "white", fontSize: "2.5rem" }}
+                      sx={{ color: "white", fontSize: "5vh" }}
                     />
                   </NavLink>
                 </Button>
