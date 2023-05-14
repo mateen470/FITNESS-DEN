@@ -11,7 +11,7 @@ const AdminDashboardSection = () => {
 
   const LogOut = async () => {
     try {
-      await axios.post("logout");
+      const response = await axios.post("logout");
       navigate("/");
     } catch (error) {
       console.log(error);
