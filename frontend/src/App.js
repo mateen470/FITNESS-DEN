@@ -1,6 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import { useSelector } from "react-redux";
 
 import Home from "./pages/home/Home";
 import SignUp from "./pages/auth/SignUp";
@@ -34,6 +35,9 @@ import WorkoutPlanUpdateRequests from "./components/trainer-dashboard-section/Wo
 import WorkoutPlanFormat from "./components/trainer-dashboard-section/WorkoutPlanFormat";
 
 const App = () => {
+  const { isAdmin, isUser, isTrainer } = useSelector(
+    (state) => state.CheckForUserType
+  );
   return (
     <>
       <ToastContainer position="top-center" />
@@ -52,7 +56,7 @@ const App = () => {
         <Route path="/diet-plan-form" element={<DietPlanFormPage />} />
         <Route path="/workout-plan-form" element={<WorkoutPlanFormPage />} />
         <Route path="/payment" element={<PaymentPage />} />
-        <Route path="/view-diet-plan" element={<ViewDietPlan/>} />
+        <Route path="/view-diet-plan" element={<ViewDietPlan />} />
         <Route path="/view-workout-plan" element={<ViewWorkoutPlan />} />
         <Route path="/all-diet-plan-req" element={<AllDietPlanRequests />} />
         <Route path="/create-diet-plan" element={<CreateDietPlan />} />

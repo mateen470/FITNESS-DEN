@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
+import totalPlanSold from "../../assets/totalPlanSold.svg";
+import dietPlanSold from "../../assets/dietPlanSold.svg";
+import workoutPlanSold from "../../assets/workoutPlanSold.svg";
+import dietPlanProfit from "../../assets/dietPlanProfit.svg";
+import workoutPlanProfit from "../../assets/workoutPlanProfit.svg";
+import totalSales from "../../assets/totalSales.svg";
 
 const StatsForAdmin = () => {
   const [AllPayments, setAllPayments] = useState([]);
@@ -64,8 +70,8 @@ const StatsForAdmin = () => {
                 <Typography
                   fontSize={"4vh"}
                   color={"white"}
-                  textAlign={"center"}
                   fontFamily={"Comme, sans-serif"}
+                  pl={"10vh"}
                 >
                   {AllPayments.length}
                 </Typography>
@@ -77,9 +83,14 @@ const StatsForAdmin = () => {
                     justifyContent: "center",
                     alignItems: "center",
                     borderRadius: "50%",
-                    background: "#19191985",
                   }}
-                ></Box>
+                >
+                  <img
+                    src={totalPlanSold}
+                    alt="total plans sold"
+                    style={{ height: "15vh", width: "20vh" }}
+                  />
+                </Box>
               </Grid>
             </Grid>
           </CardContent>
@@ -106,8 +117,8 @@ const StatsForAdmin = () => {
                 <Typography
                   fontSize={"4vh"}
                   color={"white"}
-                  textAlign={"center"}
                   fontFamily={"Comme, sans-serif"}
+                  pl={"10vh"}
                 >
                   {AllDietPlans.length}
                 </Typography>
@@ -119,9 +130,14 @@ const StatsForAdmin = () => {
                     justifyContent: "center",
                     alignItems: "center",
                     borderRadius: "50%",
-                    background: "#19191985",
                   }}
-                ></Box>
+                >
+                  <img
+                    src={dietPlanSold}
+                    alt="diet plans sold"
+                    style={{ height: "15vh", width: "20vh" }}
+                  />
+                </Box>
               </Grid>
             </Grid>
           </CardContent>
@@ -148,8 +164,8 @@ const StatsForAdmin = () => {
                 <Typography
                   fontSize={"4vh"}
                   color={"white"}
-                  textAlign={"center"}
                   fontFamily={"Comme, sans-serif"}
+                  pl={"10vh"}
                 >
                   {AllWorkoutPlans.length}
                 </Typography>
@@ -161,9 +177,15 @@ const StatsForAdmin = () => {
                     justifyContent: "center",
                     alignItems: "center",
                     borderRadius: "50%",
-                    background: "#19191985",
+                    borderRadius: "50%",
                   }}
-                ></Box>
+                >
+                  <img
+                    src={workoutPlanSold}
+                    alt="workout plans sold"
+                    style={{ height: "15vh", width: "20vh" }}
+                  />
+                </Box>
               </Grid>
             </Grid>
           </CardContent>
@@ -190,7 +212,6 @@ const StatsForAdmin = () => {
                 <Typography
                   fontSize={"4vh"}
                   color={"white"}
-                  textAlign={"center"}
                   fontFamily={"Comme, sans-serif"}
                 >
                   Rs.{TotalProfitFromDietPlans}/-
@@ -203,9 +224,14 @@ const StatsForAdmin = () => {
                     justifyContent: "center",
                     alignItems: "center",
                     borderRadius: "50%",
-                    background: "#19191985",
                   }}
-                ></Box>
+                >
+                  <img
+                    src={dietPlanProfit}
+                    alt="diet plans profit"
+                    style={{ height: "15vh", width: "20vh" }}
+                  />
+                </Box>
               </Grid>
             </Grid>
           </CardContent>
@@ -232,7 +258,6 @@ const StatsForAdmin = () => {
                 <Typography
                   fontSize={"4vh"}
                   color={"white"}
-                  textAlign={"center"}
                   fontFamily={"Comme, sans-serif"}
                 >
                   Rs.{TotalProfitFromWorkoutPlans}/-
@@ -245,9 +270,14 @@ const StatsForAdmin = () => {
                     justifyContent: "center",
                     alignItems: "center",
                     borderRadius: "50%",
-                    background: "#19191985",
                   }}
-                ></Box>
+                >
+                  <img
+                    src={workoutPlanProfit}
+                    alt="workout plans profit"
+                    style={{ height: "15vh", width: "20vh" }}
+                  />
+                </Box>
               </Grid>
             </Grid>
           </CardContent>
@@ -274,7 +304,6 @@ const StatsForAdmin = () => {
                 <Typography
                   fontSize={"4vh"}
                   color={"white"}
-                  textAlign={"center"}
                   fontFamily={"Comme, sans-serif"}
                 >
                   Rs.{TotalProfit}/-
@@ -287,9 +316,14 @@ const StatsForAdmin = () => {
                     justifyContent: "center",
                     alignItems: "center",
                     borderRadius: "50%",
-                    background: "#19191985",
                   }}
-                ></Box>
+                >
+                  <img
+                    src={totalSales}
+                    alt="total profit"
+                    style={{ height: "15vh", width: "20vh" }}
+                  />
+                </Box>
               </Grid>
             </Grid>
           </CardContent>

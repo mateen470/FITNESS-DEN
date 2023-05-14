@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Typography, Box } from "@mui/material";
 import { NavLink } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 const SignUpForm = () => {
   const [formData, setFormData] = useState({
@@ -17,15 +19,24 @@ const SignUpForm = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
-      console.log(name, email, password);
       const registerRequest = await axios.post("signup", {
         name,
         email,
         password,
       });
-      console.log(registerRequest.message);
+
+      if (registerRequest.data && registerRequest.data.success) {
+        toast.success(registerRequest.data.message);
+      }
+      if (
+        registerRequest.response &&
+        registerRequest.response.data &&
+        registerRequest.response.data.message
+      ) {
+        toast.error(registerRequest.response.data.message);
+      }
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   };
 

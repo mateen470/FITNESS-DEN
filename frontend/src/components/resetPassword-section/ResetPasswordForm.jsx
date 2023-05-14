@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Box, Container, Typography } from "@mui/material";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 const ResetPasswordForm = () => {
@@ -23,9 +25,18 @@ const ResetPasswordForm = () => {
           headers: { Authorization: accessTokenForgotPassword },
         }
       );
-      console.log(resetPassResponse);
+      if (resetPassResponse.data && resetPassResponse.data.success) {
+        toast.success(resetPassResponse.data.message);
+      }
+      if (
+        resetPassResponse.response &&
+        resetPassResponse.response.data &&
+        resetPassResponse.response.data.message
+      ) {
+        toast.error(resetPassResponse.response.data.message);
+      }
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   };
   return (

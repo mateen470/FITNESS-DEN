@@ -46,11 +46,6 @@ const utilityFunctions = {
       }
     );
   },
-  emailSyntaxChecker: async (email) => {
-    const emailChecker =
-      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return emailChecker.test(email);
-  },
   passwordHashing: async (password) => {
     const salt = await bcrypt.genSalt(10);
     const newHashedPassword = await bcrypt.hash(password, salt);

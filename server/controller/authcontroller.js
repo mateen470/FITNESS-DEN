@@ -12,14 +12,6 @@ const AuthControllerFunctions = {
           .status(400)
           .json({ success: false, message: "PLEASE FILL IN ALL FIELDS!!" });
       }
-
-      if (!utilityFunctions.emailSyntaxChecker(email)) {
-        return await res.status(400).json({
-          success: false,
-          message: "INVALID EMAIL",
-        });
-      }
-
       const userAlreadyExist = await User.findOne({ email });
 
       if (userAlreadyExist) {
@@ -254,13 +246,6 @@ const AuthControllerFunctions = {
     try {
       const { email } = req.body;
 
-      if (!utilityFunctions.emailSyntaxChecker(email)) {
-        return await res.status(400).json({
-          success: false,
-          message: "INVALID EMAIL",
-        });
-      }
-
       const verifiedEmail = await User.findOne({ email });
       if (!verifiedEmail) {
         return await res.status(400).json({
@@ -308,6 +293,12 @@ const AuthControllerFunctions = {
   ResetPassword: async (req, res) => {
     try {
       const { password } = req.body;
+      if (password.length <= 8) {
+        return await res.status(400).json({
+          success: false,
+          message: "PASSWORD SHOULD BE MORE THAN 8 CHARACTERS !!",
+        });
+      }
       const updatedHashedPassword = await utilityFunctions.passwordHashing(
         password
       );

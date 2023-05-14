@@ -4,6 +4,11 @@ import { useNavigate, NavLink } from "react-router-dom";
 import { Container, Box, Typography } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { AddCurrentUserId } from "../../context/CurrentUser";
+import {
+  setIsAdmin,
+  setIsTrainer,
+  setIsUser,
+} from "../../context/CheckForUserType";
 
 const UserDashboardSection = () => {
   const dispatch = useDispatch();
@@ -18,9 +23,13 @@ const UserDashboardSection = () => {
         setName(getUser.data.data._doc.name);
         setEmail(getUser.data.data._doc.email);
         if (getUser.data.data._doc.role === 1) {
+          dispatch(setIsAdmin(true));
           navigate("/admin");
         } else if (getUser.data.data._doc.role === 2) {
+          dispatch(setIsTrainer(true));
           navigate("/trainer");
+        } else {
+          dispatch(setIsUser(true));
         }
       } catch (error) {
         console.log(error);

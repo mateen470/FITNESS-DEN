@@ -54,7 +54,7 @@ const WorkoutPlanFormat = () => {
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "column",
-        mb: 5,
+        mb: 2,
       }}
     >
       <Box>

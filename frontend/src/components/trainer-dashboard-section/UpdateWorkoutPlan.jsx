@@ -254,7 +254,16 @@ const UpdateWorkoutPlan = () => {
         />
         {singleDayPlan[counter1][counter].Excercise.map((i, index) => (
           <>
-            <Typography>Excercise: {index + 1}</Typography>
+            <Typography
+              color={"white"}
+              fontFamily={"Comme, sans-serif"}
+              fontSize={"1.7vw"}
+              fontWeight={800}
+              textAlign={"center"}
+              my={2}
+            >
+              Excercise: {index + 1}
+            </Typography>
 
             <TextField
               placeholder="Excercise Name"

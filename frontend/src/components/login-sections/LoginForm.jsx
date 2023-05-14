@@ -25,9 +25,8 @@ const LoginForm = () => {
       );
       axios.defaults.headers.common["Authorization"] = `Bearer ${data.data}`;
       navigate("/user");
-      console.log(data.message);
     } catch (error) {
-      console.log(error.message);
+      console.log(error.response.data.message);
     }
   };
 

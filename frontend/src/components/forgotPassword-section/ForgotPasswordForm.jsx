@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Box, Container, Typography } from "@mui/material";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 const ForgotPasswordForm = () => {
   const [formData, setFormData] = useState({
@@ -17,9 +19,18 @@ const ForgotPasswordForm = () => {
       const forgotPasswordRequest = await axios.post("forgotPassword", {
         email,
       });
-      console.log(forgotPasswordRequest);
+      if (forgotPasswordRequest.data && forgotPasswordRequest.data.success) {
+        toast.success(forgotPasswordRequest.data.message);
+      }
+      if (
+        forgotPasswordRequest.response &&
+        forgotPasswordRequest.response.data &&
+        forgotPasswordRequest.response.data.message
+      ) {
+        toast.error(forgotPasswordRequest.response.data.message);
+      }
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   };
   return (
