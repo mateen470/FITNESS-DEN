@@ -67,14 +67,14 @@ const AuthControllerFunctions = {
 
         return await res.status(200).json({
           success: true,
-          message: "SIGNUP PROCESS SUCCESFULL !!",
+          message: "EMAIL SENT TO YOUR EMAIL ADDRESS!!",
           user: newUserData,
         });
       }
     } catch (error) {
       return await res.status(500).json({
         success: false,
-        message: `SIGNUP PROCESS FAILED!! ${error.message}`,
+        message: `SIGNUP PROCESS FAILED!!`,
       });
     }
   },
@@ -101,7 +101,7 @@ const AuthControllerFunctions = {
     } catch (error) {
       return await res.status(500).json({
         success: false,
-        message: `ACCOUNT VERIFICATION PROCESS FAILED!! ${error.message}`,
+        message: `ACCOUNT VERIFICATION PROCESS FAILED!!`,
       });
     }
   },
@@ -171,7 +171,7 @@ const AuthControllerFunctions = {
     } catch (error) {
       return await res.status(500).json({
         success: false,
-        message: `SIGNIN PROCESS FAILED!! ${error.message}`,
+        message: `SIGNIN PROCESS FAILED!!`,
       });
     }
   },
@@ -186,7 +186,7 @@ const AuthControllerFunctions = {
       }
       accessTokenVerified = await utilityFunctions.accessTokenVerification(
         accessToken
-        );
+      );
       const authenticatedUser = await User.findOne({
         _id: accessTokenVerified.id,
       });
@@ -201,13 +201,13 @@ const AuthControllerFunctions = {
 
       return await res.status(200).json({
         success: true,
-        message: "DATA SENT!!",
+        message: "USER AUTHORIZED!!",
         data: data,
       });
     } catch (error) {
       return await res.status(500).json({
         success: false,
-        message: `UNAUTHORIZED!! ${error.message}`,
+        message: `UNAUTHORIZED!!`,
       });
     }
   },
@@ -228,7 +228,7 @@ const AuthControllerFunctions = {
     } catch (error) {
       return await res.status(500).json({
         success: false,
-        message: `UNAUTHORIZED!! ${error.message}`,
+        message: `UNAUTHORIZED!!`,
       });
     }
   },
@@ -238,7 +238,7 @@ const AuthControllerFunctions = {
         httpOnly: true,
         secure: true,
         sameSite: "None",
-      })
+      });
       return await res.status(200).json({
         success: true,
         message: "LOGOUT SUCCESSFULL!!",
@@ -246,7 +246,7 @@ const AuthControllerFunctions = {
     } catch (error) {
       return await res.status(500).json({
         success: false,
-        message: `FAILED TO LOGOUT!! ${error.message}`,
+        message: `FAILED TO LOGOUT!!`,
       });
     }
   },
@@ -301,7 +301,7 @@ const AuthControllerFunctions = {
     } catch (error) {
       return await res.status(500).json({
         success: false,
-        message: `FORGOT PASSWORD PROCESS FAILED!! ${error.message}`,
+        message: `FORGOT PASSWORD PROCESS FAILED!!`,
       });
     }
   },
@@ -327,7 +327,7 @@ const AuthControllerFunctions = {
     } catch (error) {
       return await res.status(500).json({
         success: false,
-        message: `RESET PASSWORD PROCESS FAILED!! ${error.message}`,
+        message: `RESET PASSWORD PROCESS FAILED!!`,
       });
     }
   },
