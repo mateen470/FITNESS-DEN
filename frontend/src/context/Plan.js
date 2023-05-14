@@ -23,7 +23,8 @@ export const PlanSlice = createSlice({
     SubmitPlan: (state, action) => {
       axios
         .post("workout/completed-workout-plan", {
-          IDofCurrentUser: action.payload,
+          IDofCurrentUser: action.payload.IDofCurrentUser,
+          PlanName: action.payload.PlanName,
           WorkoutPlan: state.Plan,
         })
         .then((res) => {

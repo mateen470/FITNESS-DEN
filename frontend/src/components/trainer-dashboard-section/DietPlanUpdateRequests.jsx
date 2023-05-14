@@ -111,20 +111,18 @@ const DietPlanUpdateRequests = () => {
               </TableCell>
               <TableCell>
                 <Button>
-                  <NavLink
-                    onClick={() =>
-                      dispatch(
-                        GetDietPlanId(
-                          JSON.stringify({
-                            PlanId: item.PlanID,
-                            ReqId: item._id,
-                          })
-                        )
-                      )
-                    }
-                    to="/update-diet-plan"
-                  >
+                  <NavLink to="/update-diet-plan">
                     <VisibilityRoundedIcon
+                      onClick={() =>
+                        dispatch(
+                          GetDietPlanId(
+                            JSON.stringify({
+                              PlanId: item.PlanID,
+                              ReqId: item._id,
+                            })
+                          )
+                        )
+                      }
                       sx={{ color: "white", fontSize: "6vh" }}
                     />
                   </NavLink>

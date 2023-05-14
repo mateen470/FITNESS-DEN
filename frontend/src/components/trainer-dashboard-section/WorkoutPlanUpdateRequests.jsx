@@ -100,12 +100,10 @@ const WorkoutPlanUpdateRequests = () => {
                   </TableCell>
                   <TableCell>
                     <Button id={index} onClick={handleUpdate}>
-                      <NavLink
-                        id={index}
-                        onClick={handleUpdate}
-                        to="/update-workout-plan"
-                      >
+                      <NavLink to="/update-workout-plan">
                         <VisibilityRoundedIcon
+                          id={index}
+                          onClick={handleUpdate}
                           sx={{ color: "white", fontSize: "6vh" }}
                         />
                       </NavLink>

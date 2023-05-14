@@ -36,6 +36,7 @@ const ViewWorkoutPlanPage = () => {
   useEffect(() => handlePlan, []);
   useEffect(() => {
     Plan.length === 0 ? setplanExist(false) : setplanExist(true);
+    console.log(ResponseFromDB)
   }, [Plan, planExist]);
   const handleClick = (Week, Day) => {
     Plan.map((item) =>
@@ -184,6 +185,16 @@ const ViewWorkoutPlanPage = () => {
       )}
       {planExist ? (
         <>
+          <Typography
+            color={"white"}
+            fontFamily={"Comme, sans-serif"}
+            fontWeight={800}
+            fontSize={"6vh"}
+            textAlign={"center"}
+            my={3}
+          >
+            {ResponseFromDB.PlanName}
+          </Typography>
           {Plan.map((i, index) => (
             <>
               <Typography

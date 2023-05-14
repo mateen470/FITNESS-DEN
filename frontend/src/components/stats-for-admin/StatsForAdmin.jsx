@@ -1,16 +1,15 @@
-import { Container, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import React from "react";
+import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
 
 const StatsForAdmin = () => {
-  const [AllPayments, setAllPayments] = React.useState([]);
-  const [TotalProfit, setTotalProfit] = React.useState(0);
-  const [TotalProfitFromDietPlans, setTotalProfitFromDietPlans] =
-    React.useState(0);
+  const [AllPayments, setAllPayments] = useState([]);
+  const [TotalProfit, setTotalProfit] = useState(0);
+  const [TotalProfitFromDietPlans, setTotalProfitFromDietPlans] = useState(0);
   const [TotalProfitFromWorkoutPlans, setTotalProfitFromWorkoutPlans] =
-    React.useState(0);
-  const [AllDietPlans, setAllDietPlans] = React.useState([]);
-  const [AllWorkoutPlans, setAllWorkoutPlans] = React.useState([]);
+    useState(0);
+  const [AllDietPlans, setAllDietPlans] = useState([]);
+  const [AllWorkoutPlans, setAllWorkoutPlans] = useState([]);
 
   const FetchAllPayments = () => {
     axios
@@ -39,29 +38,264 @@ const StatsForAdmin = () => {
     setTotalProfitFromWorkoutPlans(temp1);
     setTotalProfit(temp1 + temp);
   };
-  React.useEffect(FetchAllPayments, []);
-  React.useEffect(setDietAndWorkoutPlans, [AllPayments]);
-  React.useEffect(setDietAndWorkoutPlansProfit, [
-    AllDietPlans,
-    AllWorkoutPlans,
-  ]);
+  useEffect(FetchAllPayments, []);
+  useEffect(setDietAndWorkoutPlans, [AllPayments]);
+  useEffect(setDietAndWorkoutPlansProfit, [AllDietPlans, AllWorkoutPlans]);
   return (
-    <Container>
-      <Typography>Total Number of Plans Sold:{AllPayments.length}</Typography>
-      <Typography>
-        Total Number of Diet Plans Sold:{AllDietPlans.length}
-      </Typography>
-      <Typography>
-        Total Number of Workout Plans Sold:{AllWorkoutPlans.length}
-      </Typography>
-      <Typography>Total Profit From Plans Sold: Rs.{TotalProfit}/-</Typography>
-      <Typography>
-        Total Profit From Diet Plans Sold: Rs.{TotalProfitFromDietPlans}/-
-      </Typography>
-      <Typography>
-        Total Profit From Workout Plans Sold: Rs.{TotalProfitFromWorkoutPlans}/-
-      </Typography>
-    </Container>
+    <Grid container spacing={3} mt={3} mb={5}>
+      <Grid item xs={6}>
+        <Card
+          sx={{
+            background: "linear-gradient(#310E4B,#420B5C )",
+            height: "20vh",
+          }}
+        >
+          <CardContent>
+            <Grid container>
+              <Grid item xs={8}>
+                <Typography
+                  fontSize={"4vh"}
+                  color={"white"}
+                  fontWeight={800}
+                  fontFamily={"Comme, sans-serif"}
+                >
+                  Total Plans Sold
+                </Typography>
+                <Typography
+                  fontSize={"4vh"}
+                  color={"white"}
+                  textAlign={"center"}
+                  fontFamily={"Comme, sans-serif"}
+                >
+                  {AllPayments.length}
+                </Typography>
+              </Grid>
+              <Grid item xs={4}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    borderRadius: "50%",
+                    background: "#19191985",
+                  }}
+                ></Box>
+              </Grid>
+            </Grid>
+          </CardContent>
+        </Card>
+      </Grid>
+      <Grid item xs={6}>
+        <Card
+          sx={{
+            background: "linear-gradient(#310E4B,#420B5C )",
+            height: "20vh",
+          }}
+        >
+          <CardContent>
+            <Grid container>
+              <Grid item xs={8}>
+                <Typography
+                  fontSize={"4vh"}
+                  color={"white"}
+                  fontWeight={800}
+                  fontFamily={"Comme, sans-serif"}
+                >
+                  Diet Plans Sold
+                </Typography>
+                <Typography
+                  fontSize={"4vh"}
+                  color={"white"}
+                  textAlign={"center"}
+                  fontFamily={"Comme, sans-serif"}
+                >
+                  {AllDietPlans.length}
+                </Typography>
+              </Grid>
+              <Grid item xs={4}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    borderRadius: "50%",
+                    background: "#19191985",
+                  }}
+                ></Box>
+              </Grid>
+            </Grid>
+          </CardContent>
+        </Card>
+      </Grid>
+      <Grid item xs={6}>
+        <Card
+          sx={{
+            background: "linear-gradient(#310E4B,#420B5C )",
+            height: "20vh",
+          }}
+        >
+          <CardContent>
+            <Grid container>
+              <Grid item xs={8}>
+                <Typography
+                  fontSize={"4vh"}
+                  color={"white"}
+                  fontWeight={800}
+                  fontFamily={"Comme, sans-serif"}
+                >
+                  Workout Plans Sold
+                </Typography>
+                <Typography
+                  fontSize={"4vh"}
+                  color={"white"}
+                  textAlign={"center"}
+                  fontFamily={"Comme, sans-serif"}
+                >
+                  {AllWorkoutPlans.length}
+                </Typography>
+              </Grid>
+              <Grid item xs={4}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    borderRadius: "50%",
+                    background: "#19191985",
+                  }}
+                ></Box>
+              </Grid>
+            </Grid>
+          </CardContent>
+        </Card>
+      </Grid>
+      <Grid item xs={6}>
+        <Card
+          sx={{
+            background: "linear-gradient(#310E4B,#420B5C )",
+            height: "20vh",
+          }}
+        >
+          <CardContent>
+            <Grid container>
+              <Grid item xs={8}>
+                <Typography
+                  fontSize={"4vh"}
+                  color={"white"}
+                  fontWeight={800}
+                  fontFamily={"Comme, sans-serif"}
+                >
+                  Diet Plans Profit
+                </Typography>
+                <Typography
+                  fontSize={"4vh"}
+                  color={"white"}
+                  textAlign={"center"}
+                  fontFamily={"Comme, sans-serif"}
+                >
+                  Rs.{TotalProfitFromDietPlans}/-
+                </Typography>
+              </Grid>
+              <Grid item xs={4}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    borderRadius: "50%",
+                    background: "#19191985",
+                  }}
+                ></Box>
+              </Grid>
+            </Grid>
+          </CardContent>
+        </Card>
+      </Grid>
+      <Grid item xs={6}>
+        <Card
+          sx={{
+            background: "linear-gradient(#310E4B,#420B5C )",
+            height: "20vh",
+          }}
+        >
+          <CardContent>
+            <Grid container>
+              <Grid item xs={8}>
+                <Typography
+                  fontSize={"4vh"}
+                  color={"white"}
+                  fontWeight={800}
+                  fontFamily={"Comme, sans-serif"}
+                >
+                  Workout Plans Profit
+                </Typography>
+                <Typography
+                  fontSize={"4vh"}
+                  color={"white"}
+                  textAlign={"center"}
+                  fontFamily={"Comme, sans-serif"}
+                >
+                  Rs.{TotalProfitFromWorkoutPlans}/-
+                </Typography>
+              </Grid>
+              <Grid item xs={4}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    borderRadius: "50%",
+                    background: "#19191985",
+                  }}
+                ></Box>
+              </Grid>
+            </Grid>
+          </CardContent>
+        </Card>
+      </Grid>
+      <Grid item xs={6}>
+        <Card
+          sx={{
+            background: "linear-gradient(#310E4B,#420B5C )",
+            height: "20vh",
+          }}
+        >
+          <CardContent>
+            <Grid container>
+              <Grid item xs={8}>
+                <Typography
+                  fontSize={"4vh"}
+                  color={"white"}
+                  fontWeight={800}
+                  fontFamily={"Comme, sans-serif"}
+                >
+                  Total Profit
+                </Typography>
+                <Typography
+                  fontSize={"4vh"}
+                  color={"white"}
+                  textAlign={"center"}
+                  fontFamily={"Comme, sans-serif"}
+                >
+                  Rs.{TotalProfit}/-
+                </Typography>
+              </Grid>
+              <Grid item xs={4}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    borderRadius: "50%",
+                    background: "#19191985",
+                  }}
+                ></Box>
+              </Grid>
+            </Grid>
+          </CardContent>
+        </Card>
+      </Grid>
+    </Grid>
   );
 };
 export default StatsForAdmin;

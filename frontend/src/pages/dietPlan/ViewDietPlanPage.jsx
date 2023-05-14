@@ -29,7 +29,7 @@ const ViewDietPlanPage = () => {
       setResponseFromDB(res.data.data);
     });
   };
-  useEffect(()=>FetchDietPlan, []);
+  useEffect(() => FetchDietPlan, []);
   useEffect(() => {
     DietPlan.length === 0 ? setplanExist(false) : setplanExist(true);
   }, [DietPlan, planExist]);
@@ -170,6 +170,16 @@ const ViewDietPlanPage = () => {
       )}
       {planExist ? (
         <>
+          <Typography
+            color={"white"}
+            fontFamily={"Comme, sans-serif"}
+            fontWeight={800}
+            fontSize={"6vh"}
+            textAlign={"center"}
+            my={3}
+          >
+            {ResponseFromDB.PlanName}
+          </Typography>
           {DietPlan.map((item, index) => (
             <>
               <Typography

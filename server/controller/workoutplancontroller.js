@@ -48,6 +48,7 @@ const WorkoutPlanControllerFunctions = {
     try {
       const data = new CompletedWorkoutPlanFromTrainer();
       data.IDofCurrentUser = req.body.IDofCurrentUser;
+      data.PlanName = req.body.PlanName;
       req.body.WorkoutPlan.map((item) => data.WorkoutPlan.push(item));
 
       await data.save();

@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 const dietPlan = new mongoose.Schema({
+  PlanName: String,
   DietPlan: Array,
   IDofCurrentUser: String,
 });

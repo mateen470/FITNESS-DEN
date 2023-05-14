@@ -76,7 +76,12 @@ const CreateDietPlan = () => {
   const submitPlan = () => {
     dispatch(AddWeeklyDietPlan({ BreakFast, Lunch, Dinner }));
     dispatch(AddDietPlan(weeklyDietPlan));
-    dispatch(SubmitDietPlan(Request.IDofCurrentUser));
+    dispatch(
+      SubmitDietPlan({
+        IDofCurrentUser: Request.IDofCurrentUser,
+        PlanName: Request.Title,
+      })
+    );
     axios
       .delete("diet/diet-request/" + Request._id)
       .then(() =>

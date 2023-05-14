@@ -45,6 +45,7 @@ const DietPlanControllerFunctions = {
     try {
       const data = new CompletedDietPlanFromTrainer();
       data.IDofCurrentUser = req.body.IDofCurrentUser;
+      data.PlanName = req.body.PlanName;
       req.body.DietPlan.map((item) => data.DietPlan.push(item));
       await data.save();
       return await res.status(200).json({

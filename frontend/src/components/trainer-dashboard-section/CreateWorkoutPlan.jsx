@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Plan from "./WorkoutPlanFormat";
 import { EmptyExcercise } from "../../context/Excercise";
 import { useDispatch, useSelector } from "react-redux";
@@ -45,7 +45,7 @@ const CreateWorkoutPlan = () => {
   const [flag1, setFlag1] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
-
+  useEffect(() => console.log(Request));
   const addWeeklyPlan = () => {
     dispatch(
       AddWeeklyPlan({
@@ -82,7 +82,12 @@ const CreateWorkoutPlan = () => {
     addWeeklyPlan();
     dispatch(AddPlan());
     dispatch(EmptyExcercise());
-    dispatch(SubmitPlan(Request.IDofCurrentUser));
+    dispatch(
+      SubmitPlan({
+        IDofCurrentUser: Request.IDofCurrentUser,
+        PlanName: Request.title,
+      })
+    );
     axios
       .delete("workout/workout-request/" + Request._id)
       .then(() =>

@@ -1,11 +1,110 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState } from "react";
+import StatsForAdmin from "../stats-for-admin/StatsForAdmin";
+import AdminBlogsView from "../blogs-section/AdminBlogsView";
+import { Box, Container, Typography } from "@mui/material";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
+
 const AdminDashboardSection = () => {
+  const navigate = useNavigate();
+
+  const LogOut = async () => {
+    try {
+      await axios.post("logout");
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const [active, setActive] = useState(false);
   return (
-    <div>
-      ADMIN
-      <NavLink to={"/stats-for-admin"}>check Stats</NavLink>
-    </div>
+    <Container
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "column",
+        minHeight: "100vh",
+      }}
+    >
+      <Box sx={{ position: "absolute", top: 0, left: 5 }}>
+        <Typography
+          color={"white"}
+          fontFamily={"Comme, sans-serif"}
+          onClick={LogOut}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            fontSize: "1.7vw",
+            cursor: "pointer",
+          }}
+        >
+          <KeyboardDoubleArrowLeftIcon /> LogOut
+        </Typography>
+      </Box>
+      <Typography
+        fontSize={"5vw"}
+        color={"white"}
+        fontWeight={800}
+        textAlign={"center"}
+        my={4}
+      >
+        Admin Dashboard
+      </Typography>
+
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: 8,
+        }}
+      >
+        <Typography
+          fontSize={"5vh"}
+          color={!active ? "white" : "gray"}
+          borderBottom={!active ? "2px solid white" : "none"}
+          fontWeight={800}
+          textAlign={"center"}
+          fontFamily={"Comme, sans-serif"}
+          sx={{ cursor: "pointer" }}
+          onClick={() => setActive(false)}
+        >
+          Stats
+        </Typography>
+        <Typography
+          fontSize={"5vh"}
+          color={active ? "white" : "gray"}
+          borderBottom={active ? "2px solid white" : "none"}
+          fontWeight={800}
+          textAlign={"center"}
+          fontFamily={"Comme, sans-serif"}
+          sx={{ cursor: "pointer" }}
+          onClick={() => setActive(true)}
+        >
+          Blogs
+        </Typography>
+      </Box>
+      <Box
+        sx={{
+          display: !active ? "flex" : "none",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <StatsForAdmin />
+      </Box>
+      <Box
+        sx={{
+          display: active ? "flex" : "none",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <AdminBlogsView />
+      </Box>
+    </Container>
   );
 };
 
