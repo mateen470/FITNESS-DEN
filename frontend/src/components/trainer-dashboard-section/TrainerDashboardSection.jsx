@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Box, Container, Typography } from "@mui/material";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import LogoutIcon from "@mui/icons-material/Logout";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -13,9 +16,11 @@ import {
   setWorkoutPlanRequestsLength,
   setWorkoutPlanUpdateRequestsLength,
 } from "../../context/CheckForNewPlanRequests";
+import { setIsTrainer } from "../../context/CheckForUserType";
 
 const TrainerDashboardSection = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [AllWorkoutPlanRequestsFromDB, setAllWorkoutPlanRequestsFromDB] =
     useState([]);
   const [AllDietPlanRequestsFromDB, setAllDietPlanRequestsFromDB] = useState(
@@ -67,7 +72,28 @@ const TrainerDashboardSection = () => {
   const isNewDietPlanUpdateRequests = useSelector(
     (state) => state.CheckForNewPlanRequests.isNewDietPlanUpdateRequests
   );
-  React.useEffect(() => {
+
+  const LogOut = async () => {
+    try {
+      const logOutResponse = await axios.post("logout");
+      if (logOutResponse.data && logOutResponse.data.success) {
+        toast.success(logOutResponse.data.message);
+        dispatch(setIsTrainer(false));
+        navigate("/");
+      }
+      if (
+        logOutResponse.response &&
+        logOutResponse.response.data &&
+        logOutResponse.response.data.message
+      ) {
+        toast.error(logOutResponse.response.data.message);
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  useEffect(() => {
     FetchAllPlanRequests();
     if (AllWorkoutPlanRequestsFromDB.length > NumberofWorkoutPlanRequest) {
       dispatch(setIsNewWorkoutPlanRequests(true));
@@ -98,7 +124,7 @@ const TrainerDashboardSection = () => {
         setDietPlanUpdateRequestsLength(AllDietPlanUpdateRequestsFromDB.length)
       );
     }
-  }, [temp]);
+  }, [temp,dispatch]);
 
   useEffect(() => {
     setInterval(() => setTemp((prevTemp) => prevTemp + 1), 5000);
@@ -113,6 +139,21 @@ const TrainerDashboardSection = () => {
         minHeight: "100vh",
       }}
     >
+      <Box sx={{ position: "absolute", top: 0, right: 5 }}>
+        <Typography
+          color={"white"}
+          fontFamily={"Comme, sans-serif"}
+          onClick={LogOut}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            fontSize: "1.7vw",
+            cursor: "pointer",
+          }}
+        >
+               <LogoutIcon /> LogOut
+        </Typography>
+      </Box>
       <Typography
         fontSize={"5vw"}
         color={"white"}

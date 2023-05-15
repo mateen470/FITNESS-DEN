@@ -4,6 +4,9 @@ import { useNavigate, NavLink } from "react-router-dom";
 import { Container, Box, Typography } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { AddCurrentUserId } from "../../context/CurrentUser";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import LogoutIcon from "@mui/icons-material/Logout";
 import {
   setIsAdmin,
   setIsTrainer,
@@ -15,6 +18,27 @@ const UserDashboardSection = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
+
+  const LogOut = async () => {
+    try {
+      const logOutResponse = await axios.post("logout");
+      if (logOutResponse.data && logOutResponse.data.success) {
+        toast.success(logOutResponse.data.message);
+        dispatch(setIsUser(false));
+        navigate("/");
+      }
+      if (
+        logOutResponse.response &&
+        logOutResponse.response.data &&
+        logOutResponse.response.data.message
+      ) {
+        toast.error(logOutResponse.response.data.message);
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   useEffect(() => {
     const getData = async () => {
       try {
@@ -36,7 +60,7 @@ const UserDashboardSection = () => {
       }
     };
     getData();
-  }, [navigate]);
+  }, [navigate, dispatch]);
   return (
     <Container
       sx={{
@@ -46,6 +70,21 @@ const UserDashboardSection = () => {
         minHeight: "100vh",
       }}
     >
+      <Box sx={{ position: "absolute", top: 0, right: 5 }}>
+        <Typography
+          color={"white"}
+          fontFamily={"Comme, sans-serif"}
+          onClick={LogOut}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            fontSize: "1.7vw",
+            cursor: "pointer",
+          }}
+        >
+          <LogoutIcon /> LogOut
+        </Typography>
+      </Box>
       <Box
         sx={{
           minHeight: "60vh",

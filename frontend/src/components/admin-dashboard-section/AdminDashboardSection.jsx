@@ -2,19 +2,34 @@ import React, { useState } from "react";
 import StatsForAdmin from "../stats-for-admin/StatsForAdmin";
 import AdminBlogsView from "../blogs-section/AdminBlogsView";
 import { Box, Container, Typography } from "@mui/material";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import LogoutIcon from "@mui/icons-material/Logout";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
+import { setIsAdmin } from "../../context/CheckForUserType";
+import { useDispatch } from "react-redux";
 
 const AdminDashboardSection = () => {
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const LogOut = async () => {
     try {
-      const response = await axios.post("logout");
-      navigate("/");
+      const logOutResponse = await axios.post("logout");
+      if (logOutResponse.data && logOutResponse.data.success) {
+        toast.success(logOutResponse.data.message);
+        dispatch(setIsAdmin(false));
+        navigate("/");
+      }
+      if (
+        logOutResponse.response &&
+        logOutResponse.response.data &&
+        logOutResponse.response.data.message
+      ) {
+        toast.error(logOutResponse.response.data.message);
+      }
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   };
 
@@ -28,7 +43,7 @@ const AdminDashboardSection = () => {
         minHeight: "100vh",
       }}
     >
-      <Box sx={{ position: "absolute", top: 0, left: 5 }}>
+      <Box sx={{ position: "absolute", top: 0, right: 5 }}>
         <Typography
           color={"white"}
           fontFamily={"Comme, sans-serif"}
@@ -40,7 +55,7 @@ const AdminDashboardSection = () => {
             cursor: "pointer",
           }}
         >
-          <KeyboardDoubleArrowLeftIcon /> LogOut
+          <LogoutIcon /> LogOut
         </Typography>
       </Box>
       <Typography

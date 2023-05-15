@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import logo from "../../assets/logo.svg";
+import profile from "../../assets/profile.svg";
 import { NavLink } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 const NavBar = () => {
   const [displayDropDown, setDisplayDropDown] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const { isUser } = useSelector((state) => state.CheckForUserType);
 
   useEffect(() => {
     const handleResize = () => {
@@ -194,43 +197,51 @@ const NavBar = () => {
           </NavLink>
         </Box>
       </Box>
-      <Box
-        sx={{
-          border: "1px solid pink",
-          p: 1,
-          px: 2,
-          mt: 3,
-          height: "4vw",
-          width: "8.5vw",
-          cursor: "pointer",
-        }}
-      >
-        <NavLink to={"/login"}>
-          <Typography
-            color={"black"}
-            fontFamily={"Comme, sans-serif"}
-            sx={{
-              backgroundImage:
-                " linear-gradient( to right, rgba(92, 58, 180, 1) ,rgba(134, 69, 252, 1) ) ",
-              fontSize: "1.7vw",
-              height: "3.8vw",
-              width: "9vw",
-              ml: -4.5,
-              display: "flex",
-              justifyContent: "center",
-              color: "white",
-              alignItems: "center",
-              transition: "scale 0.3s ease-in-out",
-              fontWeight: "bold",
-              "&:hover": {
-                scale: "0.95 !important",
-              },
-            }}
-          >
-            SignIn
-          </Typography>
-        </NavLink>
-      </Box>
+      {isUser === false ? (
+        <Box
+          sx={{
+            border: "1px solid pink",
+            p: 1,
+            px: 2,
+            mt: 3,
+            height: "4vw",
+            width: "8.5vw",
+            cursor: "pointer",
+          }}
+        >
+          <NavLink to={"/login"}>
+            <Typography
+              color={"black"}
+              fontFamily={"Comme, sans-serif"}
+              sx={{
+                backgroundImage:
+                  " linear-gradient( to right, rgba(92, 58, 180, 1) ,rgba(134, 69, 252, 1) ) ",
+                fontSize: "1.7vw",
+                height: "3.8vw",
+                width: "9vw",
+                ml: -4.5,
+                display: "flex",
+                justifyContent: "center",
+                color: "white",
+                alignItems: "center",
+                transition: "scale 0.3s ease-in-out",
+                fontWeight: "bold",
+                "&:hover": {
+                  scale: "0.95 !important",
+                },
+              }}
+            >
+              SignIn
+            </Typography>
+          </NavLink>
+        </Box>
+      ) : (
+        <Box mt={3}>
+          <NavLink to={"/user"}>
+            <img src={profile} alt="user-profile" style={{ height: "12vh" }} />
+          </NavLink>
+        </Box>
+      )}
     </Box>
   );
 };

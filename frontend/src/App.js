@@ -33,6 +33,7 @@ import ViewDietPlanDetails from "./components/trainer-dashboard-section/ViewDiet
 import ViewWorkoutPlanDetails from "./components/trainer-dashboard-section/ViewWorkoutPlanDetails";
 import WorkoutPlanUpdateRequests from "./components/trainer-dashboard-section/WorkoutPlanUpdateRequests";
 import WorkoutPlanFormat from "./components/trainer-dashboard-section/WorkoutPlanFormat";
+import NotFound from "./components/404-not-found/NotFound";
 
 const App = () => {
   const { isAdmin, isUser, isTrainer } = useSelector(
@@ -46,45 +47,87 @@ const App = () => {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgot" element={<ForgotPassword />} />
-        <Route path="/user" element={<UserDashboardPage />} />
-        <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/trainer" element={<TrainerDashboard />} />
         <Route path="/map" element={<Map />} />
         <Route path="/nutrition-facts" element={<NutritionFactsPage />} />
         <Route path="/diet-plans" element={<DietPlanPage />} />
         <Route path="/workout-plans" element={<WorkoutPlanPage />} />
-        <Route path="/diet-plan-form" element={<DietPlanFormPage />} />
-        <Route path="/workout-plan-form" element={<WorkoutPlanFormPage />} />
-        <Route path="/payment" element={<PaymentPage />} />
-        <Route path="/view-diet-plan" element={<ViewDietPlan />} />
-        <Route path="/view-workout-plan" element={<ViewWorkoutPlan />} />
-        <Route path="/all-diet-plan-req" element={<AllDietPlanRequests />} />
-        <Route path="/create-diet-plan" element={<CreateDietPlan />} />
-        <Route path="/create-workout-plan" element={<CreateWorkoutPlan />} />
-        <Route path="/update-diet-plan" element={<UpdateDietPlan />} />
-        <Route path="/update-workout-plan" element={<UpdateWorkoutPlan />} />
-        <Route path="/exercise" element={<Exercise />} />
-        <Route path="/workout-plan-format" element={<WorkoutPlanFormat />} />
+        <Route
+          path="/admin"
+          element={isAdmin ? <AdminDashboard /> : <NotFound />}
+        />
+        <Route
+          path="/user"
+          element={isUser ? <UserDashboardPage /> : <NotFound />}
+        />
+        <Route
+          path="/diet-plan-form"
+          element={isUser ? <DietPlanFormPage /> : <NotFound />}
+        />
+        <Route
+          path="/workout-plan-form"
+          element={isUser ? <WorkoutPlanFormPage /> : <NotFound />}
+        />
+        <Route
+          path="/payment"
+          element={isUser ? <PaymentPage /> : <NotFound />}
+        />
+        <Route
+          path="/view-diet-plan"
+          element={isUser ? <ViewDietPlan /> : <NotFound />}
+        />
+        <Route
+          path="/view-workout-plan"
+          element={isUser ? <ViewWorkoutPlan /> : <NotFound />}
+        />
+        <Route
+          path="/exercise"
+          element={isUser ? <Exercise /> : <NotFound />}
+        />
+        <Route
+          path="/all-diet-plan-req"
+          element={isTrainer ? <AllDietPlanRequests /> : <NotFound />}
+        />
+        <Route
+          path="/create-diet-plan"
+          element={isTrainer ? <CreateDietPlan /> : <NotFound />}
+        />
+        <Route
+          path="/create-workout-plan"
+          element={isTrainer ? <CreateWorkoutPlan /> : <NotFound />}
+        />
+        <Route
+          path="/update-diet-plan"
+          element={isTrainer ? <UpdateDietPlan /> : <NotFound />}
+        />
+        <Route
+          path="/update-workout-plan"
+          element={isTrainer ? <UpdateWorkoutPlan /> : <NotFound />}
+        />
+        <Route
+          path="/workout-plan-format"
+          element={isTrainer ? <WorkoutPlanFormat /> : <NotFound />}
+        />
         <Route
           path="/all-workout-plan-req"
-          element={<AllWorkoutPlanRequests />}
+          element={isTrainer ? <AllWorkoutPlanRequests /> : <NotFound />}
         />
         <Route
           path="/diet-plan-update-req"
-          element={<DietPlanUpdateRequests />}
+          element={isTrainer ? <DietPlanUpdateRequests /> : <NotFound />}
         />
         <Route
           path="/workout-plan-update-req"
-          element={<WorkoutPlanUpdateRequests />}
+          element={isTrainer ? <WorkoutPlanUpdateRequests /> : <NotFound />}
         />
 
         <Route
           path="/view-diet-plan-details"
-          element={<ViewDietPlanDetails />}
+          element={isTrainer ? <ViewDietPlanDetails /> : <NotFound />}
         />
         <Route
           path="/view-workout-plan-details"
-          element={<ViewWorkoutPlanDetails />}
+          element={isTrainer ? <ViewWorkoutPlanDetails /> : <NotFound />}
         />
 
         <Route
