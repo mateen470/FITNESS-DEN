@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Typography, Box } from "@mui/material";
 import { NavLink, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
 const LoginForm = () => {
@@ -18,15 +20,27 @@ const LoginForm = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
-      const { data } = await axios.post(
+      const loginRequest = await axios.post(
         "login",
         { email, password },
         { withCredentials: true }
       );
-      axios.defaults.headers.common["Authorization"] = `Bearer ${data.data}`;
-      navigate("/user");
+      if (loginRequest.data && loginRequest.data.success) {
+        axios.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${loginRequest.data.data}`;
+        toast.success(loginRequest.data.message);
+        navigate("/user");
+      }
+      if (
+        loginRequest.response &&
+        loginRequest.response.data &&
+        loginRequest.response.data.message
+      ) {
+        toast.error(loginRequest.response.data.message);
+      }
     } catch (error) {
-      console.log(error.response.data.message);
+      console.log(error.message);
     }
   };
 

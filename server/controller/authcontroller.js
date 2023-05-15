@@ -51,7 +51,7 @@ const AuthControllerFunctions = {
       </div>
   `;
 
-        await sendEmail({
+        sendEmail({
           to: newUserData.email,
           subject: "Email Verification ",
           text: message,
@@ -107,13 +107,6 @@ const AuthControllerFunctions = {
           .json({ success: false, message: "PLEASE FILL IN ALL FIELDS!!" });
       }
 
-      if (!utilityFunctions.emailSyntaxChecker(email)) {
-        return await res.status(400).json({
-          success: false,
-          message: "INVALID EMAIL",
-        });
-      }
-
       const verifiedUser = await User.findOne({ email });
 
       if (!verifiedUser) {
@@ -157,13 +150,13 @@ const AuthControllerFunctions = {
 
       return await res.status(200).json({
         success: true,
-        message: "SIGNIN PROCESS SUCCESSFULL!!",
+        message: "WELCOME BACK!!",
         data: accessToken,
       });
     } catch (error) {
       return await res.status(500).json({
         success: false,
-        message: `SIGNIN PROCESS FAILED!!`,
+        message: `SIGNIN PROCESS FAILED!! ${error.message}`,
       });
     }
   },

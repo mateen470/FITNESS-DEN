@@ -24,7 +24,6 @@ const SignUpForm = () => {
         email,
         password,
       });
-
       if (registerRequest.data && registerRequest.data.success) {
         toast.success(registerRequest.data.message);
       }
@@ -36,7 +35,7 @@ const SignUpForm = () => {
         toast.error(registerRequest.response.data.message);
       }
     } catch (error) {
-      console.log(error.message);
+      console.log(error);
     }
   };
 
