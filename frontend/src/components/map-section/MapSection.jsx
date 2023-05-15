@@ -87,7 +87,7 @@ const MapSection = () => {
   const initMap = () => {
     try {
       const map = new window.google.maps.Map(mapRef.current, {
-        center: { lat: 37.7749, lng: -122.4194 },
+        center: { lat: 31.4027, lng: 74.2126 },
         zoom: 13,
       });
       const searchBox = new window.google.maps.places.SearchBox(
