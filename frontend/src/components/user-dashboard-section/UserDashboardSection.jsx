@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, NavLink } from "react-router-dom";
 import { Container, Box, Typography } from "@mui/material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AddCurrentUserId } from "../../context/CurrentUser";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -18,6 +18,10 @@ const UserDashboardSection = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
+
+  const { isAdmin, isUser, isTrainer } = useSelector(
+    (state) => state.CheckForUserType
+  );
 
   const LogOut = async () => {
     try {
@@ -46,21 +50,26 @@ const UserDashboardSection = () => {
         dispatch(AddCurrentUserId(getUser.data.data._doc._id));
         setName(getUser.data.data._doc.name);
         setEmail(getUser.data.data._doc.email);
+        console.log("here");
         if (getUser.data.data._doc.role === 1) {
+          console.log("here admin");
           dispatch(setIsAdmin(true));
           navigate("/admin");
         } else if (getUser.data.data._doc.role === 2) {
+          console.log("here trainer");
           dispatch(setIsTrainer(true));
           navigate("/trainer");
         } else {
+          console.log(isUser, "pehle");
           dispatch(setIsUser(true));
+          console.log(isUser, "bad");
         }
       } catch (error) {
         console.log(error);
       }
     };
     getData();
-  }, [navigate, dispatch]);
+  }, [navigate]);
   return (
     <Container
       sx={{
