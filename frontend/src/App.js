@@ -34,6 +34,9 @@ import ViewWorkoutPlanDetails from "./components/trainer-dashboard-section/ViewW
 import WorkoutPlanUpdateRequests from "./components/trainer-dashboard-section/WorkoutPlanUpdateRequests";
 import WorkoutPlanFormat from "./components/trainer-dashboard-section/WorkoutPlanFormat";
 import NotFound from "./components/404-not-found/NotFound";
+import AddBlog from "./components/blogs-section/AddBlog";
+import ViewBlog from "./components/blogs-section/ViewBlog";
+import UpdateBlog from "./components/blogs-section/UpdateBlog";
 
 const App = () => {
   const { isAdmin, isUser, isTrainer } = useSelector(
@@ -66,6 +69,9 @@ const App = () => {
         <Route path="/update-workout-plan" element={<UpdateWorkoutPlan />} />
         <Route path="/exercise" element={<Exercise />} />
         <Route path="/workout-plan-format" element={<WorkoutPlanFormat />} />
+        <Route path="/add-blog" element={<AddBlog />} />
+        <Route path="/view-blog/:id" element={<ViewBlog />} />
+        <Route path="/update-blog/:id" element={<UpdateBlog />} />
         <Route
           path="/all-workout-plan-req"
           element={<AllWorkoutPlanRequests />}
