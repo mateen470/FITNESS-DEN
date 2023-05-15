@@ -222,7 +222,6 @@ const AuthControllerFunctions = {
       await res.clearCookie("refreshToken", {
         httpOnly: true,
         secure: true,
-        sameSite: "None",
       });
       return await res.status(200).json({
         success: true,

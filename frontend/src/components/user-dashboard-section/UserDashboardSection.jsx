@@ -50,19 +50,14 @@ const UserDashboardSection = () => {
         dispatch(AddCurrentUserId(getUser.data.data._doc._id));
         setName(getUser.data.data._doc.name);
         setEmail(getUser.data.data._doc.email);
-        console.log("here");
         if (getUser.data.data._doc.role === 1) {
-          console.log("here admin");
           dispatch(setIsAdmin(true));
           navigate("/admin");
         } else if (getUser.data.data._doc.role === 2) {
-          console.log("here trainer");
           dispatch(setIsTrainer(true));
           navigate("/trainer");
         } else {
-          console.log(isUser, "pehle");
           dispatch(setIsUser(true));
-          console.log(isUser, "bad");
         }
       } catch (error) {
         console.log(error);
