@@ -39,6 +39,7 @@ import ViewBlog from "./components/blogs-section/ViewBlog";
 import UpdateBlog from "./components/blogs-section/UpdateBlog";
 import ViewBlogHomePage from "./components/blogs-home-section/ViewSingleBlogPage";
 import ShowAllBlogs from "./components/blogs-home-section/ShowAllBlogs";
+import ProtectedRoute from "./routes/ProtectedRoute";
 
 const App = () => {
   const { isAdmin, isUser, isTrainer } = useSelector(
@@ -64,6 +65,7 @@ const App = () => {
         <Route path="/view-blog-home/:id" element={<ViewBlogHomePage />} />
         <Route path="/show-all" element={<ShowAllBlogs />} />
         <Route path="/unauthorized" element={<NotFound />} />
+        <Route path="/route-check" element={<ProtectedRoute />} />
         <Route
           path="/fitness-den/reset-password/:accessTokenForgotPassword"
           element={<ResetPassword />}

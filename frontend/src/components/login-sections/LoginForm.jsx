@@ -30,7 +30,7 @@ const LoginForm = () => {
           "Authorization"
         ] = `Bearer ${loginRequest.data.data}`;
         toast.success(loginRequest.data.message);
-        navigate("/user");
+        navigate("/route-check");
       }
       if (
         loginRequest.response &&

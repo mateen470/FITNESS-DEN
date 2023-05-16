@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, NavLink } from "react-router-dom";
 import { Container, Box, Typography } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { AddCurrentUserId } from "../../context/CurrentUser";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -18,10 +18,6 @@ const UserDashboardSection = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
-
-  const { isAdmin, isUser, isTrainer } = useSelector(
-    (state) => state.CheckForUserType
-  );
 
   const LogOut = async () => {
     try {
@@ -64,7 +60,7 @@ const UserDashboardSection = () => {
       }
     };
     getData();
-  }, [navigate]);
+  }, []);
 
   return (
     <Container
