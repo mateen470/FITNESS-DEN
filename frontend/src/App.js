@@ -37,6 +37,8 @@ import NotFound from "./components/404-not-found/NotFound";
 import AddBlog from "./components/blogs-section/AddBlog";
 import ViewBlog from "./components/blogs-section/ViewBlog";
 import UpdateBlog from "./components/blogs-section/UpdateBlog";
+import ViewBlogHomePage from "./components/blogs-home-section/ViewSingleBlogPage";
+import ShowAllBlogs from "./components/blogs-home-section/ShowAllBlogs";
 
 const App = () => {
   const { isAdmin, isUser, isTrainer } = useSelector(
@@ -72,6 +74,8 @@ const App = () => {
         <Route path="/add-blog" element={<AddBlog />} />
         <Route path="/view-blog/:id" element={<ViewBlog />} />
         <Route path="/update-blog/:id" element={<UpdateBlog />} />
+        <Route path="/view-blog-home/:id" element={<ViewBlogHomePage />} />
+        <Route path="/show-all" element={<ShowAllBlogs />} />
         <Route
           path="/all-workout-plan-req"
           element={<AllWorkoutPlanRequests />}

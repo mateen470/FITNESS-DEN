@@ -20,7 +20,7 @@ const Footer = () => {
     },
     {
       name: "Blogs",
-      path: "/",
+      path: "/show-all",
     },
     {
       name: "Find Gym Nearby",

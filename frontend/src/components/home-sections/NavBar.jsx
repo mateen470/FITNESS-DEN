@@ -137,7 +137,7 @@ const NavBar = () => {
           </NavLink>
         </Box>
         <Box>
-          <NavLink>
+          <NavLink to={"/show-all"}>
             <Typography
               color={"white"}
               fontFamily={"Rubik, sans-serif"}

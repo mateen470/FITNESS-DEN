@@ -67,7 +67,7 @@ const cardsData = [
     `,
     cardImage: blogCard,
     sideImage: blogSide,
-    path: "/",
+    path: "/show-all",
   },
   {
     id: 5,

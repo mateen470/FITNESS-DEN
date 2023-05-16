@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   CardActions,
   CardMedia,
@@ -7,45 +7,69 @@ import {
   Container,
   Grid,
   Typography,
+  Box,
 } from "@mui/material";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import { NavLink } from "react-router-dom";
-import motivate from "../../assets/motivate.svg";
-import yoga from "../../assets/yoga.svg";
-import rest from "../../assets/rest.svg";
+import axios from "axios";
 const FeaturedBlogs = () => {
-  const blogsData = [
-    {
-      title: "5 Ways to Stay Motivated During Your Workouts",
-      desc: "Feeling unmotivated to exercise? In this article, we share five practical tips to help you stay motivated and focused on your fitness goals, including setting small achievable goals and finding a workout buddy. ",
-      image: motivate,
-    },
-    {
-      title: "The Benefits of Yoga for Stress Relief",
-      desc: "We explore the ways in which practicing yoga can help reduce stress and anxiety. From breathing techniques to meditation, we share all of the tips on how to use yoga to calm your mind and improve your mental health.",
-      image: yoga,
-    },
-    {
-      title: "Why Rest Days Are Important for Fitness",
-      desc: "Rest days are often overlooked, but they're a crucial part of any fitness routine. In this article, we explain why rest days are important for your body and mind, and share tips on how to incorporate them into your life.",
-      image: rest,
-    },
-  ];
+  const [allBlogs, setAllBlogs] = useState([]);
+  const [latestBlogs, setLatestBlogs] = useState([]);
+
+  const FetchBlogs = async () => {
+    await axios.get("blog/all-blogs").then((res) => {
+      setAllBlogs(res.data.data);
+      if (res.data.data.length > 2) {
+        setLatestBlogs(res.data.data.slice(-3));
+      } else {
+        setLatestBlogs(res.data.data);
+      }
+    });
+  };
+
+  useEffect(() => {
+    FetchBlogs();
+  }, []);
 
   return (
     <Container>
-      <Typography
-        color={"white"}
-        variant="h2"
-        textAlign={"center"}
-        mt={10}
-        mb={4}
-        sx={{ textShadow: "3px 0px 0px purple", fontWeight: 800 }}
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexDirection: "column",
+        }}
       >
-        Our Latest Blogs
-      </Typography>
+        <Typography
+          color={"white"}
+          variant="h2"
+          textAlign={"center"}
+          mt={10}
+          sx={{ textShadow: "3px 0px 0px purple", fontWeight: 800 }}
+        >
+          Our Latest Blogs
+        </Typography>
+        <Box my={3}>
+          <NavLink to={"/show-all"}>
+            <Typography
+              color={"white"}
+              fontFamily={"Comme, sans-serif"}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                fontSize: "2vw",
+                borderBottom: "3px solid white",
+              }}
+            >
+              View All Blogs
+              <KeyboardDoubleArrowRightIcon />
+            </Typography>
+          </NavLink>
+        </Box>
+      </Box>
       <Grid container spacing={2}>
-        {blogsData.map((cardData, index) => {
+        {latestBlogs.map((cardData, index) => {
           return (
             <Grid item xs={4} key={index}>
               <Card>
@@ -67,7 +91,7 @@ const FeaturedBlogs = () => {
                 </Typography>
                 <CardContent>
                   <Typography variant="h7" fontFamily={"Comme, sans-serif"}>
-                    {cardData.desc}
+                    {cardData.metaDescription}
                   </Typography>
                 </CardContent>
                 <CardActions
@@ -76,7 +100,7 @@ const FeaturedBlogs = () => {
                     mb: 2,
                   }}
                 >
-                  <NavLink to="/">
+                  <NavLink to={`/view-blog-home/${cardData._id}`}>
                     <Typography
                       sx={{
                         px: 2,
