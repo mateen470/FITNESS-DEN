@@ -65,6 +65,7 @@ const UserDashboardSection = () => {
     };
     getData();
   }, [navigate]);
+
   return (
     <Container
       sx={{

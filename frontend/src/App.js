@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { useSelector } from "react-redux";
 
@@ -44,6 +44,11 @@ const App = () => {
   const { isAdmin, isUser, isTrainer } = useSelector(
     (state) => state.CheckForUserType
   );
+  const checkRole = (allowedRoles) =>
+    (allowedRoles.includes("admin") && isAdmin) ||
+    (allowedRoles.includes("user") && isUser) ||
+    (allowedRoles.includes("trainer") && isTrainer);
+
   return (
     <>
       <ToastContainer position="top-center" />
@@ -52,51 +57,13 @@ const App = () => {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgot" element={<ForgotPassword />} />
-        <Route path="/user" element={<UserDashboardPage />} />
-        <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/trainer" element={<TrainerDashboard />} />
         <Route path="/map" element={<Map />} />
         <Route path="/nutrition-facts" element={<NutritionFactsPage />} />
         <Route path="/diet-plans" element={<DietPlanPage />} />
         <Route path="/workout-plans" element={<WorkoutPlanPage />} />
-        <Route path="/diet-plan-form" element={<DietPlanFormPage />} />
-        <Route path="/workout-plan-form" element={<WorkoutPlanFormPage />} />
-        <Route path="/payment" element={<PaymentPage />} />
-        <Route path="/view-diet-plan" element={<ViewDietPlan />} />
-        <Route path="/view-workout-plan" element={<ViewWorkoutPlan />} />
-        <Route path="/all-diet-plan-req" element={<AllDietPlanRequests />} />
-        <Route path="/create-diet-plan" element={<CreateDietPlan />} />
-        <Route path="/create-workout-plan" element={<CreateWorkoutPlan />} />
-        <Route path="/update-diet-plan" element={<UpdateDietPlan />} />
-        <Route path="/update-workout-plan" element={<UpdateWorkoutPlan />} />
-        <Route path="/exercise" element={<Exercise />} />
-        <Route path="/workout-plan-format" element={<WorkoutPlanFormat />} />
-        <Route path="/add-blog" element={<AddBlog />} />
-        <Route path="/view-blog/:id" element={<ViewBlog />} />
-        <Route path="/update-blog/:id" element={<UpdateBlog />} />
         <Route path="/view-blog-home/:id" element={<ViewBlogHomePage />} />
         <Route path="/show-all" element={<ShowAllBlogs />} />
-        <Route
-          path="/all-workout-plan-req"
-          element={<AllWorkoutPlanRequests />}
-        />
-        <Route
-          path="/diet-plan-update-req"
-          element={<DietPlanUpdateRequests />}
-        />
-        <Route
-          path="/workout-plan-update-req"
-          element={<WorkoutPlanUpdateRequests />}
-        />
-
-        <Route
-          path="/view-diet-plan-details"
-          element={<ViewDietPlanDetails />}
-        />
-        <Route
-          path="/view-workout-plan-details"
-          element={<ViewWorkoutPlanDetails />}
-        />
+        <Route path="/unauthorized" element={<NotFound />} />
         <Route
           path="/fitness-den/reset-password/:accessTokenForgotPassword"
           element={<ResetPassword />}
@@ -104,6 +71,228 @@ const App = () => {
         <Route
           path="/fitness-den/activation/:activationToken"
           element={<ActivationPage />}
+        />
+        <Route
+          path="/add-blog"
+          element={
+            checkRole(["admin"]) ? <AddBlog /> : <Navigate to="/unauthorized" />
+          }
+        />
+        <Route
+          path="/view-blog/:id"
+          element={
+            checkRole(["admin"]) ? (
+              <ViewBlog />
+            ) : (
+              <Navigate to="/unauthorized" />
+            )
+          }
+        />
+        <Route
+          path="/update-blog/:id"
+          element={
+            checkRole(["admin"]) ? (
+              <UpdateBlog />
+            ) : (
+              <Navigate to="/unauthorized" />
+            )
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            checkRole(["admin"]) ? (
+              <AdminDashboard />
+            ) : (
+              <Navigate to="/unauthorized" />
+            )
+          }
+        />
+        <Route
+          path="/user"
+          element={
+            checkRole(["user"]) ? (
+              <UserDashboardPage />
+            ) : (
+              <Navigate to="/unauthorized" />
+            )
+          }
+        />
+        <Route
+          path="/payment"
+          element={
+            checkRole(["user"]) ? (
+              <PaymentPage />
+            ) : (
+              <Navigate to="/unauthorized" />
+            )
+          }
+        />
+        <Route
+          path="/view-diet-plan"
+          element={
+            checkRole(["user"]) ? (
+              <ViewDietPlan />
+            ) : (
+              <Navigate to="/unauthorized" />
+            )
+          }
+        />
+        <Route
+          path="/view-workout-plan"
+          element={
+            checkRole(["user"]) ? (
+              <ViewWorkoutPlan />
+            ) : (
+              <Navigate to="/unauthorized" />
+            )
+          }
+        />
+        <Route
+          path="/diet-plan-form"
+          element={
+            checkRole(["user"]) ? (
+              <DietPlanFormPage />
+            ) : (
+              <Navigate to="/unauthorized" />
+            )
+          }
+        />
+        <Route
+          path="/workout-plan-form"
+          element={
+            checkRole(["user"]) ? (
+              <WorkoutPlanFormPage />
+            ) : (
+              <Navigate to="/unauthorized" />
+            )
+          }
+        />
+        <Route
+          path="/exercise"
+          element={
+            checkRole(["user"]) ? <Exercise /> : <Navigate to="/unauthorized" />
+          }
+        />
+        <Route
+          path="/trainer"
+          element={
+            checkRole(["trainer"]) ? (
+              <TrainerDashboard />
+            ) : (
+              <Navigate to="/unauthorized" />
+            )
+          }
+        />
+        <Route
+          path="/all-diet-plan-req"
+          element={
+            checkRole(["trainer"]) ? (
+              <AllDietPlanRequests />
+            ) : (
+              <Navigate to="/unauthorized" />
+            )
+          }
+        />
+        <Route
+          path="/create-diet-plan"
+          element={
+            checkRole(["trainer"]) ? (
+              <CreateDietPlan />
+            ) : (
+              <Navigate to="/unauthorized" />
+            )
+          }
+        />
+        <Route
+          path="/create-workout-plan"
+          element={
+            checkRole(["trainer"]) ? (
+              <CreateWorkoutPlan />
+            ) : (
+              <Navigate to="/unauthorized" />
+            )
+          }
+        />
+        <Route
+          path="/update-diet-plan"
+          element={
+            checkRole(["trainer"]) ? (
+              <UpdateDietPlan />
+            ) : (
+              <Navigate to="/unauthorized" />
+            )
+          }
+        />
+        <Route
+          path="/update-workout-plan"
+          element={
+            checkRole(["trainer"]) ? (
+              <UpdateWorkoutPlan />
+            ) : (
+              <Navigate to="/unauthorized" />
+            )
+          }
+        />
+        <Route
+          path="/workout-plan-format"
+          element={
+            checkRole(["trainer"]) ? (
+              <WorkoutPlanFormat />
+            ) : (
+              <Navigate to="/unauthorized" />
+            )
+          }
+        />
+        <Route
+          path="/all-workout-plan-req"
+          element={
+            checkRole(["trainer"]) ? (
+              <AllWorkoutPlanRequests />
+            ) : (
+              <Navigate to="/unauthorized" />
+            )
+          }
+        />
+        <Route
+          path="/diet-plan-update-req"
+          element={
+            checkRole(["trainer"]) ? (
+              <DietPlanUpdateRequests />
+            ) : (
+              <Navigate to="/unauthorized" />
+            )
+          }
+        />
+        <Route
+          path="/workout-plan-update-req"
+          element={
+            checkRole(["trainer"]) ? (
+              <WorkoutPlanUpdateRequests />
+            ) : (
+              <Navigate to="/unauthorized" />
+            )
+          }
+        />
+        <Route
+          path="/view-diet-plan-details"
+          element={
+            checkRole(["trainer"]) ? (
+              <ViewDietPlanDetails />
+            ) : (
+              <Navigate to="/unauthorized" />
+            )
+          }
+        />
+        <Route
+          path="/view-workout-plan-details"
+          element={
+            checkRole(["trainer"]) ? (
+              <ViewWorkoutPlanDetails />
+            ) : (
+              <Navigate to="/unauthorized" />
+            )
+          }
         />
       </Routes>
     </>
