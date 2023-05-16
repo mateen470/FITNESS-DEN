@@ -38,11 +38,13 @@ const ViewBlog = () => {
           </Typography>
         </NavLink>
       </Box>
-      <Box>
-        {/* {blog.image}
-        <img src={blog.image} style={{ width: "50vh", borderRadius: "10px" }} /> */}
+      <Box sx={{ my: 2 }}>
+        <img
+          src={blog.image}
+          style={{ minWidth: "100%", height: "50vh", borderRadius: "10px" }}
+          alt="blog"
+        />
       </Box>
-
       <Typography
         fontSize={"3vw"}
         color={"white"}

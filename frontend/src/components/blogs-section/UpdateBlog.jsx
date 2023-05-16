@@ -23,6 +23,21 @@ const UpdateBlog = () => {
     setBlogData({ ...blogData, [name]: value });
   };
 
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    getBase64(file).then((encodedFile) => {
+      setBlogData({ ...blogData, image: encodedFile });
+    });
+  };
+
+  const getBase64 = (file) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+
   useEffect(() => {
     const fetchBlog = async () => {
       const getBlog = await axios.get(`blog/single-blog/${id}`);
@@ -148,14 +163,13 @@ const UpdateBlog = () => {
         <TextField
           placeholder="Add Image"
           name={"image"}
-          value={blogData.image}
-          onChange={handleInputChange}
+          type="file"
+          onChange={handleFileChange}
           sx={{
             background: "none",
             color: "white",
             borderBottom: "1px solid white",
             "& .MuiOutlinedInput-root": {
-              fontSize: "1.2rem",
               "& fieldset": {
                 borderWidth: "0",
               },

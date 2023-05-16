@@ -21,6 +21,19 @@ const AddBlog = () => {
     const { name, value } = event.target;
     setBlogData({ ...blogData, [name]: value });
   };
+  const handleFileChange = async (event) => {
+    const file = event.target.files[0];
+    const base64 = await toBase64(file);
+    setBlogData({ ...blogData, image: base64 });
+  };
+
+  const toBase64 = (file) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
 
   const addBlog = async () => {
     try {
@@ -133,14 +146,13 @@ const AddBlog = () => {
         <TextField
           placeholder="Add Image"
           name={"image"}
-          value={blogData.image}
-          onChange={handleInputChange}
+          type="file"
+          onChange={handleFileChange}
           sx={{
             background: "none",
             color: "white",
             borderBottom: "1px solid white",
             "& .MuiOutlinedInput-root": {
-              fontSize: "1.2rem",
               "& fieldset": {
                 borderWidth: "0",
               },
