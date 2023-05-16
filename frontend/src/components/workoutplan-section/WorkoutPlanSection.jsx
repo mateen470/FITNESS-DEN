@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   Container,
   Typography,
@@ -12,7 +14,7 @@ import {
 } from "@mui/material";
 import LaunchIcon from "@mui/icons-material/Launch";
 import { SetSelectedPlanToBuy } from "../../context/SelectedPlan";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import resistance from "../../assets/resistance.svg";
 import cardio from "../../assets/cardio.svg";
 import core from "../../assets/core.svg";
@@ -22,6 +24,7 @@ import workoutbg from "../../assets/workoutbg.svg";
 
 const WorkoutPlanSection = () => {
   const dispatch = useDispatch();
+  const { isUser } = useSelector((state) => state.CheckForUserType);
 
   const AllPlans = [
     {
@@ -85,6 +88,9 @@ const WorkoutPlanSection = () => {
 
     const handleClose = () => {
       setIsExpanded(false);
+    };
+    const notAccessible = () => {
+      toast.error("LOGIN FIRST!!");
     };
 
     return (
@@ -181,43 +187,85 @@ const WorkoutPlanSection = () => {
             >
               {data.DetailedContent}
             </Typography>
-            <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
-              <Box
-                sx={{
-                  border: "2px solid black",
-                  p: 1,
-                  px: 2,
-                  mt: 3,
-                  height: 40,
-                  width: 100,
-                }}
-                onClick={() => dispatch(SetSelectedPlanToBuy(AllPlans[index]))}
-              >
-                <NavLink to="/workout-plan-form">
-                  <Typography
-                    color={"white"}
-                    fontFamily={"Rubik, sans-serif"}
-                    fontWeight={600}
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      background: " black ",
-                      height: 40,
-                      width: 110,
-                      ml: -4.5,
-                      textAlign: "center",
-                      transition: "scale 0.3s ease-in-out",
-                      "&:hover": {
-                        scale: "0.95 !important",
-                      },
-                    }}
-                  >
-                    Buy Plan
-                  </Typography>
-                </NavLink>
+            {isUser ? (
+              <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
+                <Box
+                  sx={{
+                    border: "2px solid black",
+                    p: 1,
+                    px: 2,
+                    mt: 3,
+                    height: 40,
+                    width: 100,
+                  }}
+                  onClick={() =>
+                    dispatch(SetSelectedPlanToBuy(AllPlans[index]))
+                  }
+                >
+                  <NavLink to="/workout-plan-form">
+                    <Typography
+                      color={"white"}
+                      fontFamily={"Rubik, sans-serif"}
+                      fontWeight={600}
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        background: " black ",
+                        height: 40,
+                        width: 110,
+                        ml: -4.5,
+                        textAlign: "center",
+                        transition: "scale 0.3s ease-in-out",
+                        "&:hover": {
+                          scale: "0.95 !important",
+                        },
+                      }}
+                    >
+                      Buy Plan
+                    </Typography>
+                  </NavLink>
+                </Box>
               </Box>
-            </Box>
+            ) : (
+              <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
+                <Box
+                  sx={{
+                    border: "2px solid black",
+                    p: 1,
+                    px: 2,
+                    mt: 3,
+                    height: 40,
+                    width: 100,
+                  }}
+                  onClick={notAccessible}
+                >
+                  <NavLink>
+                    <Typography
+                      color={"white"}
+                      fontFamily={"Rubik, sans-serif"}
+                      fontWeight={600}
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        background: " black ",
+                        height: 40,
+                        width: 110,
+                        ml: -4.5,
+                        textAlign: "center",
+                        transition: "scale 0.3s ease-in-out",
+                        "&:hover": {
+                          scale: "0.95 !important",
+                        },
+                      }}
+                    >
+                      Buy Plan
+                    </Typography>
+                  </NavLink>
+                </Box>
+              </Box>
+            )}
           </Paper>
         </Modal>
       </Box>

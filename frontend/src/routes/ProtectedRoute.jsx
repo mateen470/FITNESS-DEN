@@ -19,11 +19,11 @@ const ProtectedRoute = () => {
         const getUser = await axios.get("auth-user");
         dispatch(AddCurrentUserId(getUser.data.data._doc._id));
         if (getUser.data.data._doc.role === 1) {
-          dispatch(setIsAdmin(true));
           navigate("/admin");
+          dispatch(setIsAdmin(true));
         } else if (getUser.data.data._doc.role === 2) {
-          dispatch(setIsTrainer(true));
           navigate("/trainer");
+          dispatch(setIsTrainer(true));
         } else {
           navigate("/user");
           dispatch(setIsUser(true));

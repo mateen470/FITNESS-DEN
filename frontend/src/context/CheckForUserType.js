@@ -4,6 +4,7 @@ const initialState = {
   isAdmin: false,
   isTrainer: false,
   isUser: false,
+  Logout: false,
 };
 
 export const CheckForUserTypeSlice = createSlice({
@@ -19,10 +20,13 @@ export const CheckForUserTypeSlice = createSlice({
     setIsUser: (state, action) => {
       state.isUser = action.payload;
     },
+    setLogout: (state, action) => {
+      state.Logout = action.payload;
+    },
   },
 });
 
-export const { setIsAdmin, setIsTrainer, setIsUser } =
+export const { setIsAdmin, setIsTrainer, setIsUser, setLogout } =
   CheckForUserTypeSlice.actions;
 
 export default CheckForUserTypeSlice.reducer;

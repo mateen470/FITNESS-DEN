@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import LogoutIcon from "@mui/icons-material/Logout";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { setIsAdmin } from "../../context/CheckForUserType";
+import { setLogout } from "../../context/CheckForUserType";
 import { useDispatch } from "react-redux";
 
 const AdminDashboardSection = () => {
@@ -18,7 +18,7 @@ const AdminDashboardSection = () => {
       const logOutResponse = await axios.post("logout");
       if (logOutResponse.data && logOutResponse.data.success) {
         toast.success(logOutResponse.data.message);
-        dispatch(setIsAdmin(false));
+        dispatch(setLogout(true));
         navigate("/");
       }
       if (

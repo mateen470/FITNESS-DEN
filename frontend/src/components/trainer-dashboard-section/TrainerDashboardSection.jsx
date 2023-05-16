@@ -16,7 +16,7 @@ import {
   setWorkoutPlanRequestsLength,
   setWorkoutPlanUpdateRequestsLength,
 } from "../../context/CheckForNewPlanRequests";
-import { setIsTrainer } from "../../context/CheckForUserType";
+import { setLogout } from "../../context/CheckForUserType";
 
 const TrainerDashboardSection = () => {
   const dispatch = useDispatch();
@@ -78,7 +78,7 @@ const TrainerDashboardSection = () => {
       const logOutResponse = await axios.post("logout");
       if (logOutResponse.data && logOutResponse.data.success) {
         toast.success(logOutResponse.data.message);
-        dispatch(setIsTrainer(false));
+        dispatch(setLogout(true));
         navigate("/");
       }
       if (
@@ -124,7 +124,7 @@ const TrainerDashboardSection = () => {
         setDietPlanUpdateRequestsLength(AllDietPlanUpdateRequestsFromDB.length)
       );
     }
-  }, [temp,dispatch]);
+  }, [temp, dispatch]);
 
   useEffect(() => {
     setInterval(() => setTemp((prevTemp) => prevTemp + 1), 5000);
@@ -151,7 +151,7 @@ const TrainerDashboardSection = () => {
             cursor: "pointer",
           }}
         >
-               <LogoutIcon /> LogOut
+          <LogoutIcon /> LogOut
         </Typography>
       </Box>
       <Typography

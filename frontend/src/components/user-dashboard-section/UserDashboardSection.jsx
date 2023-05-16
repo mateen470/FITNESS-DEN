@@ -11,6 +11,7 @@ import {
   setIsAdmin,
   setIsTrainer,
   setIsUser,
+  setLogout,
 } from "../../context/CheckForUserType";
 
 const UserDashboardSection = () => {
@@ -24,7 +25,7 @@ const UserDashboardSection = () => {
       const logOutResponse = await axios.post("logout");
       if (logOutResponse.data && logOutResponse.data.success) {
         toast.success(logOutResponse.data.message);
-        dispatch(setIsUser(false));
+        dispatch(setLogout(true));
         navigate("/");
       }
       if (
@@ -46,6 +47,7 @@ const UserDashboardSection = () => {
         dispatch(AddCurrentUserId(getUser.data.data._doc._id));
         setName(getUser.data.data._doc.name);
         setEmail(getUser.data.data._doc.email);
+        dispatch(setLogout(false));
         if (getUser.data.data._doc.role === 1) {
           dispatch(setIsAdmin(true));
           navigate("/admin");

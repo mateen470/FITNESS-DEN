@@ -79,7 +79,7 @@ const Exercise = () => {
           >
             Number of Repititions: {i.Reps}
           </Typography>
-          <NavLink>
+          <NavLink target="_blank" to={i.DemoLink}>
             <Typography
               fontSize={"1.4rem"}
               color={"white"}
