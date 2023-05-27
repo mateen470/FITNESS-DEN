@@ -62,11 +62,12 @@ const ShowAllBlogs = () => {
           {allBlogs.map((cardData, index) => {
             return (
               <Grid item xs={4} key={index}>
-                <Card>
+                <Card sx={{ height: "33rem", position: "relative" }}>
                   <CardMedia
                     component="img"
                     alt="card image"
-                    height="200"
+                    height="250"
+                    sx={{ objectFit: "cover" }}
                     image={cardData.image}
                   />
                   <Typography
@@ -86,8 +87,9 @@ const ShowAllBlogs = () => {
                   </CardContent>
                   <CardActions
                     sx={{
-                      ml: 0.5,
-                      mb: 2,
+                      position: "absolute",
+                      bottom: 5,
+                      left: 5,
                     }}
                   >
                     <NavLink to={`/view-blog-home/${cardData._id}`}>

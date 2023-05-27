@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useParams } from "react-router-dom";
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import Footer from "../home-sections/Footer";
 import axios from "axios";
+import FeaturedBlogs from "./FeaturedBlogs";
 
 const ViewSingleBlogPage = () => {
   const { id } = useParams();
@@ -20,73 +21,93 @@ const ViewSingleBlogPage = () => {
 
   return (
     <>
-      <Container
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "column",
-          pt: 2,
-          mb: 5,
-        }}
-      >
-        <Box sx={{ position: "absolute", top: 0, left: 5 }}>
-          <NavLink to={"/show-all"}>
+      <Grid container px={3} mt={3}>
+        <Grid item xs={8}>
+          <Box
+            sx={{
+              background: "white",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "column",
+              my: 5,
+              borderRadius: 2,
+            }}
+          >
+            <Box sx={{ position: "absolute", top: 0, left: 5 }}>
+              <NavLink to={"/show-all"}>
+                <Typography
+                  color={"white"}
+                  fontFamily={"Comme, sans-serif"}
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    fontSize: "1.7vw",
+                  }}
+                >
+                  <KeyboardDoubleArrowLeftIcon /> Back
+                </Typography>
+              </NavLink>
+            </Box>
             <Typography
-              color={"white"}
+              fontSize={"3.2vw"}
+              color={"black"}
+              fontWeight={800}
+              textAlign={"left"}
               fontFamily={"Comme, sans-serif"}
-              sx={{ display: "flex", alignItems: "center", fontSize: "1.7vw" }}
+              my={1}
+              px={3}
             >
-              <KeyboardDoubleArrowLeftIcon /> Back
+              {blog.title}
             </Typography>
-          </NavLink>
-        </Box>
-        <Box sx={{ my: 2 }}>
-          <img
-            src={blog.image}
-            style={{ minWidth: "100%", height: "50vh", borderRadius: "10px" }}
-            alt="blog"
-          />
-        </Box>
-        <Typography
-          fontSize={"3vw"}
-          color={"white"}
-          fontWeight={800}
-          textAlign={"center"}
-          fontFamily={"Comme, sans-serif"}
-          my={1}
-        >
-          {blog.title}
-        </Typography>
-        <Typography
-          fontSize={"2.5vw"}
-          color={"white"}
-          fontWeight={800}
-          textAlign={"left"}
-          fontFamily={"Comme, sans-serif"}
-          my={1}
-          width={"150vh"}
-        >
-          {blog.metaDescription}
-        </Typography>
+            <Box>
+              <img
+                src={blog.image}
+                style={{
+                  width: "60vw",
+                  height: "35vw",
+                  objectFit: "fill",
+                  borderRadius: "5px",
+                }}
+                alt="blog"
+              />
+            </Box>
+            <Typography
+              fontSize={"2.5vw"}
+              color={"black"}
+              fontWeight={800}
+              textAlign={"left"}
+              fontFamily={"Comme, sans-serif"}
+              my={1}
+              px={2}
+            >
+              {blog.metaDescription}
+            </Typography>
 
-        <Typography
-          fontSize={"1.9vw"}
-          color={"white"}
-          textAlign={"left"}
-          fontFamily={"Comme, sans-serif"}
-          my={1}
-          sx={{
-            wordWrap: "break-word",
-            overflowWrap: "break-word",
-            whiteSpace: "normal",
-            width: "150vh",
-            letterSpacing: "2px",
-          }}
-        >
-          {blog.content}
-        </Typography>
-      </Container>
+            <Typography
+              fontSize={"1.9vw"}
+              color={"black"}
+              textAlign={"left"}
+              fontFamily={"Comme, sans-serif"}
+              my={1}
+              px={2}
+            >
+              {blog.content &&
+                blog.content.split("\n\n").map((paragraph, index) => (
+                  <React.Fragment key={index}>
+                    {paragraph}
+                    <br />
+                    <br />
+                  </React.Fragment>
+                ))}
+            </Typography>
+          </Box>
+        </Grid>
+        <Grid item xs={4}>
+          <FeaturedBlogs id={id} />
+        </Grid>
+      </Grid>
+
       <Footer />
     </>
   );
