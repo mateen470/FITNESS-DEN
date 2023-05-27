@@ -7,6 +7,7 @@ const workoutPlanRouter = require("./router/workoutroutes");
 const dietPlanRouter = require("./router/dietroutes");
 const paymentRouter = require("./router/paymentroute");
 const blogRouter = require("./router/blogrouter");
+const productRouter = require("./router/productrouter");
 
 require("./database/connection");
 
@@ -35,6 +36,7 @@ app.use("/fitness-den/workout", workoutPlanRouter);
 app.use("/fitness-den/diet", dietPlanRouter);
 app.use("/fitness-den/payment", paymentRouter);
 app.use("/fitness-den/blog", blogRouter);
+app.use("/fitness-den/product", productRouter);
 
 app.get("/", (req, res) => {
   res.json("SERVER STARTED");
