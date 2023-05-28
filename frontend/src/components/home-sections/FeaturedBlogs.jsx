@@ -10,6 +10,8 @@ import {
   Box,
 } from "@mui/material";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 const FeaturedBlogs = () => {
@@ -116,6 +118,39 @@ const FeaturedBlogs = () => {
                       <KeyboardDoubleArrowRightIcon />
                     </Typography>
                   </NavLink>
+                </CardActions>
+                <CardActions
+                  sx={{
+                    position: "absolute",
+                    bottom: 5,
+                    right: 5,
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 2,
+                  }}
+                >
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
+                    <Typography
+                      fontSize={"1.5vw"}
+                      color={"black"}
+                      fontWeight={800}
+                      fontFamily={"Comme, sans-serif"}
+                    >
+                      {cardData.numberOfLikes}
+                    </Typography>
+                    <ThumbUpIcon sx={{ fontSize: "1.4rem" }} />
+                  </Box>
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
+                    <Typography
+                      fontSize={"1.5vw"}
+                      color={"black"}
+                      fontWeight={800}
+                      fontFamily={"Comme, sans-serif"}
+                    >
+                      {cardData.numberOfDislikes}
+                    </Typography>
+                    <ThumbDownAltIcon />
+                  </Box>
                 </CardActions>
               </Card>
             </Grid>

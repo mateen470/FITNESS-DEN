@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -19,7 +19,6 @@ const Comments = ({ id }) => {
       });
 
       if (postCommentResponse.data && postCommentResponse.data.success) {
-        toast.success(postCommentResponse.data.message);
         setComment("");
       }
 
@@ -29,6 +28,7 @@ const Comments = ({ id }) => {
         postCommentResponse.response.data.message
       ) {
         toast.error(postCommentResponse.response.data.message);
+        setComment("");
       }
     } catch (error) {
       console.log(error.message);

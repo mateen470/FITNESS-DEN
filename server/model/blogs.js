@@ -11,6 +11,24 @@ const blogsSchema = mongoose.Schema({
   title: String,
   metaDescription: String,
   content: String,
+  likes: [
+    {
+      IDofCurrentUser: String,
+    },
+  ],
+  dislikes: [
+    {
+      IDofCurrentUser: String,
+    },
+  ],
+  numberOfLikes: {
+    type: Number,
+    default: 0,
+  },
+  numberOfDislikes: {
+    type: Number,
+    default: 0,
+  },
   comments: [commentSchema],
 });
 

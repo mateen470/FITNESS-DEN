@@ -152,6 +152,108 @@ const BlogsControllerFunction = {
       });
     }
   },
+  LikeBlog: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { userId } = req.body;
+
+      const blog = await Blog.findById(id);
+      if (!blog) {
+        return res.status(404).json({
+          success: false,
+          message: "BLOG NOT FOUND!!",
+        });
+      }
+
+      const existingLike = blog.likes.find(
+        (like) => like.IDofCurrentUser === userId
+      );
+      const existingDislike = blog.dislikes.find(
+        (dislike) => dislike.IDofCurrentUser === userId
+      );
+
+      if (existingLike) {
+        return res.status(400).json({
+          success: false,
+          message: "YOU HAVE ALREADY LIKED THIS BLOG!!",
+        });
+      }
+
+      if (existingDislike) {
+        blog.dislikes = blog.dislikes.filter(
+          (dislike) => dislike.IDofCurrentUser !== userId
+        );
+        blog.numberOfDislikes = Math.max(blog.numberOfDislikes - 1, 0);
+      }
+
+      blog.likes.push({ IDofCurrentUser: userId });
+      blog.numberOfLikes++;
+
+      await blog.save();
+
+      return res.status(200).json({
+        success: true,
+        message: "BLOG LIKED SUCCESSFULLY!!",
+        data: blog.numberOfLikes,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: "CAN'T LIKE BLOG!!",
+      });
+    }
+  },
+  DislikeBlog: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { userId } = req.body;
+
+      const blog = await Blog.findById(id);
+      if (!blog) {
+        return res.status(404).json({
+          success: false,
+          message: "BLOG NOT FOUND!!",
+        });
+      }
+
+      const existingDislike = blog.dislikes.find(
+        (dislike) => dislike.IDofCurrentUser === userId
+      );
+      const existingLike = blog.likes.find(
+        (like) => like.IDofCurrentUser === userId
+      );
+
+      if (existingDislike) {
+        return res.status(400).json({
+          success: false,
+          message: "YOU HAVE ALREADY DISLIKED THIS BLOG!!",
+        });
+      }
+
+      if (existingLike) {
+        blog.likes = blog.likes.filter(
+          (like) => like.IDofCurrentUser !== userId
+        );
+        blog.numberOfLikes = Math.max(blog.numberOfLikes - 1, 0);
+      }
+
+      blog.dislikes.push({ IDofCurrentUser: userId });
+      blog.numberOfDislikes++;
+
+      await blog.save();
+
+      return res.status(200).json({
+        success: true,
+        message: "BLOG DISLIKED SUCCESSFULLY!!",
+        data: blog.numberOfDislikes,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: "CAN'T DISLIKE BLOG!!",
+      });
+    }
+  },
 };
 
 module.exports = BlogsControllerFunction;
