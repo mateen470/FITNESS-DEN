@@ -5,6 +5,8 @@ import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrow
 import Footer from "../home-sections/Footer";
 import axios from "axios";
 import FeaturedBlogs from "./FeaturedBlogs";
+import userSmoke from "../../assets/user-smoke.svg";
+import Comments from "./Comments";
 
 const ViewSingleBlogPage = () => {
   const { id } = useParams();
@@ -21,7 +23,15 @@ const ViewSingleBlogPage = () => {
 
   return (
     <>
-      <Grid container px={3} mt={3}>
+      <Grid
+        container
+        p={3}
+        sx={{
+          backgroundImage: `url(${userSmoke})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
         <Grid item xs={8}>
           <Box
             sx={{
@@ -102,6 +112,44 @@ const ViewSingleBlogPage = () => {
                 ))}
             </Typography>
           </Box>
+          <Box mt={3}>
+            <Comments id={id} />
+          </Box>
+          {blog.comments && blog.comments.length > 0 && (
+            <Box sx={{ background: "white", borderRadius: 2, p: 3, my: 3 }}>
+              <Typography
+                fontSize={"3vw"}
+                color={"black"}
+                fontWeight={800}
+                textAlign={"left"}
+                fontFamily={"Comme, sans-serif"}
+                mb={2}
+              >
+                Comments
+              </Typography>
+              {blog.comments.map((blogComments, index) => (
+                <Box mb={3} key={index}>
+                  <Typography
+                    fontSize={"1rem"}
+                    color={"#696969"}
+                    fontWeight={800}
+                    textAlign={"left"}
+                    fontFamily={"Comme, sans-serif"}
+                  >
+                    {blogComments.nameOfUser}
+                  </Typography>
+                  <Typography
+                    fontSize={"1rem"}
+                    color={"black"}
+                    textAlign={"left"}
+                    fontFamily={"Comme, sans-serif"}
+                  >
+                    {blogComments.comment}
+                  </Typography>
+                </Box>
+              ))}
+            </Box>
+          )}
         </Grid>
         <Grid item xs={4}>
           <FeaturedBlogs id={id} />

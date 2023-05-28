@@ -1,4 +1,5 @@
 const Blog = require("../model/blogs");
+const User = require("../model/auth-schema");
 
 const BlogsControllerFunction = {
   Create: async (req, res) => {
@@ -98,6 +99,56 @@ const BlogsControllerFunction = {
       return await res.status(500).json({
         success: false,
         message: "CAN'T DELETE BLOG!!",
+      });
+    }
+  },
+  Comment: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { userId, comment } = req.body;
+
+      const getUserName = await User.findOne({ _id: userId });
+      const userName = getUserName.name;
+
+      if (!comment) {
+        return await res
+          .status(400)
+          .json({ success: false, message: "PLEASE WRITE A COMMENT FIRST!!" });
+      }
+
+      const blog = await Blog.findById(id);
+      if (!blog) {
+        return res.status(404).json({
+          success: false,
+          message: "BLOG NOT FOUND!!",
+        });
+      }
+      const existingComment = blog.comments.find(
+        (blogComment) => blogComment.IDofCurrentUser === userId
+      );
+      if (existingComment) {
+        return res.status(400).json({
+          success: false,
+          message: "YOU HAVE ALREADY COMMENTED ON THIS BLOG!!",
+        });
+      }
+      const newComment = {
+        IDofCurrentUser: userId,
+        nameOfUser: userName,
+        comment,
+      };
+      blog.comments.push(newComment);
+      await blog.save();
+
+      return res.status(200).json({
+        success: true,
+        message: "COMMENT ADDED SUCCESSFULLY!!",
+        data: newComment,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: "CAN'T ADD COMMENT!!",
       });
     }
   },
