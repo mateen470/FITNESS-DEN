@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import StatsForAdmin from "../stats-for-admin/StatsForAdmin";
 import AdminBlogsView from "../blogs-section/AdminBlogsView";
+import AdminProductsView from "../e-com/e-com-admin/AdminProductView";
 import { Box, Container, Typography } from "@mui/material";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -33,7 +34,7 @@ const AdminDashboardSection = () => {
     }
   };
 
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState(0);
   return (
     <Container
       sx={{
@@ -78,32 +79,44 @@ const AdminDashboardSection = () => {
       >
         <Typography
           fontSize={"5vh"}
-          color={!active ? "white" : "gray"}
-          borderBottom={!active ? "2px solid white" : "none"}
+          color={active === 0 ? "white" : "gray"}
+          borderBottom={active === 0 ? "2px solid white" : "none"}
           fontWeight={800}
           textAlign={"center"}
           fontFamily={"Comme, sans-serif"}
           sx={{ cursor: "pointer" }}
-          onClick={() => setActive(false)}
+          onClick={() => setActive(0)}
         >
           Stats
         </Typography>
         <Typography
           fontSize={"5vh"}
-          color={active ? "white" : "gray"}
-          borderBottom={active ? "2px solid white" : "none"}
+          color={active === 1 ? "white" : "gray"}
+          borderBottom={active === 1 ? "2px solid white" : "none"}
           fontWeight={800}
           textAlign={"center"}
           fontFamily={"Comme, sans-serif"}
           sx={{ cursor: "pointer" }}
-          onClick={() => setActive(true)}
+          onClick={() => setActive(1)}
         >
           Blogs
+        </Typography>
+        <Typography
+          fontSize={"5vh"}
+          color={active === 2 ? "white" : "gray"}
+          borderBottom={active === 2 ? "2px solid white" : "none"}
+          fontWeight={800}
+          textAlign={"center"}
+          fontFamily={"Comme, sans-serif"}
+          sx={{ cursor: "pointer" }}
+          onClick={() => setActive(2)}
+        >
+          Products
         </Typography>
       </Box>
       <Box
         sx={{
-          display: !active ? "flex" : "none",
+          display: active === 0 ? "flex" : "none",
           justifyContent: "center",
           alignItems: "center",
         }}
@@ -112,12 +125,21 @@ const AdminDashboardSection = () => {
       </Box>
       <Box
         sx={{
-          display: active ? "flex" : "none",
+          display: active === 1 ? "flex" : "none",
           justifyContent: "center",
           alignItems: "center",
         }}
       >
         <AdminBlogsView />
+      </Box>
+      <Box
+        sx={{
+          display: active === 2 ? "flex" : "none",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <AdminProductsView />
       </Box>
     </Container>
   );

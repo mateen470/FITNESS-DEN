@@ -3,14 +3,32 @@ const Product = require("../model/products");
 const ProductControllerFunction = {
   CreateProduct: async (req, res) => {
     try {
-      const { image, title, metaDescription, content, price } = req.body;
-      if (!title || !metaDescription || !content || !image || !price) {
+      const {
+        mainImage,
+        sideImageOne,
+        sideImageTwo,
+        title,
+        metaDescription,
+        content,
+        price,
+      } = req.body;
+      if (
+        !title ||
+        !metaDescription ||
+        !content ||
+        !mainImage ||
+        !sideImageOne ||
+        !sideImageTwo ||
+        !price
+      ) {
         return await res
           .status(400)
           .json({ success: false, message: "PLEASE FILL IN ALL FIELDS!!" });
       }
       const productData = new Product({
-        image,
+        mainImage,
+        sideImageOne,
+        sideImageTwo,
         title,
         metaDescription,
         content,
@@ -72,7 +90,9 @@ const ProductControllerFunction = {
       updatedProduct.title = req.body.title;
       updatedProduct.metaDescription = req.body.metaDescription;
       updatedProduct.content = req.body.content;
-      updatedProduct.image = req.body.image;
+      updatedProduct.mainImage = req.body.mainImage;
+      updatedProduct.sideImageOne = req.body.sideImageOne;
+      updatedProduct.sideImageTwo = req.body.sideImageTwo;
       updatedProduct.price = req.body.price;
 
       await updatedProduct.save();

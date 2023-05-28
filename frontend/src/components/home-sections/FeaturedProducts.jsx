@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   CardActions,
   CardMedia,
@@ -10,30 +10,24 @@ import {
   Box,
 } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import dumbell from "../../assets/dumbell.svg";
-import roller from "../../assets/roller.svg";
-import band from "../../assets/band.svg";
+import axios from "axios";
+
 const FeaturedProducts = () => {
-  const productData = [
-    {
-      title: "Resistance Band Set",
-      desc: "Versatile, durable set of resistance bands for at-home workouts, with different resistance levels.",
-      image: band,
-      price: "1000.00",
-    },
-    {
-      title: "Adjustable Dumbbell",
-      desc: "Easy-to-use, high-quality adjustable dumbbells for a variety of exercises and fitness levels.",
-      image: dumbell,
-      price: "1000.00",
-    },
-    {
-      title: "Foam Roller",
-      desc: "High-density foam roller for post-workout recovery, made for muscle soreness and stiffness.",
-      image: roller,
-      price: "1000.00",
-    },
-  ];
+  const [allProducts, setAllProducts] = useState([]);
+
+  const FetchAllProducts = async () => {
+    await axios.get("product/all-products").then((res) => {
+      if (res.data.data.length > 2) {
+        setAllProducts(res.data.data.slice(-3));
+      } else {
+        setAllProducts(res.data.data);
+      }
+    });
+  };
+
+  useEffect(() => {
+    FetchAllProducts();
+  }, [allProducts]);
 
   return (
     <Container>
@@ -48,16 +42,28 @@ const FeaturedProducts = () => {
         Our Hotest Products
       </Typography>
       <Grid container spacing={2}>
-        {productData.map((cardData, index) => {
+        {allProducts.map((cardData, index) => {
           return (
             <Grid item xs={4} key={index}>
               <Card>
                 <CardMedia
-                  component="img"
-                  alt="card image"
-                  height="250"
-                  image={cardData.image}
-                />
+                  component="div"
+                  style={{
+                    height: 250,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <img
+                    alt="card image"
+                    src={cardData.mainImage}
+                    style={{
+                      maxHeight: "100%",
+                      maxWidth: "100%",
+                    }}
+                  />
+                </CardMedia>
                 <Typography
                   variant="h5"
                   color={"black"}
@@ -70,7 +76,7 @@ const FeaturedProducts = () => {
                 </Typography>
                 <CardContent>
                   <Typography variant="h7" fontFamily={"Comme, sans-serif"}>
-                    {cardData.desc}
+                    {cardData.metaDescription}
                   </Typography>
                 </CardContent>
                 <CardActions

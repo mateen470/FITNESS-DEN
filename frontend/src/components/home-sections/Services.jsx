@@ -56,7 +56,7 @@ const cardsData = [
     `,
     cardImage: storeCard,
     sideImage: storeSide,
-    path: "/",
+    path: "/show-all-products",
   },
   {
     id: 4,

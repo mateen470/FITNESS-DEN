@@ -15,12 +15,10 @@ import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 const FeaturedBlogs = () => {
-  const [allBlogs, setAllBlogs] = useState([]);
   const [latestBlogs, setLatestBlogs] = useState([]);
 
   const FetchBlogs = async () => {
     await axios.get("blog/all-blogs").then((res) => {
-      setAllBlogs(res.data.data);
       if (res.data.data.length > 2) {
         setLatestBlogs(res.data.data.slice(-3));
       } else {
@@ -126,7 +124,7 @@ const FeaturedBlogs = () => {
                     right: 5,
                     display: "flex",
                     alignItems: "center",
-                    gap: 2,
+                    gap: 1,
                   }}
                 >
                   <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>

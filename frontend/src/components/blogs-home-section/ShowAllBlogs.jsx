@@ -117,7 +117,7 @@ const ShowAllBlogs = () => {
                       right: 5,
                       display: "flex",
                       alignItems: "center",
-                      gap: 2,
+                      gap: 1,
                     }}
                   >
                     <Box

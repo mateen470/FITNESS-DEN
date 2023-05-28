@@ -16,7 +16,7 @@ const Footer = () => {
     },
     {
       name: "Gym Essentials Store",
-      path: "/",
+      path: "/show-all-products",
     },
     {
       name: "Blogs",

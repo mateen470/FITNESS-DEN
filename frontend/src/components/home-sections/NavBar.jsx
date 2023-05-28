@@ -117,7 +117,7 @@ const NavBar = () => {
           )}
         </Box>
         <Box>
-          <NavLink>
+          <NavLink to={"/show-all-products"}>
             <Typography
               color={"white"}
               fontFamily={"Rubik, sans-serif"}

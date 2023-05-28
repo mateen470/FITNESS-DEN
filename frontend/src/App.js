@@ -37,8 +37,12 @@ import NotFound from "./components/404-not-found/NotFound";
 import AddBlog from "./components/blogs-section/AddBlog";
 import ViewBlog from "./components/blogs-section/ViewBlog";
 import UpdateBlog from "./components/blogs-section/UpdateBlog";
+import AddProduct from "./components/e-com/e-com-admin/AddProduct";
+import ViewProduct from "./components/e-com/e-com-admin/ViewProduct";
+import UpdateProduct from "./components/e-com/e-com-admin/UpdateProduct";
 import ViewBlogHomePage from "./components/blogs-home-section/ViewSingleBlogPage";
 import ShowAllBlogs from "./components/blogs-home-section/ShowAllBlogs";
+import ShowAllProducts from "./components/e-com/e-com-home/ShowAllProducts";
 import ProtectedRoute from "./routes/ProtectedRoute";
 
 const App = () => {
@@ -64,6 +68,7 @@ const App = () => {
         <Route path="/workout-plans" element={<WorkoutPlanPage />} />
         <Route path="/view-blog-home/:id" element={<ViewBlogHomePage />} />
         <Route path="/show-all" element={<ShowAllBlogs />} />
+        <Route path="/show-all-products" element={<ShowAllProducts />} />
         <Route path="/unauthorized" element={<NotFound />} />
         <Route path="/route-check" element={<ProtectedRoute />} />
         <Route
@@ -80,6 +85,7 @@ const App = () => {
             checkRole(["admin"]) ? <AddBlog /> : <Navigate to="/unauthorized" />
           }
         />
+
         <Route
           path="/view-blog/:id"
           element={
@@ -90,11 +96,42 @@ const App = () => {
             )
           }
         />
+
         <Route
           path="/update-blog/:id"
           element={
             checkRole(["admin"]) ? (
               <UpdateBlog />
+            ) : (
+              <Navigate to="/unauthorized" />
+            )
+          }
+        />
+        <Route
+          path="/add-product"
+          element={
+            checkRole(["admin"]) ? (
+              <AddProduct />
+            ) : (
+              <Navigate to="/unauthorized" />
+            )
+          }
+        />
+        <Route
+          path="/view-product/:id"
+          element={
+            checkRole(["admin"]) ? (
+              <ViewProduct />
+            ) : (
+              <Navigate to="/unauthorized" />
+            )
+          }
+        />
+        <Route
+          path="/update-product/:id"
+          element={
+            checkRole(["admin"]) ? (
+              <UpdateProduct />
             ) : (
               <Navigate to="/unauthorized" />
             )
