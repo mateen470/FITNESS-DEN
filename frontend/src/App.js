@@ -41,6 +41,7 @@ import AddProduct from "./components/e-com/e-com-admin/AddProduct";
 import ViewProduct from "./components/e-com/e-com-admin/ViewProduct";
 import UpdateProduct from "./components/e-com/e-com-admin/UpdateProduct";
 import ViewBlogHomePage from "./components/blogs-home-section/ViewSingleBlogPage";
+import ViewProductHomePage from "./components/e-com/e-com-home/ViewSingleProduct";
 import ShowAllBlogs from "./components/blogs-home-section/ShowAllBlogs";
 import ShowAllProducts from "./components/e-com/e-com-home/ShowAllProducts";
 import ProtectedRoute from "./routes/ProtectedRoute";
@@ -67,6 +68,10 @@ const App = () => {
         <Route path="/diet-plans" element={<DietPlanPage />} />
         <Route path="/workout-plans" element={<WorkoutPlanPage />} />
         <Route path="/view-blog-home/:id" element={<ViewBlogHomePage />} />
+        <Route
+          path="/view-product-home/:id"
+          element={<ViewProductHomePage />}
+        />
         <Route path="/show-all" element={<ShowAllBlogs />} />
         <Route path="/show-all-products" element={<ShowAllProducts />} />
         <Route path="/unauthorized" element={<NotFound />} />

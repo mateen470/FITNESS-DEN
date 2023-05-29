@@ -118,7 +118,7 @@ const ShowAllProducts = () => {
                       left: 5,
                     }}
                   >
-                    <NavLink to={`/view-blog-home/${cardData._id}`}>
+                    <NavLink to={`/view-product-home/${cardData._id}`}>
                       <Typography
                         sx={{
                           px: 2,

@@ -93,7 +93,7 @@ const FeaturedProducts = () => {
                   </Box>
                 </CardActions>
                 <CardActions sx={{ ml: 0.5, mb: 2 }}>
-                  <NavLink to="/">
+                  <NavLink to={`/view-product-home/${cardData._id}`}>
                     <Typography
                       sx={{
                         px: 2,
