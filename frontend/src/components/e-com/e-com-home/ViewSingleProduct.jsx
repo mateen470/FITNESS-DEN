@@ -1,21 +1,26 @@
 import React, { useState, useEffect } from "react";
-import { NavLink, useParams } from "react-router-dom";
-import { Box, Rating, Typography } from "@mui/material";
+import { NavLink, useParams, useNavigate } from "react-router-dom";
+import { Box, Rating, Typography, Button } from "@mui/material";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import ReactImageMagnify from "react-image-magnify";
 import Footer from "../../home-sections/Footer";
 import userSmoke from "../../../assets/user-smoke.svg";
 import axios from "axios";
-import AddToCart from "./AddToCart";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import RelevantProducts from "./RelevantProducts";
-// import ProductComments from "./ProductComments";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useSelector } from "react-redux";
 
 const ViewSingleProduct = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [product, setProduct] = useState("");
   const [mainImage, setMainImage] = useState("");
   const [sideImageOne, setSideImageOne] = useState("");
   const [sideImageTwo, setSideImageTwo] = useState("");
+  const { isUser } = useSelector((state) => state.CheckForUserType);
+  const userId = useSelector((state) => state.CurrentUser.CurrentUserID);
 
   const FetchProduct = async (productId) => {
     await axios.get(`product/single-product/${productId}`).then((res) => {
@@ -33,6 +38,36 @@ const ViewSingleProduct = () => {
       setMainImage(sideImageTwo);
       setSideImageTwo(mainImage);
     }
+  };
+
+  const addProductToCart = async () => {
+    const productId = id;
+    const quantity = 1;
+    try {
+      const addToCartResponse = await axios.post("add-to-cart", {
+        userId,
+        productId,
+        quantity,
+      });
+
+      if (addToCartResponse.data && addToCartResponse.data.success) {
+        toast.success(addToCartResponse.data.message);
+        navigate("/cart");
+      }
+      if (
+        addToCartResponse.response &&
+        addToCartResponse.response.data &&
+        addToCartResponse.response.data.message
+      ) {
+        toast.error(addToCartResponse.response.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const notAccessible = () => {
+    toast.error("LOGIN FIRST!!");
   };
 
   useEffect(() => {
@@ -158,7 +193,64 @@ const ViewSingleProduct = () => {
             >
               Rs.{product.price}
             </Typography>
-            <AddToCart />
+            {isUser ? (
+              <Box my={1}>
+                <Button
+                  sx={{
+                    background: "black",
+                    border: "none",
+                    textTransform: "none",
+                    outline: "none",
+                    color: "white",
+                    fontSize: "2vw",
+                    transition: "0.1s ease-in-out color",
+                    "&:hover": {
+                      color: "black",
+                    },
+                  }}
+                  onClick={addProductToCart}
+                >
+                  <Typography
+                    fontSize={"2vw"}
+                    fontWeight={800}
+                    fontFamily={"Comme, sans-serif"}
+                    mx={1}
+                  >
+                    <i>Add to Cart</i>
+                  </Typography>
+                  <ShoppingCartIcon />
+                </Button>
+              </Box>
+            ) : (
+              <Box my={1}>
+                <Button
+                  sx={{
+                    background: "black",
+                    border: "none",
+                    textTransform: "none",
+                    outline: "none",
+                    color: "white",
+                    fontSize: "2vw",
+                    transition: "0.1s ease-in-out color",
+                    "&:hover": {
+                      color: "black",
+                    },
+                  }}
+                  onClick={notAccessible}
+                >
+                  <Typography
+                    fontSize={"2vw"}
+                    fontWeight={800}
+                    fontFamily={"Comme, sans-serif"}
+                    mx={1}
+                  >
+                    <i>Add to Cart</i>
+                  </Typography>
+                  <ShoppingCartIcon />
+                </Button>
+              </Box>
+            )}
+
             <Typography
               fontSize={"2.8vw"}
               color={"black"}

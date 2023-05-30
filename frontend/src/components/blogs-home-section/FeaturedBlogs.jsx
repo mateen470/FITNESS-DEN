@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Box,
-  Card,
-  CardActions,
-  CardContent,
-  Container,
-  Typography,
-} from "@mui/material";
+import { Box, Card, CardActions, CardContent, Typography } from "@mui/material";
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import axios from "axios";
@@ -24,7 +17,7 @@ const FeaturedBlogs = ({ id }) => {
   }, [allBlogs]);
 
   return (
-    <Container>
+    <Box>
       <Box my={5}>
         <Typography
           display={"flex"}
@@ -94,7 +87,7 @@ const FeaturedBlogs = ({ id }) => {
           )
         )}
       </Box>
-    </Container>
+    </Box>
   );
 };
 

@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import {
   Box,
   Grid,
-  Container,
   Typography,
   Card,
   CardMedia,
@@ -27,7 +26,7 @@ const RelevantProducts = ({ id }) => {
 
   return (
     <>
-      <Container
+      <Box
         sx={{
           display: "flex",
           justifyContent: "center",
@@ -131,7 +130,7 @@ const RelevantProducts = ({ id }) => {
             )
           )}
         </Grid>
-      </Container>
+      </Box>
     </>
   );
 };

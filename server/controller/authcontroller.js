@@ -314,6 +314,96 @@ const AuthControllerFunctions = {
       });
     }
   },
+  AddToCart: async (req, res) => {
+    try {
+      const { userId, productId, quantity } = req.body;
+      if (!productId || !quantity) {
+        return res.status(400).json({
+          success: false,
+          message: "PLEASE PROVIDE ALL FIELDS!!",
+        });
+      }
+      const user = await User.findById(userId);
+      const cartItemIndex = user.cart.findIndex(
+        (item) => item.productId === productId
+      );
+
+      if (cartItemIndex !== -1) {
+        user.cart[cartItemIndex].quantity += quantity;
+      } else {
+        user.cart.push({ productId, quantity });
+      }
+      await user.save();
+
+      return res.status(200).json({
+        success: true,
+        message: "PRODUCT ADDED SUCCESSFULLY!!",
+        data: user.cart,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: `FAILED TO ADD PRODUCT IN CART ${error.message}`,
+      });
+    }
+  },
+  RemoveFromCart: async (req, res) => {
+    try {
+      const { productId } = req.params;
+      const { userId } = req.body;
+
+      if (!productId) {
+        return res.status(400).json({
+          success: false,
+          message: "PRODUCT ID IS NOT PROVIDED!!",
+        });
+      }
+
+      const user = await User.findById(userId);
+
+      const cartItemIndex = user.cart.find(
+        (item) => item.productId === productId
+      );
+
+      if (cartItemIndex !== 0) {
+        user.cart.splice(cartItemIndex, 1);
+        await user.save();
+
+        return res.status(200).json({
+          success: true,
+          message: "PRODUCT REMOVED SUCCESSFULLY!!",
+          data: user.cart,
+        });
+      } else {
+        return res.status(404).json({
+          success: false,
+          message: "PRODUCT CANNOT BE REMOVED!!",
+        });
+      }
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: "ISSUE OCCURED IN REMOVING CART ITEM!!",
+      });
+    }
+  },
+  GetCartItems: async (req, res) => {
+    try {
+      const { userId } = req.body;
+      const user = await User.find({ _id: userId });
+      console.log(user);
+      return res.status(200).json({
+        success: true,
+        message: "CART ITEMS FETCHED!!",
+        data: user,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: `FAILED TO FETCH CART ITEMS!!${error.message}`,
+      });
+    }
+  },
 };
 
 module.exports = AuthControllerFunctions;
