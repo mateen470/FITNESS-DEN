@@ -8,6 +8,7 @@ import {
   Grid,
   Typography,
   Box,
+  Rating,
 } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
@@ -45,7 +46,7 @@ const FeaturedProducts = () => {
         {allProducts.map((cardData, index) => {
           return (
             <Grid item xs={4} key={index}>
-              <Card>
+              <Card sx={{ position: "relative" }}>
                 <CardMedia
                   component="div"
                   style={{
@@ -105,6 +106,15 @@ const FeaturedProducts = () => {
                       View
                     </Typography>
                   </NavLink>
+                </CardActions>
+                <CardActions
+                  sx={{
+                    position: "absolute",
+                    bottom: 15,
+                    right: 5,
+                  }}
+                >
+                  <Rating defaultValue={5} size="medium" readOnly />
                 </CardActions>
               </Card>
             </Grid>

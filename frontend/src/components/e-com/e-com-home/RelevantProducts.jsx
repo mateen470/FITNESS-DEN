@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import Footer from "../../home-sections/Footer";
 import {
   Box,
   Grid,
@@ -8,14 +7,12 @@ import {
   Typography,
   Card,
   CardMedia,
-  CardContent,
   CardActions,
   Rating,
 } from "@mui/material";
-import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import axios from "axios";
 
-const ShowAllProducts = () => {
+const RelevantProducts = ({ id }) => {
   const [allProducts, setAllProducts] = useState([]);
 
   const FetchAllProducts = async () => {
@@ -40,17 +37,6 @@ const ShowAllProducts = () => {
           mb: 5,
         }}
       >
-        <Box sx={{ position: "absolute", top: 0, left: 5 }}>
-          <NavLink to={"/"}>
-            <Typography
-              color={"white"}
-              fontFamily={"Comme, sans-serif"}
-              sx={{ display: "flex", alignItems: "center", fontSize: "1.7vw" }}
-            >
-              <KeyboardDoubleArrowLeftIcon /> Back
-            </Typography>
-          </NavLink>
-        </Box>
         <Typography
           fontSize={"4.5vw"}
           color={"white"}
@@ -59,17 +45,17 @@ const ShowAllProducts = () => {
           mt={4}
           mb={2}
         >
-          All Products
+          Products you may Like!
         </Typography>
         <Grid container spacing={2}>
-          {allProducts.map((cardData, index) => {
-            return (
+          {allProducts.map((cardData, index) =>
+            cardData._id !== id ? (
               <Grid item xs={4} key={index}>
-                <Card sx={{ height: "30rem", position: "relative" }}>
+                <Card sx={{ height: "21rem", position: "relative" }}>
                   <CardMedia
                     component="div"
                     style={{
-                      height: 250,
+                      height: 200,
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -94,11 +80,6 @@ const ShowAllProducts = () => {
                   >
                     {cardData.title}
                   </Typography>
-                  <CardContent>
-                    <Typography variant="h7" fontFamily={"Comme, sans-serif"}>
-                      {cardData.metaDescription}
-                    </Typography>
-                  </CardContent>
                   <CardActions
                     sx={{
                       ml: 1,
@@ -145,13 +126,14 @@ const ShowAllProducts = () => {
                   </CardActions>
                 </Card>
               </Grid>
-            );
-          })}
+            ) : (
+              ""
+            )
+          )}
         </Grid>
       </Container>
-      <Footer />
     </>
   );
 };
 
-export default ShowAllProducts;
+export default RelevantProducts;
