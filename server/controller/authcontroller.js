@@ -389,13 +389,23 @@ const AuthControllerFunctions = {
   },
   GetCartItems: async (req, res) => {
     try {
-      const { userId } = req.body;
-      const user = await User.find({ _id: userId });
-      console.log(user);
+      const accessToken = req.header("Authorization")?.split(" ")[1] || "";
+      if (!accessToken) {
+        return await res.status(400).json({
+          success: false,
+          message: "UNAUTHORIZED!! NO TOKEN FOUND",
+        });
+      }
+      accessTokenVerified = await utilityFunctions.accessTokenVerification(
+        accessToken
+      );
+      const authenticatedUser = await User.findOne({
+        _id: accessTokenVerified.id,
+      });
       return res.status(200).json({
         success: true,
         message: "CART ITEMS FETCHED!!",
-        data: user,
+        data: authenticatedUser,
       });
     } catch (error) {
       return res.status(500).json({

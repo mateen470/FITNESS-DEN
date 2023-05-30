@@ -13,32 +13,38 @@ import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrow
 import { NavLink } from "react-router-dom";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import axios from "axios";
-import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const AddToCart = () => {
-  const userId = useSelector((state) => state.CurrentUser.CurrentUserID);
-  const fakeData = [{ Title: "dummy1" }, { Title: "dummy2" }];
   const [cartItems, setCartItems] = useState([]);
+  const [product, setProduct] = useState([]);
 
   const getCartItems = async () => {
     try {
-      const getCartItemsResponse = await axios.get("get-cart-products", {
-        userId,
+      const getUserObject = await axios.post("get-cart-products", {
+        withCredentials: true,
       });
-      if (getCartItemsResponse.data && getCartItemsResponse.data.success) {
-        toast.success(getCartItemsResponse.data.message);
-        setCartItems(getCartItemsResponse.data.data);
-        console.log(getCartItemsResponse.data.data);
+      if (getUserObject.data && getUserObject.data.success) {
+        setCartItems(() => {
+          return [...getUserObject.data.data.cart];
+        });
+        fetchProduct();
       }
-      if (
-        getCartItemsResponse.response &&
-        getCartItemsResponse.response.data &&
-        getCartItemsResponse.response.data.message
-      ) {
-        toast.error(getCartItemsResponse.response.data.message);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchProduct = async () => {
+    try {
+      const products = [];
+      for (const productID of cartItems) {
+        const response = await axios.get(
+          `product/single-product/${productID.productId}`
+        );
+        products.push(response.data.data);
       }
+      setProduct(products);
     } catch (error) {
       console.log(error);
     }
@@ -122,16 +128,16 @@ const AddToCart = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {fakeData.map((item, index) => (
+            {product.map((item, index) => (
               <TableRow key={index}>
                 <TableCell
                   sx={{
-                    color: "black",
-                    fontSize: "3.7vh",
-                    fontFamily: "Comme, sans-serif",
+                    height: "20vh",
+                    weight: "20vh",
+                    product,
                   }}
                 >
-                  Image
+                  <img src={item.mainImage} alt="product" />
                 </TableCell>
                 <TableCell
                   sx={{
@@ -140,7 +146,7 @@ const AddToCart = () => {
                     fontFamily: "Comme, sans-serif",
                   }}
                 >
-                  {item.Title}
+                  {item.title}
                 </TableCell>
                 <TableCell
                   sx={{
@@ -149,7 +155,7 @@ const AddToCart = () => {
                     fontFamily: "Comme, sans-serif",
                   }}
                 >
-                  {item.Title}
+                  ""
                 </TableCell>
                 <TableCell
                   sx={{
@@ -158,7 +164,7 @@ const AddToCart = () => {
                     fontFamily: "Comme, sans-serif",
                   }}
                 >
-                  {item.Title}
+                  ""
                 </TableCell>
                 <TableCell
                   sx={{
@@ -167,7 +173,7 @@ const AddToCart = () => {
                     fontFamily: "Comme, sans-serif",
                   }}
                 >
-                  {item.Title}
+                  {item.price}
                 </TableCell>
               </TableRow>
             ))}
