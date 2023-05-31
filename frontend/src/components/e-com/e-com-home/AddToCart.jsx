@@ -42,6 +42,7 @@ const AddToCart = () => {
         const response = await axios.get(
           `product/single-product/${productID.productId}`
         );
+        console.log(products);
         products.push(response.data.data);
       }
       setProduct(products);
@@ -132,12 +133,16 @@ const AddToCart = () => {
               <TableRow key={index}>
                 <TableCell
                   sx={{
-                    height: "20vh",
-                    weight: "20vh",
-                    product,
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
                   }}
                 >
-                  <img src={item.mainImage} alt="product" />
+                  <img
+                    src={item.mainImage}
+                    alt="product"
+                    style={{ height: "20vh", weight: "20vh" }}
+                  />
                 </TableCell>
                 <TableCell
                   sx={{

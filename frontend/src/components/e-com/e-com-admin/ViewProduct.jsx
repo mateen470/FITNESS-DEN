@@ -113,7 +113,7 @@ const ViewProduct = () => {
           width: "150vh",
         }}
       >
-        {product.content}
+        {product.info}
       </Typography>
     </Container>
   );

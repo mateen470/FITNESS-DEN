@@ -272,7 +272,7 @@ const ViewSingleProduct = () => {
                 whiteSpace: "normal",
               }}
             >
-              {product.content}
+              {product.info}
             </Typography>
           </Box>
         </Box>

@@ -9,13 +9,13 @@ const ProductControllerFunction = {
         sideImageTwo,
         title,
         metaDescription,
-        content,
+        info,
         price,
       } = req.body;
       if (
         !title ||
         !metaDescription ||
-        !content ||
+        !info ||
         !mainImage ||
         !sideImageOne ||
         !sideImageTwo ||
@@ -31,7 +31,7 @@ const ProductControllerFunction = {
         sideImageTwo,
         title,
         metaDescription,
-        content,
+        info,
         price,
       });
 
@@ -89,7 +89,7 @@ const ProductControllerFunction = {
 
       updatedProduct.title = req.body.title;
       updatedProduct.metaDescription = req.body.metaDescription;
-      updatedProduct.content = req.body.content;
+      updatedProduct.info = req.body.info;
       updatedProduct.mainImage = req.body.mainImage;
       updatedProduct.sideImageOne = req.body.sideImageOne;
       updatedProduct.sideImageTwo = req.body.sideImageTwo;

@@ -15,7 +15,7 @@ const UpdateProduct = () => {
     sideImageOne: "",
     sideImageTwo: "",
     metaDescription: "",
-    content: "",
+    info: "",
     price: "",
   });
   const {
@@ -24,7 +24,7 @@ const UpdateProduct = () => {
     sideImageOne,
     sideImageTwo,
     metaDescription,
-    content,
+    info,
     price,
   } = productData;
 
@@ -44,7 +44,7 @@ const UpdateProduct = () => {
         sideImageOne: fetchedProduct.sideImageOne,
         sideImageTwo: fetchedProduct.sideImageTwo,
         metaDescription: fetchedProduct.metaDescription,
-        content: fetchedProduct.content,
+        info: fetchedProduct.info,
         price: fetchedProduct.price,
       });
     };
@@ -61,7 +61,7 @@ const UpdateProduct = () => {
           sideImageOne,
           sideImageTwo,
           metaDescription,
-          content,
+          info,
           price,
         }
       );
@@ -330,8 +330,8 @@ const UpdateProduct = () => {
               },
             },
           }}
-          name={"content"}
-          value={productData.content}
+          name={"info"}
+          value={productData.info}
           onChange={handleInputChange}
         />
       </Box>

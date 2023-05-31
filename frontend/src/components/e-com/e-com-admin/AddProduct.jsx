@@ -14,7 +14,7 @@ const AddProduct = () => {
     sideImageOne: "",
     sideImageTwo: "",
     metaDescription: "",
-    content: "",
+    info: "",
     price: "",
   });
   const {
@@ -23,7 +23,7 @@ const AddProduct = () => {
     sideImageOne,
     sideImageTwo,
     metaDescription,
-    content,
+    info,
     price,
   } = productData;
 
@@ -41,7 +41,7 @@ const AddProduct = () => {
         sideImageOne,
         sideImageTwo,
         metaDescription,
-        content,
+        info,
         price,
       });
       if (addProduct.data && addProduct.data.success) {
@@ -309,8 +309,8 @@ const AddProduct = () => {
               },
             },
           }}
-          name={"content"}
-          value={productData.content}
+          name={"info"}
+          value={productData.info}
           onChange={handleInputChange}
         />
       </Box>
