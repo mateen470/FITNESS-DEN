@@ -349,30 +349,37 @@ const AuthControllerFunctions = {
   },
   RemoveFromCart: async (req, res) => {
     try {
-      const { productId } = req.params;
-      const { userId } = req.body;
-
+      const productId = req.params;
       if (!productId) {
         return res.status(400).json({
           success: false,
           message: "PRODUCT ID IS NOT PROVIDED!!",
         });
       }
-
-      const user = await User.findById(userId);
-
-      const cartItemIndex = user.cart.find(
-        (item) => item.productId === productId
+      const accessToken = req.header("Authorization")?.split(" ")[1] || "";
+      if (!accessToken) {
+        return await res.status(400).json({
+          success: false,
+          message: "UNAUTHORIZED!! NO TOKEN FOUND",
+        });
+      }
+      accessTokenVerified = await utilityFunctions.accessTokenVerification(
+        accessToken
       );
+      const user = await User.findOne({
+        _id: accessTokenVerified.id,
+      });
 
-      if (cartItemIndex !== 0) {
+      const cartItemIndex = user.cart.findIndex(
+        (item) => item.productId === productId.id
+      );
+      if (cartItemIndex !== -1) {
         user.cart.splice(cartItemIndex, 1);
         await user.save();
 
         return res.status(200).json({
           success: true,
-          message: "PRODUCT REMOVED SUCCESSFULLY!!",
-          data: user.cart,
+          message: "PRODUCT REMOVED!!",
         });
       } else {
         return res.status(404).json({
@@ -411,6 +418,92 @@ const AuthControllerFunctions = {
       return res.status(500).json({
         success: false,
         message: `FAILED TO FETCH CART ITEMS!!${error.message}`,
+      });
+    }
+  },
+  IncrementProduct: async (req, res) => {
+    try {
+      const productId = req.params;
+      if (!productId) {
+        return res.status(400).json({
+          success: false,
+          message: "PRODUCT ID IS NOT PROVIDED!!",
+        });
+      }
+      const accessToken = req.header("Authorization")?.split(" ")[1] || "";
+      if (!accessToken) {
+        return await res.status(400).json({
+          success: false,
+          message: "UNAUTHORIZED!! NO TOKEN FOUND",
+        });
+      }
+      accessTokenVerified = await utilityFunctions.accessTokenVerification(
+        accessToken
+      );
+      const user = await User.findOne({
+        _id: accessTokenVerified.id,
+      });
+
+      const cartItemIndex = user.cart.findIndex(
+        (item) => item.productId === productId.id
+      );
+
+      if (cartItemIndex !== -1) {
+        user.cart[cartItemIndex].quantity += 1;
+      }
+      await user.save();
+
+      return res.status(200).json({
+        success: true,
+        message: "INCREMENTED!!",
+      });
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: `FAILED TO INCREMENT!!${error.message}`,
+      });
+    }
+  },
+  DecrementProduct: async (req, res) => {
+    try {
+      const productId = req.params;
+      if (!productId) {
+        return res.status(400).json({
+          success: false,
+          message: "PRODUCT ID IS NOT PROVIDED!!",
+        });
+      }
+      const accessToken = req.header("Authorization")?.split(" ")[1] || "";
+      if (!accessToken) {
+        return await res.status(400).json({
+          success: false,
+          message: "UNAUTHORIZED!! NO TOKEN FOUND",
+        });
+      }
+      accessTokenVerified = await utilityFunctions.accessTokenVerification(
+        accessToken
+      );
+      const user = await User.findOne({
+        _id: accessTokenVerified.id,
+      });
+
+      const cartItemIndex = user.cart.findIndex(
+        (item) => item.productId === productId.id
+      );
+
+      if (cartItemIndex !== -1) {
+        user.cart[cartItemIndex].quantity -= 1;
+      }
+      await user.save();
+
+      return res.status(200).json({
+        success: true,
+        message: "DECREMENTED!!",
+      });
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: `FAILED TO DECREMENT!!${error.message}`,
       });
     }
   },

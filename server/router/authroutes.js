@@ -13,6 +13,8 @@ router.post("/forgotpassword", AuthControllerFunctions.ForgotPassword);
 router.post("/add-to-cart", AuthControllerFunctions.AddToCart);
 router.delete("/remove-from-cart/:id", AuthControllerFunctions.RemoveFromCart);
 router.post("/get-cart-products", AuthControllerFunctions.GetCartItems);
+router.post("/increment/:id", AuthControllerFunctions.IncrementProduct);
+router.post("/decrement/:id", AuthControllerFunctions.DecrementProduct);
 router.post(
   "/resetpassword",
   middleWare.tokenVerificationOfResetPasswordPage,
