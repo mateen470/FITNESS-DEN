@@ -5,6 +5,8 @@ import profile from "../../assets/profile.svg";
 import { NavLink } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+
 const NavBar = () => {
   const [displayDropDown, setDisplayDropDown] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -236,10 +238,41 @@ const NavBar = () => {
           </NavLink>
         </Box>
       ) : (
-        <Box mt={3}>
+        <Box
+          mt={3}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 1,
+          }}
+        >
           <NavLink to={"/user"}>
             <img src={profile} alt="user-profile" style={{ height: "12vh" }} />
           </NavLink>
+          <Box>
+            <NavLink to={"/cart"}>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                <ShoppingCartIcon
+                  style={{ color: "white", fontSize: "2.5rem" }}
+                />
+                <Typography
+                  color={"white"}
+                  fontFamily={"Comme, sans-serif"}
+                  fontSize={"1rem"}
+                  fontWeight={"bold"}
+                >
+                  CART
+                </Typography>
+              </Box>
+            </NavLink>
+          </Box>
         </Box>
       )}
     </Box>

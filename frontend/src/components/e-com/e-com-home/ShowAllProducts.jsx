@@ -13,6 +13,7 @@ import {
   Rating,
 } from "@mui/material";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import axios from "axios";
 
 const ShowAllProducts = () => {
@@ -49,6 +50,29 @@ const ShowAllProducts = () => {
             >
               <KeyboardDoubleArrowLeftIcon /> Back
             </Typography>
+          </NavLink>
+        </Box>
+        <Box sx={{ position: "absolute", top: 10, right: 20 }}>
+          <NavLink to={"/cart"}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <ShoppingCartIcon
+                style={{ color: "white", fontSize: "2.5rem" }}
+              />
+              <Typography
+                color={"white"}
+                fontFamily={"Comme, sans-serif"}
+                fontSize={"1rem"}
+                fontWeight={"bold"}
+              >
+                CART
+              </Typography>
+            </Box>
           </NavLink>
         </Box>
         <Typography
