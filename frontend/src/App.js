@@ -69,7 +69,6 @@ const App = () => {
         <Route path="/diet-plans" element={<DietPlanPage />} />
         <Route path="/workout-plans" element={<WorkoutPlanPage />} />
         <Route path="/view-blog-home/:id" element={<ViewBlogHomePage />} />
-        <Route path="/cart" element={<Cart />} />
         <Route
           path="/view-product-home/:id"
           element={<ViewProductHomePage />}
@@ -162,6 +161,12 @@ const App = () => {
             ) : (
               <Navigate to="/unauthorized" />
             )
+          }
+        />
+        <Route
+          path="/cart"
+          element={
+            checkRole(["user"]) ? <Cart /> : <Navigate to="/unauthorized" />
           }
         />
         <Route

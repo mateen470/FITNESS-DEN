@@ -77,6 +77,7 @@ const ViewSingleBlogPage = () => {
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
+        spacing={1}
       >
         <Grid item xs={8}>
           <Box

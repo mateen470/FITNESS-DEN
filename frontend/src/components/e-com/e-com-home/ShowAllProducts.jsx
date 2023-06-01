@@ -15,9 +15,11 @@ import {
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const ShowAllProducts = () => {
   const [allProducts, setAllProducts] = useState([]);
+  const { isUser } = useSelector((state) => state.CheckForUserType);
 
   const FetchAllProducts = async () => {
     await axios
@@ -52,29 +54,34 @@ const ShowAllProducts = () => {
             </Typography>
           </NavLink>
         </Box>
-        <Box sx={{ position: "absolute", top: 10, right: 20 }}>
-          <NavLink to={"/cart"}>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
-              <ShoppingCartIcon
-                style={{ color: "white", fontSize: "2.5rem" }}
-              />
-              <Typography
-                color={"white"}
-                fontFamily={"Comme, sans-serif"}
-                fontSize={"1rem"}
-                fontWeight={"bold"}
+        {isUser ? (
+          <Box sx={{ position: "absolute", top: 10, right: 20 }}>
+            <NavLink to={"/cart"}>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
               >
-                CART
-              </Typography>
-            </Box>
-          </NavLink>
-        </Box>
+                <ShoppingCartIcon
+                  style={{ color: "white", fontSize: "2.5rem" }}
+                />
+                <Typography
+                  color={"white"}
+                  fontFamily={"Comme, sans-serif"}
+                  fontSize={"1rem"}
+                  fontWeight={"bold"}
+                >
+                  CART
+                </Typography>
+              </Box>
+            </NavLink>
+          </Box>
+        ) : (
+          ""
+        )}
+
         <Typography
           fontSize={"4.5vw"}
           color={"white"}

@@ -99,7 +99,33 @@ const ViewSingleProduct = () => {
             </Typography>
           </NavLink>
         </Box>
-
+        {isUser ? (
+          <Box sx={{ position: "absolute", top: 10, right: 20 }}>
+            <NavLink to={"/cart"}>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                <ShoppingCartIcon
+                  style={{ color: "white", fontSize: "2.5rem" }}
+                />
+                <Typography
+                  color={"white"}
+                  fontFamily={"Comme, sans-serif"}
+                  fontSize={"1rem"}
+                  fontWeight={"bold"}
+                >
+                  CART
+                </Typography>
+              </Box>
+            </NavLink>
+          </Box>
+        ) : (
+          ""
+        )}
         <Box
           sx={{
             display: "flex",
@@ -108,7 +134,8 @@ const ViewSingleProduct = () => {
             background: "white",
             p: 5,
             pl: 7,
-            my: 3,
+            mt: 7,
+            mb: 3,
             borderRadius: 2,
           }}
         >

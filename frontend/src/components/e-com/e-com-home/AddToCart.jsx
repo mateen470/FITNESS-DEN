@@ -108,6 +108,10 @@ const AddToCart = () => {
     getCartItems();
   }, [product]);
 
+  useEffect(() => {
+    getCartItems();
+  }, []);
+
   return (
     <Box p={3}>
       <Box sx={{ position: "absolute", top: 0, left: 5 }}>

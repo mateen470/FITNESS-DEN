@@ -238,41 +238,10 @@ const NavBar = () => {
           </NavLink>
         </Box>
       ) : (
-        <Box
-          mt={3}
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: 1,
-          }}
-        >
+        <Box mt={3}>
           <NavLink to={"/user"}>
             <img src={profile} alt="user-profile" style={{ height: "12vh" }} />
           </NavLink>
-          <Box>
-            <NavLink to={"/cart"}>
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                }}
-              >
-                <ShoppingCartIcon
-                  style={{ color: "white", fontSize: "2.5rem" }}
-                />
-                <Typography
-                  color={"white"}
-                  fontFamily={"Comme, sans-serif"}
-                  fontSize={"1rem"}
-                  fontWeight={"bold"}
-                >
-                  CART
-                </Typography>
-              </Box>
-            </NavLink>
-          </Box>
         </Box>
       )}
     </Box>
