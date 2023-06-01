@@ -13,14 +13,17 @@ import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrow
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import axios from "axios";
 import cartBg from "../../../assets/workoutbg.svg";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useDispatch } from "react-redux";
+import { AddAllProductsInfoToBuy } from "../../../context/EcomPayment";
 
 const AddToCart = () => {
+  const dispatch = useDispatch();
   const [cartItems, setCartItems] = useState([]);
   const [product, setProduct] = useState([]);
 
@@ -368,6 +371,14 @@ const AddToCart = () => {
           }}
         >
           <Button
+            onClick={() =>
+              dispatch(
+                AddAllProductsInfoToBuy({
+                  TotalPayment: calculateTotalPrice(),
+                  AllProducts: product,
+                })
+              )
+            }
             sx={{
               background: "black",
               border: "none",
@@ -387,7 +398,19 @@ const AddToCart = () => {
               fontFamily={"Comme, sans-serif"}
               mx={1}
             >
-              CheckOut
+              <Link
+                onClick={() =>
+                  dispatch(
+                    AddAllProductsInfoToBuy({
+                      TotalPayment: calculateTotalPrice(),
+                      AllProducts: product,
+                    })
+                  )
+                }
+                to="/checkout"
+              >
+                CheckOut
+              </Link>
             </Typography>
             <ShoppingCartCheckoutIcon />
           </Button>

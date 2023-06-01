@@ -46,6 +46,8 @@ import ShowAllBlogs from "./components/blogs-home-section/ShowAllBlogs";
 import ShowAllProducts from "./components/e-com/e-com-home/ShowAllProducts";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import Cart from "./components/e-com/e-com-home/AddToCart";
+import Checkout from "./components/e-com/e-com-payment/Checkout";
+import EcomPaymentPage from "./pages/payment/EcomPaymentPage";
 
 const App = () => {
   const { isAdmin, isUser, isTrainer } = useSelector(
@@ -340,6 +342,22 @@ const App = () => {
           element={
             checkRole(["trainer"]) ? (
               <ViewWorkoutPlanDetails />
+            ) : (
+              <Navigate to="/unauthorized" />
+            )
+          }
+        />
+        <Route
+          path="/checkout"
+          element={
+            checkRole(["user"]) ? <Checkout /> : <Navigate to="/unauthorized" />
+          }
+        />
+        <Route
+          path="/ecom-payment"
+          element={
+            checkRole(["user"]) ? (
+              <EcomPaymentPage />
             ) : (
               <Navigate to="/unauthorized" />
             )

@@ -12,6 +12,7 @@ import PhysicalInfoReducer from "./PhysicalInfo";
 import CurrentUserReducer from "./CurrentUser";
 import CheckForNewPlanRequestsReducer from "./CheckForNewPlanRequests";
 import CheckForUserTypeReducer from "./CheckForUserType";
+import EcomPaymentReducer from "./EcomPayment";
 const persistConfig = {
   key: "root",
   blacklist: ["Plan", "Excercise", "DietPlan"],
@@ -30,6 +31,7 @@ const reducer = combineReducers({
   CurrentUser: CurrentUserReducer,
   CheckForNewPlanRequests: CheckForNewPlanRequestsReducer,
   CheckForUserType: CheckForUserTypeReducer,
+  EcomPayment: EcomPaymentReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);
