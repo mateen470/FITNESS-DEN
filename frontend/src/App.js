@@ -48,6 +48,7 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 import Cart from "./components/e-com/e-com-home/AddToCart";
 import Checkout from "./components/e-com/e-com-payment/Checkout";
 import EcomPaymentPage from "./pages/payment/EcomPaymentPage";
+import PaidOrder from "./components/user-dashboard-section/PaidOrders";
 
 const App = () => {
   const { isAdmin, isUser, isTrainer } = useSelector(
@@ -228,6 +229,32 @@ const App = () => {
           }
         />
         <Route
+          path="/checkout"
+          element={
+            checkRole(["user"]) ? <Checkout /> : <Navigate to="/unauthorized" />
+          }
+        />
+        <Route
+          path="/ecom-payment"
+          element={
+            checkRole(["user"]) ? (
+              <EcomPaymentPage />
+            ) : (
+              <Navigate to="/unauthorized" />
+            )
+          }
+        />
+        <Route
+          path="/paid-orders"
+          element={
+            checkRole(["user"]) ? (
+              <PaidOrder />
+            ) : (
+              <Navigate to="/unauthorized" />
+            )
+          }
+        />
+        <Route
           path="/trainer"
           element={
             checkRole(["trainer"]) ? (
@@ -342,22 +369,6 @@ const App = () => {
           element={
             checkRole(["trainer"]) ? (
               <ViewWorkoutPlanDetails />
-            ) : (
-              <Navigate to="/unauthorized" />
-            )
-          }
-        />
-        <Route
-          path="/checkout"
-          element={
-            checkRole(["user"]) ? <Checkout /> : <Navigate to="/unauthorized" />
-          }
-        />
-        <Route
-          path="/ecom-payment"
-          element={
-            checkRole(["user"]) ? (
-              <EcomPaymentPage />
             ) : (
               <Navigate to="/unauthorized" />
             )

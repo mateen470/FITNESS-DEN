@@ -3,6 +3,8 @@ const router = express.Router();
 const dotenv = require("dotenv");
 const AllPaymentsModel = require("../model/allPayments");
 const EcomAllPaymentsModel = require("../model/ecomAllPayments");
+const User = require("../model/auth-schema");
+const utilityFunctions = require("../utility/utilityfunctions");
 dotenv.config();
 
 const stripe = require("stripe")(process.env.SECRET_KEY);
@@ -55,8 +57,38 @@ router.post("/ecom-allPayments", async (req, res) => {
     return res.status(500).json(error);
   }
 });
-router.get("/ecom-allPayments", async (req, res) => {
-  const data = await EcomAllPaymentsModel.find();
-  res.send(data);
-});
+router.get("/get-user-paid-products", async (req, res) => {
+  try {
+    const accessToken = req.header("Authorization")?.split(" ")[1] || "";
+    if (!accessToken) {
+      return await res.status(400).json({
+        success: false,
+        message: "UNAUTHORIZED!! NO TOKEN FOUND",
+      });
+    }
+    accessTokenVerified = await utilityFunctions.accessTokenVerification(
+      accessToken
+    );
+    const user = await User.findOne({
+      _id: accessTokenVerified.id,
+    });
+    const userId = user._id.toString();
+
+    const paidProducts = await EcomAllPaymentsModel.find({
+      IDofCurrentUser: userId,
+    });
+    console.log(paidProducts);
+    return res.status(200).json({
+      success: true,
+      message: "PRODUCTS FETCHED SUCCESSFULLY!!",
+      data: paidProducts,
+    });
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+}),
+  router.get("/ecom-allPayments", async (req, res) => {
+    const data = await EcomAllPaymentsModel.find();
+    res.send(data);
+  });
 module.exports = router;

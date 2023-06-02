@@ -27,41 +27,6 @@ const AddToCart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [product, setProduct] = useState([]);
 
-  const getCartItems = async () => {
-    try {
-      const getUserObject = await axios.post("get-cart-products", {
-        withCredentials: true,
-      });
-      if (getUserObject.data && getUserObject.data.success) {
-        setCartItems(() => {
-          return [...getUserObject.data.data.cart];
-        });
-        fetchProduct();
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const fetchProduct = async () => {
-    try {
-      const products = [];
-      for (const cartItem of cartItems) {
-        const response = await axios.get(
-          `product/single-product/${cartItem.productId}`
-        );
-        const productData = {
-          ...response.data.data,
-          quantity: cartItem.quantity,
-        };
-        products.push(productData);
-      }
-      setProduct(products);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const removeProduct = async (id) => {
     try {
       const removeProduct = await axios.delete(`remove-from-cart/${id}`, {
@@ -107,13 +72,44 @@ const AddToCart = () => {
     }
   };
 
-  useEffect(() => {
-    getCartItems();
-  }, [product]);
+  const fetchProduct = async () => {
+    try {
+      const products = [];
+      for (const cartItem of cartItems) {
+        const response = await axios.get(
+          `product/single-product/${cartItem.productId}`
+        );
+        const productData = {
+          ...response.data.data,
+          quantity: cartItem.quantity,
+        };
+        products.push(productData);
+      }
+      setProduct(products);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
+    const getCartItems = async () => {
+      try {
+        const getUserObject = await axios.post("get-cart-products", {
+          withCredentials: true,
+        });
+        if (getUserObject.data && getUserObject.data.success) {
+          setCartItems(() => {
+            return [...getUserObject.data.data.cart];
+          });
+          fetchProduct();
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     getCartItems();
-  }, []);
+  }, [product]);
 
   return (
     <Box p={3}>

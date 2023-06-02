@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -51,10 +51,13 @@ const EcomPayment = () => {
               AllProductsBoughtInfo: ProductsToBuyInfo,
               CheckoutData: CheckoutData,
             })
-            .then((res) => {
+            .then(async (res) => {
               toast.success(
                 "PAYMENT SUCCESSFULL. YOUR ORDER IS BEING PROCESSED"
               );
+              await axios.post("remove-cart-item-after-payment", {
+                withCredentials: true,
+              });
               navigate("/show-all-products");
             })
             .catch(() => {

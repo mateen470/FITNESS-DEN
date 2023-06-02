@@ -62,7 +62,7 @@ const UserDashboardSection = () => {
       }
     };
     getData();
-  }, []);
+  }, [name, email, dispatch]);
 
   return (
     <Container
@@ -135,6 +135,14 @@ const UserDashboardSection = () => {
           borderBottom={"0.5px solid white"}
         >
           <NavLink to={"/view-workout-plan"}>ViewWorkoutPlan</NavLink>
+        </Typography>
+        <Typography
+          color={"white"}
+          fontSize={"4.5vh"}
+          fontFamily={"Comme, sans-serif"}
+          borderBottom={"0.5px solid white"}
+        >
+          <NavLink to={"/paid-orders"}>Your Orders</NavLink>
         </Typography>
       </Box>
     </Container>

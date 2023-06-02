@@ -507,6 +507,37 @@ const AuthControllerFunctions = {
       });
     }
   },
+  RemoveAllProductsFromCartAfterPayment: async (req, res) => {
+    try {
+      const accessToken = req.header("Authorization")?.split(" ")[1] || "";
+      if (!accessToken) {
+        return await res.status(400).json({
+          success: false,
+          message: "UNAUTHORIZED!! NO TOKEN FOUND",
+        });
+      }
+      accessTokenVerified = await utilityFunctions.accessTokenVerification(
+        accessToken
+      );
+      const user = await User.findOne({
+        _id: accessTokenVerified.id,
+      });
+
+      user.cart = [];
+
+      await user.save();
+
+      return res.status(200).json({
+        success: true,
+        message: "CART IS NOW EMPTY!!",
+      });
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: `FAILED TO REMOVE PRODUCTS FROM CART AFTER PAYMENT!!${error.message}`,
+      });
+    }
+  },
 };
 
 module.exports = AuthControllerFunctions;

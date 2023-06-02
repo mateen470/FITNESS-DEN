@@ -16,6 +16,10 @@ router.post("/get-cart-products", AuthControllerFunctions.GetCartItems);
 router.post("/increment/:id", AuthControllerFunctions.IncrementProduct);
 router.post("/decrement/:id", AuthControllerFunctions.DecrementProduct);
 router.post(
+  "/remove-cart-item-after-payment",
+  AuthControllerFunctions.RemoveAllProductsFromCartAfterPayment
+);
+router.post(
   "/resetpassword",
   middleWare.tokenVerificationOfResetPasswordPage,
   AuthControllerFunctions.ResetPassword
