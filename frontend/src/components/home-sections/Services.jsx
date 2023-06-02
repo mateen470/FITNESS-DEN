@@ -66,7 +66,8 @@ const cardsData = [
     expandedContent: `Our fitness blog section provides a wealth of information on a variety of topics related to fitness and wellness. Our expert writers cover everything from workout tips and nutrition advice to the latest trends in fitness and the science behind exercise. Our articles are informative, engaging, and easy to understand, making them a valuable resource for anyone looking to improve their health and fitness. 
     `,
     cardImage: blogCard,
-    sideImage: blogSide,
+    sideImage:
+      "https://res.cloudinary.com/abdulmateen/image/upload/v1685730103/blogSide_pgltdm.svg",
     path: "/show-all",
   },
   {

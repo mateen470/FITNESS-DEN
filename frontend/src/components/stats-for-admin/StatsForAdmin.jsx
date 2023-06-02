@@ -207,7 +207,7 @@ const StatsForAdmin = () => {
                   fontWeight={800}
                   fontFamily={"Comme, sans-serif"}
                 >
-                  Diet Plans Profit
+                  Diet Plans Sales
                 </Typography>
                 <Typography
                   fontSize={"4vh"}
@@ -253,7 +253,7 @@ const StatsForAdmin = () => {
                   fontWeight={800}
                   fontFamily={"Comme, sans-serif"}
                 >
-                  Workout Plans Profit
+                  Workout Plans Sales
                 </Typography>
                 <Typography
                   fontSize={"4vh"}
@@ -299,7 +299,7 @@ const StatsForAdmin = () => {
                   fontWeight={800}
                   fontFamily={"Comme, sans-serif"}
                 >
-                  Total Profit
+                  Total Sales
                 </Typography>
                 <Typography
                   fontSize={"4vh"}

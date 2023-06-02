@@ -11,6 +11,7 @@ import {
 import { NavLink } from "react-router-dom";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import userSmoke from "../../assets/user-smoke.svg";
+import emptyCart from "../../assets/emptyCart.svg";
 import axios from "axios";
 
 const PaidOrders = () => {
@@ -66,15 +67,19 @@ const PaidOrders = () => {
             alignItems: "center",
           }}
         >
-          <Typography
-            color={"white"}
-            fontSize={"4.5vw"}
-            textAlign={"center"}
-            mt={4}
-            mb={2}
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              background: "rgba(255,255,255,0.3)",
+              borderRadius: 2,
+              width: "70vh",
+              p: 5,
+            }}
           >
-            No Product Bought yet!
-          </Typography>
+            <img src={emptyCart} style={{ width: "60vh" }} />
+          </Box>
         </Box>
       ) : (
         <Table sx={{ mb: 5 }}>

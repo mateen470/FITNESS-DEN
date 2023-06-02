@@ -49,6 +49,7 @@ import Cart from "./components/e-com/e-com-home/AddToCart";
 import Checkout from "./components/e-com/e-com-payment/Checkout";
 import EcomPaymentPage from "./pages/payment/EcomPaymentPage";
 import PaidOrder from "./components/user-dashboard-section/PaidOrders";
+import PaidProduct from "./components/admin-dashboard-section/PaidProductView";
 
 const App = () => {
   const { isAdmin, isUser, isTrainer } = useSelector(
@@ -141,6 +142,16 @@ const App = () => {
           element={
             checkRole(["admin"]) ? (
               <UpdateProduct />
+            ) : (
+              <Navigate to="/unauthorized" />
+            )
+          }
+        />
+        <Route
+          path="/paid-product-view/:id"
+          element={
+            checkRole(["admin"]) ? (
+              <PaidProduct />
             ) : (
               <Navigate to="/unauthorized" />
             )

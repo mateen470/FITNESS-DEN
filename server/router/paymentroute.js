@@ -77,7 +77,6 @@ router.get("/get-user-paid-products", async (req, res) => {
     const paidProducts = await EcomAllPaymentsModel.find({
       IDofCurrentUser: userId,
     });
-    console.log(paidProducts);
     return res.status(200).json({
       success: true,
       message: "PRODUCTS FETCHED SUCCESSFULLY!!",
@@ -88,7 +87,16 @@ router.get("/get-user-paid-products", async (req, res) => {
   }
 }),
   router.get("/ecom-allPayments", async (req, res) => {
-    const data = await EcomAllPaymentsModel.find();
-    res.send(data);
+    try {
+      const data = await EcomAllPaymentsModel.find();
+      console.log(data);
+      return res.status(200).json({
+        success: true,
+        message: "ALL PAID PRODUCTS FETCHED SUCCESSFULLY!!",
+        data: data,
+      });
+    } catch (error) {
+      return res.status(500).json(error);
+    }
   });
 module.exports = router;

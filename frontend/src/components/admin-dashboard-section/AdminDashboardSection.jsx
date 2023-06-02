@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import StatsForAdmin from "../stats-for-admin/StatsForAdmin";
 import AdminBlogsView from "../blogs-section/AdminBlogsView";
 import AdminProductsView from "../e-com/e-com-admin/AdminProductView";
+import AllPaidProducts from "./AllPaidOrders";
 import { Box, Container, Typography } from "@mui/material";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -113,6 +114,18 @@ const AdminDashboardSection = () => {
         >
           Products
         </Typography>
+        <Typography
+          fontSize={"5vh"}
+          color={active === 3 ? "white" : "gray"}
+          borderBottom={active === 3 ? "2px solid white" : "none"}
+          fontWeight={800}
+          textAlign={"center"}
+          fontFamily={"Comme, sans-serif"}
+          sx={{ cursor: "pointer" }}
+          onClick={() => setActive(3)}
+        >
+          Orders
+        </Typography>
       </Box>
       <Box
         sx={{
@@ -140,6 +153,15 @@ const AdminDashboardSection = () => {
         }}
       >
         <AdminProductsView />
+      </Box>
+      <Box
+        sx={{
+          display: active === 3 ? "flex" : "none",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <AllPaidProducts />
       </Box>
     </Container>
   );

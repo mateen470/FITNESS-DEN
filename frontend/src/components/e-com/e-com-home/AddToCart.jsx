@@ -17,6 +17,7 @@ import { Link, NavLink } from "react-router-dom";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import axios from "axios";
 import cartBg from "../../../assets/workoutbg.svg";
+import emptyCart from "../../../assets/emptyCart.svg";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
@@ -154,16 +155,19 @@ const AddToCart = () => {
               alignItems: "center",
             }}
           >
-            <Typography
-              color={"white"}
-              fontSize={"4.5vw"}
-              fontWeight={800}
-              textAlign={"center"}
-              mt={4}
-              mb={2}
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                background: "rgba(255,255,255,0.3)",
+                borderRadius: 2,
+                width: "70vh",
+                p: 5,
+              }}
             >
-              No Product in your Cart!
-            </Typography>
+              <img src={emptyCart} style={{ width: "60vh" }} />
+            </Box>
           </Box>
         ) : (
           <Table sx={{ mb: 5 }}>

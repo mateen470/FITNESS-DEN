@@ -75,7 +75,8 @@ const WorkoutPlanSection = () => {
       DetailedContent:
         "Balance and stability training focuses on exercises that challenge and improve the body's ability to maintain balance and stability. This type of training often involves using unstable surfaces or equipment like balance boards or stability balls. By engaging core muscles and improving proprioception, balance and stability exercises enhance coordination, posture, and overall stability. ",
       Price: 5000,
-      Image: balance,
+      Image:
+        "https://res.cloudinary.com/abdulmateen/image/upload/v1685729842/balance_zvnkqo.svg",
     },
   ];
 
