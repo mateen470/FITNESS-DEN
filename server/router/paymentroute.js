@@ -88,7 +88,6 @@ router.get("/get-user-paid-products", async (req, res) => {
   router.get("/ecom-allPayments", async (req, res) => {
     try {
       const data = await EcomAllPaymentsModel.find();
-      console.log(data);
       return res.status(200).json({
         success: true,
         message: "ALL PAID PRODUCTS FETCHED SUCCESSFULLY!!",
@@ -98,4 +97,33 @@ router.get("/get-user-paid-products", async (req, res) => {
       return res.status(500).json(error);
     }
   });
+router.get("/ecom-single-porduct/:id", async (req, res) => {
+  try {
+    const porduct_Id = req.params;
+    const data = await EcomAllPaymentsModel.findOne({ _id: porduct_Id.id });
+    console.log(data);
+    return res.status(200).json({
+      success: true,
+      message: "SINGLE PAID PRODUCTS FETCHED SUCCESSFULLY!!",
+      data: data,
+    });
+  } catch (error) {
+    return res.status(500).json(`THE ERROR IS ${error.message}`);
+  }
+});
+router.put("/ecom-change-status/:id", async (req, res) => {
+  try {
+    const porduct_Id = req.params;
+    const data = await EcomAllPaymentsModel.findOne({ _id: porduct_Id.id });
+    data.status = req.body.deliveryStatus;
+    await data.save();
+    return res.status(200).json({
+      success: true,
+      message: "STATUS CHANGED!!",
+    });
+  } catch (error) {
+    return res.status(500).json(`THE ERROR IS ${error.message}`);
+  }
+});
+
 module.exports = router;

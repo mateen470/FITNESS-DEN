@@ -81,7 +81,7 @@ const ViewBlog = () => {
           width: "150vh",
         }}
       >
-        {blog.content}
+        {blog.mainData}
       </Typography>
     </Container>
   );

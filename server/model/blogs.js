@@ -10,7 +10,7 @@ const blogsSchema = mongoose.Schema({
   image: String,
   title: String,
   metaDescription: String,
-  content: String,
+  mainData: String,
   likes: [
     {
       IDofCurrentUser: String,

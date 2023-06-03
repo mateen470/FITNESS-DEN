@@ -2,8 +2,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import visa from "../../../assets/visa.svg";
-import master from "../../../assets/master.svg";
 import axios from "axios";
 import {
   CardNumberElement,
@@ -108,8 +106,20 @@ const EcomPayment = () => {
               >
                 Card Number
               </Typography>
-              <img src={visa} alt="visa-card" style={{ width: "6vw" }} />
-              <img src={master} alt="master-card" style={{ width: "5vw" }} />
+              <img
+                src={
+                  "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779093/visa_yw8sdl.svg"
+                }
+                alt="visa-card"
+                style={{ width: "6vw" }}
+              />
+              <img
+                src={
+                  "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779075/master_brug6k.svg"
+                }
+                alt="master-card"
+                style={{ width: "5vw" }}
+              />
             </Box>
             <Box
               sx={{

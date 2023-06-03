@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { NavLink } from "react-router-dom";
 import {
   Container,
@@ -271,16 +271,6 @@ const DietPlanSection = () => {
     );
   };
 
-  useEffect(() => {
-    preloadImages();
-  }, []);
-
-  const preloadImages = () => {
-    AllPlans.forEach((data) => {
-      const img = new Image();
-      img.src = data.Image;
-    });
-  };
   return (
     <Container>
       <Typography

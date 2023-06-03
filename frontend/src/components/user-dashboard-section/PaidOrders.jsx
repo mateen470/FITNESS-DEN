@@ -81,6 +81,7 @@ const PaidOrders = () => {
               src={
                 "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779071/emptyCart_ygei0a.svg"
               }
+              alt="emptycart"
               style={{ width: "60vh" }}
             />
           </Box>
@@ -131,6 +132,7 @@ const PaidOrders = () => {
           <TableBody>
             {products.map((item) => {
               const allProducts = item.AllProductsBoughtInfo[0]?.AllProducts;
+              const status = item.status;
 
               return allProducts.map((product, productIndex) => {
                 const mainImage = product.mainImage;
@@ -197,7 +199,7 @@ const PaidOrders = () => {
                         fontFamily: "Comme, sans-serif",
                       }}
                     >
-                      in Process
+                      {status}
                     </TableCell>
                   </TableRow>
                 );

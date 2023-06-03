@@ -148,7 +148,7 @@ const App = () => {
           }
         />
         <Route
-          path="/paid-product-view"
+          path="/paid-product-view/:id"
           element={
             checkRole(["admin"]) ? (
               <PaidProduct />

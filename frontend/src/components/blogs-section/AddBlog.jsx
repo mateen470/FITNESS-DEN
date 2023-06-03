@@ -12,9 +12,9 @@ const AddBlog = () => {
     title: "",
     image: "",
     metaDescription: "",
-    content: "",
+    mainData: "",
   });
-  const { title, image, metaDescription, content } = blogData;
+  const { title, image, metaDescription, mainData } = blogData;
 
   const handleInputChange = (event) => {
     event.preventDefault();
@@ -28,7 +28,7 @@ const AddBlog = () => {
         title,
         image,
         metaDescription,
-        content,
+        mainData,
       });
       if (addBlog.data && addBlog.data.success) {
         toast.success(addBlog.data.message);
@@ -214,8 +214,8 @@ const AddBlog = () => {
               },
             },
           }}
-          name={"content"}
-          value={blogData.content}
+          name={"mainData"}
+          value={blogData.mainData}
           onChange={handleInputChange}
         />
       </Box>

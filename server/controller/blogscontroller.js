@@ -4,8 +4,8 @@ const User = require("../model/auth-schema");
 const BlogsControllerFunction = {
   Create: async (req, res) => {
     try {
-      const { image, title, metaDescription, content } = req.body;
-      if (!title || !metaDescription || !content || !image) {
+      const { image, title, metaDescription, mainData } = req.body;
+      if (!title || !metaDescription || !mainData || !image) {
         return await res
           .status(400)
           .json({ success: false, message: "PLEASE FILL IN ALL FIELDS!!" });
@@ -14,7 +14,7 @@ const BlogsControllerFunction = {
         image,
         title,
         metaDescription,
-        content,
+        mainData,
       });
 
       await blogData.save();
@@ -71,7 +71,7 @@ const BlogsControllerFunction = {
 
       updatedBlog.title = req.body.title;
       updatedBlog.metaDescription = req.body.metaDescription;
-      updatedBlog.content = req.body.content;
+      updatedBlog.mainData = req.body.mainData;
       updatedBlog.image = req.body.image;
 
       await updatedBlog.save();

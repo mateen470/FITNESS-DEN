@@ -150,8 +150,8 @@ const ViewSingleBlogPage = () => {
               my={1}
               px={2}
             >
-              {blog.content &&
-                blog.content.split("\n\n").map((paragraph, index) => (
+              {blog.mainData &&
+                blog.mainData.split("\n\n").map((paragraph, index) => (
                   <React.Fragment key={index}>
                     {paragraph}
                     <br />

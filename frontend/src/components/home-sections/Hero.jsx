@@ -8,7 +8,8 @@ const Hero = ({ scrollToSection }) => {
     <Container
       sx={{
         position: "relative",
-        backgroundImage: "url(https://i.postimg.cc/RZqd1yZ4/banner.png)",
+        backgroundImage:
+          "url(https://res.cloudinary.com/diwvqpuuf/image/upload/v1685800269/banner_uzwlda.png)",
         backgroundPosition: "top center",
         backgroundRepeat: "no-repeat",
         backgroundSize: "100% auto",

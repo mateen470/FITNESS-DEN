@@ -13,9 +13,9 @@ const UpdateBlog = () => {
     title: "",
     image: "",
     metaDescription: "",
-    content: "",
+    mainData: "",
   });
-  const { title, image, metaDescription, content } = blogData;
+  const { title, image, metaDescription, mainData } = blogData;
 
   const handleInputChange = (event) => {
     event.preventDefault();
@@ -31,7 +31,7 @@ const UpdateBlog = () => {
         title: fetchedBlog.title,
         image: fetchedBlog.image,
         metaDescription: fetchedBlog.metaDescription,
-        content: fetchedBlog.content,
+        mainData: fetchedBlog.mainData,
       });
     };
     fetchBlog();
@@ -43,7 +43,7 @@ const UpdateBlog = () => {
         title,
         image,
         metaDescription,
-        content,
+        mainData,
       });
       if (updateBlog.data && updateBlog.data.success) {
         toast.success(updateBlog.data.message);
@@ -229,8 +229,8 @@ const UpdateBlog = () => {
               },
             },
           }}
-          name={"content"}
-          value={blogData.content}
+          name={"mainData"}
+          value={blogData.mainData}
           onChange={handleInputChange}
         />
       </Box>
