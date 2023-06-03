@@ -12,18 +12,6 @@ import {
 import { NavLink } from "react-router-dom";
 import LaunchIcon from "@mui/icons-material/Launch";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
-import blogCard from "../../assets/blogCard.svg";
-import blogSide from "../../assets/blogSide.svg";
-import dietCard from "../../assets/dietCard.svg";
-import dietSide from "../../assets/dietSide.svg";
-import foodCard from "../../assets/foodCard.svg";
-import foodSide from "../../assets/foodSide.svg";
-import gymCard from "../../assets/gymCard.svg";
-import gymSide from "../../assets/gymSide.svg";
-import storeCard from "../../assets/storeCard.svg";
-import storeSide from "../../assets/storeSide.svg";
-import workoutCard from "../../assets/workoutCard.svg";
-import workoutSide from "../../assets/workoutSide.svg";
 
 const cardsData = [
   {
@@ -33,8 +21,10 @@ const cardsData = [
       "Get a customized workout plan designed by experienced trainers based on your goals, fitness level, and schedule, and achieve your fitness objectives with our expert guidance.",
     expandedContent:
       "Our workout plan service offers a comprehensive approach to help you achieve your fitness goals. Our expert trainers will design a customized program based on your individual needs, including your current fitness level, goals, and schedule. Our plans include a variety of exercises to target different muscle groups and provide a well-rounded fitness experience.",
-    cardImage: workoutCard,
-    sideImage: workoutSide,
+    cardImage:
+      "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779114/workoutCard_xdtkc1.svg",
+    sideImage:
+      "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779135/workoutSide_ky9exs.svg",
     path: "/workout-plans",
   },
   {
@@ -43,8 +33,10 @@ const cardsData = [
     description:
       "Get a customized diet plan designed by experienced nutritionists based on your goals and individual needs, and achieve optimal health and wellness with our expert guidance.",
     expandedContent: `Our diet plan service offers a comprehensive approach to help you achieve your health and wellness goals. Our expert nutritionists will design a customized program based on your individual needs, including your current diet, goals, and lifestyle. Our plans include a variety of options to accommodate different dietary preferences, including vegetarian and gluten-free options.`,
-    cardImage: dietCard,
-    sideImage: dietSide,
+    cardImage:
+      "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685778055/dietCard_eoimiw.svg",
+    sideImage:
+      "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779015/dietSide_dfdcxn.svg",
     path: "/diet-plans",
   },
   {
@@ -54,8 +46,10 @@ const cardsData = [
       "Our fitness website offers an online store with a wide range of high-quality fitness products and equipment. We provide convenient online ordering and fast, reliable shipping",
     expandedContent: `Our online store offers a comprehensive range of fitness products and equipment to help you achieve your fitness objectives. We provide high-quality products that are designed to be durable and effective, from weights and resistance bands to yoga mats and workout apparel. Our online ordering system is convenient and easy to use, and we offer fast, reliable shipping to ensure that your products arrive quickly and in good condition. With our wide selection and competitive prices, we make it easy for you to find the products you need to reach your fitness goals.
     `,
-    cardImage: storeCard,
-    sideImage: storeSide,
+    cardImage:
+      "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779080/storeCard_iarhi7.svg",
+    sideImage:
+      "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779080/storeSide_oi8srk.svg",
     path: "/show-all-products",
   },
   {
@@ -65,7 +59,8 @@ const cardsData = [
       "Our fitness website offers a comprehensive blog section covering a wide range of topics related to fitness, health, and wellness.",
     expandedContent: `Our fitness blog section provides a wealth of information on a variety of topics related to fitness and wellness. Our expert writers cover everything from workout tips and nutrition advice to the latest trends in fitness and the science behind exercise. Our articles are informative, engaging, and easy to understand, making them a valuable resource for anyone looking to improve their health and fitness. 
     `,
-    cardImage: blogCard,
+    cardImage:
+      "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685736733/blogCard_lgdr4y.svg",
     sideImage:
       "https://res.cloudinary.com/abdulmateen/image/upload/v1685730103/blogSide_pgltdm.svg",
     path: "/show-all",
@@ -77,8 +72,10 @@ const cardsData = [
       "Our fitness website offers a convenient tool to help you find nearby gyms and fitness centers. With our easy-to-use platform, you can quickly find and compare gym options in your area.",
     expandedContent: `Our gym finder service makes it easy to find nearby gyms and fitness centers that meet your specific needs. Our search feature allows you to filter by location. We provide detailed information about each gym, including hours of operation and reviews to help you make an informed decision. With our easy-to-use platform, you can compare and contrast different gyms in your area to find the perfect fit for your workout routine. Whether you're a seasoned gym-goer or just starting out, our gym finder is a valuable resource to help you achieve your fitness goals.
     `,
-    cardImage: gymCard,
-    sideImage: gymSide,
+    cardImage:
+      "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779074/gymCard_eujd7k.svg",
+    sideImage:
+      "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779121/gymSide_vk23zn.svg",
     path: "/map",
   },
   {
@@ -87,8 +84,10 @@ const cardsData = [
     description:
       "Our fitness website offers a comprehensive Nutritional Fact Finder tool to help you make informed decisions about your diet. Simply enter the food item you're curious about and get detailed information on its nutritional content.",
     expandedContent: `Our Nutritional Fact Finder tool is a powerful resource designed to help you make informed decisions about your diet. With this tool, you can easily find detailed nutritional information on a wide range of foods. Simply enter the food item you're curious about, and our tool will provide nutritional information. Armed with this information, you can make smarter choices about what you eat and ensure that you're getting the right balance of nutrients to support your health and fitness goals. Our Nutritional Fact Finder tool is a valuable resource for anyone looking to take control of their diet and achieve optimal health.`,
-    cardImage: foodCard,
-    sideImage: foodSide,
+    cardImage:
+      "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779075/foodCard_ygcnls.svg",
+    sideImage:
+      "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779072/foodSide_eq2rt4.svg",
     path: "/nutrition-facts",
   },
 ];

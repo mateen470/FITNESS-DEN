@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import logo from "../../assets/logo.svg";
-import profile from "../../assets/profile.svg";
 import { NavLink } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 const NavBar = () => {
   const [displayDropDown, setDisplayDropDown] = useState(false);
@@ -41,7 +38,9 @@ const NavBar = () => {
       >
         <Box>
           <img
-            src={logo}
+            src={
+              "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779074/logo_n2sf6t.svg"
+            }
             style={{ width: "90px", height: "90px" }}
             alt="logo"
           />
@@ -240,7 +239,13 @@ const NavBar = () => {
       ) : (
         <Box mt={3}>
           <NavLink to={"/user"}>
-            <img src={profile} alt="user-profile" style={{ height: "12vh" }} />
+            <img
+              src={
+                "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779078/profile_z25g0d.svg"
+              }
+              alt="user-profile"
+              style={{ height: "12vh" }}
+            />
           </NavLink>
         </Box>
       )}

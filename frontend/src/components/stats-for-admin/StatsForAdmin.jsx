@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
-import totalPlanSold from "../../assets/totalPlanSold.svg";
-import dietPlanSold from "../../assets/dietPlanSold.svg";
-import workoutPlanSold from "../../assets/workoutPlanSold.svg";
-import dietPlanProfit from "../../assets/dietPlanProfit.svg";
-import workoutPlanProfit from "../../assets/workoutPlanProfit.svg";
-import totalSales from "../../assets/totalSales.svg";
 
 const StatsForAdmin = () => {
   const [AllPayments, setAllPayments] = useState([]);
@@ -86,7 +80,9 @@ const StatsForAdmin = () => {
                   }}
                 >
                   <img
-                    src={totalPlanSold}
+                    src={
+                      "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779082/totalPlanSold_dlyhen.svg"
+                    }
                     alt="total plans sold"
                     style={{ height: "15vh", width: "20vh" }}
                   />
@@ -133,7 +129,9 @@ const StatsForAdmin = () => {
                   }}
                 >
                   <img
-                    src={dietPlanSold}
+                    src={
+                      "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685778139/dietPlanSold_gjjhfb.svg"
+                    }
                     alt="diet plans sold"
                     style={{ height: "15vh", width: "20vh" }}
                   />
@@ -181,7 +179,9 @@ const StatsForAdmin = () => {
                   }}
                 >
                   <img
-                    src={workoutPlanSold}
+                    src={
+                      "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779113/workoutPlanSold_jixeme.svg"
+                    }
                     alt="workout plans sold"
                     style={{ height: "15vh", width: "20vh" }}
                   />
@@ -227,7 +227,9 @@ const StatsForAdmin = () => {
                   }}
                 >
                   <img
-                    src={dietPlanProfit}
+                    src={
+                      "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685778103/dietPlanProfit_wjdp7k.svg"
+                    }
                     alt="diet plans profit"
                     style={{ height: "15vh", width: "20vh" }}
                   />
@@ -273,7 +275,9 @@ const StatsForAdmin = () => {
                   }}
                 >
                   <img
-                    src={workoutPlanProfit}
+                    src={
+                      "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779111/workoutPlanProfit_gydawa.svg"
+                    }
                     alt="workout plans profit"
                     style={{ height: "15vh", width: "20vh" }}
                   />
@@ -319,7 +323,9 @@ const StatsForAdmin = () => {
                   }}
                 >
                   <img
-                    src={totalSales}
+                    src={
+                      "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779081/totalSales_bwys1f.svg"
+                    }
                     alt="total profit"
                     style={{ height: "15vh", width: "20vh" }}
                   />

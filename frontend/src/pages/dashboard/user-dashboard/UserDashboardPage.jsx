@@ -3,13 +3,13 @@ import UserDashboardSection from "../../../components/user-dashboard-section/Use
 import { Box, Container, Typography } from "@mui/material";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import { NavLink } from "react-router-dom";
-import userSmoke from "../../../assets/user-smoke.svg";
 
 const UserDashboardPage = () => {
   return (
     <Box
       sx={{
-        backgroundImage: `url(${userSmoke})`,
+        backgroundImage:
+          "url(https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779141/user-smoke_artunt.svg)",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}

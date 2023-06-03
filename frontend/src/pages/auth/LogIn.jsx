@@ -3,7 +3,6 @@ import LoginForm from "../../components/login-sections/LoginForm";
 import { Box, Grid, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
-import loginImage from "../../assets/loginPage.svg";
 const LogIn = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
@@ -41,7 +40,9 @@ const LogIn = () => {
       </Box>
       <Grid xs={4} item>
         <img
-          src={loginImage}
+          src={
+            "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779076/loginPage_uvclu2.svg"
+          }
           alt="HERO"
           style={{
             height: "99vh",

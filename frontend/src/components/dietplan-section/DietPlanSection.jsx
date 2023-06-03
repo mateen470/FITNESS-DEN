@@ -15,12 +15,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LaunchIcon from "@mui/icons-material/Launch";
 import { useDispatch, useSelector } from "react-redux";
-import dietbg from "../../assets/dietbg.svg";
-import keto from "../../assets/keto.svg";
-import mediterranean from "../../assets/mediterranean.svg";
-import muscleGain from "../../assets/muscleGain.svg";
-import vegan from "../../assets/vegan.svg";
-import weightLoss from "../../assets/weightLoss.svg";
 
 const DietPlanSection = () => {
   const dispatch = useDispatch();
@@ -34,7 +28,8 @@ const DietPlanSection = () => {
       DetailedContent:
         "The ketogenic diet (keto diet) is a low-carbohydrate, high-fat eating plan that induces ketosis, where the body uses fat for fuel instead of glucose. It involves reducing carb intake (20-50g/day) and increasing fat intake (70-75% of calories), with moderate protein intake (20-25% of calories). Healthy fats like avocados, nuts, and oils are encouraged, while sugars, grains, and starchy foods are limited. Benefits may include weight loss and improved blood sugar control, but proper nutrient balance and professional guidance are crucial. ",
       Price: 5000,
-      Image: keto,
+      Image:
+        "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779077/keto_zygdwn.svg",
     },
     {
       Type: "Diet",
@@ -44,7 +39,8 @@ const DietPlanSection = () => {
       DetailedContent:
         "A fat loss diet is an eating plan designed to facilitate weight loss by reducing body fat. It involves creating a calorie deficit by consuming fewer calories than the body requires. A balanced fat loss diet emphasizes whole, nutrient-dense foods while controlling portions and avoiding processed or high-calorie foods. It typically includes lean proteins, fruits, vegetables, whole grains, and healthy fats. Regular physical activity and a sustainable approach are essential for successful fat loss.",
       Price: 5000,
-      Image: weightLoss,
+      Image:
+        "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779098/weightLoss_n8koel.svg",
     },
     {
       Type: "Diet",
@@ -54,7 +50,8 @@ const DietPlanSection = () => {
       DetailedContent:
         "A muscle gain diet is a dietary approach aimed at increasing muscle mass and strength. It involves consuming a calorie surplus and prioritizing high-quality protein sources to support muscle protein synthesis. The diet typically includes lean proteins, complex carbohydrates, healthy fats, and proper hydration. Combined with regular strength training, the muscle gain diet optimizes muscle growth.",
       Price: 5000,
-      Image: muscleGain,
+      Image:
+        "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779077/muscleGain_nkzjft.svg",
     },
     {
       Type: "Diet",
@@ -64,7 +61,8 @@ const DietPlanSection = () => {
       DetailedContent:
         "A vegetarian or vegan diet excludes or minimizes the consumption of animal products. Vegetarians avoid meat but may consume dairy and eggs, while vegans eliminate all animal-derived products. These diets emphasize plant-based foods like fruits, vegetables, whole grains, legumes, nuts, and seeds. Proper planning ensures sufficient intake of nutrients like protein, iron, vitamin B12, and omega-3 fatty acids. Vegetarian and vegan diets are chosen for ethical, environmental, and health reasons.",
       Price: 5000,
-      Image: vegan,
+      Image:
+        "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685783026/vegan_f7kvch.svg",
     },
     {
       Type: "Diet",
@@ -74,7 +72,8 @@ const DietPlanSection = () => {
       DetailedContent:
         "The Mediterranean diet is a balanced eating pattern inspired by the traditional foods of Mediterranean countries. It emphasizes whole, minimally processed foods such as fruits, vegetables, whole grains, legumes, and nuts. Olive oil is a key component, providing healthy monounsaturated fats. Moderate amounts of fish, poultry, dairy, and eggs are included for protein and additional nutrients. Red meat and processed foods are limited. ",
       Price: 5000,
-      Image: mediterranean,
+      Image:
+        "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779076/mediterranean_upwiqd.svg",
     },
   ];
 
@@ -163,7 +162,8 @@ const DietPlanSection = () => {
               overflowY: "auto",
               border: "none",
               outline: "none",
-              backgroundImage: `url(${dietbg})`,
+              backgroundImage:
+                "url(https://res.cloudinary.com/diwvqpuuf/image/upload/v1685798206/dietbg_phtqgr.png)",
               backgroundPosition: "center",
               backgroundSize: "cover",
               elevation: 0,

@@ -16,8 +16,6 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { Link, NavLink } from "react-router-dom";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import axios from "axios";
-import cartBg from "../../../assets/workoutbg.svg";
-import emptyCart from "../../../assets/emptyCart.svg";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
@@ -138,7 +136,8 @@ const AddToCart = () => {
 
       <Box
         sx={{
-          backgroundImage: `url(${cartBg})`,
+          backgroundImage:
+            "url(https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779108/workoutbg_ifypzl.svg)",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
@@ -166,7 +165,12 @@ const AddToCart = () => {
                 p: 5,
               }}
             >
-              <img src={emptyCart} style={{ width: "60vh" }} />
+              <img
+                src={
+                  "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779071/emptyCart_ygei0a.svg"
+                }
+                style={{ width: "60vh" }}
+              />
             </Box>
           </Box>
         ) : (

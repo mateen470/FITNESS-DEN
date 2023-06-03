@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import SignUpForm from "../../components/signup-sections/SignUpForm";
 import { Box, Grid, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import signUpImage from "../../assets/signUpPage.svg";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 const SignUp = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -48,7 +47,9 @@ const SignUp = () => {
       </Grid>
       <Grid xs={5} item>
         <img
-          src={signUpImage}
+          src={
+            "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779083/signUpPage_xzu6kd.svg"
+          }
           alt="HERO"
           style={{
             height: "99vh",

@@ -3,7 +3,6 @@ import axios from "axios";
 import Nutrients from "./Nutrients";
 import { Box, Container } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import nutrition from "../../assets/nutrition.svg";
 
 const NutritionFacts = () => {
   const [searchText, setSearchText] = useState("");
@@ -80,7 +79,13 @@ const NutritionFacts = () => {
         <Nutrients data={NutritionValues} setShowModal={setShowModal} />
       ) : (
         <Box sx={{ mt: -6 }}>
-          <img src={nutrition} alt="nutrition" style={{ maxHeight: "70vh" }} />
+          <img
+            src={
+              "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779127/nutrition_hlg4qw.svg"
+            }
+            alt="nutrition"
+            style={{ maxHeight: "70vh" }}
+          />
         </Box>
       )}
     </Container>

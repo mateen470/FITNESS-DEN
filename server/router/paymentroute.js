@@ -47,7 +47,6 @@ router.get("/allPayments", async (req, res) => {
 router.post("/ecom-allPayments", async (req, res) => {
   try {
     const data = new EcomAllPaymentsModel();
-    console.log(req.body);
     data.IDofCurrentUser = req.body.IDofCurrentUser;
     data.AllProductsBoughtInfo = req.body.AllProductsBoughtInfo;
     data.CheckoutData = req.body.CheckoutData;

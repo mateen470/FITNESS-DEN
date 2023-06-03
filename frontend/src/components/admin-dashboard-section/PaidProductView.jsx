@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const PaidProductView = () => {
-  return (
-    <div>PaidProductView</div>
-  )
-}
+  return <div></div>;
+};
 
-export default PaidProductView
+export default PaidProductView;

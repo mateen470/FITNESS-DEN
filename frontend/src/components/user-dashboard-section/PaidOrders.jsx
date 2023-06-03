@@ -10,8 +10,6 @@ import {
 } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
-import userSmoke from "../../assets/user-smoke.svg";
-import emptyCart from "../../assets/emptyCart.svg";
 import axios from "axios";
 
 const PaidOrders = () => {
@@ -31,7 +29,8 @@ const PaidOrders = () => {
   return (
     <Box
       sx={{
-        backgroundImage: `url(${userSmoke})`,
+        backgroundImage:
+          "url(https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779141/user-smoke_artunt.svg)",
         backgroundSize: "cover",
         backgroundPosition: "center",
         minHeight: "100vh",
@@ -78,7 +77,12 @@ const PaidOrders = () => {
               p: 5,
             }}
           >
-            <img src={emptyCart} style={{ width: "60vh" }} />
+            <img
+              src={
+                "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779071/emptyCart_ygei0a.svg"
+              }
+              style={{ width: "60vh" }}
+            />
           </Box>
         </Box>
       ) : (
@@ -127,12 +131,12 @@ const PaidOrders = () => {
           <TableBody>
             {products.map((item) => {
               const allProducts = item.AllProductsBoughtInfo[0]?.AllProducts;
-              const totalPayment = item.AllProductsBoughtInfo[0]?.TotalPayment;
 
               return allProducts.map((product, productIndex) => {
                 const mainImage = product.mainImage;
                 const title = product.title;
                 const quantity = product.quantity;
+                const totalPayment = product.price;
 
                 return (
                   <TableRow key={productIndex}>
@@ -183,7 +187,7 @@ const PaidOrders = () => {
                         fontFamily: "Comme, sans-serif",
                       }}
                     >
-                      Rs.{totalPayment}
+                      Rs.{totalPayment * quantity}
                     </TableCell>
                     <TableCell
                       sx={{

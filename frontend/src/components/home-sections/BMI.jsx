@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Box, Container, Typography } from "@mui/material";
-import bmiImage from "../../assets/BMI.svg";
 const BMI = () => {
   const [height, setHeight] = useState();
   const [weight, setWeight] = useState();
@@ -17,7 +16,8 @@ const BMI = () => {
       sx={{
         mt: 10,
         position: "relative",
-        backgroundImage: `url(${bmiImage})`,
+        backgroundImage:
+          "url(https://res.cloudinary.com/diwvqpuuf/image/upload/v1685736861/BMI_vthukj.svg)",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",

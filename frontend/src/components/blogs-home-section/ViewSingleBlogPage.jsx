@@ -6,7 +6,6 @@ import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrow
 import Footer from "../home-sections/Footer";
 import axios from "axios";
 import FeaturedBlogs from "./FeaturedBlogs";
-import userSmoke from "../../assets/user-smoke.svg";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
 import Comments from "./Comments";
@@ -73,7 +72,8 @@ const ViewSingleBlogPage = () => {
         container
         p={3}
         sx={{
-          backgroundImage: `url(${userSmoke})`,
+          backgroundImage:
+            "url(https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779141/user-smoke_artunt.svg)",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}

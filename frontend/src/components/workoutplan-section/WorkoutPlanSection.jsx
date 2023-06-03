@@ -15,12 +15,6 @@ import {
 import LaunchIcon from "@mui/icons-material/Launch";
 import { SetSelectedPlanToBuy } from "../../context/SelectedPlan";
 import { useDispatch, useSelector } from "react-redux";
-import resistance from "../../assets/resistance.svg";
-import cardio from "../../assets/cardio.svg";
-import core from "../../assets/core.svg";
-import flex from "../../assets/flex.svg";
-import balance from "../../assets/balance.svg";
-import workoutbg from "../../assets/workoutbg.svg";
 
 const WorkoutPlanSection = () => {
   const dispatch = useDispatch();
@@ -35,7 +29,8 @@ const WorkoutPlanSection = () => {
       DetailedContent:
         "Resistance training, also referred to as strength training or weightlifting, is a targeted exercise approach aimed at enhancing muscle strength and promoting muscle growth. It involves utilizing various forms of resistance, such as bodyweight, free weights, or resistance machines, to challenge specific muscle groups. Through a process of muscle fiber breakdown and subsequent repair, resistance training induces muscle adaptation and hypertrophy. Compound exercises like squats and bench presses, isolation exercises like bicep curls, and bodyweight exercises are commonly employed.",
       Price: 5000,
-      Image: resistance,
+      Image:
+        "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779091/resistance_t10nnx.svg",
     },
     {
       Type: "Workout",
@@ -45,7 +40,8 @@ const WorkoutPlanSection = () => {
       DetailedContent:
         "Cardiovascular training, also known as cardio or aerobic exercise, involves engaging in activities that elevate the heart rate and improve cardiovascular endurance. These activities, such as running, swimming, cycling, or high-intensity interval training (HIIT), target large muscle groups and require sustained effort. By regularly participating in cardiovascular training, individuals can enhance their heart and lung function, improve circulation, increase stamina, and burn calories. ",
       Price: 5000,
-      Image: cardio,
+      Image:
+        "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685736903/cardio_zrtunl.svg",
     },
     {
       Type: "Workout",
@@ -55,7 +51,8 @@ const WorkoutPlanSection = () => {
       DetailedContent:
         "Core training encompasses exercises that specifically target and strengthen the muscles of the abdomen, lower back, and hips. By focusing on the core muscles, including the rectus abdominis, obliques, transverse abdominis, and erector spinae, core training improves stability, balance, and posture. Common core exercises include planks, crunches, Russian twists, bridges, and supermans, which engage these muscle groups. Regular core training not only enhances functional strength but also helps prevent injuries related to the core area and promotes better overall back health.",
       Price: 5000,
-      Image: core,
+      Image:
+        "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685736952/core_byaozl.svg",
     },
     {
       Type: "Workout",
@@ -65,7 +62,8 @@ const WorkoutPlanSection = () => {
       DetailedContent:
         "Flexibility and mobility training focuses on exercises and practices that improve the body's range of motion and movement capabilities. It involves stretching, dynamic movements, and exercises targeting joint mobility and muscle flexibility. By incorporating flexibility and mobility training into a fitness routine, individuals can enhance physical performance, prevent injuries, improve posture, and develop better movement patterns.",
       Price: 5000,
-      Image: flex,
+      Image:
+        "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779071/flex_rooims.svg",
     },
     {
       Type: "Workout",
@@ -165,7 +163,8 @@ const WorkoutPlanSection = () => {
               overflowY: "auto",
               border: "none",
               outline: "none",
-              backgroundImage: `url(${workoutbg})`,
+              backgroundImage:
+                "url(https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779108/workoutbg_ifypzl.svg)",
               backgroundPosition: "center",
               backgroundSize: "cover",
               elevation: 0,

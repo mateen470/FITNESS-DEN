@@ -4,7 +4,6 @@ import { Box, Rating, Typography, Button } from "@mui/material";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import ReactImageMagnify from "react-image-magnify";
 import Footer from "../../home-sections/Footer";
-import userSmoke from "../../../assets/user-smoke.svg";
 import axios from "axios";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import RelevantProducts from "./RelevantProducts";
@@ -79,7 +78,8 @@ const ViewSingleProduct = () => {
       <Box
         sx={{
           p: 3,
-          backgroundImage: `url(${userSmoke})`,
+          backgroundImage:
+            "url(https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779141/user-smoke_artunt.svg)",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}

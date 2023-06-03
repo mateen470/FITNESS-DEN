@@ -1,8 +1,6 @@
 import React from "react";
-import Typography from "@mui/material/Typography";
 import { Box, Button, Container } from "@mui/material";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
-import bannerImage from "../../assets/banner.svg";
 import NavBar from "./NavBar";
 
 const Hero = ({ scrollToSection }) => {
@@ -10,7 +8,7 @@ const Hero = ({ scrollToSection }) => {
     <Container
       sx={{
         position: "relative",
-        backgroundImage: `url(${bannerImage})`,
+        backgroundImage: "url(https://i.postimg.cc/RZqd1yZ4/banner.png)",
         backgroundPosition: "top center",
         backgroundRepeat: "no-repeat",
         backgroundSize: "100% auto",
@@ -20,45 +18,6 @@ const Hero = ({ scrollToSection }) => {
       }}
     >
       <NavBar />
-      {/* <Box
-        sx={{
-          ml: "6vw",
-          transform: "rotate(90deg)",
-          transformOrigin: "top left",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "flex-start",
-        }}
-      >
-        <Typography
-          color={"white"}
-          display={"inline-block"}
-          sx={{
-            fontSize: "5vw",
-            textShadow: "3px 0px 0px purple",
-            fontWeight: 800,
-          }}
-        >
-          own your
-          <Typography
-            sx={{
-              background:
-                " linear-gradient( rgba(92, 58, 180, 1) ,rgba(134, 69, 252, 1) ) ",
-              backgroundClip: "text",
-              webkitBackgroundClip: "text",
-              color: "transparent",
-              textShadow: "none",
-              fontWeight: 800,
-              fontSize: "5vw",
-            }}
-            color={"white"}
-            display={"inline-block"}
-            ml={1}
-          >
-            FITNESS
-          </Typography>
-        </Typography>
-      </Box> */}
       <Box
         sx={{
           textAlign: "center",
