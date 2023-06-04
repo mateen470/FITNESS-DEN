@@ -36,7 +36,7 @@ const FeaturedBlogs = ({ id }) => {
         </Typography>
         {allBlogs.map((data, index) =>
           data._id !== id ? (
-            <Card sx={{ position: "relative", my: 2 }}>
+            <Card sx={{ position: "relative", my: 2 }} key={index}>
               <CardContent>
                 <Typography
                   key={index}

@@ -230,7 +230,7 @@ const AuthControllerFunctions = {
     } catch (error) {
       return await res.status(500).json({
         success: false,
-        message: `FAILED TO LOGOUT!!`,
+        message: "FAILED TO LOGOUT!!",
       });
     }
   },
