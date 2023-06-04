@@ -162,7 +162,7 @@ const MapSection = () => {
           position: pos,
           map: map,
           icon: {
-            url: usergps,
+            url: "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685901274/usergps_rk5beg.svg",
             scaledSize: new window.google.maps.Size(50, 50),
           },
         });
