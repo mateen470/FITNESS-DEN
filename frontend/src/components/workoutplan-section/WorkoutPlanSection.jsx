@@ -1,5 +1,5 @@
-import React, {  useState } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
@@ -15,11 +15,19 @@ import {
 import LaunchIcon from "@mui/icons-material/Launch";
 import { SetSelectedPlanToBuy } from "../../context/SelectedPlan";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 
 const WorkoutPlanSection = () => {
   const dispatch = useDispatch();
   const { isUser } = useSelector((state) => state.CheckForUserType);
-
+  const [Plan, setPlan] = useState([]);
+  const [WorkoutPlanRequests, setWorkoutPlanRequests] = useState([]);
+  const navigate = useNavigate();
+  const flag = useRef(false);
+  const flag1 = useRef(false);
+  const IDofCurrentUser = useSelector(
+    (state) => state.CurrentUser.CurrentUserID
+  );
   const AllPlans = [
     {
       Type: "Workout",
@@ -77,6 +85,39 @@ const WorkoutPlanSection = () => {
         "https://res.cloudinary.com/abdulmateen/image/upload/v1685729842/balance_zvnkqo.svg",
     },
   ];
+
+  const checkIfPlanAlreadyBought = (Title) => {
+    axios.get("workout/all-workout-plans/" + IDofCurrentUser).then((res) => {
+      setPlan(res.data.data);
+    });
+    var filteredWorkoutPlan = Plan.filter((Item) => Item.PlanName === Title);
+    console.log(filteredWorkoutPlan.length);
+    if (filteredWorkoutPlan.length > 0) {
+      flag.current = true;
+      console.log(flag);
+    } else flag.current = false;
+
+    axios
+      .get("workout/all-new-workout-requests")
+      .then((res) => setWorkoutPlanRequests(res.data.data));
+    var filteredWorkoutPlanRequests = WorkoutPlanRequests.filter(
+      (Request) =>
+        Request.IDofCurrentUser === IDofCurrentUser && Request.title === Title
+    );
+    console.log(filteredWorkoutPlanRequests);
+    if (filteredWorkoutPlanRequests.length > 0) {
+      flag1.current = true;
+    } else flag1.current = false;
+  };
+
+  const CheckFlags = () => {
+    if (flag.current || flag1.current) {
+      toast.error("YOU HAVE ALREADY BOUGHT THIS PLAN");
+    } else navigate("/workout-plan-form");
+  };
+  useEffect(() => {
+    checkIfPlanAlreadyBought();
+  }, []);
 
   const CustomCard = ({ data, index }) => {
     const [isExpanded, setIsExpanded] = useState(false);
@@ -198,11 +239,13 @@ const WorkoutPlanSection = () => {
                     height: 40,
                     width: 100,
                   }}
-                  onClick={() =>
-                    dispatch(SetSelectedPlanToBuy(AllPlans[index]))
-                  }
+                  onClick={() => {
+                    checkIfPlanAlreadyBought(data.Title);
+                    CheckFlags();
+                    dispatch(SetSelectedPlanToBuy(AllPlans[index]));
+                  }}
                 >
-                  <NavLink to="/workout-plan-form">
+                  <NavLink>
                     <Typography
                       color={"white"}
                       fontFamily={"Rubik, sans-serif"}

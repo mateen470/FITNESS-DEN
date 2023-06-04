@@ -50,6 +50,10 @@ const EcomPayment = () => {
               CheckoutData: CheckoutData,
             })
             .then(async (res) => {
+              axios.post("payment/allPayments", {
+                PlanType: "Ecom Product",
+                PlanAmount: ProductsToBuyInfo.TotalPayment,
+              });
               toast.success(
                 "PAYMENT SUCCESSFULL. YOUR ORDER IS BEING PROCESSED"
               );

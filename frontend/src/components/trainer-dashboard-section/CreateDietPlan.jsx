@@ -87,7 +87,7 @@ const CreateDietPlan = () => {
       .then(() =>
         dispatch(setDietPlanRequestsLength(CurrentDietPlanRequestsLength - 1))
       );
-    navigate("/all-diet-plan-req");
+    navigate("/trainer");
   };
 
   const handleSubmit = () => {

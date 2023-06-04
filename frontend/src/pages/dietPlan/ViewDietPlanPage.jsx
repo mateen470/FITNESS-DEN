@@ -17,18 +17,18 @@ import { useSelector } from "react-redux";
 
 const ViewDietPlanPage = () => {
   const [DietPlan, setDietPlan] = useState([]);
-  const [ResponseFromDB, setResponseFromDB] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [planExist, setplanExist] = useState(false);
+  const [indx, setindx] = useState(-1);
   const IDofCurrentUser = useSelector(
     (state) => state.CurrentUser.CurrentUserID
   );
   const FetchDietPlan = async () => {
     await axios.get("diet/all-diet-plans/" + IDofCurrentUser).then((res) => {
-      setDietPlan(res.data.data.DietPlan);
-      setResponseFromDB(res.data.data);
+      setDietPlan(res.data.data);
     });
   };
+
   useEffect(() => FetchDietPlan, []);
   useEffect(() => {
     DietPlan.length === 0 ? setplanExist(false) : setplanExist(true);
@@ -129,6 +129,7 @@ const ViewDietPlanPage = () => {
       default:
         return <TableCell></TableCell>;
     }
+    console.log(DietPlan);
   };
   return (
     <Container
@@ -165,106 +166,141 @@ const ViewDietPlanPage = () => {
         <DietPlanUpdateRequestModal
           modalOpen={modalOpen}
           setModalOpen={setModalOpen}
-          Plan={ResponseFromDB}
+          Plan={DietPlan[indx]}
         />
       )}
       {planExist ? (
-        <>
-          <Typography
-            color={"white"}
-            fontFamily={"Comme, sans-serif"}
-            fontWeight={800}
-            fontSize={"6vh"}
-            textAlign={"center"}
-            my={3}
-          >
-            {ResponseFromDB.PlanName}
-          </Typography>
-          {DietPlan.map((item, index) => (
-            <>
-              <Typography
-                color={"white"}
-                fontFamily={"Comme, sans-serif"}
-                fontWeight={800}
-                fontSize={"5vh"}
-                mt={3}
+        DietPlan.map((Plan, index1) => (
+          <>
+            <Typography
+              color={"white"}
+              fontFamily={"Comme, sans-serif"}
+              fontWeight={800}
+              fontSize={"6vh"}
+              textAlign={"center"}
+              my={3}
+            >
+              {Plan.PlanName}
+            </Typography>
+            {Plan.DietPlan.map((item, index) => (
+              <>
+                <Typography
+                  color={"white"}
+                  fontFamily={"Comme, sans-serif"}
+                  fontWeight={800}
+                  fontSize={"5vh"}
+                  mt={3}
+                >
+                  Week {index + 1}
+                </Typography>
+
+                <Table sx={{ mb: 5 }}>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell></TableCell>
+                      <TableCell
+                        sx={{
+                          color: "white",
+                          fontWeight: "bold",
+                          fontSize: "5vh",
+                          fontFamily: "Comme, sans-serif",
+                        }}
+                      >
+                        Breakfast
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          color: "white",
+                          fontWeight: "bold",
+                          fontSize: "5vh",
+                          fontFamily: "Comme, sans-serif",
+                        }}
+                      >
+                        Lunch
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          color: "white",
+                          fontWeight: "bold",
+                          fontSize: "5vh",
+                          fontFamily: "Comme, sans-serif",
+                        }}
+                      >
+                        Dinner
+                      </TableCell>
+                    </TableRow>
+                  </TableHead>
+
+                  {item.map((i, key) => (
+                    <TableBody>
+                      {handleDay(key)}
+                      <TableCell
+                        sx={{
+                          color: "white",
+                          fontSize: "3.5vh",
+                          fontFamily: "Comme, sans-serif",
+                        }}
+                      >
+                        {i.BreakFast}
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          color: "white",
+                          fontSize: "3.5vh",
+                          fontFamily: "Comme, sans-serif",
+                        }}
+                      >
+                        {i.Lunch}
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          color: "white",
+                          fontSize: "3.5vh",
+                          fontFamily: "Comme, sans-serif",
+                        }}
+                      >
+                        {i.Dinner}
+                      </TableCell>
+                    </TableBody>
+                  ))}
+                </Table>
+              </>
+            ))}
+            <Box
+              sx={{
+                display: planExist ? "flex" : "none",
+                alignItems: "center",
+                justifyContent: "center",
+                mb: 10,
+                mt: 4,
+              }}
+            >
+              <button
+                onClick={() => {
+                  setModalOpen(true);
+                  setindx(index1);
+                }}
+                style={{
+                  background: "white",
+                  borderRadius: "5px",
+                  cursor: "pointer",
+                  border: "none",
+                }}
               >
-                Week {index + 1}
-              </Typography>
-
-              <Table sx={{ mb: 5 }}>
-                <TableHead>
-                  <TableRow>
-                    <TableCell></TableCell>
-                    <TableCell
-                      sx={{
-                        color: "white",
-                        fontWeight: "bold",
-                        fontSize: "5vh",
-                        fontFamily: "Comme, sans-serif",
-                      }}
-                    >
-                      Breakfast
-                    </TableCell>
-                    <TableCell
-                      sx={{
-                        color: "white",
-                        fontWeight: "bold",
-                        fontSize: "5vh",
-                        fontFamily: "Comme, sans-serif",
-                      }}
-                    >
-                      Lunch
-                    </TableCell>
-                    <TableCell
-                      sx={{
-                        color: "white",
-                        fontWeight: "bold",
-                        fontSize: "5vh",
-                        fontFamily: "Comme, sans-serif",
-                      }}
-                    >
-                      Dinner
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-
-                {item.map((i, key) => (
-                  <TableBody>
-                    {handleDay(key)}
-                    <TableCell
-                      sx={{
-                        color: "white",
-                        fontSize: "3.5vh",
-                        fontFamily: "Comme, sans-serif",
-                      }}
-                    >
-                      {i.BreakFast}
-                    </TableCell>
-                    <TableCell
-                      sx={{
-                        color: "white",
-                        fontSize: "3.5vh",
-                        fontFamily: "Comme, sans-serif",
-                      }}
-                    >
-                      {i.Lunch}
-                    </TableCell>
-                    <TableCell
-                      sx={{
-                        color: "white",
-                        fontSize: "3.5vh",
-                        fontFamily: "Comme, sans-serif",
-                      }}
-                    >
-                      {i.Dinner}
-                    </TableCell>
-                  </TableBody>
-                ))}
-              </Table>
-            </>
-          ))}
-        </>
+                <Typography
+                  fontSize={"3.5vh"}
+                  color={"black"}
+                  fontWeight={800}
+                  textAlign={"center"}
+                  px={2}
+                  py={1}
+                >
+                  Update Plan
+                </Typography>
+              </button>
+            </Box>
+          </>
+        ))
       ) : (
         <Container
           sx={{
@@ -299,38 +335,6 @@ const ViewDietPlanPage = () => {
           </Typography>
         </Container>
       )}
-      <Box
-        sx={{
-          display: planExist ? "flex" : "none",
-          alignItems: "center",
-          justifyContent: "center",
-          mb: 10,
-          mt: 4,
-        }}
-      >
-        <button
-          onClick={() => {
-            setModalOpen(true);
-          }}
-          style={{
-            background: "white",
-            borderRadius: "5px",
-            cursor: "pointer",
-            border: "none",
-          }}
-        >
-          <Typography
-            fontSize={"3.5vh"}
-            color={"black"}
-            fontWeight={800}
-            textAlign={"center"}
-            px={2}
-            py={1}
-          >
-            Update Plan
-          </Typography>
-        </button>
-      </Box>
     </Container>
   );
 };

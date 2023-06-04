@@ -1,5 +1,5 @@
-import React, {  useState } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   Container,
   Typography,
@@ -15,10 +15,19 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LaunchIcon from "@mui/icons-material/Launch";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 
 const DietPlanSection = () => {
   const dispatch = useDispatch();
   const { isUser } = useSelector((state) => state.CheckForUserType);
+  const [DietPlan, setDietPlan] = useState([]);
+  const flag = useRef(false);
+  const flag1 = useRef(false);
+  const [DietPlanRequests, setDietPlanRequests] = useState([]);
+  const navigate = useNavigate();
+  const IDofCurrentUser = useSelector(
+    (state) => state.CurrentUser.CurrentUserID
+  );
   const AllPlans = [
     {
       Type: "Diet",
@@ -76,6 +85,36 @@ const DietPlanSection = () => {
         "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779076/mediterranean_upwiqd.svg",
     },
   ];
+
+  const checkIfPlanAlreadyBought = (Title) => {
+    console.log(Title);
+    axios.get("diet/all-diet-plans/" + IDofCurrentUser).then((res) => {
+      setDietPlan(res.data.data);
+    });
+    var filteredDietPlan = DietPlan.filter((Plan) => Plan.PlanName === Title);
+    console.log(filteredDietPlan.length);
+    if (filteredDietPlan.length > 0) {
+      flag.current = true;
+    } else flag.current = false;
+    axios
+      .get("diet/all-new-diet-requests")
+      .then((res) => setDietPlanRequests(res.data.data));
+    var filteredDietPlanRequests = DietPlanRequests.filter(
+      (Request) =>
+        Request.IDofCurrentUser === IDofCurrentUser && Request.Title === Title
+    );
+    console.log(filteredDietPlanRequests);
+    if (filteredDietPlanRequests.length > 0) {
+      flag1.current = true;
+    } else flag1.current = false;
+  };
+
+  const CheckFlags = () => {
+    if (flag.current || flag1.current) {
+      toast.error("YOU HAVE ALREADY BOUGHT THIS PLAN");
+    } else navigate("/diet-plan-form");
+  };
+  useEffect(() => checkIfPlanAlreadyBought(), []);
 
   const CustomCard = ({ data, index }) => {
     const [isExpanded, setIsExpanded] = useState(false);
@@ -197,11 +236,13 @@ const DietPlanSection = () => {
                     height: 40,
                     width: 100,
                   }}
-                  onClick={() =>
-                    dispatch(SetSelectedPlanToBuy(AllPlans[index]))
-                  }
+                  onClick={() => {
+                    checkIfPlanAlreadyBought(data.Title);
+                    CheckFlags();
+                    dispatch(SetSelectedPlanToBuy(AllPlans[index]));
+                  }}
                 >
-                  <NavLink to="/diet-plan-form">
+                  <NavLink>
                     <Typography
                       color={"white"}
                       fontFamily={"Rubik, sans-serif"}

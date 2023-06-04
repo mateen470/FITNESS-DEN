@@ -5,7 +5,7 @@ import { setDietPlanUpdateRequestsLength } from "../../context/CheckForNewPlanRe
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ConfirmationModal from "../confirmation-model/ConfirmationModal";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 
 import {
@@ -23,6 +23,7 @@ import {
 } from "@mui/material";
 
 const UpdateDietPlan = () => {
+  const navigate = useNavigate();
   const PlanToUpdateID = useSelector((state) => state.UpdatePlan.DietPlanId);
   const CurrentDietPlanUpdateRequestsLength = useSelector(
     (state) => state.CheckForNewPlanRequests.DietPlanUpdateRequestsLength
@@ -73,12 +74,14 @@ const UpdateDietPlan = () => {
       toast.success("PLAN UPDATED SUCCESSFULLY");
       axios
         .delete("diet/diet-update-request/" + ReqId)
-        .then(() =>
-          dispatch(
-            setDietPlanUpdateRequestsLength(
-              CurrentDietPlanUpdateRequestsLength - 1
-            )
-          )
+        .then(
+          () =>
+            dispatch(
+              setDietPlanUpdateRequestsLength(
+                CurrentDietPlanUpdateRequestsLength - 1
+              )
+            ),
+          navigate("/trainer")
         );
     });
   };

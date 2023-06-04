@@ -81,7 +81,7 @@ const DietPlanControllerFunctions = {
   },
   GetAllCompletedPlans: async (req, res) => {
     try {
-      const allCompletedPlans = await CompletedDietPlanFromTrainer.findOne({
+      const allCompletedPlans = await CompletedDietPlanFromTrainer.find({
         IDofCurrentUser: req.params.id,
       });
       return await res.status(200).json({

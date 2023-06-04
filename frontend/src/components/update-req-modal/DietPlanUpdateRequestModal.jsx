@@ -18,7 +18,7 @@ const DietPlanUpdateRequestModal = ({ modalOpen, setModalOpen, Plan }) => {
           PlanId,
           UpdateDescription,
         })
-        .then((res) => console.log(res.data.data));
+        .then((res) => toast.success(res.data.message));
     }
   };
   return (

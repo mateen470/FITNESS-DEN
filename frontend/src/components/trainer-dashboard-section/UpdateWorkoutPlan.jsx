@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";
 import { setWorkoutPlanUpdateRequestsLength } from "../../context/CheckForNewPlanRequests";
 import ConfirmationModal from "../confirmation-model/ConfirmationModal";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import {
   WorkoutNameValidation,
@@ -24,6 +24,7 @@ import {
 } from "@mui/material";
 
 const UpdateWorkoutPlan = () => {
+  const navigate = useNavigate();
   const [counter, setCounter] = useState(0);
   const [counter1, setCounter1] = useState(0);
   const [counter2, setCounter2] = useState(0);
@@ -150,12 +151,14 @@ const UpdateWorkoutPlan = () => {
         toast.success("PLAN UPDATED SUCCESSFULLY");
         axios
           .delete("workout/workout-update-request/" + FetchedPlan._id)
-          .then(() =>
-            dispatch(
-              setWorkoutPlanUpdateRequestsLength(
-                CurrentWorkoutPlanUpdateRequestsLength - 1
-              )
-            )
+          .then(
+            () =>
+              dispatch(
+                setWorkoutPlanUpdateRequestsLength(
+                  CurrentWorkoutPlanUpdateRequestsLength - 1
+                )
+              ),
+            navigate("/trainer")
           );
       })
       .catch("THERE WAS ERROR UPDATING");

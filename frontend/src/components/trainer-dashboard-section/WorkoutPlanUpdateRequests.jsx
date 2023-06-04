@@ -70,6 +70,16 @@ const WorkoutPlanUpdateRequests = () => {
                   fontFamily: "Comme, sans-serif",
                 }}
               >
+                ID
+              </TableCell>
+              <TableCell
+                sx={{
+                  color: "white",
+                  fontWeight: "bold",
+                  fontSize: "5vh",
+                  fontFamily: "Comme, sans-serif",
+                }}
+              >
                 Description
               </TableCell>
               <TableCell
@@ -96,6 +106,16 @@ const WorkoutPlanUpdateRequests = () => {
                       fontFamily: "Comme, sans-serif",
                     }}
                   >
+                    {index + 1}
+                  </TableCell>
+                  <TableCell
+                    className="requestDescriotion"
+                    sx={{
+                      color: "white",
+                      fontSize: "5vh",
+                      fontFamily: "Comme, sans-serif",
+                    }}
+                  >
                     {i.Description}
                   </TableCell>
                   <TableCell>
@@ -107,7 +127,6 @@ const WorkoutPlanUpdateRequests = () => {
                       >
                         <VisibilityRoundedIcon
                           id={index}
-                          onClick={handleUpdate}
                           sx={{ color: "white", fontSize: "6vh" }}
                         />
                       </NavLink>

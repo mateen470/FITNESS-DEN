@@ -95,7 +95,7 @@ const CreateWorkoutPlan = () => {
           setWorkoutPlanRequestsLength(CurrentWorkoutPlanRequestsLength - 1)
         )
       );
-    navigate("/all-workout-plan-req");
+    navigate("/trainer");
   };
 
   const handleSubmit = () => {

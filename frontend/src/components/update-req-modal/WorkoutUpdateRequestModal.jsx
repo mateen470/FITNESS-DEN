@@ -17,7 +17,7 @@ const WorkoutUpdateRequestModal = ({ modalOpen, setModalOpen, Plan }) => {
           Description: Description,
           Plan: Plan,
         })
-        .then((res) => console.log(res.data.data));
+        .then((res) => toast.success(res.data.message));
     }
   };
   return (

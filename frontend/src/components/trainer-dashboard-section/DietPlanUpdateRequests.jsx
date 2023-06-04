@@ -98,7 +98,7 @@ const DietPlanUpdateRequests = () => {
                   fontFamily: "Comme, sans-serif",
                 }}
               >
-                {item._id}
+                {index + 1}
               </TableCell>
               <TableCell
                 sx={{

@@ -22,6 +22,7 @@ const ViewWorkoutPlanPage = () => {
   const [ResponseFromDB, setResponseFromDB] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [planExist, setplanExist] = useState(false);
+  const [idx, setIdx] = useState();
   const IDofCurrentUser = useSelector(
     (state) => state.CurrentUser.CurrentUserID
   );
@@ -29,22 +30,22 @@ const ViewWorkoutPlanPage = () => {
     await axios
       .get("workout/all-workout-plans/" + IDofCurrentUser)
       .then((res) => {
-        setPlan(res.data.data.WorkoutPlan);
-        setResponseFromDB(res.data.data);
+        setPlan(res.data.data);
       });
   };
   useEffect(() => handlePlan, []);
   useEffect(() => {
     Plan.length === 0 ? setplanExist(false) : setplanExist(true);
-    console.log(ResponseFromDB)
+    console.log(ResponseFromDB);
   }, [Plan, planExist]);
   const handleClick = (Week, Day) => {
     Plan.map((item) =>
-      item.map(
-        (y) =>
-          y.Week === Week &&
-          y.Day === Day &&
-          dispatch(FetchExcercise(y.Excercise))
+      item.WorkoutPlan.map((y) =>
+        y.map((x) => {
+          x.Week === Week &&
+            x.Day === Day &&
+            dispatch(FetchExcercise(x.Excercise));
+        })
       )
     );
   };
@@ -145,6 +146,7 @@ const ViewWorkoutPlanPage = () => {
         return <TableCell></TableCell>;
     }
   };
+  console.log(Plan);
   return (
     <Container
       sx={{
@@ -180,83 +182,118 @@ const ViewWorkoutPlanPage = () => {
         <UpdateRequestModal
           modalOpen={modalOpen}
           setModalOpen={setModalOpen}
-          Plan={ResponseFromDB}
+          Plan={Plan[idx]}
         />
       )}
       {planExist ? (
-        <>
-          <Typography
-            color={"white"}
-            fontFamily={"Comme, sans-serif"}
-            fontWeight={800}
-            fontSize={"6vh"}
-            textAlign={"center"}
-            my={3}
-          >
-            {ResponseFromDB.PlanName}
-          </Typography>
-          {Plan.map((i, index) => (
-            <>
-              <Typography
-                color={"white"}
-                fontFamily={"Comme, sans-serif"}
-                fontWeight={800}
-                fontSize={"5vh"}
-                mt={3}
-              >
-                Week{index + 1}
-              </Typography>
-              <Table sx={{ mb: 5 }}>
-                <TableHead>
-                  <TableRow>
-                    <TableCell
-                      sx={{
-                        color: "white",
-                        fontWeight: "bold",
-                        fontSize: "5vh",
-                        fontFamily: "Comme, sans-serif",
-                      }}
-                    >
-                      Day
-                    </TableCell>
-                    <TableCell
-                      sx={{
-                        color: "white",
-                        fontWeight: "bold",
-                        fontSize: "5vh",
-                        fontFamily: "Comme, sans-serif",
-                      }}
-                    >
-                      Exercise
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {i.map((x) => (
+        Plan.map((Item, mainIndex) => (
+          <>
+            <Typography
+              color={"white"}
+              fontFamily={"Comme, sans-serif"}
+              fontWeight={800}
+              fontSize={"6vh"}
+              textAlign={"center"}
+              my={3}
+            >
+              {Item.PlanName}
+            </Typography>
+            {Item.WorkoutPlan.map((i, index) => (
+              <>
+                <Typography
+                  color={"white"}
+                  fontFamily={"Comme, sans-serif"}
+                  fontWeight={800}
+                  fontSize={"5vh"}
+                  mt={3}
+                >
+                  Week{index + 1}
+                </Typography>
+                <Table sx={{ mb: 5 }}>
+                  <TableHead>
                     <TableRow>
-                      {handleDay(x.Day)}
-                      <TableCell onClick={() => handleClick(x.Week, x.Day)}>
-                        <NavLink to="/exercise">
-                          <Typography
-                            sx={{
-                              color: "white",
-                              fontSize: "3.5vh",
-                              fontFamily: "Comme, sans-serif",
-                              borderBottom: "0.5px solid white",
-                              display: "inline-block",
-                            }}
-                          >
-                            {x.BodyPart}
-                          </Typography>
-                        </NavLink>
+                      <TableCell
+                        sx={{
+                          color: "white",
+                          fontWeight: "bold",
+                          fontSize: "5vh",
+                          fontFamily: "Comme, sans-serif",
+                        }}
+                      >
+                        Day
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          color: "white",
+                          fontWeight: "bold",
+                          fontSize: "5vh",
+                          fontFamily: "Comme, sans-serif",
+                        }}
+                      >
+                        Exercise
                       </TableCell>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </>
-          ))}
-        </>
+                  </TableHead>
+                  <TableBody>
+                    {i.map((x) => (
+                      <TableRow>
+                        {handleDay(x.Day)}
+                        <TableCell onClick={() => handleClick(x.Week, x.Day)}>
+                          <NavLink to="/exercise">
+                            <Typography
+                              sx={{
+                                color: "white",
+                                fontSize: "3.5vh",
+                                fontFamily: "Comme, sans-serif",
+                                borderBottom: "0.5px solid white",
+                                display: "inline-block",
+                              }}
+                            >
+                              {x.BodyPart}
+                            </Typography>
+                          </NavLink>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </>
+            ))}
+            <Box
+              sx={{
+                display: planExist ? "flex" : "none",
+                alignItems: "center",
+                justifyContent: "center",
+                mb: 10,
+                mt: 4,
+              }}
+            >
+              <button
+                onClick={() => {
+                  setModalOpen(true);
+                  setIdx(mainIndex);
+                }}
+                style={{
+                  background: "white",
+                  borderRadius: "5px",
+                  cursor: "pointer",
+                  border: "none",
+                }}
+              >
+                <Typography
+                  fontSize={"3.5vh"}
+                  color={"black"}
+                  fontWeight={800}
+                  textAlign={"center"}
+                  px={2}
+                  py={1}
+                >
+                  Update Plan
+                </Typography>
+              </button>
+            </Box>
+          </>
+        ))
       ) : (
         <Container
           sx={{
@@ -291,38 +328,6 @@ const ViewWorkoutPlanPage = () => {
           </Typography>
         </Container>
       )}
-      <Box
-        sx={{
-          display: planExist ? "flex" : "none",
-          alignItems: "center",
-          justifyContent: "center",
-          mb: 10,
-          mt: 4,
-        }}
-      >
-        <button
-          onClick={() => {
-            setModalOpen(true);
-          }}
-          style={{
-            background: "white",
-            borderRadius: "5px",
-            cursor: "pointer",
-            border: "none",
-          }}
-        >
-          <Typography
-            fontSize={"3.5vh"}
-            color={"black"}
-            fontWeight={800}
-            textAlign={"center"}
-            px={2}
-            py={1}
-          >
-            Update Plan
-          </Typography>
-        </button>
-      </Box>
     </Container>
   );
 };
