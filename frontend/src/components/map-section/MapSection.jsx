@@ -109,7 +109,7 @@ const MapSection = () => {
   const initMap = () => {
     try {
       const map = new window.google.maps.Map(mapRef.current, {
-        center: { lat: 31.4027, lng: 74.2126 }, 
+        center: { lat: 31.4027, lng: 74.2126 },
         zoom: 13,
       });
 
@@ -130,8 +130,8 @@ const MapSection = () => {
             position: pos,
             map: map,
             icon: {
-              url: "", 
-              scaledSize: new window.google.maps.Size(50, 50), 
+              url: "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685901274/usergps_rk5beg.svg",
+              scaledSize: new window.google.maps.Size(50, 50),
             },
           });
 
@@ -162,7 +162,7 @@ const MapSection = () => {
           position: pos,
           map: map,
           icon: {
-            url: usergps, 
+            url: usergps,
             scaledSize: new window.google.maps.Size(50, 50),
           },
         });
