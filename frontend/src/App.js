@@ -50,6 +50,7 @@ import Checkout from "./components/e-com/e-com-payment/Checkout";
 import EcomPaymentPage from "./pages/payment/EcomPaymentPage";
 import PaidOrder from "./components/user-dashboard-section/PaidOrders";
 import PaidProduct from "./components/admin-dashboard-section/PaidProductView";
+import LogOut from "./components/LogOut/LogOut";
 
 const App = () => {
   const { isAdmin, isUser, isTrainer } = useSelector(
@@ -68,6 +69,7 @@ const App = () => {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgot" element={<ForgotPassword />} />
+        <Route path="/logout" element={<LogOut />} />
         <Route path="/map" element={<Map />} />
         <Route path="/nutrition-facts" element={<NutritionFactsPage />} />
         <Route path="/diet-plans" element={<DietPlanPage />} />

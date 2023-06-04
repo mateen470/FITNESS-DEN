@@ -7,17 +7,11 @@ import FeaturedProducts from "../../components/home-sections/FeaturedProducts";
 import FeaturedBlogs from "../../components/home-sections/FeaturedBlogs";
 import BMI from "../../components/home-sections/BMI";
 import Footer from "../../components/home-sections/Footer";
-import {
-  setIsAdmin,
-  setIsTrainer,
-  setIsUser,
-} from "../../context/CheckForUserType";
-import { useSelector, useDispatch } from "react-redux";
+
+import { useDispatch } from "react-redux";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { Logout } = useSelector((state) => state.CheckForUserType);
-
   const sectionRef = useRef(null);
   const [showScrollButton, setShowScrollButton] = React.useState(false);
 
@@ -33,12 +27,6 @@ const Home = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
-  useEffect(() => {
-    Logout && dispatch(setIsTrainer(false));
-    Logout && dispatch(setIsUser(false));
-    Logout && dispatch(setIsAdmin(false));
-  }, [Logout]);
 
   const scrollToSection = () => {
     scrollSmoothTo(sectionRef.current.offsetTop);

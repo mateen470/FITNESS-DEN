@@ -22,7 +22,7 @@ const AdminDashboardSection = () => {
       if (logOutResponse.data && logOutResponse.data.success) {
         toast.success(logOutResponse.data.message);
         dispatch(setLogout(true));
-        navigate("/");
+        navigate("/logout");
       }
       if (
         logOutResponse.response &&

@@ -25,8 +25,8 @@ const UserDashboardSection = () => {
       const logOutResponse = await axios.post("logout");
       if (logOutResponse.data && logOutResponse.data.success) {
         toast.success(logOutResponse.data.message);
-         dispatch(setLogout(true));
-        navigate("/");
+        dispatch(setLogout(true));
+        navigate("/logout");
       }
       if (
         logOutResponse.response &&

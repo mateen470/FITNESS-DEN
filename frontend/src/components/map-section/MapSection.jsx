@@ -15,34 +15,56 @@ const MapSection = () => {
 
   const addMarkers = (places) => {
     clearMarkers();
+
+    const isMobile = () => {
+      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+      return /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
+        userAgent
+      );
+    };
+
     const newMarkers = places.map((place) => {
       const marker = new window.google.maps.Marker({
         position: place.geometry.location,
         map: map,
       });
 
+      const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+        place.name
+      )}&query_place_id=${place.place_id}`;
+
       const infoWindow = new window.google.maps.InfoWindow({
-        content: `<div>${place.name}</div>`,
+        content: isMobile()
+          ? `<a href=${url} target='_blank'>${place.name}</a>`
+          : `<div>${place.name}</div>`,
       });
 
-      marker.addListener("mouseover", () => {
-        infoWindow.open(map, marker);
-      });
+      if (isMobile()) {
+        marker.addListener("click", () => {
+          infoWindow.open(map, marker);
+        });
+      } else {
+        marker.addListener("mouseover", () => {
+          infoWindow.open(map, marker);
+        });
 
-      marker.addListener("mouseout", () => {
-        infoWindow.close();
-      });
+        marker.addListener("mouseout", () => {
+          infoWindow.close();
+        });
 
-      marker.addListener("click", () => {
-        const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-          place.name
-        )}&query_place_id=${place.place_id}`;
-        window.open(url, "_blank");
-      });
+        marker.addListener("click", () => {
+          window.open(url, "_blank");
+        });
+      }
+
       return marker;
     });
+
+    setMarkers(newMarkers);
+
     setMarkers(newMarkers);
   };
+
   useEffect(() => {
     if (window.google && window.google.maps) {
       initMap();
@@ -56,7 +78,7 @@ const MapSection = () => {
       return;
     }
     const script = document.createElement("script");
-    script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyAbzew_5u800t81qb6CbABPWqlU9hEeeUE&libraries=places&callback=initMap`;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyApkvLLh3-F8hyjI-Kb1fyGpv22FecYap4&libraries=places&callback=initMap`;
     script.defer = true;
     script.async = true;
     window.initMap = initMap;
@@ -87,9 +109,38 @@ const MapSection = () => {
   const initMap = () => {
     try {
       const map = new window.google.maps.Map(mapRef.current, {
-        center: { lat: 31.4027, lng: 74.2126 },
+        center: { lat: 31.4027, lng: 74.2126 }, 
         zoom: 13,
       });
+
+      let userMarker;
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          const pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+          console.log(pos);
+          map.setCenter(pos);
+
+          if (userMarker) userMarker.setMap(null);
+
+          userMarker = new window.google.maps.Marker({
+            position: pos,
+            map: map,
+            icon: {
+              url: "", 
+              scaledSize: new window.google.maps.Size(50, 50), 
+            },
+          });
+
+          setCurrentPlace({
+            geometry: { location: pos },
+          });
+        });
+      }
+
       const searchBox = new window.google.maps.places.SearchBox(
         searchBoxRef.current
       );
@@ -99,14 +150,30 @@ const MapSection = () => {
       searchBox.addListener("places_changed", () => {
         const places = searchBox.getPlaces();
         if (places.length === 0) return;
+
         setCurrentPlace(places[0]);
-        map.setCenter(places[0].geometry.location);
+
+        const pos = places[0].geometry.location;
+        map.setCenter(pos);
+
+        if (userMarker) userMarker.setMap(null);
+
+        userMarker = new window.google.maps.Marker({
+          position: pos,
+          map: map,
+          icon: {
+            url: usergps, 
+            scaledSize: new window.google.maps.Size(50, 50),
+          },
+        });
       });
+
       setMap(map);
     } catch (error) {
       console.error("Error initializing map:", error);
     }
   };
+
   return (
     <Container
       sx={{
@@ -143,7 +210,7 @@ const MapSection = () => {
             style={{
               minWidth: "100%",
               padding: "10px",
-              color: "white",
+              color: "black",
               backgroundColor: "none",
               outline: "none",
               border: "none",
