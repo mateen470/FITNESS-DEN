@@ -1,98 +1,59 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { Box, Button } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Box, Typography } from "@mui/material";
 import axios from "axios";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import SendIcon from "@mui/icons-material/Send";
 
 const ProductComments = ({ id }) => {
-  const [comment, setComment] = useState("");
-  const userId = useSelector((state) => state.CurrentUser.CurrentUserID);
-  const { isUser } = useSelector((state) => state.CheckForUserType);
+  const [product, setProduct] = useState("");
 
-  const PostComment = async () => {
-    try {
-      const postCommentResponse = await axios.post(`blog/add-comment/${id}`, {
-        userId,
-        comment,
-      });
-
-      if (postCommentResponse.data && postCommentResponse.data.success) {
-        setComment("");
+  useEffect(() => {
+    const PostComment = async () => {
+      try {
+        const getProduct = await axios.get(`product/single-product/${id}`);
+        setProduct(getProduct.data.data);
+      } catch (error) {
+        console.log(error.message);
       }
-
-      if (
-        postCommentResponse.response &&
-        postCommentResponse.response.data &&
-        postCommentResponse.response.data.message
-      ) {
-        toast.error(postCommentResponse.response.data.message);
-        setComment("");
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
-  const notAccessible = () => {
-    toast.error("LOGIN FIRST!!");
-  };
+    };
+    PostComment();
+  }, [product]);
 
   return (
     <Box>
-      <Box
-        sx={{
-          mt: 3,
-          display: "flex",
-          justifyContent: "center",
-          borderBottom: "2px solid white",
-          px: 5,
-          mx: 2,
-        }}
-      >
-        <input
-          type="text"
-          placeholder="Add Comment..."
-          name="comment"
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
-          style={{
-            minWidth: "100%",
-            padding: "10px",
-            color: "white",
-            backgroundColor: "none",
-            outline: "none",
-            border: "none",
-            fontSize: "1.7vw",
-          }}
-        />
-        {isUser ? (
-          <Button
-            sx={{
-              backghround: "none",
-              border: "none",
-              outline: "none",
-              color: "white",
-            }}
-            onClick={PostComment}
+      {product.comments && product.comments.length > 0 && (
+        <Box sx={{ background: "white", borderRadius: 2, p: 3, my: 3 }}>
+          <Typography
+            fontSize={"3vw"}
+            color={"black"}
+            fontWeight={800}
+            textAlign={"left"}
+            fontFamily={"Comme, sans-serif"}
+            mb={2}
           >
-            <SendIcon />
-          </Button>
-        ) : (
-          <Button
-            sx={{
-              backghround: "none",
-              border: "none",
-              outline: "none",
-              color: "white",
-            }}
-            onClick={notAccessible}
-          >
-            <SendIcon />
-          </Button>
-        )}
-      </Box>
+            Comments
+          </Typography>
+          {product.comments.map((productComments, index) => (
+            <Box mb={3} key={index}>
+              <Typography
+                fontSize={"1.7vw"}
+                color={"#696969"}
+                fontWeight={800}
+                textAlign={"left"}
+                fontFamily={"Comme, sans-serif"}
+              >
+                {productComments.nameOfUser}
+              </Typography>
+              <Typography
+                fontSize={"1.5vw"}
+                color={"black"}
+                textAlign={"left"}
+                fontFamily={"Comme, sans-serif"}
+              >
+                {productComments.comment}
+              </Typography>
+            </Box>
+          ))}
+        </Box>
+      )}
     </Box>
   );
 };

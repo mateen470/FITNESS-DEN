@@ -538,6 +538,22 @@ const AuthControllerFunctions = {
       });
     }
   },
+  AllUsers: async (req, res) => {
+    try {
+      const allUsers = await User.find();
+
+      return await res.status(200).json({
+        success: true,
+        message: "ALL USERS ARE FETCHED!!",
+        data: allUsers,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: `FAILED TO GET ALL USERS!!${error.message}`,
+      });
+    }
+  },
 };
 
 module.exports = AuthControllerFunctions;

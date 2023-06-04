@@ -121,7 +121,7 @@ const RelevantProducts = ({ id }) => {
                       right: 5,
                     }}
                   >
-                    <Rating defaultValue={5} size="medium" readOnly />
+                    <Rating defaultValue={cardData.reviewStars} size="medium" readOnly />
                   </CardActions>
                 </Card>
               </Grid>

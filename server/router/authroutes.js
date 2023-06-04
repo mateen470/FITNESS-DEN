@@ -15,6 +15,7 @@ router.delete("/remove-from-cart/:id", AuthControllerFunctions.RemoveFromCart);
 router.post("/get-cart-products", AuthControllerFunctions.GetCartItems);
 router.post("/increment/:id", AuthControllerFunctions.IncrementProduct);
 router.post("/decrement/:id", AuthControllerFunctions.DecrementProduct);
+router.get("/all-users", AuthControllerFunctions.AllUsers);
 router.post(
   "/remove-cart-item-after-payment",
   AuthControllerFunctions.RemoveAllProductsFromCartAfterPayment

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Box,
   Table,
@@ -7,13 +7,64 @@ import {
   TableHead,
   TableRow,
   Typography,
+  TextField,
+  Button,
+  Rating,
 } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const PaidOrders = () => {
   const [products, setProducts] = useState([]);
+  const [review, setReview] = useState("");
+  const [rating, setRating] = useState(0);
+  const [prdId, setPrdId] = useState(0);
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = (id) => {
+    setOpen(true);
+    setPrdId(id);
+  };
+  const handleClose = () => setOpen(false);
+
+  const modalRef = useRef();
+
+  const handleOutsideClick = (e) => {
+    if (modalRef.current && !modalRef.current.contains(e.target)) {
+      handleClose();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const sendReviewAndComments = await axios.post(
+      `product/add-review/${prdId}`,
+      {
+        review,
+        rating,
+      }
+    );
+    if (sendReviewAndComments.data && sendReviewAndComments.data.success) {
+      toast.success(sendReviewAndComments.data.message);
+    }
+    if (
+      sendReviewAndComments.response &&
+      sendReviewAndComments.response.data &&
+      sendReviewAndComments.response.data.message
+    ) {
+      toast.error(sendReviewAndComments.response.data.message);
+    }
+    handleClose();
+  };
 
   useEffect(() => {
     const fetchPaidProducts = async () => {
@@ -200,6 +251,22 @@ const PaidOrders = () => {
                       }}
                     >
                       {status}
+                      {status === "Delivered" ? (
+                        <Button
+                          onClick={() => handleOpen(product._id)}
+                          sx={{
+                            textTransform: "none",
+                            background: "rgba(255,255,255,0.1)",
+                            border: "1px solid white",
+                            color: "white",
+                            ml: 2,
+                          }}
+                        >
+                          Rate
+                        </Button>
+                      ) : (
+                        ""
+                      )}
                     </TableCell>
                   </TableRow>
                 );
@@ -207,6 +274,111 @@ const PaidOrders = () => {
             })}
           </TableBody>
         </Table>
+      )}
+      {open && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "rgba(0,0,0,0.5)",
+            zIndex: 9999,
+          }}
+        >
+          <Box
+            ref={modalRef}
+            sx={{
+              position: "relative",
+              width: 400,
+              bgcolor: "rgba(255,255,255,0.8)",
+              border: "none",
+              borderRadius: 2,
+              boxShadow: 24,
+              p: 4,
+            }}
+          >
+            <Typography
+              id="transition-modal-title"
+              color={"black"}
+              fontSize={"1.5vw"}
+              fontWeight={800}
+              textAlign={"center"}
+            >
+              Tell us about the Product and our Services!
+            </Typography>
+            <TextField
+              multiline
+              rows={4}
+              value={review}
+              onChange={(e) => setReview(e.target.value)}
+              sx={{
+                minWidth: "100%",
+                borderRadius: 3,
+                backgroundColor: "rgba(0,0, 0, 0.1)",
+                backdropFilter: "blur(10px)",
+                boxShadow: "10px 10px 10px rgba(255, 255, 255, 0.1)",
+                color: "black",
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderWidth: "0",
+                  },
+                  "&:hover fieldset": {
+                    borderWidth: "0",
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderWidth: "0",
+                  },
+                  "& .MuiOutlinedInput-input": {
+                    overflow: "auto",
+                    color: "black",
+                  },
+                },
+              }}
+            />
+            <Typography
+              id="transition-modal-description"
+              color={"black"}
+              fontSize={"1.5vw"}
+              fontWeight={800}
+              textAlign={"center"}
+              mt={2}
+            >
+              Rate
+            </Typography>
+            <Box sx={{ display: "flex", justifyContent: "center" }}>
+              <Rating
+                defaultValue={0}
+                value={rating}
+                onChange={(event, newValue) => {
+                  setRating(newValue);
+                }}
+                size="large"
+              />
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                mt: 4,
+              }}
+            >
+              <Button
+                onClick={handleSubmit}
+                sx={{
+                  color: "white",
+                  background: "black",
+                }}
+              >
+                Submit
+              </Button>
+            </Box>
+          </Box>
+        </div>
       )}
     </Box>
   );

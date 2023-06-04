@@ -10,6 +10,7 @@ import RelevantProducts from "./RelevantProducts";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector } from "react-redux";
+import ProductComments from "./ProductComments";
 
 const ViewSingleProduct = () => {
   const { id } = useParams();
@@ -18,6 +19,7 @@ const ViewSingleProduct = () => {
   const [mainImage, setMainImage] = useState("");
   const [sideImageOne, setSideImageOne] = useState("");
   const [sideImageTwo, setSideImageTwo] = useState("");
+  const [rating, setRating] = useState(0);
   const { isUser } = useSelector((state) => state.CheckForUserType);
   const userId = useSelector((state) => state.CurrentUser.CurrentUserID);
 
@@ -27,6 +29,7 @@ const ViewSingleProduct = () => {
       setMainImage(res.data.data.mainImage);
       setSideImageOne(res.data.data.sideImageOne);
       setSideImageTwo(res.data.data.sideImageTwo);
+      setRating(res.data.data.reviewStars);
     });
   };
   const handleImageToggle = (image) => {
@@ -204,7 +207,7 @@ const ViewSingleProduct = () => {
             >
               {product.title}
             </Typography>
-            <Rating defaultValue={5} size="large" readOnly />
+            <Rating value={rating} size="large" readOnly />
             <hr style={{ marginTop: "1rem" }} />
             <Typography
               fontSize={"2.5vw"}
@@ -304,7 +307,7 @@ const ViewSingleProduct = () => {
           </Box>
         </Box>
         <RelevantProducts id={id} />
-        {/* <ProductComments id={id} /> */}
+        <ProductComments id={id} />
       </Box>
       <Footer />
     </>

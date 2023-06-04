@@ -101,7 +101,6 @@ router.get("/ecom-single-porduct/:id", async (req, res) => {
   try {
     const porduct_Id = req.params;
     const data = await EcomAllPaymentsModel.findOne({ _id: porduct_Id.id });
-    console.log(data);
     return res.status(200).json({
       success: true,
       message: "SINGLE PAID PRODUCTS FETCHED SUCCESSFULLY!!",

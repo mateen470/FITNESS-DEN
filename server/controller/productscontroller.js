@@ -1,4 +1,6 @@
 const Product = require("../model/products");
+const User = require("../model/auth-schema");
+const utilityFunctions = require("../utility/utilityfunctions");
 
 const ProductControllerFunction = {
   CreateProduct: async (req, res) => {
@@ -120,6 +122,80 @@ const ProductControllerFunction = {
       return await res.status(500).json({
         success: false,
         message: "CAN'T DELETE PRODUCT!!",
+      });
+    }
+  },
+  AddReview: async (req, res) => {
+    try {
+      const id = req.params;
+      const { review, rating } = req.body;
+      if (!review) {
+        return await res
+          .status(400)
+          .json({ success: false, message: "PLEASE WRITE A REVIEW FIRST!!" });
+      }
+      if (!rating) {
+        return await res.status(400).json({
+          success: false,
+          message: "PLEASE RATE OUR PRODUCT AND SERVICES ALSO!!",
+        });
+      }
+
+      const accessToken = req.header("Authorization")?.split(" ")[1] || "";
+      if (!accessToken) {
+        return await res.status(400).json({
+          success: false,
+        });
+      }
+      accessTokenVerified = await utilityFunctions.accessTokenVerification(
+        accessToken
+      );
+      const user = await User.findOne({
+        _id: accessTokenVerified.id,
+      });
+
+      const userName = user.name;
+      const userId = user._id.toString();
+      const productId = id.id;
+      const product = await Product.findOne({ _id: productId });
+
+      if (!product) {
+        return res.status(404).json({
+          success: false,
+          message: "PRODUCT NOT FOUND!!",
+        });
+      }
+      const existingReview = product.comments.find(
+        (productReview) => productReview.IDofCurrentUser === userId
+      );
+      if (existingReview) {
+        return res.status(400).json({
+          success: false,
+          message: "YOU HAVE ALREADY REVIEWED THIS PRODUCT!!",
+        });
+      }
+      const newReview = {
+        IDofCurrentUser: user._id,
+        nameOfUser: userName,
+        comment: review,
+      };
+
+      product.comments.push(newReview);
+      product.ratings.push(rating);
+      product.reviewStars =
+        product.ratings.reduce((a, b) => a + b, 0) / product.ratings.length;
+
+      await product.save();
+
+      return res.status(200).json({
+        success: true,
+        message: "THANK YOU FOR REVIEWING!!",
+        data: newReview,
+      });
+    } catch (error) {
+      return await res.status(500).json({
+        success: false,
+        message: `CAN'T ADD REVIEW!!${error.message}`,
       });
     }
   },

@@ -4,6 +4,7 @@ const ProductControllerFunction = require("../controller/productscontroller");
 
 productRouter.post("/add-product", ProductControllerFunction.CreateProduct);
 productRouter.get("/all-products", ProductControllerFunction.ShowAllProducts);
+productRouter.post("/add-review/:id", ProductControllerFunction.AddReview);
 productRouter.get(
   "/single-product/:id",
   ProductControllerFunction.ViewSingleProduct
