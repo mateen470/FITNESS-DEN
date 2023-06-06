@@ -12,11 +12,11 @@ import {
   CardActions,
   Rating,
 } from "@mui/material";
-import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import CircularProgress from "@mui/material/CircularProgress";
+import NavBar from "../../home-sections/NavBar";
 
 const ShowAllProducts = () => {
   const [allProducts, setAllProducts] = useState([]);
@@ -52,54 +52,56 @@ const ShowAllProducts = () => {
           mb: 5,
         }}
       >
-        <Box sx={{ position: "absolute", top: 0, left: 5 }}>
-          <NavLink to={"/"}>
-            <Typography
-              color={"white"}
-              fontFamily={"Comme, sans-serif"}
-              sx={{ display: "flex", alignItems: "center", fontSize: "1.7vw" }}
-            >
-              <KeyboardDoubleArrowLeftIcon /> Back
-            </Typography>
-          </NavLink>
+        <Box sx={{ position: "absolute", top: 0, left: 0, right: 10 }}>
+          <NavBar />
         </Box>
-        {isUser ? (
-          <Box sx={{ position: "absolute", top: 10, right: 20 }}>
-            <NavLink to={"/cart"}>
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                }}
-              >
-                <ShoppingCartIcon
-                  style={{ color: "white", fontSize: "2.5rem" }}
-                />
-                <Typography
-                  color={"white"}
-                  fontFamily={"Comme, sans-serif"}
-                  fontSize={"1rem"}
-                  fontWeight={"bold"}
-                >
-                  CART
-                </Typography>
-              </Box>
-            </NavLink>
-          </Box>
-        ) : (
-          ""
-        )}
-
         <Typography
           fontSize={"4.5vw"}
           color={"white"}
           fontWeight={800}
           textAlign={"center"}
-          mt={4}
+          mt={12}
           mb={2}
         >
-          All Products
+          All Products{" "}
+          {isUser ? (
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Box
+                sx={{
+                  borderRadius: "50%",
+                  background: "rgba(255,255,255,0.1)",
+                  width: "5rem",
+                  height: "5rem",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <NavLink to={"/cart"}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                    }}
+                  >
+                    <ShoppingCartIcon
+                      style={{ color: "white", fontSize: "3rem" }}
+                    />
+                  </Box>
+                </NavLink>
+              </Box>
+            </Box>
+          ) : (
+            ""
+          )}
         </Typography>
         {isLoading ? (
           <CircularProgress color="secondary" />

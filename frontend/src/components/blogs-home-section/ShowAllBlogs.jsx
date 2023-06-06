@@ -11,12 +11,12 @@ import {
   CardContent,
   CardActions,
 } from "@mui/material";
-import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
+import NavBar from "../home-sections/NavBar";
 
 const ShowAllBlogs = () => {
   const [allBlogs, setAllBlogs] = useState([]);
@@ -51,23 +51,15 @@ const ShowAllBlogs = () => {
           mb: 5,
         }}
       >
-        <Box sx={{ position: "absolute", top: 0, left: 5 }}>
-          <NavLink to={"/"}>
-            <Typography
-              color={"white"}
-              fontFamily={"Comme, sans-serif"}
-              sx={{ display: "flex", alignItems: "center", fontSize: "1.7vw" }}
-            >
-              <KeyboardDoubleArrowLeftIcon /> Back
-            </Typography>
-          </NavLink>
+        <Box sx={{ position: "absolute", top: 0, left: 0, right: 10 }}>
+          <NavBar />
         </Box>
         <Typography
           fontSize={"4.5vw"}
           color={"white"}
           fontWeight={800}
           textAlign={"center"}
-          mt={4}
+          mt={12}
           mb={2}
         >
           All Blogs

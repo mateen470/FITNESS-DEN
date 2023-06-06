@@ -37,13 +37,15 @@ const NavBar = () => {
         }}
       >
         <Box>
-          <img
-            src={
-              "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779074/logo_n2sf6t.svg"
-            }
-            style={{ width: "90px", height: "90px" }}
-            alt="logo"
-          />
+          <NavLink to={"/"}>
+            <img
+              src={
+                "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779074/logo_n2sf6t.svg"
+              }
+              style={{ width: "90px", height: "90px" }}
+              alt="logo"
+            />
+          </NavLink>
         </Box>
         <Box
           sx={{
