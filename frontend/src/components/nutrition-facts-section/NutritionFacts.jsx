@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Nutrients from "./Nutrients";
-import { Box, Container } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
 const NutritionFacts = () => {
@@ -78,15 +78,280 @@ const NutritionFacts = () => {
       {showModal ? (
         <Nutrients data={NutritionValues} setShowModal={setShowModal} />
       ) : (
-        <Box sx={{ mt: -6 }}>
-          <img
-            src={
-              "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779127/nutrition_hlg4qw.svg"
-            }
-            alt="nutrition"
-            style={{ maxHeight: "70vh" }}
-          />
-        </Box>
+        <Container
+          sx={{
+            background: "white",
+            minHeight: "100%",
+            width: "50%",
+            borderRadius: 3,
+            mb: 8,
+            position: "relative",
+            pb: 4,
+          }}
+        >
+          <Typography
+            sx={{
+              fontSize: "2rem",
+              color: "black",
+              fontWeight: 800,
+              textAlign: "center",
+              pt: 1,
+              borderBottom: "5px solid black",
+              mb: 1,
+            }}
+          >
+            NUTRITION INFO
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: "1.5rem",
+              color: "black",
+              fontWeight: "bold",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            FOOD NAME:
+            <Typography
+              sx={{
+                pl: 1,
+                fontFamily: "Comme, sans-serif",
+                fontSize: "1.5rem",
+                color: "black",
+                fontWeight: "bold",
+              }}
+            ></Typography>
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: "1.2rem",
+              color: "black",
+              fontWeight: 600,
+              borderBottom: "3px solid black",
+              pb: 1,
+              mb: 1,
+            }}
+          >
+            Serving Size :100g
+          </Typography>
+
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              borderBottom: "1px solid black",
+            }}
+          >
+            <Typography
+              sx={{
+                fontFamily: "Comme, sans-serif",
+                fontSize: "1.3rem",
+                color: "black",
+              }}
+            >
+              Protein
+            </Typography>
+            <Typography
+              sx={{
+                fontFamily: "Comme, sans-serif",
+                fontSize: "1.3rem",
+                color: "black",
+              }}
+            ></Typography>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              borderBottom: "1px solid black",
+            }}
+          >
+            <Typography
+              sx={{
+                fontFamily: "Comme, sans-serif",
+                fontSize: "1.3rem",
+                color: "black",
+              }}
+            >
+              Total lipid (fat)
+            </Typography>
+            <Typography
+              sx={{
+                fontFamily: "Comme, sans-serif",
+                fontSize: "1.3rem",
+                color: "black",
+              }}
+            ></Typography>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              borderBottom: "1px solid black",
+            }}
+          >
+            <Typography
+              sx={{
+                fontFamily: "Comme, sans-serif",
+                fontSize: "1.3rem",
+                color: "black",
+              }}
+            >
+              Carbohydrate, by difference
+            </Typography>
+            <Typography
+              sx={{
+                fontFamily: "Comme, sans-serif",
+                fontSize: "1.3rem",
+                color: "black",
+              }}
+            ></Typography>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              borderBottom: "1px solid black",
+            }}
+          >
+            <Typography
+              sx={{
+                fontFamily: "Comme, sans-serif",
+                fontSize: "1.3rem",
+                color: "black",
+              }}
+            >
+              Energy
+            </Typography>
+            <Typography
+              sx={{
+                fontFamily: "Comme, sans-serif",
+                fontSize: "1.3rem",
+                color: "black",
+              }}
+            ></Typography>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              borderBottom: "1px solid black",
+            }}
+          >
+            <Typography
+              sx={{
+                fontFamily: "Comme, sans-serif",
+                fontSize: "1.3rem",
+                color: "black",
+              }}
+            >
+              Sugars, total including NLEA
+            </Typography>
+            <Typography
+              sx={{
+                fontFamily: "Comme, sans-serif",
+                fontSize: "1.3rem",
+                color: "black",
+              }}
+            ></Typography>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              borderBottom: "1px solid black",
+            }}
+          >
+            <Typography
+              sx={{
+                fontFamily: "Comme, sans-serif",
+                fontSize: "1.3rem",
+                color: "black",
+              }}
+            >
+              Calcium, Ca
+            </Typography>
+            <Typography
+              sx={{
+                fontFamily: "Comme, sans-serif",
+                fontSize: "1.3rem",
+                color: "black",
+              }}
+            ></Typography>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              borderBottom: "1px solid black",
+            }}
+          >
+            <Typography
+              sx={{
+                fontFamily: "Comme, sans-serif",
+                fontSize: "1.3rem",
+                color: "black",
+              }}
+            >
+              Iron, Fe
+            </Typography>
+            <Typography
+              sx={{
+                fontFamily: "Comme, sans-serif",
+                fontSize: "1.3rem",
+                color: "black",
+              }}
+            ></Typography>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              borderBottom: "1px solid black",
+            }}
+          >
+            <Typography
+              sx={{
+                fontFamily: "Comme, sans-serif",
+                fontSize: "1.3rem",
+                color: "black",
+              }}
+            >
+              Sodium, Na
+            </Typography>
+            <Typography
+              sx={{
+                fontFamily: "Comme, sans-serif",
+                fontSize: "1.3rem",
+                color: "black",
+              }}
+            ></Typography>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              borderBottom: "1px solid black",
+            }}
+          >
+            <Typography
+              sx={{
+                fontFamily: "Comme, sans-serif",
+                fontSize: "1.3rem",
+                color: "black",
+              }}
+            >
+              Cholesterol
+            </Typography>
+            <Typography
+              sx={{
+                fontFamily: "Comme, sans-serif",
+                fontSize: "1.3rem",
+                color: "black",
+              }}
+            ></Typography>
+          </Box>
+        </Container>
       )}
     </Container>
   );

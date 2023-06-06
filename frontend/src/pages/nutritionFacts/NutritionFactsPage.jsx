@@ -1,6 +1,6 @@
 import React from "react";
 import NutritionFactsSection from "../../components/nutrition-facts-section/NutritionFactsSection";
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import Footer from "../../components/home-sections/Footer";
@@ -8,7 +8,7 @@ import Footer from "../../components/home-sections/Footer";
 const NutritionFactsPage = () => {
   return (
     <>
-      <Container>
+      <Box>
         <Box sx={{ position: "absolute", top: 0, left: 5 }}>
           <NavLink to={"/"}>
             <Typography
@@ -21,7 +21,7 @@ const NutritionFactsPage = () => {
           </NavLink>
         </Box>
         <NutritionFactsSection />
-      </Container>
+      </Box>
       <Footer />
     </>
   );

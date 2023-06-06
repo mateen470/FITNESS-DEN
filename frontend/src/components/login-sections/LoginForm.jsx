@@ -4,12 +4,17 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
+  const [eyeIcon, setEyeIcon] = useState(false);
+
   const navigate = useNavigate();
   const { email, password } = formData;
   const handleInputChange = (event) => {
@@ -86,12 +91,13 @@ const LoginForm = () => {
           mt: 3,
           minWidth: "70%",
           display: "flex",
-          justifyContent: "center",
+          justifyContent: "space-between",
           borderBottom: "2px solid white",
+          pr: 3,
         }}
       >
         <input
-          type="password"
+          type={eyeIcon ? "text" : "password"}
           placeholder="Password"
           name="password"
           value={formData.password}
@@ -106,6 +112,21 @@ const LoginForm = () => {
             fontSize: "1.7vw",
           }}
         />
+        <button
+          style={{
+            cursor: "pointer",
+            background: "none",
+            border: "none",
+            outline: "none",
+          }}
+          onClick={() => setEyeIcon(!eyeIcon)}
+        >
+          {eyeIcon ? (
+            <RemoveRedEyeIcon sx={{ color: "white", fontSize: "2.5vw" }} />
+          ) : (
+            <VisibilityOffIcon sx={{ color: "white", fontSize: "2.5vw" }} />
+          )}
+        </button>
       </Box>
       <Box sx={{ mt: 2 }}>
         <NavLink to={"/forgot"}>

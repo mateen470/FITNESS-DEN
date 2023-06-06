@@ -1,14 +1,21 @@
 import React from "react";
-import { Typography, Box, Container } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 import NutritionFacts from "./NutritionFacts";
 const NutritionFactsSection = () => {
   return (
-    <Container
+    <Box
       sx={{
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "column",
+        minHeight: "100vh",
+        backgroundImage:
+          "url(https://res.cloudinary.com/diwvqpuuf/image/upload/v1686055643/Untitled_design_16_-min_ody48r.svg)",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        minWidth: "100vw",
       }}
     >
       <Typography
@@ -20,7 +27,7 @@ const NutritionFactsSection = () => {
         Find Nutritional Facts
       </Typography>
       <NutritionFacts />
-    </Container>
+    </Box>
   );
 };
 

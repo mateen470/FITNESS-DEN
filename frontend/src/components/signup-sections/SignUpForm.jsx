@@ -4,12 +4,18 @@ import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+
 const SignUpForm = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
   });
+
+  const [eyeIcon, setEyeIcon] = useState(false);
+
   const { name, email, password } = formData;
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -107,12 +113,13 @@ const SignUpForm = () => {
           mt: 3,
           minWidth: "70%",
           display: "flex",
-          justifyContent: "center",
+          justifyContent: "space-between",
           borderBottom: "2px solid white",
+          pr: 3,
         }}
       >
         <input
-          type="password"
+          type={eyeIcon ? "text" : "password"}
           placeholder="Password"
           name="password"
           value={formData.password}
@@ -127,6 +134,21 @@ const SignUpForm = () => {
             fontSize: "1.7vw",
           }}
         />
+        <button
+          style={{
+            cursor: "pointer",
+            background: "none",
+            border: "none",
+            outline: "none",
+          }}
+          onClick={() => setEyeIcon(!eyeIcon)}
+        >
+          {eyeIcon ? (
+            <RemoveRedEyeIcon sx={{ color: "white", fontSize: "2.5vw" }} />
+          ) : (
+            <VisibilityOffIcon sx={{ color: "white", fontSize: "2.5vw" }} />
+          )}
+        </button>
       </Box>
       <Box
         sx={{
