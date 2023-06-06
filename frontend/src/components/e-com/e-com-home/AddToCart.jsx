@@ -13,7 +13,7 @@ import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrow
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -396,26 +396,26 @@ const AddToCart = () => {
               },
             }}
           >
-            <Typography
-              fontSize={"1.7vw"}
-              fontWeight={800}
-              fontFamily={"Comme, sans-serif"}
-              mx={1}
+            <NavLink
+              onClick={() =>
+                dispatch(
+                  AddAllProductsInfoToBuy({
+                    TotalPayment: calculateTotalPrice(),
+                    AllProducts: product,
+                  })
+                )
+              }
+              to="/checkout"
             >
-              <Link
-                onClick={() =>
-                  dispatch(
-                    AddAllProductsInfoToBuy({
-                      TotalPayment: calculateTotalPrice(),
-                      AllProducts: product,
-                    })
-                  )
-                }
-                to="/checkout"
+              <Typography
+                fontSize={"1.7vw"}
+                fontWeight={800}
+                fontFamily={"Comme, sans-serif"}
+                mx={1}
               >
                 CheckOut
-              </Link>
-            </Typography>
+              </Typography>
+            </NavLink>
             <ShoppingCartCheckoutIcon />
           </Button>
         </Box>

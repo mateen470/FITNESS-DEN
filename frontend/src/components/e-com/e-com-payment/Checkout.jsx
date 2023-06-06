@@ -1,18 +1,39 @@
 import { Box, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { AddCheckoutInfo } from "../../../context/EcomPayment";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
+import { toast } from "react-toastify";
 
 const Checkout = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [FullName, setFullName] = useState("");
   const [Email, setEmail] = useState("");
   const [PhoneNumber, setPhoneNumber] = useState("");
   const [Country, setCountry] = useState("");
   const [City, setCity] = useState("");
   const [Address, setAddress] = useState("");
+
+  const sendCheckOutInfo = () => {
+    if (!FullName || !Email || !PhoneNumber || !Country || !City || !Address) {
+      toast.error("PLEASE FILL IN ALL FIELDS!!");
+    } else {
+      dispatch(
+        AddCheckoutInfo({
+          FullName,
+          Email,
+          PhoneNumber,
+          Country,
+          City,
+          Address,
+        })
+      );
+      navigate("/ecom-payment");
+    }
+  };
+
   return (
     <Box px={10} pt={5} pb={10}>
       <Box sx={{ position: "absolute", top: 0, left: 5 }}>
@@ -215,42 +236,29 @@ const Checkout = () => {
               width: "19.5vw",
               cursor: "pointer",
             }}
-            onClick={() =>
-              dispatch(
-                AddCheckoutInfo({
-                  FullName,
-                  Email,
-                  PhoneNumber,
-                  Country,
-                  City,
-                  Address,
-                })
-              )
-            }
+            onClick={sendCheckOutInfo}
           >
-            <NavLink to="/ecom-payment">
-              <Typography
-                color={"black"}
-                fontFamily={"Comme, sans-serif"}
-                sx={{
-                  background: "white",
-                  fontSize: "1.7vw",
-                  height: "4.2vw",
-                  width: "20vw",
-                  ml: -4.5,
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  transition: "scale 0.3s ease-in-out",
-                  fontWeight: "bold",
-                  "&:hover": {
-                    scale: "0.95 !important",
-                  },
-                }}
-              >
-                Continue to Payment
-              </Typography>
-            </NavLink>
+            <Typography
+              color={"black"}
+              fontFamily={"Comme, sans-serif"}
+              sx={{
+                background: "white",
+                fontSize: "1.7vw",
+                height: "4.2vw",
+                width: "20vw",
+                ml: -4.5,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                transition: "scale 0.3s ease-in-out",
+                fontWeight: "bold",
+                "&:hover": {
+                  scale: "0.95 !important",
+                },
+              }}
+            >
+              Continue to Payment
+            </Typography>
           </Box>
         </Box>
       </Box>
