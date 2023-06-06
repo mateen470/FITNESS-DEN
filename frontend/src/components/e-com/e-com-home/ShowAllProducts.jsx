@@ -16,20 +16,29 @@ import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrow
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const ShowAllProducts = () => {
   const [allProducts, setAllProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const { isUser } = useSelector((state) => state.CheckForUserType);
 
   const FetchAllProducts = async () => {
+    setIsLoading(true);
     await axios
       .get("product/all-products")
-      .then((res) => setAllProducts(res.data.data));
+      .then((res) => {
+        setAllProducts(res.data.data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        setIsLoading(false);
+      });
   };
-
   useEffect(() => {
     FetchAllProducts();
-  }, [allProducts]);
+  }, []);
 
   return (
     <>
@@ -92,97 +101,104 @@ const ShowAllProducts = () => {
         >
           All Products
         </Typography>
-        <Grid container spacing={2}>
-          {allProducts.map((cardData, index) => {
-            return (
-              <Grid item xs={4} key={index}>
-                <Card sx={{ height: "30rem", position: "relative" }}>
-                  <CardMedia
-                    component="div"
-                    style={{
-                      height: 250,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <img
-                      alt="card image"
-                      src={cardData.mainImage}
+        {isLoading ? (
+          <CircularProgress color="secondary" />
+        ) : (
+          <Grid container spacing={2}>
+            {allProducts.map((cardData, index) => {
+              return (
+                <Grid item xs={4} key={index}>
+                  <Card sx={{ height: "30rem", position: "relative" }}>
+                    <CardMedia
+                      component="div"
                       style={{
-                        maxHeight: "100%",
-                        maxWidth: "100%",
+                        height: 250,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
                       }}
-                    />
-                  </CardMedia>
-                  <Typography
-                    variant="h5"
-                    color={"black"}
-                    textAlign={"center"}
-                    mt={2}
-                    fontWeight={600}
-                    px={1}
-                  >
-                    {cardData.title}
-                  </Typography>
-                  <CardContent>
-                    <Typography variant="h7" fontFamily={"Comme, sans-serif"}>
-                      {cardData.metaDescription}
-                    </Typography>
-                  </CardContent>
-                  <CardActions
-                    sx={{
-                      ml: 1,
-                    }}
-                  >
-                    <Box>
-                      PRICE :
-                      <Typography variant="h7" fontFamily={"Comme, sans-serif"}>
-                        {cardData.price}
-                      </Typography>
-                      Rs.
-                    </Box>
-                  </CardActions>
-                  <CardActions
-                    sx={{
-                      position: "absolute",
-                      bottom: 5,
-                      left: 5,
-                    }}
-                  >
-                    <NavLink to={`/view-product-home/${cardData._id}`}>
-                      <Typography
-                        sx={{
-                          px: 2,
-                          background: "black",
-                          color: "white",
-                          borderRadius: 1,
-                          display: "flex",
-                          alignItems: "center",
+                    >
+                      <img
+                        alt="card image"
+                        src={cardData.mainImage}
+                        style={{
+                          maxHeight: "100%",
+                          maxWidth: "100%",
                         }}
-                      >
-                        View
+                      />
+                    </CardMedia>
+                    <Typography
+                      variant="h5"
+                      color={"black"}
+                      textAlign={"center"}
+                      mt={2}
+                      fontWeight={600}
+                      px={1}
+                    >
+                      {cardData.title}
+                    </Typography>
+                    <CardContent>
+                      <Typography variant="h7" fontFamily={"Comme, sans-serif"}>
+                        {cardData.metaDescription}
                       </Typography>
-                    </NavLink>
-                  </CardActions>
-                  <CardActions
-                    sx={{
-                      position: "absolute",
-                      bottom: 5,
-                      right: 5,
-                    }}
-                  >
-                    <Rating
-                      defaultValue={cardData.reviewStars}
-                      size="medium"
-                      readOnly
-                    />
-                  </CardActions>
-                </Card>
-              </Grid>
-            );
-          })}
-        </Grid>
+                    </CardContent>
+                    <CardActions
+                      sx={{
+                        ml: 1,
+                      }}
+                    >
+                      <Box>
+                        PRICE :
+                        <Typography
+                          variant="h7"
+                          fontFamily={"Comme, sans-serif"}
+                        >
+                          {cardData.price}
+                        </Typography>
+                        Rs.
+                      </Box>
+                    </CardActions>
+                    <CardActions
+                      sx={{
+                        position: "absolute",
+                        bottom: 5,
+                        left: 5,
+                      }}
+                    >
+                      <NavLink to={`/view-product-home/${cardData._id}`}>
+                        <Typography
+                          sx={{
+                            px: 2,
+                            background: "black",
+                            color: "white",
+                            borderRadius: 1,
+                            display: "flex",
+                            alignItems: "center",
+                          }}
+                        >
+                          View
+                        </Typography>
+                      </NavLink>
+                    </CardActions>
+                    <CardActions
+                      sx={{
+                        position: "absolute",
+                        bottom: 5,
+                        right: 5,
+                      }}
+                    >
+                      <Rating
+                        defaultValue={cardData.reviewStars}
+                        size="medium"
+                        readOnly
+                      />
+                    </CardActions>
+                  </Card>
+                </Grid>
+              );
+            })}
+          </Grid>
+        )}
       </Container>
       <Footer />
     </>

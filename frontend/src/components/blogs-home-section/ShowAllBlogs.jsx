@@ -16,16 +16,28 @@ import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArro
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
 import axios from "axios";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const ShowAllBlogs = () => {
   const [allBlogs, setAllBlogs] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const FetchAllBlogs = async () => {
-    await axios.get("blog/all-blogs").then((res) => setAllBlogs(res.data.data));
+    setIsLoading(true);
+    await axios
+      .get("blog/all-blogs")
+      .then((res) => {
+        setAllBlogs(res.data.data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        setIsLoading(false);
+      });
   };
   useEffect(() => {
     FetchAllBlogs();
-  }, [allBlogs]);
+  }, []);
 
   return (
     <>
@@ -60,98 +72,102 @@ const ShowAllBlogs = () => {
         >
           All Blogs
         </Typography>
-        <Grid container spacing={2}>
-          {allBlogs.map((cardData, index) => {
-            return (
-              <Grid item xs={4} key={index}>
-                <Card sx={{ height: "33rem", position: "relative" }}>
-                  <CardMedia
-                    component="img"
-                    alt="card image"
-                    height="250"
-                    sx={{ objectFit: "cover" }}
-                    image={cardData.image}
-                  />
-                  <Typography
-                    variant="h5"
-                    color={"black"}
-                    textAlign={"center"}
-                    mt={2}
-                    fontWeight={600}
-                    px={1}
-                  >
-                    {cardData.title}
-                  </Typography>
-                  <CardContent>
-                    <Typography variant="h7" fontFamily={"Comme, sans-serif"}>
-                      {cardData.metaDescription}
+        {isLoading ? (
+          <CircularProgress color="secondary" />
+        ) : (
+          <Grid container spacing={2}>
+            {allBlogs.map((cardData, index) => {
+              return (
+                <Grid item xs={4} key={index}>
+                  <Card sx={{ height: "33rem", position: "relative" }}>
+                    <CardMedia
+                      component="img"
+                      alt="card image"
+                      height="250"
+                      sx={{ objectFit: "cover" }}
+                      image={cardData.image}
+                    />
+                    <Typography
+                      variant="h5"
+                      color={"black"}
+                      textAlign={"center"}
+                      mt={2}
+                      fontWeight={600}
+                      px={1}
+                    >
+                      {cardData.title}
                     </Typography>
-                  </CardContent>
-                  <CardActions
-                    sx={{
-                      position: "absolute",
-                      bottom: 5,
-                      left: 5,
-                    }}
-                  >
-                    <NavLink to={`/view-blog-home/${cardData._id}`}>
-                      <Typography
-                        sx={{
-                          px: 2,
-                          background: "black",
-                          color: "white",
-                          borderRadius: 1,
-                          display: "flex",
-                          alignItems: "center",
-                        }}
-                      >
-                        Read More
-                        <KeyboardDoubleArrowRightIcon />
+                    <CardContent>
+                      <Typography variant="h7" fontFamily={"Comme, sans-serif"}>
+                        {cardData.metaDescription}
                       </Typography>
-                    </NavLink>
-                  </CardActions>
-                  <CardActions
-                    sx={{
-                      position: "absolute",
-                      bottom: 5,
-                      right: 5,
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 1,
-                    }}
-                  >
-                    <Box
-                      sx={{ display: "flex", alignItems: "center", gap: 0.5 }}
+                    </CardContent>
+                    <CardActions
+                      sx={{
+                        position: "absolute",
+                        bottom: 5,
+                        left: 5,
+                      }}
                     >
-                      <Typography
-                        fontSize={"1.5vw"}
-                        color={"black"}
-                        fontWeight={800}
-                        fontFamily={"Comme, sans-serif"}
-                      >
-                        {cardData.numberOfLikes}
-                      </Typography>
-                      <ThumbUpIcon sx={{ fontSize: "1.4rem" }} />
-                    </Box>
-                    <Box
-                      sx={{ display: "flex", alignItems: "center", gap: 0.5 }}
+                      <NavLink to={`/view-blog-home/${cardData._id}`}>
+                        <Typography
+                          sx={{
+                            px: 2,
+                            background: "black",
+                            color: "white",
+                            borderRadius: 1,
+                            display: "flex",
+                            alignItems: "center",
+                          }}
+                        >
+                          Read More
+                          <KeyboardDoubleArrowRightIcon />
+                        </Typography>
+                      </NavLink>
+                    </CardActions>
+                    <CardActions
+                      sx={{
+                        position: "absolute",
+                        bottom: 5,
+                        right: 5,
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 1,
+                      }}
                     >
-                      <Typography
-                        fontSize={"1.5vw"}
-                        color={"black"}
-                        fontWeight={800}
-                        fontFamily={"Comme, sans-serif"}
+                      <Box
+                        sx={{ display: "flex", alignItems: "center", gap: 0.5 }}
                       >
-                        {cardData.numberOfDislikes}
-                      </Typography>
-                      <ThumbDownAltIcon />
-                    </Box>
-                  </CardActions>
-                </Card>
-              </Grid>
-            );
-          })}
-        </Grid>
+                        <Typography
+                          fontSize={"1.5vw"}
+                          color={"black"}
+                          fontWeight={800}
+                          fontFamily={"Comme, sans-serif"}
+                        >
+                          {cardData.numberOfLikes}
+                        </Typography>
+                        <ThumbUpIcon sx={{ fontSize: "1.4rem" }} />
+                      </Box>
+                      <Box
+                        sx={{ display: "flex", alignItems: "center", gap: 0.5 }}
+                      >
+                        <Typography
+                          fontSize={"1.5vw"}
+                          color={"black"}
+                          fontWeight={800}
+                          fontFamily={"Comme, sans-serif"}
+                        >
+                          {cardData.numberOfDislikes}
+                        </Typography>
+                        <ThumbDownAltIcon />
+                      </Box>
+                    </CardActions>
+                  </Card>
+                </Grid>
+              );
+            })}
+          </Grid>
+        )}
       </Container>
       <Footer />
     </>
