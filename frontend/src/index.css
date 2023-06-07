@@ -11,12 +11,6 @@ html {
 }
 body {
   background: rgb(92, 58, 180);
-  /* background: linear-gradient(
-    225deg,
-    rgba(92, 58, 180, 1) 0%,
-    rgba(29, 175, 253, 1) 50%,
-    rgba(134, 69, 252, 1) 100%
-  ) !important; */
   background-image: linear-gradient(
     to bottom left,
     #29084d 20%,
