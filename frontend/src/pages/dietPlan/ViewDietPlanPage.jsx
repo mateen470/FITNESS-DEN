@@ -23,13 +23,13 @@ const ViewDietPlanPage = () => {
   const IDofCurrentUser = useSelector(
     (state) => state.CurrentUser.CurrentUserID
   );
-  const FetchDietPlan = async () => {
-    await axios.get("diet/all-diet-plans/" + IDofCurrentUser).then((res) => {
+  const FetchDietPlan = () => {
+    axios.get("diet/all-diet-plans/" + IDofCurrentUser).then((res) => {
       setDietPlan(res.data.data);
     });
   };
 
-  useEffect(() => FetchDietPlan, []);
+  useEffect(() => FetchDietPlan(), []);
   useEffect(() => {
     DietPlan.length === 0 ? setplanExist(false) : setplanExist(true);
   }, [DietPlan, planExist]);

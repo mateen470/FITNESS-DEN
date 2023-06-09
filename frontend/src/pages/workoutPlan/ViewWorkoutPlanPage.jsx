@@ -26,14 +26,12 @@ const ViewWorkoutPlanPage = () => {
   const IDofCurrentUser = useSelector(
     (state) => state.CurrentUser.CurrentUserID
   );
-  const handlePlan = async () => {
-    await axios
-      .get("workout/all-workout-plans/" + IDofCurrentUser)
-      .then((res) => {
-        setPlan(res.data.data);
-      });
+  const handlePlan = () => {
+    axios.get("workout/all-workout-plans/" + IDofCurrentUser).then((res) => {
+      setPlan(res.data.data);
+    });
   };
-  useEffect(() => handlePlan, []);
+  useEffect(() => handlePlan(), []);
   useEffect(() => {
     Plan.length === 0 ? setplanExist(false) : setplanExist(true);
     console.log(ResponseFromDB);
