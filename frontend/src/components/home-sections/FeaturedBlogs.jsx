@@ -16,6 +16,8 @@ import { NavLink } from "react-router-dom";
 import axios from "axios";
 const FeaturedBlogs = () => {
   const [latestBlogs, setLatestBlogs] = useState([]);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
 
   const FetchBlogs = async () => {
     await axios.get("blog/all-blogs").then((res) => {
@@ -31,6 +33,16 @@ const FeaturedBlogs = () => {
     FetchBlogs();
   }, []);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <Container>
       <Box
@@ -43,7 +55,13 @@ const FeaturedBlogs = () => {
       >
         <Typography
           color={"white"}
-          variant="h2"
+          variant={
+            windowWidth < 900 && windowWidth > 500
+              ? "h3"
+              : windowWidth < 500
+              ? "h4"
+              : "h2"
+          }
           textAlign={"center"}
           mt={10}
           sx={{ textShadow: "3px 0px 0px purple", fontWeight: 800 }}
@@ -55,10 +73,10 @@ const FeaturedBlogs = () => {
             <Typography
               color={"white"}
               fontFamily={"Comme, sans-serif"}
+              variant="h6"
               sx={{
                 display: "flex",
                 alignItems: "center",
-                fontSize: "2vw",
                 borderBottom: "3px solid white",
               }}
             >
@@ -71,8 +89,8 @@ const FeaturedBlogs = () => {
       <Grid container spacing={2}>
         {latestBlogs.map((cardData, index) => {
           return (
-            <Grid item xs={4} key={index}>
-              <Card sx={{ height: "33rem", position: "relative" }}>
+            <Grid item xs={12} sm={6} md={4} key={index}>
+              <Card sx={{ height: 550, position: "relative" }}>
                 <CardMedia
                   component="img"
                   alt="card image"
@@ -129,7 +147,7 @@ const FeaturedBlogs = () => {
                 >
                   <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
                     <Typography
-                      fontSize={"1.5vw"}
+                      variant="h6"
                       color={"black"}
                       fontWeight={800}
                       fontFamily={"Comme, sans-serif"}
@@ -140,7 +158,7 @@ const FeaturedBlogs = () => {
                   </Box>
                   <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
                     <Typography
-                      fontSize={"1.5vw"}
+                      variant="h6"
                       color={"black"}
                       fontWeight={800}
                       fontFamily={"Comme, sans-serif"}

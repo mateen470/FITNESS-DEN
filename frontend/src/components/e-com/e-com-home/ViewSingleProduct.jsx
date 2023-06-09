@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { NavLink, useParams, useNavigate } from "react-router-dom";
 import { Box, Rating, Typography, Button } from "@mui/material";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
-import ReactImageMagnify from "react-image-magnify";
 import Footer from "../../home-sections/Footer";
 import axios from "axios";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -11,6 +10,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector } from "react-redux";
 import ProductComments from "./ProductComments";
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 const ViewSingleProduct = () => {
   const { id } = useParams();
@@ -143,21 +143,24 @@ const ViewSingleProduct = () => {
           }}
         >
           <Box>
-            <Box sx={{ my: 2, position: "relative", zIndex: 100 }}>
-              <ReactImageMagnify
-                {...{
-                  smallImage: {
-                    alt: "product",
-                    isFluidWidth: true,
-                    src: mainImage,
-                  },
-                  largeImage: {
-                    src: mainImage,
-                    width: 500,
-                    height: 500,
-                  },
-                }}
-              />
+            <Box sx={{ my: 2 }}>
+              <Typography
+                fontWeight={400}
+                fontFamily={"Comme, sans-serif"}
+                textAlign={"center"}
+                mb={1}
+              >
+                scoll on Image to Zoom!
+              </Typography>
+              <TransformWrapper options={{ limitToBounds: false }}>
+                <TransformComponent>
+                  <img
+                    src={mainImage}
+                    alt="Zoomable Image"
+                    style={{ width: "220px", height: "300px" }}
+                  />
+                </TransformComponent>
+              </TransformWrapper>
             </Box>
             <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
               <Box
@@ -167,7 +170,7 @@ const ViewSingleProduct = () => {
                 <img
                   src={sideImageOne}
                   style={{
-                    minWidth: "100%",
+                    width: "120px",
                     height: "25vh",
                     borderRadius: "10px",
                   }}
@@ -181,7 +184,7 @@ const ViewSingleProduct = () => {
                 <img
                   src={sideImageTwo}
                   style={{
-                    minWidth: "100%",
+                    width: "120px",
                     height: "25vh",
                     borderRadius: "10px",
                   }}

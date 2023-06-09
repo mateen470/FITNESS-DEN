@@ -15,9 +15,13 @@ const RelevantProducts = ({ id }) => {
   const [allProducts, setAllProducts] = useState([]);
 
   const FetchAllProducts = async () => {
-    await axios
-      .get("product/all-products")
-      .then((res) => setAllProducts(res.data.data));
+    await axios.get("product/all-products").then((res) => {
+      if (res.data.data.length > 2) {
+        setAllProducts(res.data.data.slice(-3));
+      } else {
+        setAllProducts(res.data.data);
+      }
+    });
   };
 
   useEffect(() => {
@@ -32,7 +36,6 @@ const RelevantProducts = ({ id }) => {
           justifyContent: "center",
           alignItems: "center",
           flexDirection: "column",
-          minHeight: "100vh",
           mb: 5,
         }}
       >
@@ -50,7 +53,7 @@ const RelevantProducts = ({ id }) => {
           {allProducts.map((cardData, index) =>
             cardData._id !== id ? (
               <Grid item xs={4} key={index}>
-                <Card sx={{ height: "21rem", position: "relative" }}>
+                <Card sx={{ height: "22rem", position: "relative" }}>
                   <CardMedia
                     component="div"
                     style={{
@@ -121,7 +124,11 @@ const RelevantProducts = ({ id }) => {
                       right: 5,
                     }}
                   >
-                    <Rating defaultValue={cardData.reviewStars} size="medium" readOnly />
+                    <Rating
+                      defaultValue={cardData.reviewStars}
+                      size="medium"
+                      readOnly
+                    />
                   </CardActions>
                 </Card>
               </Grid>

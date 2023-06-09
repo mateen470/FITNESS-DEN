@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import LaunchIcon from "@mui/icons-material/Launch";
+import MobileViewServices from "./MobileViewServices";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 
 const cardsData = [
@@ -231,90 +232,104 @@ const CustomCard = ({ data }) => {
   );
 };
 const Services = () => {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
   useEffect(() => {
-    preloadImages();
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
-  const preloadImages = () => {
-    cardsData.forEach((data) => {
-      const img = new Image();
-      img.src = data.cardImage;
-    });
-  };
   return (
     <Container>
       <Typography
         color={"white"}
-        variant="h2"
+        variant={
+          windowWidth < 900 && windowWidth > 500
+            ? "h3"
+            : windowWidth < 500
+            ? "h4"
+            : "h2"
+        }
         textAlign={"center"}
         my={4}
         sx={{ textShadow: "3px 0px 0px purple", fontWeight: 800 }}
       >
         What we Offer!
       </Typography>
-      <Grid
-        container
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-        rowSpacing={2}
-      >
-        {cardsData.map((data, index) => (
-          <React.Fragment key={data.id}>
-            {index % 2 === 0 ? (
-              <>
-                <Grid item xs={6}>
-                  <CustomCard data={data} />
-                </Grid>
-                <Grid
-                  item
-                  xs={6}
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <img
-                    src={data.sideImage}
-                    alt="CARD IMAGES"
-                    style={{
-                      width: index === 0 ? "300px" : "250px",
-                      height: index === 0 ? "200px" : "250px",
+      {windowWidth < 900 ? (
+        <Box mt={-10}>
+          <MobileViewServices />
+        </Box>
+      ) : (
+        <Grid
+          container
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+          rowSpacing={2}
+        >
+          {cardsData.map((data, index) => (
+            <React.Fragment key={data.id}>
+              {index % 2 === 0 ? (
+                <>
+                  <Grid item xs={6}>
+                    <CustomCard data={data} />
+                  </Grid>
+                  <Grid
+                    item
+                    xs={6}
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
                     }}
-                  />
-                </Grid>
-              </>
-            ) : (
-              <>
-                <Grid
-                  item
-                  xs={6}
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <img
-                    src={data.sideImage}
-                    alt="CARD IMAGES"
-                    style={{
-                      width: index === 1 || index === 5 ? "300px" : "250px",
-                      height: index === 1 || index === 5 ? "300px" : "250px",
+                  >
+                    <img
+                      src={data.sideImage}
+                      alt="CARD IMAGES"
+                      style={{
+                        width: index === 0 ? "300px" : "250px",
+                        height: index === 0 ? "200px" : "250px",
+                      }}
+                    />
+                  </Grid>
+                </>
+              ) : (
+                <>
+                  <Grid
+                    item
+                    xs={6}
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
                     }}
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <CustomCard data={data} />
-                </Grid>
-              </>
-            )}
-          </React.Fragment>
-        ))}
-      </Grid>
+                  >
+                    <img
+                      src={data.sideImage}
+                      alt="CARD IMAGES"
+                      style={{
+                        width: index === 1 || index === 5 ? "300px" : "250px",
+                        height: index === 1 || index === 5 ? "300px" : "250px",
+                      }}
+                    />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <CustomCard data={data} />
+                  </Grid>
+                </>
+              )}
+            </React.Fragment>
+          ))}
+        </Grid>
+      )}
     </Container>
   );
 };

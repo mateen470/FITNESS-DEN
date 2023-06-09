@@ -15,6 +15,7 @@ import axios from "axios";
 
 const FeaturedProducts = () => {
   const [allProducts, setAllProducts] = useState([]);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const FetchAllProducts = async () => {
     await axios.get("product/all-products").then((res) => {
@@ -27,6 +28,16 @@ const FeaturedProducts = () => {
   };
 
   useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
     FetchAllProducts();
   }, [allProducts]);
 
@@ -34,7 +45,13 @@ const FeaturedProducts = () => {
     <Container>
       <Typography
         color={"white"}
-        variant="h2"
+        variant={
+          windowWidth < 900 && windowWidth > 500
+            ? "h3"
+            : windowWidth < 500
+            ? "h4"
+            : "h2"
+        }
         textAlign={"center"}
         mt={10}
         mb={4}
@@ -45,8 +62,8 @@ const FeaturedProducts = () => {
       <Grid container spacing={2}>
         {allProducts.map((cardData, index) => {
           return (
-            <Grid item xs={4} key={index}>
-              <Card sx={{ position: "relative" }}>
+            <Grid item xs={12} sm={6} md={4} key={index}>
+              <Card sx={{ position: "relative", height: 480 }}>
                 <CardMedia
                   component="div"
                   style={{
@@ -82,18 +99,25 @@ const FeaturedProducts = () => {
                 </CardContent>
                 <CardActions
                   sx={{
-                    ml: 1,
+                    position: "absolute",
+                    bottom: 15,
+                    left: 5,
                   }}
                 >
-                  <Box>
-                    PRICE :
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      bottom: 40,
+                      left: 8,
+                      display: "flex",
+                    }}
+                  >
+                    PRICE
                     <Typography variant="h7" fontFamily={"Comme, sans-serif"}>
-                      {cardData.price}
+                      :{cardData.price}
                     </Typography>
                     Rs.
                   </Box>
-                </CardActions>
-                <CardActions sx={{ ml: 0.5, mb: 2 }}>
                   <NavLink to={`/view-product-home/${cardData._id}`}>
                     <Typography
                       sx={{

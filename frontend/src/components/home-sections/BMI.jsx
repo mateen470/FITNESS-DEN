@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Box, Container, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Box, Button, Container, Typography } from "@mui/material";
 const BMI = () => {
   const [height, setHeight] = useState();
   const [weight, setWeight] = useState();
@@ -11,6 +11,17 @@ const BMI = () => {
     setBmi(calculatedBMI);
   };
 
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  });
   return (
     <Box
       sx={{
@@ -22,16 +33,16 @@ const BMI = () => {
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         minWidth: "100%",
-        minHeight: `30vw`,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "column",
+        p: 15,
       }}
     >
       <Typography
         color={"white"}
-        variant="h2"
+        fontSize={"8vh"}
         textAlign={"center"}
         sx={{ display: "flex", alignItems: "center", fontWeight: 800 }}
       >
@@ -39,16 +50,17 @@ const BMI = () => {
         {bmi > 0 ? (
           <Typography
             color={"white"}
-            variant="h2"
+            fontSize={"8vh"}
             textAlign={"center"}
             fontWeight={800}
+            ml={2}
           >
-            : {bmi.toFixed(1)}
+            {bmi.toFixed(1)}
           </Typography>
         ) : (
           <Typography
             color={"white"}
-            variant="h2"
+            fontSize={"8vh"}
             textAlign={"center"}
             ml={1}
             fontWeight={800}
@@ -58,16 +70,21 @@ const BMI = () => {
         )}
       </Typography>
 
-      <Container
+      <Box
         sx={{
-          display: "flex",
+          display: windowWidth < 700 ? "block" : "flex",
           justifyContent: "center",
           alignItems: "center",
           gap: 2,
           mt: 2,
         }}
       >
-        <Box sx={{ borderBottom: "2px solid white" }}>
+        <Box
+          sx={{
+            borderBottom: "2px solid white",
+            mb: windowWidth < 700 ? 3 : 0,
+          }}
+        >
           <input
             placeholder="Height (cm)"
             type="number"
@@ -79,12 +96,17 @@ const BMI = () => {
               color: "white",
               outline: "none",
               border: "none",
-              fontSize: "1.7vw",
+              fontSize: "150%",
               paddingBottom: "5px",
             }}
           />
         </Box>
-        <Box sx={{ borderBottom: "2px solid white" }}>
+        <Box
+          sx={{
+            borderBottom: "2px solid white",
+            mb: windowWidth < 700 ? 3 : 0,
+          }}
+        >
           <input
             placeholder="Weight (kg)"
             type="number"
@@ -96,46 +118,62 @@ const BMI = () => {
               color: "white",
               outline: "none",
               border: "none",
-              fontSize: "1.7vw",
+              fontSize: "150%",
               paddingBottom: "5px",
             }}
           />
         </Box>
-      </Container>
-      <Box
-        sx={{
-          border: "2px solid black",
-          p: 1,
-          px: 2,
-          mt: 3,
-          height: "3.5vw",
-          width: "9.5vw",
-          cursor: "pointer",
-        }}
-      >
-        <Typography
-          color={"white"}
-          fontFamily={"Rubik, sans-serif"}
-          fontWeight={600}
-          sx={{
-            background: " black",
-            fontSize: "1.3vw",
-            height: "3.5vw",
-            width: "10vw",
-            ml: -4.3,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            transition: "scale 0.3s ease-in-out",
-            "&:hover": {
-              scale: "0.95 !important",
-            },
-          }}
-          onClick={calculateBMI}
-        >
-          Calculate BMI
-        </Typography>
       </Box>
+      {windowWidth > 1000 ? (
+        <Box
+          sx={{
+            border: "2px solid black",
+            p: 1,
+            px: 2,
+            mt: 3,
+            height: "3.5vw",
+            width: "9.5vw",
+            cursor: "pointer",
+          }}
+        >
+          <Typography
+            color={"white"}
+            fontFamily={"Rubik, sans-serif"}
+            fontWeight={600}
+            sx={{
+              background: " black",
+              fontSize: "1.3vw",
+              height: "3.5vw",
+              width: "10vw",
+              ml: -4.3,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              transition: "scale 0.3s ease-in-out",
+              "&:hover": {
+                scale: "0.95 !important",
+              },
+            }}
+            onClick={calculateBMI}
+          >
+            Calculate BMI
+          </Typography>
+        </Box>
+      ) : (
+        <Box mt={5}>
+          <Button
+            onClick={calculateBMI}
+            sx={{
+              textTransform: "none",
+              color: "white",
+              background: "black",
+              minWidth: "7rem",
+            }}
+          >
+            Calculate BMI
+          </Button>
+        </Box>
+      )}
     </Box>
   );
 };
