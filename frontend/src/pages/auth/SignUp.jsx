@@ -26,39 +26,54 @@ const SignUp = () => {
     };
   }, []);
   return (
-    <Grid container sx={{ maxHeight: "100vh" }}>
-      <Box sx={{ position: "absolute", top: 0, left: 5 }}>
-        <NavLink to={"/"}>
-          <Typography
-            color={"white"}
-            fontFamily={"Comme, sans-serif"}
-            sx={{ display: "flex", alignItems: "center", fontSize: "1.7vw" }}
-          >
-            <KeyboardDoubleArrowLeftIcon /> Home
-          </Typography>
-        </NavLink>
-      </Box>
-      <Grid
-        xs={7}
-        item
-        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
-      >
+    <>
+      {windowWidth < 1100 && windowHeight > 1000 ? (
         <SignUpForm />
-      </Grid>
-      <Grid xs={5} item>
-        <img
-          src={
-            "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779083/signUpPage_xzu6kd.svg"
-          }
-          alt="HERO"
-          style={{
-            height: "99vh",
-            width: windowWidth < 1200 && windowHeight > 700 ? "50vw" : "auto",
-            marginLeft: windowWidth > 1200 ? "-20vw" : "-12vw",
-          }}
-        />
-      </Grid>
-    </Grid>
+      ) : (
+        <Grid container sx={{ maxHeight: "100vh" }}>
+          <Box sx={{ position: "absolute", top: 0, left: 5 }}>
+            <NavLink to={"/"}>
+              <Typography
+                color={"white"}
+                fontFamily={"Comme, sans-serif"}
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  fontSize: "1.7vw",
+                }}
+              >
+                <KeyboardDoubleArrowLeftIcon /> Home
+              </Typography>
+            </NavLink>
+          </Box>
+          <Grid
+            xs={7}
+            item
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <SignUpForm />
+          </Grid>
+          <Grid xs={5} item>
+            <img
+              src={
+                "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779083/signUpPage_xzu6kd.svg"
+              }
+              alt="HERO"
+              style={{
+                height: "99vh",
+                width:
+                  windowWidth < 1200 && windowHeight > 700 ? "50vw" : "auto",
+                marginLeft: windowWidth > 1200 ? "-20vw" : "-12vw",
+              }}
+            />
+          </Grid>
+        </Grid>
+      )}
+    </>
   );
 };
 
