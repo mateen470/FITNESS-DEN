@@ -28,7 +28,43 @@ const SignUp = () => {
   return (
     <>
       {windowWidth < 1100 && windowHeight > 1000 ? (
-        <SignUpForm />
+        <Box>
+          <Box sx={{ position: "absolute", top: 0, left: 5 }}>
+            <NavLink to={"/"}>
+              <Typography
+                color={"white"}
+                fontFamily={"Comme, sans-serif"}
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  fontSize: "2vh",
+                }}
+              >
+                <KeyboardDoubleArrowLeftIcon /> Home
+              </Typography>
+            </NavLink>
+          </Box>
+          <SignUpForm />
+        </Box>
+      ) : windowWidth < 1000 ? (
+        <Box>
+          <Box sx={{ position: "absolute", top: 0, left: 5 }}>
+            <NavLink to={"/"}>
+              <Typography
+                color={"white"}
+                fontFamily={"Comme, sans-serif"}
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  fontSize: "1.2rem",
+                }}
+              >
+                <KeyboardDoubleArrowLeftIcon /> Home
+              </Typography>
+            </NavLink>
+          </Box>
+          <SignUpForm />
+        </Box>
       ) : (
         <Grid container sx={{ maxHeight: "100vh" }}>
           <Box sx={{ position: "absolute", top: 0, left: 5 }}>
