@@ -70,23 +70,27 @@ const Footer = () => {
             <Typography variant="h3" color={"white"} fontWeight={800}>
               Fitness Den
             </Typography>
-            <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-              <Box>
-                <NavLink to={"/"} style={{ color: "white" }}>
-                  <InstagramIcon />
-                </NavLink>
+            {windowWidth < 900 ? (
+              <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                <Box>
+                  <NavLink to={"/"} style={{ color: "white" }}>
+                    <InstagramIcon />
+                  </NavLink>
+                </Box>
+                <Box>
+                  <NavLink to={"/"} style={{ color: "white" }}>
+                    <FacebookIcon />
+                  </NavLink>
+                </Box>
+                <Box>
+                  <NavLink to={"/"} style={{ color: "white" }}>
+                    <EmailIcon />
+                  </NavLink>
+                </Box>
               </Box>
-              <Box>
-                <NavLink to={"/"} style={{ color: "white" }}>
-                  <FacebookIcon />
-                </NavLink>
-              </Box>
-              <Box>
-                <NavLink to={"/"} style={{ color: "white" }}>
-                  <EmailIcon />
-                </NavLink>
-              </Box>
-            </Box>
+            ) : (
+              ""
+            )}
           </Grid>
           <Grid
             item
