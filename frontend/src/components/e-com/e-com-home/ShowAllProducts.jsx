@@ -22,6 +22,7 @@ const ShowAllProducts = () => {
   const [allProducts, setAllProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const { isUser } = useSelector((state) => state.CheckForUserType);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const FetchAllProducts = async () => {
     setIsLoading(true);
@@ -40,6 +41,16 @@ const ShowAllProducts = () => {
     FetchAllProducts();
   }, []);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <>
       <Container
@@ -56,14 +67,20 @@ const ShowAllProducts = () => {
           <NavBar />
         </Box>
         <Typography
-          fontSize={"4.5vw"}
+          variant={
+            windowWidth < 900 && windowWidth > 500
+              ? "h3"
+              : windowWidth < 500
+              ? "h4"
+              : "h2"
+          }
           color={"white"}
           fontWeight={800}
           textAlign={"center"}
           mt={12}
           mb={2}
         >
-          All Products{" "}
+          All Products
           {isUser ? (
             <Box
               sx={{
@@ -109,7 +126,7 @@ const ShowAllProducts = () => {
           <Grid container spacing={2}>
             {allProducts.map((cardData, index) => {
               return (
-                <Grid item xs={4} key={index}>
+                <Grid item xs={12} sm={6} md={4} key={index}>
                   <Card sx={{ height: "30rem", position: "relative" }}>
                     <CardMedia
                       component="div"
