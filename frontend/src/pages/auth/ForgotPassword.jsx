@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ForgotPasswordForm from "../../components/forgotPassword-section/ForgotPasswordForm";
 import { Box, Container, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 
 const ForgotPassword = () => {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     <Container
       sx={{
@@ -19,7 +30,11 @@ const ForgotPassword = () => {
           <Typography
             color={"white"}
             fontFamily={"Comme, sans-serif"}
-            sx={{ display: "flex", alignItems: "center", fontSize: "1.7vw" }}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              fontSize: windowWidth < 1100 ? "1.4rem" : "1.7vw",
+            }}
           >
             <KeyboardDoubleArrowLeftIcon /> Back
           </Typography>
