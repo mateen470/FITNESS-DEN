@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Grid, List, ListItem, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import EmailIcon from "@mui/icons-material/Email";
 import FacebookIcon from "@mui/icons-material/Facebook";
 const Footer = () => {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
   const services = [
     {
       name: "Workout Plans",
@@ -31,6 +33,17 @@ const Footer = () => {
       path: "/nutrition-facts",
     },
   ];
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <footer>
       <Box
@@ -42,20 +55,44 @@ const Footer = () => {
         <Grid container sx={{ pb: 3 }}>
           <Grid
             item
-            xs={4}
+            xs={12}
+            sm={6}
+            md={4}
             sx={{
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
+              flexDirection: "column",
+              gap: 3,
+              mt: windowWidth < 600 ? 5 : 0,
             }}
           >
             <Typography variant="h3" color={"white"} fontWeight={800}>
               Fitness Den
             </Typography>
+            <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+              <Box>
+                <NavLink to={"/"} style={{ color: "white" }}>
+                  <InstagramIcon />
+                </NavLink>
+              </Box>
+              <Box>
+                <NavLink to={"/"} style={{ color: "white" }}>
+                  <FacebookIcon />
+                </NavLink>
+              </Box>
+              <Box>
+                <NavLink to={"/"} style={{ color: "white" }}>
+                  <EmailIcon />
+                </NavLink>
+              </Box>
+            </Box>
           </Grid>
           <Grid
             item
-            xs={4}
+            xs={12}
+            sm={6}
+            md={4}
             sx={{
               display: "flex",
               alignItems: "center",
@@ -84,32 +121,38 @@ const Footer = () => {
               })}
             </List>
           </Grid>
-          <Grid
-            item
-            xs={4}
-            sx={{
-              display: "flex",
-              justifyContent: "flex-start",
-              gap: 2,
-              pt: 7,
-            }}
-          >
-            <Box>
-              <NavLink to={"/"} style={{ color: "white" }}>
-                <InstagramIcon />
-              </NavLink>
-            </Box>
-            <Box>
-              <NavLink to={"/"} style={{ color: "white" }}>
-                <FacebookIcon />
-              </NavLink>
-            </Box>
-            <Box>
-              <NavLink to={"/"} style={{ color: "white" }}>
-                <EmailIcon />
-              </NavLink>
-            </Box>
-          </Grid>
+          {windowWidth > 900 ? (
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={4}
+              sx={{
+                display: "flex",
+                justifyContent: "flex-start",
+                gap: 2,
+                pt: 7,
+              }}
+            >
+              <Box>
+                <NavLink to={"/"} style={{ color: "white" }}>
+                  <InstagramIcon />
+                </NavLink>
+              </Box>
+              <Box>
+                <NavLink to={"/"} style={{ color: "white" }}>
+                  <FacebookIcon />
+                </NavLink>
+              </Box>
+              <Box>
+                <NavLink to={"/"} style={{ color: "white" }}>
+                  <EmailIcon />
+                </NavLink>
+              </Box>
+            </Grid>
+          ) : (
+            ""
+          )}
         </Grid>
       </Box>
     </footer>
