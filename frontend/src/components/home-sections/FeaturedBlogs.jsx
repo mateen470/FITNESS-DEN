@@ -18,7 +18,6 @@ const FeaturedBlogs = () => {
   const [latestBlogs, setLatestBlogs] = useState([]);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-
   const FetchBlogs = async () => {
     await axios.get("blog/all-blogs").then((res) => {
       if (res.data.data.length > 2) {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Box, Button } from "@mui/material";
 import axios from "axios";
@@ -10,6 +10,8 @@ const Comments = ({ id }) => {
   const [comment, setComment] = useState("");
   const userId = useSelector((state) => state.CurrentUser.CurrentUserID);
   const { isUser } = useSelector((state) => state.CheckForUserType);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
 
   const PostComment = async () => {
     try {
@@ -39,6 +41,26 @@ const Comments = ({ id }) => {
     toast.error("LOGIN FIRST!!");
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowHeight(window.innerHeight);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <Box>
       <Box
@@ -59,12 +81,17 @@ const Comments = ({ id }) => {
           onChange={(e) => setComment(e.target.value)}
           style={{
             minWidth: "100%",
-            padding: "10px",
+            padding: windowWidth < 400 ? "10px 0px" : "10px",
             color: "white",
             backgroundColor: "none",
             outline: "none",
             border: "none",
-            fontSize: "1.7vw",
+            fontSize:
+              windowWidth < 1100 && windowHeight > 1000
+                ? "3vw"
+                : windowWidth < 1000
+                ? "1.2rem"
+                : "2vw",
           }}
         />
         {isUser ? (
@@ -77,7 +104,16 @@ const Comments = ({ id }) => {
             }}
             onClick={PostComment}
           >
-            <SendIcon />
+            <SendIcon
+              sx={{
+                fontSize:
+                  windowWidth < 1100 && windowHeight > 1000
+                    ? "3vw"
+                    : windowWidth < 1000
+                    ? "1.2rem"
+                    : "2vw",
+              }}
+            />
           </Button>
         ) : (
           <Button
@@ -89,7 +125,16 @@ const Comments = ({ id }) => {
             }}
             onClick={notAccessible}
           >
-            <SendIcon />
+            <SendIcon
+              sx={{
+                fontSize:
+                  windowWidth < 1100 && windowHeight > 1000
+                    ? "3vw"
+                    : windowWidth < 1000
+                    ? "1.2rem"
+                    : "2vw",
+              }}
+            />
           </Button>
         )}
       </Box>

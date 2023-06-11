@@ -9,6 +9,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 const FeaturedBlogs = ({ id }) => {
   const [allBlogs, setAllBlogs] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const FetchAllBlogs = async () => {
     setIsLoading(true);
@@ -28,13 +29,23 @@ const FeaturedBlogs = ({ id }) => {
     FetchAllBlogs();
   }, []);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <Box>
       <Box my={5}>
         <Typography
           display={"flex"}
           gap={1}
-          fontSize={"3.5vw"}
+          variant={windowWidth < 810 ? "h5" : "h4"}
           color={"white"}
           fontWeight={800}
           textAlign={"left"}
@@ -65,7 +76,7 @@ const FeaturedBlogs = ({ id }) => {
                   <CardContent>
                     <Typography
                       key={index}
-                      fontSize={"2vw"}
+                      variant="h5"
                       color={"black"}
                       fontWeight={600}
                       textAlign={"left"}

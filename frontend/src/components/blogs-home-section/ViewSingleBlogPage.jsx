@@ -11,12 +11,16 @@ import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
 import Comments from "./Comments";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { motion, useScroll } from "framer-motion";
 
 const ViewSingleBlogPage = () => {
   const { id } = useParams();
+  const { scrollYProgress } = useScroll();
   const [blog, setBlog] = useState("");
   const userId = useSelector((state) => state.CurrentUser.CurrentUserID);
   const { isUser } = useSelector((state) => state.CheckForUserType);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
 
   const FetchBlog = async () => {
     await axios
@@ -66,8 +70,39 @@ const ViewSingleBlogPage = () => {
     FetchBlog();
   }, [blog]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowHeight(window.innerHeight);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <>
+      <motion.div
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: "5px",
+          background: "#830d5c ",
+          transformOrigin: "0%",
+          scaleX: scrollYProgress,
+        }}
+      />
       <Grid
         container
         p={3}
@@ -79,7 +114,7 @@ const ViewSingleBlogPage = () => {
         }}
         spacing={1}
       >
-        <Grid item xs={8}>
+        <Grid item xs={12} sm={12} md={8}>
           <Box
             sx={{
               background: "white",
@@ -100,7 +135,12 @@ const ViewSingleBlogPage = () => {
                   sx={{
                     display: "flex",
                     alignItems: "center",
-                    fontSize: "1.7vw",
+                    fontSize:
+                      windowWidth < 1100 && windowHeight > 1000
+                        ? "2vh"
+                        : windowWidth < 1000
+                        ? "1.2rem"
+                        : "1.7vw",
                   }}
                 >
                   <KeyboardDoubleArrowLeftIcon /> Back
@@ -108,7 +148,13 @@ const ViewSingleBlogPage = () => {
               </NavLink>
             </Box>
             <Typography
-              fontSize={"3.2vw"}
+              fontSize={
+                windowWidth < 1100 && windowHeight > 1000
+                  ? "3.2vh"
+                  : windowWidth < 1000
+                  ? "3vh"
+                  : "3.2vw"
+              }
               color={"black"}
               fontWeight={800}
               textAlign={"left"}
@@ -122,7 +168,12 @@ const ViewSingleBlogPage = () => {
               <img
                 src={blog.image}
                 style={{
-                  width: "60vw",
+                  width:
+                    windowWidth < 810 && windowWidth > 500
+                      ? "90vw"
+                      : windowWidth < 500
+                      ? "80vw"
+                      : "60vw",
                   height: "35vw",
                   objectFit: "fill",
                   borderRadius: "5px",
@@ -131,7 +182,13 @@ const ViewSingleBlogPage = () => {
               />
             </Box>
             <Typography
-              fontSize={"2.5vw"}
+              fontSize={
+                windowWidth < 1100 && windowHeight > 1000
+                  ? "2.5vh"
+                  : windowWidth < 1000
+                  ? "2.5vh"
+                  : "2.5vw"
+              }
               color={"black"}
               fontWeight={800}
               textAlign={"left"}
@@ -143,7 +200,13 @@ const ViewSingleBlogPage = () => {
             </Typography>
 
             <Typography
-              fontSize={"1.9vw"}
+              fontSize={
+                windowWidth < 1100 && windowHeight > 1000
+                  ? "2vh"
+                  : windowWidth < 1000
+                  ? "2.3vh"
+                  : "1.9vw"
+              }
               color={"black"}
               textAlign={"left"}
               fontFamily={"Comme, sans-serif"}
@@ -184,7 +247,7 @@ const ViewSingleBlogPage = () => {
                 }}
               >
                 <Typography
-                  fontSize={"2vw"}
+                  variant="h6"
                   color={"white"}
                   fontWeight={800}
                   fontFamily={"Comme, sans-serif"}
@@ -216,7 +279,7 @@ const ViewSingleBlogPage = () => {
                 }}
               >
                 <Typography
-                  fontSize={"2vw"}
+                  variant="h6"
                   color={"white"}
                   fontWeight={800}
                   fontFamily={"Comme, sans-serif"}
@@ -259,7 +322,7 @@ const ViewSingleBlogPage = () => {
                 }}
               >
                 <Typography
-                  fontSize={"2vw"}
+                  variant="h6"
                   color={"white"}
                   fontWeight={800}
                   fontFamily={"Comme, sans-serif"}
@@ -291,7 +354,7 @@ const ViewSingleBlogPage = () => {
                 }}
               >
                 <Typography
-                  fontSize={"2vw"}
+                  variant="h6"
                   color={"white"}
                   fontWeight={800}
                   fontFamily={"Comme, sans-serif"}
@@ -319,7 +382,13 @@ const ViewSingleBlogPage = () => {
           {blog.comments && blog.comments.length > 0 && (
             <Box sx={{ background: "white", borderRadius: 2, p: 3, my: 3 }}>
               <Typography
-                fontSize={"3vw"}
+                fontSize={
+                  windowWidth < 1100 && windowHeight > 1000
+                    ? "3.2vh"
+                    : windowWidth < 1000
+                    ? "3vh"
+                    : "3vw"
+                }
                 color={"black"}
                 fontWeight={800}
                 textAlign={"left"}
@@ -331,7 +400,13 @@ const ViewSingleBlogPage = () => {
               {blog.comments.map((blogComments, index) => (
                 <Box mb={3} key={index}>
                   <Typography
-                    fontSize={"1.7vw"}
+                    fontSize={
+                      windowWidth < 1100 && windowHeight > 1000
+                        ? "2vh"
+                        : windowWidth < 1000
+                        ? "0.8rem"
+                        : "1.7vw"
+                    }
                     color={"#696969"}
                     fontWeight={800}
                     textAlign={"left"}
@@ -340,7 +415,13 @@ const ViewSingleBlogPage = () => {
                     {blogComments.nameOfUser}
                   </Typography>
                   <Typography
-                    fontSize={"1.5vw"}
+                    fontSize={
+                      windowWidth < 1100 && windowHeight > 1000
+                        ? "1.8vh"
+                        : windowWidth < 1000
+                        ? "0.6rem"
+                        : "1.5vw"
+                    }
                     color={"black"}
                     textAlign={"left"}
                     fontFamily={"Comme, sans-serif"}
@@ -352,7 +433,7 @@ const ViewSingleBlogPage = () => {
             </Box>
           )}
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={12} sm={12} md={4}>
           <FeaturedBlogs id={id} />
         </Grid>
       </Grid>

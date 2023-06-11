@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { IconButton, Box } from "@mui/material";
 import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
 import Hero from "../../components/home-sections/Hero";
@@ -7,20 +7,18 @@ import FeaturedProducts from "../../components/home-sections/FeaturedProducts";
 import FeaturedBlogs from "../../components/home-sections/FeaturedBlogs";
 import BMI from "../../components/home-sections/BMI";
 import Footer from "../../components/home-sections/Footer";
-
-import { useDispatch } from "react-redux";
+import ParallaxText from "../../components/home-sections/ParallaxText";
 
 const Home = () => {
-  const dispatch = useDispatch();
   const sectionRef = useRef(null);
-  const [showScrollButton, setShowScrollButton] = React.useState(false);
+  const [showScrollButton, setShowScrollButton] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
       setShowScrollButton(scrollY > 300);
     };
-
     window.addEventListener("scroll", handleScroll);
 
     return () => {
@@ -52,9 +50,19 @@ const Home = () => {
       }
     });
   };
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     <Box sx={{ position: "relative" }}>
       <Hero scrollToSection={scrollToSection} />
+      {windowWidth > 990 ? <ParallaxText /> : ""}
       <Box ref={sectionRef}>
         <Services />
       </Box>

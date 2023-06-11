@@ -88,7 +88,7 @@ const ShowAllBlogs = () => {
             {allBlogs.map((cardData, index) => {
               return (
                 <Grid item xs={12} sm={6} md={4} key={index}>
-                  <Card sx={{ height: "33rem", position: "relative" }}>
+                  <Card sx={{ height: 565, position: "relative" }}>
                     <CardMedia
                       component="img"
                       alt="card image"
@@ -148,7 +148,7 @@ const ShowAllBlogs = () => {
                         sx={{ display: "flex", alignItems: "center", gap: 0.5 }}
                       >
                         <Typography
-                          fontSize={"1.5vw"}
+                          variant="h6"
                           color={"black"}
                           fontWeight={800}
                           fontFamily={"Comme, sans-serif"}
@@ -161,7 +161,7 @@ const ShowAllBlogs = () => {
                         sx={{ display: "flex", alignItems: "center", gap: 0.5 }}
                       >
                         <Typography
-                          fontSize={"1.5vw"}
+                          variant="h6"
                           color={"black"}
                           fontWeight={800}
                           fontFamily={"Comme, sans-serif"}
