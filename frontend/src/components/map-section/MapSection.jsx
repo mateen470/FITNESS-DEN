@@ -290,7 +290,7 @@ const MapSection = () => {
                   <th
                     style={{
                       fontFamily: "Comme, sans-serif",
-                      fontSize: "1.8rem",
+                      fontSize: windowWidth < 600 ? "1.2rem" : "1.8rem",
                       color: "white",
                       fontWeight: "bold",
                       borderBottom: "3px solid black",
@@ -302,7 +302,7 @@ const MapSection = () => {
                   <th
                     style={{
                       fontFamily: "Comme, sans-serif",
-                      fontSize: "1.8rem",
+                      fontSize: windowWidth < 600 ? "1.2rem" : "1.8rem",
                       color: "white",
                       fontWeight: "bold",
                       borderBottom: "3px solid black",
@@ -314,7 +314,7 @@ const MapSection = () => {
                   <th
                     style={{
                       fontFamily: "Comme, sans-serif",
-                      fontSize: "1.8rem",
+                      fontSize: windowWidth < 600 ? "1.2rem" : "1.8rem",
                       color: "white",
                       fontWeight: "bold",
                       borderBottom: "3px solid black",
@@ -335,7 +335,7 @@ const MapSection = () => {
                       style={{
                         padding: "0.5rem",
                         fontFamily: "Comme, sans-serif",
-                        fontSize: "1.3rem",
+                        fontSize: windowWidth < 600 ? "1rem" : "1.3rem",
                         color: "white",
                       }}
                     >
@@ -343,9 +343,9 @@ const MapSection = () => {
                     </td>
                     <td
                       style={{
-                        padding: "0.5rem 2rem",
+                        padding: windowWidth < 600 ? "1rem" : "0.5rem 2rem",
                         fontFamily: "Comme, sans-serif",
-                        fontSize: "1.3rem",
+                        fontSize: windowWidth < 600 ? "1rem" : "1.3rem",
                         color: "white",
                       }}
                     >
@@ -353,9 +353,9 @@ const MapSection = () => {
                     </td>
                     <td
                       style={{
-                        padding: "0.5rem 2rem",
+                        padding: windowWidth < 600 ? "1rem" : "0.5rem 2rem",
                         fontFamily: "Comme, sans-serif",
-                        fontSize: "1.3rem",
+                        fontSize: windowWidth < 600 ? "1rem" : "1.3rem",
                         color: "white",
                         textAlign: "center",
                       }}
