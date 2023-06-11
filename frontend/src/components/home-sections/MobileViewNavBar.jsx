@@ -28,6 +28,17 @@ const MobileViewNavBar = () => {
     { text: "Get Nutrition Facts", path: "/nutrition-facts" },
   ];
 
+  const ScrollbarCSS = {
+    "&::-webkit-scrollbar": {
+      width: "8px",
+      backgroundColor: "transparent",
+    },
+    "&::-webkit-scrollbar-thumb": {
+      backgroundColor: "#6a1b9a", // Set the color of the thumb here
+      borderRadius: "10px",
+    },
+  };
+
   return (
     <div>
       {isUser === false ? (
@@ -60,72 +71,79 @@ const MobileViewNavBar = () => {
         onClose={toggleDrawer(false)}
         PaperProps={{
           style: {
-            backgroundColor: "#29084d ",
+            backgroundColor: "#29084d",
             minWidth: "30vw",
           },
         }}
       >
-        {isUser ? (
-          <IconButton
-            onClick={toggleDrawer(false)}
-            sx={{ position: "absolute", right: 0 }}
-          >
-            <CloseIcon style={{ color: "white" }} />
-          </IconButton>
-        ) : (
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              mt: 2,
-            }}
-          >
-            <Button>
-              <NavLink
-                to={"/login"}
-                style={{
-                  color: "black",
-                  background: "white",
-                  borderRadius: "5px",
-                  padding: "0px 10px",
-                }}
-              >
-                Sign In
-              </NavLink>
-            </Button>
-            <IconButton onClick={toggleDrawer(false)}>
+        <Box
+          sx={{
+            overflow: "auto",
+            ...ScrollbarCSS,
+          }}
+        >
+          {isUser ? (
+            <IconButton
+              onClick={toggleDrawer(false)}
+              sx={{ position: "absolute", right: 0 }}
+            >
               <CloseIcon style={{ color: "white" }} />
             </IconButton>
-          </Box>
-        )}
-
-        <List sx={{ mt: 4 }}>
-          {menuItems.map((item) => (
-            <ListItem key={item.text} disablePadding>
-              <ListItemButton
-                component={NavLink}
-                to={item.path}
-                sx={{
-                  "&:hover": {
-                    backgroundColor: "rgba(255, 255, 255, 0.1)",
-                  },
-                }}
-              >
-                <Typography
-                  sx={{
-                    color: "white",
-                    fontWeight: "bold",
-                    fontSize: "1.2rem",
+          ) : (
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                mt: 2,
+              }}
+            >
+              <Button>
+                <NavLink
+                  to={"/login"}
+                  style={{
+                    color: "black",
+                    background: "white",
+                    borderRadius: "5px",
+                    padding: "0px 10px",
                   }}
                 >
-                  {item.text}
-                </Typography>
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
+                  Sign In
+                </NavLink>
+              </Button>
+              <IconButton onClick={toggleDrawer(false)}>
+                <CloseIcon style={{ color: "white" }} />
+              </IconButton>
+            </Box>
+          )}
+
+          <List sx={{ mt: 4 }}>
+            {menuItems.map((item) => (
+              <ListItem key={item.text} disablePadding>
+                <ListItemButton
+                  component={NavLink}
+                  to={item.path}
+                  sx={{
+                    "&:hover": {
+                      backgroundColor: "rgba(255, 255, 255, 0.1)",
+                    },
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      color: "white",
+                      fontWeight: "bold",
+                      fontSize: "1.2rem",
+                    }}
+                  >
+                    {item.text}
+                  </Typography>
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+          <Divider />
+        </Box>
       </Drawer>
     </div>
   );
