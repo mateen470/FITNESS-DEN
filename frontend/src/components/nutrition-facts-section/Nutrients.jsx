@@ -3,6 +3,7 @@ import { Box, Button, Container, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 const Nutrients = ({ data, setShowModal }) => {
   const [FilteredData, setFilteredData] = useState([]);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const FilterData = () => {
     setFilteredData(
@@ -22,13 +23,22 @@ const Nutrients = ({ data, setShowModal }) => {
   };
 
   useEffect(FilterData, []);
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     data.length !== 0 && (
       <Container
         sx={{
           background: "white",
           minHeight: "100%",
-          width: "50%",
+          width: windowWidth < 800 ? "100%" : "50%",
           borderRadius: 3,
           mb: 8,
           position: "relative",
@@ -44,7 +54,7 @@ const Nutrients = ({ data, setShowModal }) => {
         </Button>
         <Typography
           sx={{
-            fontSize: "2rem",
+            fontSize: windowWidth < 500 ? "1.5rem" : "2rem",
             color: "black",
             fontWeight: 800,
             textAlign: "center",

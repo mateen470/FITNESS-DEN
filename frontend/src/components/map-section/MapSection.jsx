@@ -7,6 +7,8 @@ const MapSection = () => {
   const [map, setMap] = useState(null);
   const [places, setPlaces] = useState([]);
   const [currentPlace, setCurrentPlace] = useState(null);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const [markers, setMarkers] = useState([]);
   const clearMarkers = () => {
     markers.forEach((marker) => marker.setMap(null));
@@ -174,6 +176,26 @@ const MapSection = () => {
     }
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowHeight(window.innerHeight);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <Container
       sx={{
@@ -185,9 +207,19 @@ const MapSection = () => {
     >
       <Typography
         color={"white"}
-        variant="h2"
+        variant={
+          windowWidth < 900 && windowWidth > 500
+            ? "h3"
+            : windowWidth < 500
+            ? "h4"
+            : "h2"
+        }
         textAlign={"center"}
-        sx={{ textShadow: "3px 0px 0px purple", fontWeight: 800 }}
+        sx={{
+          textShadow: "3px 0px 0px purple",
+          fontWeight: 800,
+          mt: windowWidth < 600 ? 10 : "",
+        }}
       >
         Find Gyms Nearby
       </Typography>
@@ -209,15 +241,30 @@ const MapSection = () => {
             ref={searchBoxRef}
             style={{
               minWidth: "100%",
-              padding: "10px",
+              padding: windowWidth < 400 ? "10px 0px" : "10px",
               color: "black",
               backgroundColor: "none",
               outline: "none",
               border: "none",
-              fontSize: "1.7vw",
+              fontSize:
+                windowWidth < 1100 && windowHeight > 1000
+                  ? "3vw"
+                  : windowWidth < 1000
+                  ? "1.2rem"
+                  : "2vw",
             }}
           />
-          <SearchIcon sx={{ color: "white !important", fontSize: "2vw" }} />
+          <SearchIcon
+            sx={{
+              color: "white !important",
+              fontSize:
+                windowWidth < 1100 && windowHeight > 1000
+                  ? "3vw"
+                  : windowWidth < 1000
+                  ? "1.2rem"
+                  : "2vw",
+            }}
+          />
         </Box>
       </Box>
       <Container>

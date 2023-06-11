@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Nutrients from "./Nutrients";
 import { Box, Container, Typography } from "@mui/material";
@@ -8,6 +8,8 @@ const NutritionFacts = () => {
   const [searchText, setSearchText] = useState("");
   const [NutritionValues, setNutritionValues] = useState();
   const [showModal, setShowModal] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const handleSubmit = async () => {
     const options = {
       method: "GET",
@@ -32,6 +34,26 @@ const NutritionFacts = () => {
     setShowModal(true);
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowHeight(window.innerHeight);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <Container
       sx={{
@@ -45,7 +67,7 @@ const NutritionFacts = () => {
         sx={{
           my: 5,
           px: "2vw",
-          width: "40%",
+          width: windowWidth < 600 ? "100%" : "40%",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -58,18 +80,28 @@ const NutritionFacts = () => {
           onChange={(e) => setSearchText(e.target.value)}
           style={{
             minWidth: "100%",
-            padding: "10px",
+            padding: windowWidth < 400 ? "10px 0px" : "10px",
             color: "white",
             backgroundColor: "none",
             outline: "none",
             border: "none",
-            fontSize: "1.7vw",
+            fontSize:
+              windowWidth < 1100 && windowHeight > 1000
+                ? "3vw"
+                : windowWidth < 1000
+                ? "1.2rem"
+                : "2vw",
           }}
         />
         <SearchIcon
           sx={{
             color: "white !important",
-            fontSize: "3vw",
+            fontSize:
+              windowWidth < 1100 && windowHeight > 1000
+                ? "3vw"
+                : windowWidth < 1000
+                ? "1.2rem"
+                : "2vw",
             cursor: "pointer",
           }}
           onClick={handleSubmit}
@@ -82,7 +114,7 @@ const NutritionFacts = () => {
           sx={{
             background: "white",
             minHeight: "100%",
-            width: "50%",
+            width: windowWidth < 800 ? "100%" : "50%",
             borderRadius: 3,
             mb: 8,
             position: "relative",
@@ -91,7 +123,7 @@ const NutritionFacts = () => {
         >
           <Typography
             sx={{
-              fontSize: "2rem",
+              fontSize: windowWidth < 500 ? "1.5rem" : "2rem",
               color: "black",
               fontWeight: 800,
               textAlign: "center",

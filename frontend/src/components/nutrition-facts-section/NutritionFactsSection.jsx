@@ -1,7 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Typography, Box } from "@mui/material";
 import NutritionFacts from "./NutritionFacts";
 const NutritionFactsSection = () => {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowHeight(window.innerHeight);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <Box
       sx={{
@@ -20,9 +43,19 @@ const NutritionFactsSection = () => {
     >
       <Typography
         color={"white"}
-        variant="h2"
+        variant={
+          windowWidth < 900 && windowWidth > 500
+            ? "h3"
+            : windowWidth < 500
+            ? "h4"
+            : "h2"
+        }
         textAlign={"center"}
-        sx={{ textShadow: "3px 0px 0px purple", fontWeight: 800 }}
+        sx={{
+          textShadow: "3px 0px 0px purple",
+          fontWeight: 800,
+          mt: windowWidth < 600 ? 10 : "",
+        }}
       >
         Find Nutritional Facts
       </Typography>
