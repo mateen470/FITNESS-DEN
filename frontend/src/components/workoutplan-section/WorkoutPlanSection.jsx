@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import WorkoutPlanSectionMobileView from "./WorkoutPlanMobileView";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -25,6 +26,8 @@ const WorkoutPlanSection = () => {
   const navigate = useNavigate();
   const flag = useRef(false);
   const flag1 = useRef(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
   const IDofCurrentUser = useSelector(
     (state) => state.CurrentUser.CurrentUserID
   );
@@ -132,6 +135,16 @@ const WorkoutPlanSection = () => {
     const notAccessible = () => {
       toast.error("LOGIN FIRST!!");
     };
+
+    useEffect(() => {
+      const handleResize = () => {
+        setWindowWidth(window.innerWidth);
+      };
+      window.addEventListener("resize", handleResize);
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
+    }, []);
 
     return (
       <Box position="relative">
@@ -319,77 +332,89 @@ const WorkoutPlanSection = () => {
     <Container>
       <Typography
         color={"white"}
-        variant="h2"
+        variant={
+          windowWidth < 900 && windowWidth > 500
+            ? "h3"
+            : windowWidth < 500
+            ? "h4"
+            : "h2"
+        }
         textAlign={"center"}
         my={4}
         sx={{ textShadow: "3px 0px 0px purple", fontWeight: 800 }}
       >
         Our WorkoutPlans
       </Typography>
-      <Grid
-        container
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          mt: 4,
-        }}
-        rowSpacing={2}
-      >
-        {AllPlans.map((data, index) => (
-          <React.Fragment key={data.id}>
-            {index % 2 === 0 ? (
-              <>
-                <Grid item xs={6}>
-                  <CustomCard data={data} index={index} />
-                </Grid>
-                <Grid
-                  item
-                  xs={6}
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <img
-                    src={data.Image}
-                    alt="CARD IMAGES"
-                    style={{
-                      width: "250px",
-                      height: "250px",
+      {windowWidth < 900 ? (
+        <Box mt={-10}>
+          <WorkoutPlanSectionMobileView />
+        </Box>
+      ) : (
+        <Grid
+          container
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            mt: 4,
+          }}
+          rowSpacing={2}
+        >
+          {AllPlans.map((data, index) => (
+            <React.Fragment key={data.id}>
+              {index % 2 === 0 ? (
+                <>
+                  <Grid item xs={6}>
+                    <CustomCard data={data} index={index} />
+                  </Grid>
+                  <Grid
+                    item
+                    xs={6}
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
                     }}
-                  />
-                </Grid>
-              </>
-            ) : (
-              <>
-                <Grid
-                  item
-                  xs={6}
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <img
-                    src={data.Image}
-                    alt="CARD IMAGES"
-                    style={{
-                      width: "250px",
-                      height: "250px",
+                  >
+                    <img
+                      src={data.Image}
+                      alt="CARD IMAGES"
+                      style={{
+                        width: "250px",
+                        height: "250px",
+                      }}
+                    />
+                  </Grid>
+                </>
+              ) : (
+                <>
+                  <Grid
+                    item
+                    xs={6}
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
                     }}
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <CustomCard data={data} index={index} />
-                </Grid>
-              </>
-            )}
-          </React.Fragment>
-        ))}
-      </Grid>
+                  >
+                    <img
+                      src={data.Image}
+                      alt="CARD IMAGES"
+                      style={{
+                        width: "250px",
+                        height: "250px",
+                      }}
+                    />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <CustomCard data={data} index={index} />
+                  </Grid>
+                </>
+              )}
+            </React.Fragment>
+          ))}
+        </Grid>
+      )}
     </Container>
   );
 };
