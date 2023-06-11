@@ -12,6 +12,7 @@ import {
 import { NavLink } from "react-router-dom";
 import LaunchIcon from "@mui/icons-material/Launch";
 import MobileViewServices from "./MobileViewServices";
+import { Tilt } from "react-tilt";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 
 const cardsData = [
@@ -106,48 +107,50 @@ const CustomCard = ({ data }) => {
 
   return (
     <Box position="relative">
-      <Card
-        onClick={handleClick}
-        sx={{
-          width: "100%",
-          height: "100%",
-          padding: 2,
-          cursor: "pointer",
-          background: "rgba(255, 255, 255, 0.336)",
-        }}
-      >
-        <Typography
+      <Tilt options={{ max: 25, scale: 1 }}>
+        <Card
+          onClick={handleClick}
           sx={{
-            position: "absolute",
-            right: 5,
-            top: 3,
-            opacity: 0.5,
-            display: "flex",
-            alignItems: "center",
-            color: "white",
+            width: "100%",
+            height: "100%",
+            padding: 2,
+            cursor: "pointer",
+            background: "rgba(255, 255, 255, 0.336)",
           }}
         >
-          <LaunchIcon />
-        </Typography>
-        <CardContent>
           <Typography
-            variant="h4"
-            color={"white"}
-            textAlign={"center"}
-            fontWeight={600}
+            sx={{
+              position: "absolute",
+              right: 5,
+              top: 3,
+              opacity: 0.5,
+              display: "flex",
+              alignItems: "center",
+              color: "white",
+            }}
           >
-            {data.title}
+            <LaunchIcon />
           </Typography>
-          <Typography
-            fontSize={"1.2rem"}
-            color={"white"}
-            textAlign={"left"}
-            fontFamily={"Comme, sans-serif"}
-          >
-            {data.description}
-          </Typography>
-        </CardContent>
-      </Card>
+          <CardContent>
+            <Typography
+              variant="h4"
+              color={"white"}
+              textAlign={"center"}
+              fontWeight={600}
+            >
+              {data.title}
+            </Typography>
+            <Typography
+              fontSize={"1.2rem"}
+              color={"white"}
+              textAlign={"left"}
+              fontFamily={"Comme, sans-serif"}
+            >
+              {data.description}
+            </Typography>
+          </CardContent>
+        </Card>
+      </Tilt>
 
       <Modal
         open={isExpanded}
