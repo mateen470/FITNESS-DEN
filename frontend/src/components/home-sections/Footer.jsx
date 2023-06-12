@@ -67,9 +67,11 @@ const Footer = () => {
               mt: windowWidth < 600 ? 5 : 0,
             }}
           >
-            <Typography variant="h3" color={"white"} fontWeight={800}>
-              Fitness Den
-            </Typography>
+            <NavLink to={"/"}>
+              <Typography variant="h3" color={"white"} fontWeight={800}>
+                Fitness Den
+              </Typography>
+            </NavLink>
             {windowWidth < 900 ? (
               <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
                 <Box>

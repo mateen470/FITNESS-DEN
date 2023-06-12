@@ -17,6 +17,7 @@ import LaunchIcon from "@mui/icons-material/Launch";
 import { SetSelectedPlanToBuy } from "../../context/SelectedPlan";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import { Tilt } from "react-tilt";
 
 const WorkoutPlanSection = () => {
   const dispatch = useDispatch();
@@ -148,57 +149,58 @@ const WorkoutPlanSection = () => {
 
     return (
       <Box position="relative">
-        <Card
-          onClick={handleClick}
-          sx={{
-            width: "100%",
-            height: "100%",
-            padding: 2,
-            cursor: "pointer",
-            background: "rgba(255, 255, 255, 0.336)",
-          }}
-        >
-          <Typography
+        <Tilt options={{ max: 25, scale: 1 }}>
+          <Card
+            onClick={handleClick}
             sx={{
-              position: "absolute",
-              right: 5,
-              top: 3,
-              opacity: 0.5,
-              display: "flex",
-              alignItems: "center",
-              color: "white",
+              width: "100%",
+              height: "100%",
+              padding: 2,
+              cursor: "pointer",
+              background: "rgba(255, 255, 255, 0.336)",
             }}
           >
-            <LaunchIcon />
-          </Typography>
-          <CardContent>
             <Typography
-              variant="h4"
-              color={"white"}
-              textAlign={"center"}
-              fontWeight={600}
+              sx={{
+                position: "absolute",
+                right: 5,
+                top: 3,
+                opacity: 0.5,
+                display: "flex",
+                alignItems: "center",
+                color: "white",
+              }}
             >
-              {data.Title}
+              <LaunchIcon />
             </Typography>
-            <Typography
-              fontSize={"1.2rem"}
-              color={"white"}
-              textAlign={"left"}
-              fontFamily={"Comme, sans-serif"}
-            >
-              {data.Description}
-            </Typography>
-            <Typography
-              fontSize={"1.5rem"}
-              color={"white"}
-              textAlign={"center"}
-              fontWeight={800}
-            >
-              {data.Price} /- PKR
-            </Typography>
-          </CardContent>
-        </Card>
-
+            <CardContent>
+              <Typography
+                variant="h4"
+                color={"white"}
+                textAlign={"center"}
+                fontWeight={600}
+              >
+                {data.Title}
+              </Typography>
+              <Typography
+                fontSize={"1.2rem"}
+                color={"white"}
+                textAlign={"left"}
+                fontFamily={"Comme, sans-serif"}
+              >
+                {data.Description}
+              </Typography>
+              <Typography
+                fontSize={"1.5rem"}
+                color={"white"}
+                textAlign={"center"}
+                fontWeight={800}
+              >
+                {data.Price} /- PKR
+              </Typography>
+            </CardContent>
+          </Card>
+        </Tilt>
         <Modal
           open={isExpanded}
           onClose={handleClose}
