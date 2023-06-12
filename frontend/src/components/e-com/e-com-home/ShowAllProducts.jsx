@@ -11,8 +11,13 @@ import {
   CardContent,
   CardActions,
   Rating,
+  Select,
+  MenuItem,
+  InputBase,
+  InputAdornment,
 } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import SearchIcon from "@mui/icons-material/Search";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -23,6 +28,8 @@ const ShowAllProducts = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { isUser } = useSelector((state) => state.CheckForUserType);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortOrder, setSortOrder] = useState("");
 
   const FetchAllProducts = async () => {
     setIsLoading(true);
@@ -37,6 +44,7 @@ const ShowAllProducts = () => {
         setIsLoading(false);
       });
   };
+
   useEffect(() => {
     FetchAllProducts();
   }, []);
@@ -50,6 +58,20 @@ const ShowAllProducts = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  let filteredProducts = allProducts;
+
+  if (searchTerm) {
+    filteredProducts = filteredProducts.filter((product) =>
+      product.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }
+
+  if (sortOrder) {
+    filteredProducts.sort((a, b) =>
+      sortOrder === "highest" ? b.price - a.price : a.price - b.price
+    );
+  }
 
   return (
     <>
@@ -120,11 +142,116 @@ const ShowAllProducts = () => {
             ""
           )}
         </Typography>
+
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            flexDirection: windowWidth < 800 ? "column" : "",
+            justifyContent: "space-between",
+            mb: 2,
+            minWidth: "100%",
+            gap: windowWidth < 800 ? 2 : 10,
+          }}
+        >
+          <InputBase
+            placeholder="Search…"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            startAdornment={
+              <InputAdornment position="start">
+                <SearchIcon
+                  style={{
+                    color: "white",
+                    paddingRight: "0px",
+                    paddingLeft: "3px",
+                  }}
+                />
+              </InputAdornment>
+            }
+            sx={{
+              width: "50%",
+              height: "38px",
+              background: "#ffffff1f",
+              borderRadius: "3px",
+              padding: "10px 12px",
+              fontSize: 16,
+              color: "whitesmoke",
+            }}
+          />
+
+          <Select
+            value={sortOrder}
+            onChange={(e) => setSortOrder(e.target.value)}
+            MenuProps={{
+              PaperProps: {
+                sx: {
+                  backgroundColor: "#452951",
+                  mt: 0.5,
+                  "& .MuiMenuItem-root": {
+                    color: "white",
+                    "&:hover": {
+                      backgroundColor: "#4E2C60",
+                    },
+                  },
+                  "& .Mui-selected": {
+                    opacity: 0.4,
+                    backgroundColor: "transparent",
+                  },
+                  "& .MuiList-root": {
+                    paddingTop: 0,
+                    paddingBottom: 0,
+                  },
+                  "& .MuiMenu-paper": {
+                    marginTop: "8px",
+                  },
+                  "& .MuiListItem-root": {
+                    paddingTop: "10px",
+                    paddingBottom: "10px",
+                    "&:hover": {
+                      backgroundColor: "none",
+                    },
+                  },
+                },
+              },
+            }}
+            sx={{
+              "& .MuiSelect-select .notranslate::after": `"Filters"`
+                ? {
+                    content: `"Filters"`,
+                    opacity: 0.42,
+                  }
+                : {},
+              width: "50%",
+              height: "38px",
+              background: "#ffffff1f",
+              borderRadius: "3px",
+              padding: "10px 0px",
+              fontSize: 16,
+              color: "whitesmoke",
+              backgroundColor: "none",
+              boxShadow: "none",
+              ".MuiOutlinedInput-notchedOutline": {
+                border: 0,
+              },
+              "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                border: 0,
+              },
+              "& .MuiSelect-icon": {
+                color: "whitesmoke",
+              },
+            }}
+          >
+            <MenuItem value={"highest"}>Most Expensive</MenuItem>
+            <MenuItem value={"lowest"}>Cheapest</MenuItem>
+          </Select>
+        </Box>
+
         {isLoading ? (
           <CircularProgress color="secondary" />
         ) : (
           <Grid container spacing={2}>
-            {allProducts.map((cardData, index) => {
+            {filteredProducts.map((cardData, index) => {
               return (
                 <Grid item xs={12} sm={6} md={4} key={index}>
                   <Card sx={{ height: "30rem", position: "relative" }}>
