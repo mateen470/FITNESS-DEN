@@ -136,11 +136,7 @@ const AddToCart = () => {
 
       <Box
         sx={{
-          backgroundImage:
-            "url(https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779108/workoutbg_ifypzl.svg)",
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
+          background: "white",
           borderRadius: 2,
           p: 3,
           position: "relative",
@@ -180,7 +176,7 @@ const AddToCart = () => {
                 <TableCell></TableCell>
                 <TableCell
                   sx={{
-                    color: "white",
+                    color: "black",
                     fontWeight: "bold",
                     fontSize: "5vh",
                   }}
@@ -189,7 +185,7 @@ const AddToCart = () => {
                 </TableCell>
                 <TableCell
                   sx={{
-                    color: "white",
+                    color: "black",
                     fontWeight: "bold",
                     fontSize: "5vh",
                   }}
@@ -198,7 +194,7 @@ const AddToCart = () => {
                 </TableCell>
                 <TableCell
                   sx={{
-                    color: "white",
+                    color: "black",
                     fontWeight: "bold",
                     fontSize: "5vh",
                     textAlign: "center",
@@ -208,7 +204,7 @@ const AddToCart = () => {
                 </TableCell>
                 <TableCell
                   sx={{
-                    color: "white",
+                    color: "black",
                     fontWeight: "bold",
                     fontSize: "5vh",
                   }}
@@ -239,7 +235,7 @@ const AddToCart = () => {
                   </TableCell>
                   <TableCell
                     sx={{
-                      color: "white",
+                      color: "black",
                       fontSize: "4vh",
                       fontWeight: "bold",
                       fontFamily: "Comme, sans-serif",
@@ -264,17 +260,17 @@ const AddToCart = () => {
                         }}
                       >
                         <KeyboardArrowUpIcon
-                          style={{ color: "white", cursor: "pointer" }}
+                          style={{ color: "black", cursor: "pointer" }}
                           onClick={() => increment(item._id)}
                         />
                         <KeyboardArrowDownIcon
-                          style={{ color: "white", cursor: "pointer" }}
+                          style={{ color: "black", cursor: "pointer" }}
                           onClick={() => decrement(item._id, item.quantity)}
                         />
                       </Box>
                       <Typography
                         sx={{
-                          color: "white",
+                          color: "black",
                           fontSize: "4vh",
                           fontWeight: "bold",
                           fontFamily: "Comme, sans-serif",
@@ -296,7 +292,7 @@ const AddToCart = () => {
                         style={{
                           fontSize: "7vh",
                           cursor: "pointer",
-                          color: "white",
+                          color: "black",
                         }}
                         onClick={() => removeProduct(item._id)}
                       />{" "}
@@ -304,7 +300,7 @@ const AddToCart = () => {
                   </TableCell>
                   <TableCell
                     sx={{
-                      color: "white",
+                      color: "black",
                       fontSize: "4vh",
                       fontWeight: "bold",
                       fontFamily: "Comme, sans-serif",
@@ -336,7 +332,7 @@ const AddToCart = () => {
                 fontFamily={"Comme, sans-serif"}
                 fontSize={"2vw"}
                 fontWeight={400}
-                color={"white"}
+                color={"black"}
               >
                 Total
               </Typography>
@@ -351,14 +347,14 @@ const AddToCart = () => {
                 fontSize={"2vw"}
                 fontWeight={800}
                 fontFamily={"Comme, sans-serif"}
-                color={"white"}
+                color={"black"}
               >
                 Rs.{" "}
                 <Typography
                   fontSize={"2vw"}
                   fontWeight={800}
                   fontFamily={"Comme, sans-serif"}
-                  color={"white"}
+                  color={"black"}
                 >
                   {calculateTotalPrice()}
                 </Typography>

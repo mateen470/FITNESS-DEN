@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, Container } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 import NavBar from "./NavBar";
 
@@ -29,11 +29,11 @@ const Hero = ({ scrollToSection }) => {
   return (
     <>
       {windowWidth < 1100 && windowHeight > 1100 ? (
-        <Container
+        <Box
           sx={{
             position: "relative",
             backgroundImage:
-              "url(https://res.cloudinary.com/diwvqpuuf/image/upload/v1686423249/All_In_One-min_qmnhmv.svg)",
+              "url(https://res.cloudinary.com/diwvqpuuf/image/upload/v1686825564/S_o_l_u_t_i_o_n-min_d87otp.svg)",
             backgroundPosition: "top center",
             backgroundRepeat: "no-repeat",
             backgroundSize: "100% auto",
@@ -66,17 +66,16 @@ const Hero = ({ scrollToSection }) => {
               <KeyboardDoubleArrowDownIcon sx={{ fontSize: "2vw" }} />
             </Button>
           </Box>
-        </Container>
+        </Box>
       ) : windowWidth < 1000 ? (
-        <Container
+        <Box
           sx={{
             position: "relative",
             backgroundImage:
-              "url(https://res.cloudinary.com/diwvqpuuf/image/upload/v1686423249/All_In_One-min_qmnhmv.svg)",
-            backgroundPosition: "top center",
+              "url(https://res.cloudinary.com/diwvqpuuf/image/upload/v1686825564/S_o_l_u_t_i_o_n-min_d87otp.svg)",
             backgroundRepeat: "no-repeat",
-            backgroundSize: "100% 100%",
-            minWidth: "100%",
+            backgroundPosition: "center",
+            backgroundSize: "cover",
             minHeight: `90vh`,
             mb: 0,
           }}
@@ -105,9 +104,9 @@ const Hero = ({ scrollToSection }) => {
               <KeyboardDoubleArrowDownIcon sx={{ fontSize: "2vw" }} />
             </Button>
           </Box>
-        </Container>
+        </Box>
       ) : (
-        <Container
+        <Box
           sx={{
             position: "relative",
             backgroundImage:
@@ -118,6 +117,7 @@ const Hero = ({ scrollToSection }) => {
             minWidth: "100%",
             minHeight: `55vw`,
             mb: 0,
+            pr: 1.25,
           }}
         >
           <NavBar />
@@ -144,7 +144,7 @@ const Hero = ({ scrollToSection }) => {
               <KeyboardDoubleArrowDownIcon sx={{ fontSize: "2vw" }} />
             </Button>
           </Box>
-        </Container>
+        </Box>
       )}
     </>
   );

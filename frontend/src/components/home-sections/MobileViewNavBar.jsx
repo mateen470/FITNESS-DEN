@@ -34,7 +34,7 @@ const MobileViewNavBar = () => {
       backgroundColor: "transparent",
     },
     "&::-webkit-scrollbar-thumb": {
-      backgroundColor: "#6a1b9a", // Set the color of the thumb here
+      backgroundColor: "#6a1b9a",
       borderRadius: "10px",
     },
   };
