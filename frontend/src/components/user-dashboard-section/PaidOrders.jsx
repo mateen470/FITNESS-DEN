@@ -201,15 +201,27 @@ const PaidOrders = () => {
                       }}
                     >
                       {mainImage && (
-                        <img
-                          src={mainImage}
-                          alt="product"
-                          style={{
-                            height: "20vh",
-                            weight: "20vh",
-                            borderRadius: "5px",
+                        <Box
+                          sx={{
+                            background: "white",
+                            borderRadius: 2,
+                            width: "7rem",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            py: 1,
                           }}
-                        />
+                        >
+                          <img
+                            src={mainImage}
+                            alt="product"
+                            style={{
+                              height: "20vh",
+                              weight: "20vh",
+                              borderRadius: "5px",
+                            }}
+                          />
+                        </Box>
                       )}
                     </TableCell>
                     <TableCell
