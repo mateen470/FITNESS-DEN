@@ -362,37 +362,55 @@ const AddToCart = () => {
             </Box>
           </Box>
         </Box>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            mt: 10,
-          }}
-        >
-          <Button
-            onClick={() =>
-              dispatch(
-                AddAllProductsInfoToBuy({
-                  TotalPayment: calculateTotalPrice(),
-                  AllProducts: product,
-                })
-              )
-            }
+        {product.length === 0 ? (
+          <Box
             sx={{
-              background: "black",
-              border: "none",
-              textTransform: "none",
-              outline: "none",
-              color: "white",
-              fontSize: "2vw",
-              transition: "0.1s ease-in-out color",
-              "&:hover": {
-                color: "black",
-              },
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              mt: 10,
             }}
           >
-            <NavLink
+            <Button
+              sx={{
+                background: "black",
+                border: "none",
+                textTransform: "none",
+                outline: "none",
+                color: "white",
+                fontSize: "2vw",
+                transition: "0.1s ease-in-out color",
+                "&:hover": {
+                  color: "black",
+                },
+              }}
+            >
+              <NavLink
+                onClick={() => toast.error("NO PRODUCT IN CART!!")}
+                to="/cart"
+              >
+                <Typography
+                  fontSize={"1.7vw"}
+                  fontWeight={800}
+                  fontFamily={"Comme, sans-serif"}
+                  mx={1}
+                >
+                  CheckOut
+                </Typography>
+              </NavLink>
+              <ShoppingCartCheckoutIcon />
+            </Button>
+          </Box>
+        ) : (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              mt: 10,
+            }}
+          >
+            <Button
               onClick={() =>
                 dispatch(
                   AddAllProductsInfoToBuy({
@@ -401,20 +419,43 @@ const AddToCart = () => {
                   })
                 )
               }
-              to="/checkout"
+              sx={{
+                background: "black",
+                border: "none",
+                textTransform: "none",
+                outline: "none",
+                color: "white",
+                fontSize: "2vw",
+                transition: "0.1s ease-in-out color",
+                "&:hover": {
+                  color: "black",
+                },
+              }}
             >
-              <Typography
-                fontSize={"1.7vw"}
-                fontWeight={800}
-                fontFamily={"Comme, sans-serif"}
-                mx={1}
+              <NavLink
+                onClick={() =>
+                  dispatch(
+                    AddAllProductsInfoToBuy({
+                      TotalPayment: calculateTotalPrice(),
+                      AllProducts: product,
+                    })
+                  )
+                }
+                to="/checkout"
               >
-                CheckOut
-              </Typography>
-            </NavLink>
-            <ShoppingCartCheckoutIcon />
-          </Button>
-        </Box>
+                <Typography
+                  fontSize={"1.7vw"}
+                  fontWeight={800}
+                  fontFamily={"Comme, sans-serif"}
+                  mx={1}
+                >
+                  CheckOut
+                </Typography>
+              </NavLink>
+              <ShoppingCartCheckoutIcon />
+            </Button>
+          </Box>
+        )}
       </Box>
     </Box>
   );
