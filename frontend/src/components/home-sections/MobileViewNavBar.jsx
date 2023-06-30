@@ -20,6 +20,7 @@ const MobileViewNavBar = () => {
   };
 
   const menuItems = [
+    { text: "Home", path: "/" },
     { text: "WorkoutPlans", path: "/workout-plans" },
     { text: "DietPlans", path: "/diet-plans" },
     { text: "Blogs", path: "/show-all" },
@@ -117,7 +118,7 @@ const MobileViewNavBar = () => {
             </Box>
           )}
 
-          <List sx={{ mt: 4 }}>
+          <List sx={{ mt: 1 }}>
             {menuItems.map((item) => (
               <ListItem key={item.text} disablePadding>
                 <ListItemButton

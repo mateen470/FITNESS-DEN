@@ -33,12 +33,12 @@ const Hero = ({ scrollToSection }) => {
           sx={{
             position: "relative",
             backgroundImage:
-              "url(https://res.cloudinary.com/diwvqpuuf/image/upload/v1686825564/S_o_l_u_t_i_o_n-min_d87otp.svg)",
+              "url(https://res.cloudinary.com/diwvqpuuf/image/upload/v1688130266/HeroSectionMT_p7atp4.png)",
             backgroundPosition: "top center",
             backgroundRepeat: "no-repeat",
-            backgroundSize: "100% auto",
+            backgroundSize: "100% 100%",
             minWidth: "100%",
-            minHeight: `55vw`,
+            minHeight: `70vw`,
             mb: 0,
           }}
         >
@@ -47,8 +47,8 @@ const Hero = ({ scrollToSection }) => {
             sx={{
               textAlign: "center",
               position: "absolute",
-              bottom: "35px",
-              left: "45%",
+              bottom: "0px",
+              left: "40%",
             }}
           >
             <Button
@@ -59,7 +59,7 @@ const Hero = ({ scrollToSection }) => {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                fontSize: "1.5vw",
+                fontSize: "2vw",
               }}
             >
               Explore More
@@ -72,10 +72,10 @@ const Hero = ({ scrollToSection }) => {
           sx={{
             position: "relative",
             backgroundImage:
-              "url(https://res.cloudinary.com/diwvqpuuf/image/upload/v1686825564/S_o_l_u_t_i_o_n-min_d87otp.svg)",
+              "url(https://res.cloudinary.com/diwvqpuuf/image/upload/v1688130266/HeroSectionMT_p7atp4.png)",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
-            backgroundSize: "cover",
+            backgroundSize: "170% 100%",
             minHeight: `90vh`,
             mb: 0,
           }}
@@ -85,8 +85,13 @@ const Hero = ({ scrollToSection }) => {
             sx={{
               textAlign: "center",
               position: "absolute",
-              bottom: "35px",
-              left: "45%",
+              bottom: "0px",
+              left:
+                windowWidth < 600 && windowWidth > 400
+                  ? "35vw"
+                  : windowWidth < 400
+                  ? "30vw"
+                  : "40vw",
             }}
           >
             <Button
@@ -97,11 +102,11 @@ const Hero = ({ scrollToSection }) => {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                fontSize: "1.5vw",
+                fontSize: "1rem",
               }}
             >
               Explore More
-              <KeyboardDoubleArrowDownIcon sx={{ fontSize: "2vw" }} />
+              <KeyboardDoubleArrowDownIcon sx={{ fontSize: "1rem" }} />
             </Button>
           </Box>
         </Box>

@@ -13,6 +13,7 @@ import axios from "axios";
 
 const RelevantProducts = ({ id }) => {
   const [allProducts, setAllProducts] = useState([]);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const FetchAllProducts = async () => {
     await axios.get("product/all-products").then((res) => {
@@ -28,6 +29,16 @@ const RelevantProducts = ({ id }) => {
     FetchAllProducts();
   }, [allProducts]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <>
       <Box
@@ -40,7 +51,15 @@ const RelevantProducts = ({ id }) => {
         }}
       >
         <Typography
-          fontSize={"4.5vw"}
+          variant={
+            windowWidth < 810 && windowWidth > 768
+              ? "h5"
+              : windowWidth < 768 && windowWidth > 500
+              ? "h3"
+              : windowWidth < 500
+              ? "h4"
+              : "h3"
+          }
           color={"white"}
           fontWeight={800}
           textAlign={"center"}
@@ -52,7 +71,7 @@ const RelevantProducts = ({ id }) => {
         <Grid container spacing={2}>
           {allProducts.map((cardData, index) =>
             cardData._id !== id ? (
-              <Grid item xs={4} key={index}>
+              <Grid item xs={12} sm={6} md={4} key={index}>
                 <Card sx={{ height: "22rem", position: "relative" }}>
                   <CardMedia
                     component="div"

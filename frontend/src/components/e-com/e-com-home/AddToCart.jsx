@@ -25,6 +25,8 @@ const AddToCart = () => {
   const dispatch = useDispatch();
   const [cartItems, setCartItems] = useState([]);
   const [product, setProduct] = useState([]);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
 
   const removeProduct = async (id) => {
     try {
@@ -110,6 +112,25 @@ const AddToCart = () => {
     getCartItems();
   }, [product]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowHeight(window.innerHeight);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <Box p={3}>
       <Box sx={{ position: "absolute", top: 0, left: 5 }}>
@@ -117,7 +138,16 @@ const AddToCart = () => {
           <Typography
             color={"white"}
             fontFamily={"Comme, sans-serif"}
-            sx={{ display: "flex", alignItems: "center", fontSize: "1.7vw" }}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              fontSize:
+                windowWidth < 1100 && windowHeight > 1000
+                  ? "2vh"
+                  : windowWidth < 1000
+                  ? "1.2rem"
+                  : "1.7vw",
+            }}
           >
             <KeyboardDoubleArrowLeftIcon /> Back
           </Typography>
@@ -125,7 +155,15 @@ const AddToCart = () => {
       </Box>
       <Typography
         color={"white"}
-        fontSize={"4.5vw"}
+        variant={
+          windowWidth < 810 && windowWidth > 768
+            ? "h5"
+            : windowWidth < 768 && windowWidth > 500
+            ? "h3"
+            : windowWidth < 500
+            ? "h5"
+            : "h3"
+        }
         fontWeight={800}
         textAlign={"center"}
         mt={4}
@@ -138,6 +176,7 @@ const AddToCart = () => {
         sx={{
           background: "white",
           borderRadius: 2,
+          overflowX: "auto",
           p: 3,
           position: "relative",
         }}
@@ -165,7 +204,14 @@ const AddToCart = () => {
                 src={
                   "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779071/emptyCart_ygei0a.svg"
                 }
-                style={{ width: "60vh" }}
+                style={{
+                  width:
+                    windowWidth < 1100 && windowHeight > 1000
+                      ? "40vh"
+                      : windowWidth < 1000
+                      ? "30vh"
+                      : "40vh",
+                }}
               />
             </Box>
           </Box>
@@ -178,7 +224,12 @@ const AddToCart = () => {
                   sx={{
                     color: "black",
                     fontWeight: "bold",
-                    fontSize: "5vh",
+                    fontSize:
+                      windowWidth < 1100 && windowHeight > 1000
+                        ? "5vh"
+                        : windowWidth < 1000
+                        ? "1rem"
+                        : "5vh",
                   }}
                 >
                   Title
@@ -187,7 +238,12 @@ const AddToCart = () => {
                   sx={{
                     color: "black",
                     fontWeight: "bold",
-                    fontSize: "5vh",
+                    fontSize:
+                      windowWidth < 1100 && windowHeight > 1000
+                        ? "5vh"
+                        : windowWidth < 1000
+                        ? "1rem"
+                        : "5vh",
                   }}
                 >
                   Quantity
@@ -196,7 +252,12 @@ const AddToCart = () => {
                   sx={{
                     color: "black",
                     fontWeight: "bold",
-                    fontSize: "5vh",
+                    fontSize:
+                      windowWidth < 1100 && windowHeight > 1000
+                        ? "5vh"
+                        : windowWidth < 1000
+                        ? "1rem"
+                        : "5vh",
                     textAlign: "center",
                   }}
                 >
@@ -206,7 +267,12 @@ const AddToCart = () => {
                   sx={{
                     color: "black",
                     fontWeight: "bold",
-                    fontSize: "5vh",
+                    fontSize:
+                      windowWidth < 1100 && windowHeight > 1000
+                        ? "5vh"
+                        : windowWidth < 1000
+                        ? "1rem"
+                        : "5vh",
                   }}
                 >
                   Price
@@ -227,8 +293,18 @@ const AddToCart = () => {
                       src={item.mainImage}
                       alt="product"
                       style={{
-                        height: "20vh",
-                        weight: "20vh",
+                        height:
+                          windowWidth < 1100 && windowHeight > 1000
+                            ? "20vh"
+                            : windowWidth < 1000
+                            ? "4rem"
+                            : "20vh",
+                        weight:
+                          windowWidth < 1100 && windowHeight > 1000
+                            ? "20vh"
+                            : windowWidth < 1000
+                            ? "4rem"
+                            : "20vh",
                         borderRadius: "5px",
                       }}
                     />
@@ -236,7 +312,12 @@ const AddToCart = () => {
                   <TableCell
                     sx={{
                       color: "black",
-                      fontSize: "4vh",
+                      fontSize:
+                        windowWidth < 1100 && windowHeight > 1000
+                          ? "4vh"
+                          : windowWidth < 1000
+                          ? "0.8rem"
+                          : "4vh",
                       fontWeight: "bold",
                       fontFamily: "Comme, sans-serif",
                     }}
@@ -271,7 +352,12 @@ const AddToCart = () => {
                       <Typography
                         sx={{
                           color: "black",
-                          fontSize: "4vh",
+                          fontSize:
+                            windowWidth < 1100 && windowHeight > 1000
+                              ? "4vh"
+                              : windowWidth < 1000
+                              ? "0.8rem"
+                              : "4vh",
                           fontWeight: "bold",
                           fontFamily: "Comme, sans-serif",
                         }}
@@ -290,7 +376,12 @@ const AddToCart = () => {
                     >
                       <DeleteIcon
                         style={{
-                          fontSize: "7vh",
+                          fontSize:
+                            windowWidth < 1100 && windowHeight > 1000
+                              ? "7vh"
+                              : windowWidth < 1000
+                              ? "1.2rem"
+                              : "7vh",
                           cursor: "pointer",
                           color: "black",
                         }}
@@ -301,7 +392,12 @@ const AddToCart = () => {
                   <TableCell
                     sx={{
                       color: "black",
-                      fontSize: "4vh",
+                      fontSize:
+                        windowWidth < 1100 && windowHeight > 1000
+                          ? "4vh"
+                          : windowWidth < 1000
+                          ? "0.8rem"
+                          : "4vh",
                       fontWeight: "bold",
                       fontFamily: "Comme, sans-serif",
                     }}
@@ -330,7 +426,15 @@ const AddToCart = () => {
             <Box>
               <Typography
                 fontFamily={"Comme, sans-serif"}
-                fontSize={"2vw"}
+                fontSize={
+                  windowWidth < 1100 && windowHeight > 1000
+                    ? "2.8vh"
+                    : windowWidth < 1000 && windowHeight > 500
+                    ? "3.5vh"
+                    : windowHeight < 550
+                    ? "5vh"
+                    : "2vw"
+                }
                 fontWeight={400}
                 color={"black"}
               >
@@ -344,14 +448,30 @@ const AddToCart = () => {
                   justifyContent: "center",
                   alignItems: "center",
                 }}
-                fontSize={"2vw"}
+                fontSize={
+                  windowWidth < 1100 && windowHeight > 1000
+                    ? "2.8vh"
+                    : windowWidth < 1000 && windowHeight > 500
+                    ? "3.5vh"
+                    : windowHeight < 550
+                    ? "5vh"
+                    : "2vw"
+                }
                 fontWeight={800}
                 fontFamily={"Comme, sans-serif"}
                 color={"black"}
               >
-                Rs.{" "}
+                Rs.
                 <Typography
-                  fontSize={"2vw"}
+                  fontSize={
+                    windowWidth < 1100 && windowHeight > 1000
+                      ? "2.8vh"
+                      : windowWidth < 1000 && windowHeight > 500
+                      ? "3.5vh"
+                      : windowHeight < 550
+                      ? "5vh"
+                      : "2vw"
+                  }
                   fontWeight={800}
                   fontFamily={"Comme, sans-serif"}
                   color={"black"}
@@ -390,7 +510,13 @@ const AddToCart = () => {
                 to="/cart"
               >
                 <Typography
-                  fontSize={"1.7vw"}
+                  fontSize={
+                    windowWidth < 1100 && windowHeight > 1000
+                      ? "2vh"
+                      : windowWidth < 1000
+                      ? "1rem"
+                      : "1.7vw"
+                  }
                   fontWeight={800}
                   fontFamily={"Comme, sans-serif"}
                   mx={1}
@@ -444,7 +570,13 @@ const AddToCart = () => {
                 to="/checkout"
               >
                 <Typography
-                  fontSize={"1.7vw"}
+                  fontSize={
+                    windowWidth < 1100 && windowHeight > 1000
+                      ? "2vh"
+                      : windowWidth < 1000
+                      ? "1rem"
+                      : "1.7vw"
+                  }
                   fontWeight={800}
                   fontFamily={"Comme, sans-serif"}
                   mx={1}
