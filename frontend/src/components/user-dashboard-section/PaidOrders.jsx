@@ -23,6 +23,8 @@ const PaidOrders = () => {
   const [rating, setRating] = useState(0);
   const [prdId, setPrdId] = useState(0);
   const [open, setOpen] = React.useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const handleOpen = (id) => {
     setOpen(true);
     setPrdId(id);
@@ -30,27 +32,7 @@ const PaidOrders = () => {
   const handleClose = () => setOpen(false);
 
   const modalRef = useRef();
-  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowHeight(window.innerHeight);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
   const handleOutsideClick = (e) => {
     if (modalRef.current && !modalRef.current.contains(e.target)) {
       handleClose();
@@ -97,6 +79,25 @@ const PaidOrders = () => {
     fetchPaidProducts();
   }, []);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowHeight(window.innerHeight);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <Box
       sx={{
@@ -113,7 +114,16 @@ const PaidOrders = () => {
           <Typography
             color={"white"}
             fontFamily={"Comme, sans-serif"}
-            sx={{ display: "flex", alignItems: "center", fontSize: "1.7vw" }}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              fontSize:
+                windowWidth < 1100 && windowHeight > 1000
+                  ? "2vh"
+                  : windowWidth < 1000
+                  ? "1.2rem"
+                  : "1.7vw",
+            }}
           >
             <KeyboardDoubleArrowLeftIcon /> Back
           </Typography>
@@ -121,7 +131,15 @@ const PaidOrders = () => {
       </Box>
       <Typography
         color={"white"}
-        fontSize={"4.5vw"}
+        variant={
+          windowWidth < 810 && windowWidth > 768
+            ? "h5"
+            : windowWidth < 768 && windowWidth > 500
+            ? "h3"
+            : windowWidth < 500
+            ? "h5"
+            : "h3"
+        }
         fontWeight={800}
         textAlign={"center"}
         mt={4}
@@ -129,36 +147,36 @@ const PaidOrders = () => {
       >
         My ShoppingCart
       </Typography>
-      {products.length === 0 ? (
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+      <Box sx={{ overflowX: "auto" }}>
+        {products.length === 0 ? (
           <Box
             sx={{
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              background: "rgba(255,255,255,0.3)",
-              borderRadius: 2,
-              width: windowWidth < 786 ? "70vw" : "70vh",
-              p: 5,
             }}
           >
-            <img
-              src={
-                "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779071/emptyCart_ygei0a.svg"
-              }
-              alt="emptycart"
-              style={{ width: windowWidth < 786 ? "60vw" : "60vh" }}
-            />
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                background: "rgba(255,255,255,0.3)",
+                borderRadius: 2,
+                width: "70vh",
+                p: 5,
+              }}
+            >
+              <img
+                src={
+                  "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779071/emptyCart_ygei0a.svg"
+                }
+                alt="emptycart"
+                style={{ width: "60vh" }}
+              />
+            </Box>
           </Box>
-        </Box>
-      ) : (
-        <Box sx={{ width: "100%", display: "block", overflowX: "auto" }}>
+        ) : (
           <Table sx={{ mb: 5 }}>
             <TableHead>
               <TableRow>
@@ -167,7 +185,12 @@ const PaidOrders = () => {
                   sx={{
                     color: "white",
                     fontWeight: "bold",
-                    width: windowWidth < 786 ? "3vh" : "5vh",
+                    fontSize:
+                      windowWidth < 1100 && windowHeight > 1000
+                        ? "5vh"
+                        : windowWidth < 1000
+                        ? "1rem"
+                        : "5vh",
                   }}
                 >
                   Title
@@ -176,7 +199,12 @@ const PaidOrders = () => {
                   sx={{
                     color: "white",
                     fontWeight: "bold",
-                    width: windowWidth < 786 ? "3vh" : "5vh",
+                    fontSize:
+                      windowWidth < 1100 && windowHeight > 1000
+                        ? "5vh"
+                        : windowWidth < 1000
+                        ? "1rem"
+                        : "5vh",
                   }}
                 >
                   Quantity
@@ -185,7 +213,12 @@ const PaidOrders = () => {
                   sx={{
                     color: "white",
                     fontWeight: "bold",
-                    width: windowWidth < 786 ? "3vh" : "5vh",
+                    fontSize:
+                      windowWidth < 1100 && windowHeight > 1000
+                        ? "5vh"
+                        : windowWidth < 1000
+                        ? "1rem"
+                        : "5vh",
                   }}
                 >
                   Paid-Price
@@ -194,7 +227,12 @@ const PaidOrders = () => {
                   sx={{
                     color: "white",
                     fontWeight: "bold",
-                    width: windowWidth < 786 ? "3vh" : "5vh",
+                    fontSize:
+                      windowWidth < 1100 && windowHeight > 1000
+                        ? "5vh"
+                        : windowWidth < 1000
+                        ? "1rem"
+                        : "5vh",
                   }}
                 >
                   Status
@@ -222,21 +260,48 @@ const PaidOrders = () => {
                         }}
                       >
                         {mainImage && (
-                          <img
-                            src={mainImage}
-                            alt="product"
-                            style={{
-                              height: "20vh",
-                              weight: "20vh",
-                              borderRadius: "5px",
+                          <Box
+                            sx={{
+                              background: "white",
+                              borderRadius: 2,
+                              width: "7rem",
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              py: 1,
                             }}
-                          />
+                          >
+                            <img
+                              src={mainImage}
+                              alt="product"
+                              style={{
+                                height:
+                                  windowWidth < 1100 && windowHeight > 1000
+                                    ? "20vh"
+                                    : windowWidth < 1000
+                                    ? "4rem"
+                                    : "20vh",
+                                weight:
+                                  windowWidth < 1100 && windowHeight > 1000
+                                    ? "20vh"
+                                    : windowWidth < 1000
+                                    ? "4rem"
+                                    : "20vh",
+                                borderRadius: "5px",
+                              }}
+                            />
+                          </Box>
                         )}
                       </TableCell>
                       <TableCell
                         sx={{
                           color: "white",
-                          width: windowWidth < 786 ? "2.5vh" : "4vh",
+                          fontSize:
+                            windowWidth < 1100 && windowHeight > 1000
+                              ? "4vh"
+                              : windowWidth < 1000
+                              ? "0.8rem"
+                              : "4vh",
                           fontWeight: "bold",
                           fontFamily: "Comme, sans-serif",
                         }}
@@ -246,7 +311,12 @@ const PaidOrders = () => {
                       <TableCell
                         sx={{
                           color: "white",
-                          width: windowWidth < 786 ? "2.5vh" : "4vh",
+                          fontSize:
+                            windowWidth < 1100 && windowHeight > 1000
+                              ? "4vh"
+                              : windowWidth < 1000
+                              ? "0.8rem"
+                              : "4vh",
                           fontWeight: "bold",
                           fontFamily: "Comme, sans-serif",
                         }}
@@ -256,7 +326,12 @@ const PaidOrders = () => {
                       <TableCell
                         sx={{
                           color: "white",
-                          width: windowWidth < 786 ? "2.5vh" : "4vh",
+                          fontSize:
+                            windowWidth < 1100 && windowHeight > 1000
+                              ? "4vh"
+                              : windowWidth < 1000
+                              ? "0.8rem"
+                              : "4vh",
                           fontWeight: "bold",
                           fontFamily: "Comme, sans-serif",
                         }}
@@ -266,7 +341,12 @@ const PaidOrders = () => {
                       <TableCell
                         sx={{
                           color: "white",
-                          width: windowWidth < 786 ? "2.5vh" : "4vh",
+                          fontSize:
+                            windowWidth < 1100 && windowHeight > 1000
+                              ? "4vh"
+                              : windowWidth < 1000
+                              ? "0.8rem"
+                              : "4vh",
                           fontWeight: "bold",
                           fontFamily: "Comme, sans-serif",
                         }}
@@ -280,7 +360,12 @@ const PaidOrders = () => {
                               background: "rgba(255,255,255,0.1)",
                               border: "1px solid white",
                               color: "white",
-                              ml: 2,
+                              ml:
+                                windowWidth < 720 && windowWidth > 710
+                                  ? 1
+                                  : windowWidth < 710
+                                  ? 0
+                                  : 2,
                             }}
                           >
                             Rate
@@ -295,8 +380,8 @@ const PaidOrders = () => {
               })}
             </TableBody>
           </Table>
-        </Box>
-      )}
+        )}
+      </Box>
       {open && (
         <div
           style={{
