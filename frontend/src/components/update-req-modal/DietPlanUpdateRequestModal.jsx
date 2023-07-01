@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { ToastContainer, toast } from "react-toastify";
@@ -8,6 +8,27 @@ import { UpdateRequestValidation } from "../../Validations/UpdateRequestValidati
 const DietPlanUpdateRequestModal = ({ modalOpen, setModalOpen, Plan }) => {
   const [UpdateDescription, setUpdateDescription] = useState("");
   console.log(Plan);
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowHeight(window.innerHeight);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   const handleClick = () => {
     toast.error(UpdateRequestValidation(UpdateDescription));
     if (!UpdateRequestValidation(UpdateDescription)) {
@@ -37,8 +58,22 @@ const DietPlanUpdateRequestModal = ({ modalOpen, setModalOpen, Plan }) => {
       <Box
         sx={{
           background: "#29084d",
-          height: "25vw",
-          width: "30vw",
+          height:
+            windowWidth < 330
+              ? "75vw"
+              : windowWidth < 510
+              ? "60vw"
+              : windowWidth < 880
+              ? "35vw"
+              : "25vw",
+          width:
+            windowWidth < 330
+              ? "75vw"
+              : windowWidth < 510
+              ? "60vw"
+              : windowWidth < 880
+              ? "50vw"
+              : "30vw",
           position: "absolute",
           display: "flex",
           flexDirection: "column",

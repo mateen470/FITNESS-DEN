@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -42,11 +42,32 @@ const WorkoutPlanForm = () => {
   const [Equipments, setEquipments] = useState(false);
   const [EquipmentDes, setEquipmentsDes] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
+
   const IDofCurrentUser = useSelector(
     (state) => state.CurrentUser.CurrentUserID
   );
   const navigate = useNavigate();
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowHeight(window.innerHeight);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   const submitRequest = () => {
     dispatch(
       AddPhysicalInfo({
@@ -153,7 +174,12 @@ const WorkoutPlanForm = () => {
           flexDirection: "column",
         }}
       >
-        <Typography variant="h3" color={"white"} fontWeight={800}>
+        <Typography
+          variant="h3"
+          color={"white"}
+          fontWeight={800}
+          sx={{ textAlign: windowWidth < 660 && "center" }}
+        >
           Enter Physical Information
         </Typography>
 
@@ -300,7 +326,7 @@ const WorkoutPlanForm = () => {
           >
             <Box
               sx={{
-                border: "2px solid white",
+                border: windowWidth > 786 && "2px solid white",
                 p: 1,
                 px: 2,
                 mt: 3,
@@ -315,9 +341,24 @@ const WorkoutPlanForm = () => {
                 fontFamily={"Comme, sans-serif"}
                 sx={{
                   background: "white",
-                  fontSize: "1.4vw",
-                  height: "3.4vw",
-                  width: "8.6vw",
+                  fontSize:
+                    windowWidth < 450
+                      ? "5vw"
+                      : windowWidth < 786
+                      ? "4vw"
+                      : "1.4vw",
+                  height:
+                    windowWidth < 450
+                      ? "8vw"
+                      : windowWidth < 786
+                      ? "6vw"
+                      : "3.4vw",
+                  width:
+                    windowWidth < 450
+                      ? "18vw"
+                      : windowWidth < 786
+                      ? "16vw"
+                      : "8.6vw",
                   ml: -4.5,
                   display: "flex",
                   justifyContent: "center",

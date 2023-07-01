@@ -181,7 +181,12 @@ const ViewWorkoutPlanPage = () => {
           <Typography
             color={"white"}
             fontFamily={"Comme, sans-serif"}
-            sx={{ display: "flex", alignItems: "center", fontSize: "1.7vw" }}
+            sx={{ display: "flex", alignItems: "center",fontSize:
+                windowWidth < 1100 && windowHeight > 1000
+                  ? "2vh"
+                  : windowWidth < 1000
+                  ? "1.2rem"
+                  : "1.7vw",}}
           >
             <KeyboardDoubleArrowLeftIcon /> Back
           </Typography>
@@ -265,7 +270,7 @@ const ViewWorkoutPlanPage = () => {
                               <Typography
                                 sx={{
                                   color: "white",
-                                  fontSize: windowWidth < 786 ? "2vh" : "3.5vh",
+                                  fontSize: windowWidth < 786 ? "3vh" : "3.5vh",
                                   fontFamily: "Comme, sans-serif",
                                   borderBottom: "0.5px solid white",
                                   display: "inline-block",
