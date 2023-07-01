@@ -28,7 +28,27 @@ const ViewDietPlanPage = () => {
       setDietPlan(res.data.data);
     });
   };
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowHeight(window.innerHeight);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   useEffect(() => FetchDietPlan(), []);
   useEffect(() => {
     DietPlan.length === 0 ? setplanExist(false) : setplanExist(true);
@@ -41,7 +61,7 @@ const ViewDietPlanPage = () => {
             sx={{
               color: "white",
               fontWeight: "bold",
-              fontSize: "5vh",
+              fontSize: windowWidth < 786 ? "3vh" : "5vh",
               fontFamily: "Comme, sans-serif",
             }}
           >
@@ -54,7 +74,7 @@ const ViewDietPlanPage = () => {
             sx={{
               color: "white",
               fontWeight: "bold",
-              fontSize: "5vh",
+              fontSize: windowWidth < 786 ? "3vh" : "5vh",
               fontFamily: "Comme, sans-serif",
             }}
           >
@@ -67,7 +87,7 @@ const ViewDietPlanPage = () => {
             sx={{
               color: "white",
               fontWeight: "bold",
-              fontSize: "5vh",
+              fontSize: windowWidth < 786 ? "3vh" : "5vh",
               fontFamily: "Comme, sans-serif",
             }}
           >
@@ -80,7 +100,7 @@ const ViewDietPlanPage = () => {
             sx={{
               color: "white",
               fontWeight: "bold",
-              fontSize: "5vh",
+              fontSize: windowWidth < 786 ? "3vh" : "5vh",
               fontFamily: "Comme, sans-serif",
             }}
           >
@@ -93,7 +113,7 @@ const ViewDietPlanPage = () => {
             sx={{
               color: "white",
               fontWeight: "bold",
-              fontSize: "5vh",
+              fontSize: windowWidth < 786 ? "3vh" : "5vh",
               fontFamily: "Comme, sans-serif",
             }}
           >
@@ -106,7 +126,7 @@ const ViewDietPlanPage = () => {
             sx={{
               color: "white",
               fontWeight: "bold",
-              fontSize: "5vh",
+              fontSize: windowWidth < 786 ? "3vh" : "5vh",
               fontFamily: "Comme, sans-serif",
             }}
           >
@@ -119,7 +139,7 @@ const ViewDietPlanPage = () => {
             sx={{
               color: "white",
               fontWeight: "bold",
-              fontSize: "5vh",
+              fontSize: windowWidth < 786 ? "3vh" : "5vh",
               fontFamily: "Comme, sans-serif",
             }}
           >
@@ -193,77 +213,80 @@ const ViewDietPlanPage = () => {
                 >
                   Week {index + 1}
                 </Typography>
+                <Box
+                  sx={{ overflowX: "scroll", display: "block", width: "100%" }}
+                >
+                  <Table sx={{ mb: 5 }}>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell></TableCell>
+                        <TableCell
+                          sx={{
+                            color: "white",
+                            fontWeight: "bold",
+                            fontSize: windowWidth < 786 ? "3vh" : "5vh",
+                            fontFamily: "Comme, sans-serif",
+                          }}
+                        >
+                          Breakfast
+                        </TableCell>
+                        <TableCell
+                          sx={{
+                            color: "white",
+                            fontWeight: "bold",
+                            fontSize: windowWidth < 786 ? "3vh" : "5vh",
+                            fontFamily: "Comme, sans-serif",
+                          }}
+                        >
+                          Lunch
+                        </TableCell>
+                        <TableCell
+                          sx={{
+                            color: "white",
+                            fontWeight: "bold",
+                            fontSize: windowWidth < 786 ? "3vh" : "5vh",
+                            fontFamily: "Comme, sans-serif",
+                          }}
+                        >
+                          Dinner
+                        </TableCell>
+                      </TableRow>
+                    </TableHead>
 
-                <Table sx={{ mb: 5 }}>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell></TableCell>
-                      <TableCell
-                        sx={{
-                          color: "white",
-                          fontWeight: "bold",
-                          fontSize: "5vh",
-                          fontFamily: "Comme, sans-serif",
-                        }}
-                      >
-                        Breakfast
-                      </TableCell>
-                      <TableCell
-                        sx={{
-                          color: "white",
-                          fontWeight: "bold",
-                          fontSize: "5vh",
-                          fontFamily: "Comme, sans-serif",
-                        }}
-                      >
-                        Lunch
-                      </TableCell>
-                      <TableCell
-                        sx={{
-                          color: "white",
-                          fontWeight: "bold",
-                          fontSize: "5vh",
-                          fontFamily: "Comme, sans-serif",
-                        }}
-                      >
-                        Dinner
-                      </TableCell>
-                    </TableRow>
-                  </TableHead>
-
-                  {item.map((i, key) => (
-                    <TableBody>
-                      {handleDay(key)}
-                      <TableCell
-                        sx={{
-                          color: "white",
-                          fontSize: "3.5vh",
-                          fontFamily: "Comme, sans-serif",
-                        }}
-                      >
-                        {i.BreakFast}
-                      </TableCell>
-                      <TableCell
-                        sx={{
-                          color: "white",
-                          fontSize: "3.5vh",
-                          fontFamily: "Comme, sans-serif",
-                        }}
-                      >
-                        {i.Lunch}
-                      </TableCell>
-                      <TableCell
-                        sx={{
-                          color: "white",
-                          fontSize: "3.5vh",
-                          fontFamily: "Comme, sans-serif",
-                        }}
-                      >
-                        {i.Dinner}
-                      </TableCell>
-                    </TableBody>
-                  ))}
-                </Table>
+                    {item.map((i, key) => (
+                      <TableBody>
+                        {handleDay(key)}
+                        <TableCell
+                          sx={{
+                            color: "white",
+                            fontSize: windowWidth < 786 ? "2vh" : "3.5vh",
+                            fontFamily: "Comme, sans-serif",
+                          }}
+                        >
+                          {i.BreakFast}
+                        </TableCell>
+                        <TableCell
+                          sx={{
+                            color: "white",
+                            fontSize: windowWidth < 786 ? "2vh" : "3.5vh",
+                            fontFamily: "Comme, sans-serif",
+                          }}
+                        >
+                          {i.Lunch}
+                        </TableCell>
+                        <TableCell
+                          sx={{
+                            color: "white",
+                            fontSize: windowWidth < 786 ? "2vh" : "3.5vh",
+                            fontFamily: "Comme, sans-serif",
+                          }}
+                        >
+                          {i.Dinner}
+                        </TableCell>
+                      </TableBody>
+                    ))}
+                  </Table>
+                </Box>
               </>
             ))}
             <Box

@@ -30,7 +30,27 @@ const PaidOrders = () => {
   const handleClose = () => setOpen(false);
 
   const modalRef = useRef();
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowHeight(window.innerHeight);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   const handleOutsideClick = (e) => {
     if (modalRef.current && !modalRef.current.contains(e.target)) {
       handleClose();
@@ -124,7 +144,7 @@ const PaidOrders = () => {
               alignItems: "center",
               background: "rgba(255,255,255,0.3)",
               borderRadius: 2,
-              width: "70vh",
+              width: windowWidth < 786 ? "70vw" : "70vh",
               p: 5,
             }}
           >
@@ -133,85 +153,75 @@ const PaidOrders = () => {
                 "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779071/emptyCart_ygei0a.svg"
               }
               alt="emptycart"
-              style={{ width: "60vh" }}
+              style={{ width: windowWidth < 786 ? "60vw" : "60vh" }}
             />
           </Box>
         </Box>
       ) : (
-        <Table sx={{ mb: 5 }}>
-          <TableHead>
-            <TableRow>
-              <TableCell></TableCell>
-              <TableCell
-                sx={{
-                  color: "white",
-                  fontWeight: "bold",
-                  fontSize: "5vh",
-                }}
-              >
-                Title
-              </TableCell>
-              <TableCell
-                sx={{
-                  color: "white",
-                  fontWeight: "bold",
-                  fontSize: "5vh",
-                }}
-              >
-                Quantity
-              </TableCell>
-              <TableCell
-                sx={{
-                  color: "white",
-                  fontWeight: "bold",
-                  fontSize: "5vh",
-                }}
-              >
-                Paid-Price
-              </TableCell>
-              <TableCell
-                sx={{
-                  color: "white",
-                  fontWeight: "bold",
-                  fontSize: "5vh",
-                }}
-              >
-                Status
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {products.map((item) => {
-              const allProducts = item.AllProductsBoughtInfo[0]?.AllProducts;
-              const status = item.status;
+        <Box sx={{ width: "100%", display: "block", overflowX: "auto" }}>
+          <Table sx={{ mb: 5 }}>
+            <TableHead>
+              <TableRow>
+                <TableCell></TableCell>
+                <TableCell
+                  sx={{
+                    color: "white",
+                    fontWeight: "bold",
+                    width: windowWidth < 786 ? "3vh" : "5vh",
+                  }}
+                >
+                  Title
+                </TableCell>
+                <TableCell
+                  sx={{
+                    color: "white",
+                    fontWeight: "bold",
+                    width: windowWidth < 786 ? "3vh" : "5vh",
+                  }}
+                >
+                  Quantity
+                </TableCell>
+                <TableCell
+                  sx={{
+                    color: "white",
+                    fontWeight: "bold",
+                    width: windowWidth < 786 ? "3vh" : "5vh",
+                  }}
+                >
+                  Paid-Price
+                </TableCell>
+                <TableCell
+                  sx={{
+                    color: "white",
+                    fontWeight: "bold",
+                    width: windowWidth < 786 ? "3vh" : "5vh",
+                  }}
+                >
+                  Status
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {products.map((item) => {
+                const allProducts = item.AllProductsBoughtInfo[0]?.AllProducts;
+                const status = item.status;
 
-              return allProducts.map((product, productIndex) => {
-                const mainImage = product.mainImage;
-                const title = product.title;
-                const quantity = product.quantity;
-                const totalPayment = product.price;
+                return allProducts.map((product, productIndex) => {
+                  const mainImage = product.mainImage;
+                  const title = product.title;
+                  const quantity = product.quantity;
+                  const totalPayment = product.price;
 
-                return (
-                  <TableRow key={productIndex}>
-                    <TableCell
-                      sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      {mainImage && (
-                        <Box
-                          sx={{
-                            background: "white",
-                            borderRadius: 2,
-                            width: "7rem",
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            py: 1,
-                          }}
-                        >
+                  return (
+                    <TableRow key={productIndex}>
+                      <TableCell
+                        sx={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        {mainImage && (
                           <img
                             src={mainImage}
                             alt="product"
@@ -221,71 +231,71 @@ const PaidOrders = () => {
                               borderRadius: "5px",
                             }}
                           />
-                        </Box>
-                      )}
-                    </TableCell>
-                    <TableCell
-                      sx={{
-                        color: "white",
-                        fontSize: "4vh",
-                        fontWeight: "bold",
-                        fontFamily: "Comme, sans-serif",
-                      }}
-                    >
-                      {title}
-                    </TableCell>
-                    <TableCell
-                      sx={{
-                        color: "white",
-                        fontSize: "4vh",
-                        fontWeight: "bold",
-                        fontFamily: "Comme, sans-serif",
-                      }}
-                    >
-                      {quantity}
-                    </TableCell>
-                    <TableCell
-                      sx={{
-                        color: "white",
-                        fontSize: "4vh",
-                        fontWeight: "bold",
-                        fontFamily: "Comme, sans-serif",
-                      }}
-                    >
-                      Rs.{totalPayment * quantity}
-                    </TableCell>
-                    <TableCell
-                      sx={{
-                        color: "white",
-                        fontSize: "4vh",
-                        fontWeight: "bold",
-                        fontFamily: "Comme, sans-serif",
-                      }}
-                    >
-                      {status}
-                      {status === "Delivered" ? (
-                        <Button
-                          onClick={() => handleOpen(product._id)}
-                          sx={{
-                            textTransform: "none",
-                            background: "rgba(255,255,255,0.1)",
-                            border: "1px solid white",
-                            color: "white",
-                            ml: 2,
-                          }}
-                        >
-                          Rate
-                        </Button>
-                      ) : (
-                        ""
-                      )}
-                    </TableCell>
-                  </TableRow>
-                );
-              });
-            })}
-          </TableBody>
-        </Table>
+                        )}
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          color: "white",
+                          width: windowWidth < 786 ? "2.5vh" : "4vh",
+                          fontWeight: "bold",
+                          fontFamily: "Comme, sans-serif",
+                        }}
+                      >
+                        {title}
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          color: "white",
+                          width: windowWidth < 786 ? "2.5vh" : "4vh",
+                          fontWeight: "bold",
+                          fontFamily: "Comme, sans-serif",
+                        }}
+                      >
+                        {quantity}
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          color: "white",
+                          width: windowWidth < 786 ? "2.5vh" : "4vh",
+                          fontWeight: "bold",
+                          fontFamily: "Comme, sans-serif",
+                        }}
+                      >
+                        Rs.{totalPayment * quantity}
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          color: "white",
+                          width: windowWidth < 786 ? "2.5vh" : "4vh",
+                          fontWeight: "bold",
+                          fontFamily: "Comme, sans-serif",
+                        }}
+                      >
+                        {status}
+                        {status === "Delivered" ? (
+                          <Button
+                            onClick={() => handleOpen(product._id)}
+                            sx={{
+                              textTransform: "none",
+                              background: "rgba(255,255,255,0.1)",
+                              border: "1px solid white",
+                              color: "white",
+                              ml: 2,
+                            }}
+                          >
+                            Rate
+                          </Button>
+                        ) : (
+                          ""
+                        )}
+                      </TableCell>
+                    </TableRow>
+                  );
+                });
+              })}
+            </TableBody>
+          </Table>
+        </Box>
       )}
       {open && (
         <div

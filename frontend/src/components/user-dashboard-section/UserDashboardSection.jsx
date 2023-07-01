@@ -19,7 +19,27 @@ const UserDashboardSection = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowHeight(window.innerHeight);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   const LogOut = async () => {
     try {
       const logOutResponse = await axios.post("logout");
@@ -91,7 +111,7 @@ const UserDashboardSection = () => {
       <Box
         sx={{
           minHeight: "60vh",
-          minWidth: "100vh",
+          minWidth: windowWidth < 870 ? "90vw" : "100vh",
           backgroundColor: "rgba(255, 255, 255, 0.1)",
           backdropFilter: "blur(10px)",
           boxShadow: "10px 10px 10px rgba(0, 0, 0, 0.1)",
@@ -106,7 +126,9 @@ const UserDashboardSection = () => {
       >
         <Typography
           color={"white"}
-          fontSize={"5.5vh"}
+          fontSize={
+            windowWidth < 520 ? "5vw" : windowWidth < 786 ? "3.5vh" : "5.5vh"
+          }
           fontFamily={"Comme, sans-serif"}
           fontWeight={800}
         >
@@ -114,7 +136,9 @@ const UserDashboardSection = () => {
         </Typography>
         <Typography
           color={"white"}
-          fontSize={"5.5vh"}
+          fontSize={
+            windowWidth < 520 ? "5.5vw" : windowWidth < 786 ? "3.5vh" : "5.5vh"
+          }
           fontFamily={"Comme, sans-serif"}
           fontWeight={800}
         >
@@ -122,7 +146,7 @@ const UserDashboardSection = () => {
         </Typography>
         <Typography
           color={"white"}
-          fontSize={"4.5vh"}
+          fontSize={windowWidth < 786 ? "3vh" : "4.5vh"}
           fontFamily={"Comme, sans-serif"}
           borderBottom={"0.5px solid white"}
         >
@@ -130,7 +154,7 @@ const UserDashboardSection = () => {
         </Typography>
         <Typography
           color={"white"}
-          fontSize={"4.5vh"}
+          fontSize={windowWidth < 786 ? "3vh" : "4.5vh"}
           fontFamily={"Comme, sans-serif"}
           borderBottom={"0.5px solid white"}
         >
@@ -138,7 +162,7 @@ const UserDashboardSection = () => {
         </Typography>
         <Typography
           color={"white"}
-          fontSize={"4.5vh"}
+          fontSize={windowWidth < 786 ? "3vh" : "4.5vh"}
           fontFamily={"Comme, sans-serif"}
           borderBottom={"0.5px solid white"}
         >

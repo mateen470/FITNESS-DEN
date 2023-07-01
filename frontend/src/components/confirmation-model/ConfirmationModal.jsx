@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Button, Typography } from "@mui/material";
 
 const ConfirmationModal = ({ modalOpen, setModalOpen, submitPlan }) => {
@@ -6,6 +6,27 @@ const ConfirmationModal = ({ modalOpen, setModalOpen, submitPlan }) => {
     setModalOpen(!modalOpen);
     submitPlan();
   };
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowHeight(window.innerHeight);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     <Box
       sx={{
@@ -24,8 +45,22 @@ const ConfirmationModal = ({ modalOpen, setModalOpen, submitPlan }) => {
       <Box
         sx={{
           background: "#29084d",
-          height: "12vw",
-          width: "25vw",
+          height:
+            windowWidth < 330
+              ? "40vw"
+              : windowWidth < 510
+              ? "30vw"
+              : windowWidth < 880
+              ? "20vw"
+              : "12vw",
+          width:
+            windowWidth < 330
+              ? "60vw"
+              : windowWidth < 510
+              ? "50vw"
+              : windowWidth < 880
+              ? "30vw"
+              : "25vw",
           position: "absolute",
           display: "flex",
           flexDirection: "column",
@@ -42,7 +77,7 @@ const ConfirmationModal = ({ modalOpen, setModalOpen, submitPlan }) => {
         onClick={(e) => e.stopPropagation()}
       >
         <Typography
-          fontSize={"1.7rem"}
+          fontSize={windowWidth < 880 ? "1rem" : "1.7rem"}
           color={"white"}
           textAlign={"center"}
           fontFamily={"Comme, sans-serif"}
@@ -62,7 +97,13 @@ const ConfirmationModal = ({ modalOpen, setModalOpen, submitPlan }) => {
           >
             <Typography
               color={"black"}
-              fontSize={"1.2rem"}
+              fontSize={
+                windowWidth < 330
+                  ? "0.5rem"
+                  : windowWidth < 880
+                  ? "0.8rem"
+                  : "1.2rem"
+              }
               fontFamily={"Comme, sans-serif"}
               fontWeight={800}
             >
@@ -77,7 +118,13 @@ const ConfirmationModal = ({ modalOpen, setModalOpen, submitPlan }) => {
           >
             <Typography
               color={"black"}
-              fontSize={"1.2rem"}
+              fontSize={
+                windowWidth < 330
+                  ? "0.5rem"
+                  : windowWidth < 880
+                  ? "0.8rem"
+                  : "1.2rem"
+              }
               fontFamily={"Comme, sans-serif"}
               fontWeight={800}
             >

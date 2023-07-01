@@ -57,4 +57,4 @@ const WorkoutPlanPage = () => {
   );
 };
 
-export default WorkoutPlanPage;
+export default WorkoutPlanPage

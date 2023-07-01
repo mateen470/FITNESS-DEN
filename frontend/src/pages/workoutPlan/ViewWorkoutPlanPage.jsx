@@ -31,6 +31,27 @@ const ViewWorkoutPlanPage = () => {
       setPlan(res.data.data);
     });
   };
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowHeight(window.innerHeight);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   useEffect(() => handlePlan(), []);
   useEffect(() => {
     Plan.length === 0 ? setplanExist(false) : setplanExist(true);
@@ -55,7 +76,7 @@ const ViewWorkoutPlanPage = () => {
             sx={{
               color: "white",
               fontWeight: "bold",
-              fontSize: "5vh",
+              fontSize: windowWidth < 786 ? "3vh" : "5vh",
               fontFamily: "Comme, sans-serif",
             }}
           >
@@ -68,7 +89,7 @@ const ViewWorkoutPlanPage = () => {
             sx={{
               color: "white",
               fontWeight: "bold",
-              fontSize: "5vh",
+              fontSize: windowWidth < 786 ? "3vh" : "5vh",
               fontFamily: "Comme, sans-serif",
             }}
           >
@@ -81,7 +102,7 @@ const ViewWorkoutPlanPage = () => {
             sx={{
               color: "white",
               fontWeight: "bold",
-              fontSize: "5vh",
+              fontSize: windowWidth < 786 ? "3vh" : "5vh",
               fontFamily: "Comme, sans-serif",
             }}
           >
@@ -94,7 +115,7 @@ const ViewWorkoutPlanPage = () => {
             sx={{
               color: "white",
               fontWeight: "bold",
-              fontSize: "5vh",
+              fontSize: windowWidth < 786 ? "3vh" : "5vh",
               fontFamily: "Comme, sans-serif",
             }}
           >
@@ -107,7 +128,7 @@ const ViewWorkoutPlanPage = () => {
             sx={{
               color: "white",
               fontWeight: "bold",
-              fontSize: "5vh",
+              fontSize: windowWidth < 786 ? "3vh" : "5vh",
               fontFamily: "Comme, sans-serif",
             }}
           >
@@ -120,7 +141,7 @@ const ViewWorkoutPlanPage = () => {
             sx={{
               color: "white",
               fontWeight: "bold",
-              fontSize: "5vh",
+              fontSize: windowWidth < 786 ? "3vh" : "5vh",
               fontFamily: "Comme, sans-serif",
             }}
           >
@@ -133,7 +154,7 @@ const ViewWorkoutPlanPage = () => {
             sx={{
               color: "white",
               fontWeight: "bold",
-              fontSize: "5vh",
+              fontSize: windowWidth < 786 ? "3vh" : "5vh",
               fontFamily: "Comme, sans-serif",
             }}
           >
@@ -207,54 +228,58 @@ const ViewWorkoutPlanPage = () => {
                 >
                   Week{index + 1}
                 </Typography>
-                <Table sx={{ mb: 5 }}>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell
-                        sx={{
-                          color: "white",
-                          fontWeight: "bold",
-                          fontSize: "5vh",
-                          fontFamily: "Comme, sans-serif",
-                        }}
-                      >
-                        Day
-                      </TableCell>
-                      <TableCell
-                        sx={{
-                          color: "white",
-                          fontWeight: "bold",
-                          fontSize: "5vh",
-                          fontFamily: "Comme, sans-serif",
-                        }}
-                      >
-                        Exercise
-                      </TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {i.map((x) => (
+                <Box
+                  sx={{ width: "100%", display: "block", overflowX: "auto" }}
+                >
+                  <Table sx={{ mb: 5 }}>
+                    <TableHead>
                       <TableRow>
-                        {handleDay(x.Day)}
-                        <TableCell onClick={() => handleClick(x.Week, x.Day)}>
-                          <NavLink to="/exercise">
-                            <Typography
-                              sx={{
-                                color: "white",
-                                fontSize: "3.5vh",
-                                fontFamily: "Comme, sans-serif",
-                                borderBottom: "0.5px solid white",
-                                display: "inline-block",
-                              }}
-                            >
-                              {x.BodyPart}
-                            </Typography>
-                          </NavLink>
+                        <TableCell
+                          sx={{
+                            color: "white",
+                            fontWeight: "bold",
+                            fontSize: windowWidth < 786 ? "3vh" : "5vh",
+                            fontFamily: "Comme, sans-serif",
+                          }}
+                        >
+                          Day
+                        </TableCell>
+                        <TableCell
+                          sx={{
+                            color: "white",
+                            fontWeight: "bold",
+                            fontSize: windowWidth < 786 ? "3vh" : "5vh",
+                            fontFamily: "Comme, sans-serif",
+                          }}
+                        >
+                          Exercise
                         </TableCell>
                       </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
+                    </TableHead>
+                    <TableBody>
+                      {i.map((x) => (
+                        <TableRow>
+                          {handleDay(x.Day)}
+                          <TableCell onClick={() => handleClick(x.Week, x.Day)}>
+                            <NavLink to="/exercise">
+                              <Typography
+                                sx={{
+                                  color: "white",
+                                  fontSize: windowWidth < 786 ? "2vh" : "3.5vh",
+                                  fontFamily: "Comme, sans-serif",
+                                  borderBottom: "0.5px solid white",
+                                  display: "inline-block",
+                                }}
+                              >
+                                {x.BodyPart}
+                              </Typography>
+                            </NavLink>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </Box>
               </>
             ))}
             <Box
