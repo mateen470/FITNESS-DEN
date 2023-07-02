@@ -42,7 +42,7 @@ const BMI = () => {
     >
       <Typography
         color={"white"}
-        fontSize={windowWidth < 400 ? "6.5vh" : "8vh"}
+        fontSize={windowWidth < 500 ? "6vh" : "8vh"}
         textAlign={"center"}
         sx={{ display: "flex", alignItems: "center", fontWeight: 800 }}
       >
@@ -50,7 +50,7 @@ const BMI = () => {
         {bmi > 0 ? (
           <Typography
             color={"white"}
-            fontSize={windowWidth < 400 ? "6.5vh" : "8vh"}
+            fontSize={windowWidth < 500 ? "6vh" : "8vh"}
             textAlign={"center"}
             fontWeight={800}
             ml={2}
@@ -60,7 +60,7 @@ const BMI = () => {
         ) : (
           <Typography
             color={"white"}
-            fontSize={windowWidth < 400 ? "6.5vh" : "8vh"}
+            fontSize={windowWidth < 500 ? "6vh" : "8vh"}
             textAlign={"center"}
             ml={1}
             fontWeight={800}
