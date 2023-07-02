@@ -18,7 +18,7 @@ const ActivationPageComponent = () => {
             navigate("/");
           }
         } catch (error) {
-          navigate("/not-activated");
+          navigate("/signup");
         }
       };
       activateEmail();

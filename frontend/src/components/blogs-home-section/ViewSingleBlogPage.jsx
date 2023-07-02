@@ -183,9 +183,9 @@ const ViewSingleBlogPage = () => {
             <Typography
               fontSize={
                 windowWidth < 500
-                  ? "1.1rem"
+                  ? "1.4rem"
                   : windowWidth > 500 && windowWidth < 800
-                  ? "1.9rem"
+                  ? "1.7rem"
                   : "2.2rem"
               }
               color={"black"}
