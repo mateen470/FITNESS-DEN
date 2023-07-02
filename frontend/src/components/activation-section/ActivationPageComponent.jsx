@@ -15,10 +15,10 @@ const ActivationPageComponent = () => {
           });
           if (activationProcess.data && activationProcess.data.success) {
             toast.success(activationProcess.data.message);
-            navigate("https://fitness-den.netlify.app");
+            navigate("/");
           }
         } catch (error) {
-          navigate("https://fitness-den.netlify.app/not-activated");
+          navigate("/not-activated");
         }
       };
       activateEmail();
