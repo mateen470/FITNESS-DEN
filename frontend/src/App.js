@@ -86,7 +86,7 @@ const App = () => {
         <Route path="/unauthorized" element={<NotFound />} />
         <Route path="/route-check" element={<ProtectedRoute />} />
         <Route
-          path="/fitness-den/reset-password/:accessTokenForgotPassword"
+          path="/reset-password/:accessTokenForgotPassword"
           element={<ResetPassword />}
         />
         <Route

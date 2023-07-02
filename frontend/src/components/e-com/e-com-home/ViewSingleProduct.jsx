@@ -256,8 +256,10 @@ const ViewSingleProduct = () => {
                 fontSize={
                   windowWidth < 1100 && windowHeight > 1000
                     ? "3.4vh"
-                    : windowWidth < 1000
-                    ? "8vh"
+                    : windowWidth < 1000 && windowWidth > 500
+                    ? "4vh"
+                    : windowWidth < 500
+                    ? "4.2vh"
                     : "3.2vw"
                 }
                 color={"black"}
@@ -273,7 +275,7 @@ const ViewSingleProduct = () => {
                   windowWidth < 1100 && windowHeight > 1000
                     ? "3vh"
                     : windowWidth < 1000
-                    ? "6vh"
+                    ? "3.5vh"
                     : "2.5vw"
                 }
                 color={"#3b60ff"}
@@ -309,7 +311,7 @@ const ViewSingleProduct = () => {
                         windowWidth < 1100 && windowHeight > 1000
                           ? "2.6vh"
                           : windowWidth < 1000
-                          ? "5vh"
+                          ? "3vh"
                           : "1.9vw"
                       }
                       fontWeight={800}
@@ -342,7 +344,7 @@ const ViewSingleProduct = () => {
                         windowWidth < 1100 && windowHeight > 1000
                           ? "2.6vh"
                           : windowWidth < 1000
-                          ? "5vh"
+                          ? "3vh"
                           : "1.9vw"
                       }
                       fontWeight={800}
@@ -360,8 +362,10 @@ const ViewSingleProduct = () => {
                 fontSize={
                   windowWidth < 1100 && windowHeight > 1000
                     ? "3vh"
-                    : windowWidth < 1000
-                    ? "6vh"
+                    : windowWidth < 1000 && windowWidth > 500
+                    ? "3vh"
+                    : windowWidth < 500
+                    ? "3.5vh"
                     : "2.5vw"
                 }
                 color={"black"}
@@ -376,14 +380,15 @@ const ViewSingleProduct = () => {
                 fontSize={
                   windowWidth < 1100 && windowHeight > 1000
                     ? "2.2vh"
-                    : windowWidth < 1000
-                    ? "5vh"
+                    : windowWidth < 1000 && windowWidth > 500
+                    ? "2.5vh"
+                    : windowWidth < 500
+                    ? "3vh"
                     : "1.9vw"
                 }
                 color={"black"}
                 fontFamily={"Comme, sans-serif"}
                 my={1}
-                textAlign={"justify"}
                 sx={{
                   wordWrap: "break-word",
                   overflowWrap: "break-word",
@@ -602,7 +607,6 @@ const ViewSingleProduct = () => {
                 color={"black"}
                 fontFamily={"Comme, sans-serif"}
                 my={1}
-                textAlign={"justify"}
                 sx={{
                   wordWrap: "break-word",
                   overflowWrap: "break-word",

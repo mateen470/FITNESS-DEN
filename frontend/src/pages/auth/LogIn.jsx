@@ -92,7 +92,7 @@ const LogIn = () => {
                 height: "99vh",
                 width:
                   windowWidth < 1200 && windowHeight > 700 ? "50vw" : "auto",
-                marginLeft: windowWidth > 1200 ? "-9vw" : "-6vw",
+                marginLeft: "-6vw",
               }}
             />
           </Grid>

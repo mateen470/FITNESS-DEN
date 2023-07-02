@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, Container, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 const BMI = () => {
   const [height, setHeight] = useState();
   const [weight, setWeight] = useState();
@@ -42,7 +42,7 @@ const BMI = () => {
     >
       <Typography
         color={"white"}
-        fontSize={"8vh"}
+        fontSize={windowWidth < 400 ? "6.5vh" : "8vh"}
         textAlign={"center"}
         sx={{ display: "flex", alignItems: "center", fontWeight: 800 }}
       >
@@ -50,7 +50,7 @@ const BMI = () => {
         {bmi > 0 ? (
           <Typography
             color={"white"}
-            fontSize={"8vh"}
+            fontSize={windowWidth < 400 ? "6.5vh" : "8vh"}
             textAlign={"center"}
             fontWeight={800}
             ml={2}
@@ -60,7 +60,7 @@ const BMI = () => {
         ) : (
           <Typography
             color={"white"}
-            fontSize={"8vh"}
+            fontSize={windowWidth < 400 ? "6.5vh" : "8vh"}
             textAlign={"center"}
             ml={1}
             fontWeight={800}

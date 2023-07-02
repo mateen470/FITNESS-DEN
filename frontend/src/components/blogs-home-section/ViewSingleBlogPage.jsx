@@ -148,13 +148,7 @@ const ViewSingleBlogPage = () => {
               </NavLink>
             </Box>
             <Typography
-              fontSize={
-                windowWidth < 1100 && windowHeight > 1000
-                  ? "3.2vh"
-                  : windowWidth < 1000
-                  ? "3vh"
-                  : "3.2vw"
-              }
+              variant={windowWidth < 700 ? "h5" : "h4"}
               color={"black"}
               fontWeight={800}
               textAlign={"left"}
@@ -174,7 +168,12 @@ const ViewSingleBlogPage = () => {
                       : windowWidth < 500
                       ? "80vw"
                       : "60vw",
-                  height: "35vw",
+                  height:
+                    windowWidth < 810 && windowWidth > 500
+                      ? "50vw"
+                      : windowWidth < 500
+                      ? "80vw"
+                      : "35vw",
                   objectFit: "fill",
                   borderRadius: "5px",
                 }}
@@ -183,11 +182,11 @@ const ViewSingleBlogPage = () => {
             </Box>
             <Typography
               fontSize={
-                windowWidth < 1100 && windowHeight > 1000
-                  ? "2.5vh"
-                  : windowWidth < 1000
-                  ? "2.5vh"
-                  : "2.5vw"
+                windowWidth < 500
+                  ? "1.1rem"
+                  : windowWidth > 500 && windowWidth < 800
+                  ? "1.7rem"
+                  : "2.2rem"
               }
               color={"black"}
               fontWeight={800}
@@ -200,12 +199,12 @@ const ViewSingleBlogPage = () => {
             </Typography>
 
             <Typography
-              fontSize={
-                windowWidth < 1100 && windowHeight > 1000
-                  ? "2vh"
-                  : windowWidth < 1000
-                  ? "2.3vh"
-                  : "1.9vw"
+              variant={
+                windowWidth < 700 && windowWidth > 500
+                  ? "h5"
+                  : windowWidth < 500
+                  ? "h7"
+                  : "h5"
               }
               color={"black"}
               textAlign={"left"}
@@ -386,7 +385,7 @@ const ViewSingleBlogPage = () => {
                   windowWidth < 1100 && windowHeight > 1000
                     ? "3.2vh"
                     : windowWidth < 1000
-                    ? "3vh"
+                    ? "3.2vh"
                     : "3vw"
                 }
                 color={"black"}
@@ -404,7 +403,7 @@ const ViewSingleBlogPage = () => {
                       windowWidth < 1100 && windowHeight > 1000
                         ? "2vh"
                         : windowWidth < 1000
-                        ? "1rem"
+                        ? "1.1rem"
                         : "1.7vw"
                     }
                     color={"#696969"}
@@ -419,7 +418,7 @@ const ViewSingleBlogPage = () => {
                       windowWidth < 1100 && windowHeight > 1000
                         ? "1.8vh"
                         : windowWidth < 1000
-                        ? "0.8rem"
+                        ? "0.95rem"
                         : "1.5vw"
                     }
                     color={"black"}
