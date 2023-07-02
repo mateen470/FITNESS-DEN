@@ -118,7 +118,7 @@ const MobileViewNavBar = () => {
             </Box>
           )}
 
-          <List sx={{ mt: 4 }}>
+          <List sx={{ mt: isUser ? 5 : 1 }}>
             {menuItems.map((item) => (
               <ListItem key={item.text} disablePadding>
                 <ListItemButton
