@@ -101,7 +101,12 @@ const UserDashboardSection = () => {
           sx={{
             display: "flex",
             alignItems: "center",
-            fontSize: "1.7vw",
+            fontSize:
+              windowWidth < 1100 && windowHeight > 1000
+                ? "2vh"
+                : windowWidth < 1000
+                ? "1.2rem"
+                : "1.7vw",
             cursor: "pointer",
           }}
         >

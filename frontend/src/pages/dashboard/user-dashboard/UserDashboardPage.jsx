@@ -1,10 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import UserDashboardSection from "../../../components/user-dashboard-section/UserDashboardSection";
 import { Box, Container, Typography } from "@mui/material";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import { NavLink } from "react-router-dom";
 
 const UserDashboardPage = () => {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowHeight(window.innerHeight);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     <Box
       sx={{
@@ -20,7 +41,16 @@ const UserDashboardPage = () => {
             <Typography
               color={"white"}
               fontFamily={"Comme, sans-serif"}
-              sx={{ display: "flex", alignItems: "center", fontSize: "1.7vw" }}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                fontSize:
+                  windowWidth < 1100 && windowHeight > 1000
+                    ? "2vh"
+                    : windowWidth < 1000
+                    ? "1.2rem"
+                    : "1.7vw",
+              }}
             >
               <KeyboardDoubleArrowLeftIcon /> Home
             </Typography>
