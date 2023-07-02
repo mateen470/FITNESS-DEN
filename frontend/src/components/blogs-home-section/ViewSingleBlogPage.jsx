@@ -185,7 +185,7 @@ const ViewSingleBlogPage = () => {
                 windowWidth < 500
                   ? "1.1rem"
                   : windowWidth > 500 && windowWidth < 800
-                  ? "1.7rem"
+                  ? "1.9rem"
                   : "2.2rem"
               }
               color={"black"}
@@ -203,7 +203,7 @@ const ViewSingleBlogPage = () => {
                 windowWidth < 700 && windowWidth > 500
                   ? "h5"
                   : windowWidth < 500
-                  ? "h7"
+                  ? "h6"
                   : "h5"
               }
               color={"black"}

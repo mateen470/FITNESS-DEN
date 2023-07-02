@@ -53,6 +53,7 @@ import PaidProduct from "./components/admin-dashboard-section/PaidProductView";
 import LogOut from "./components/LogOut/LogOut";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import NotActivated from "./components/not-activated/NotActivated";
 
 const App = () => {
   const { isAdmin, isUser, isTrainer } = useSelector(
@@ -76,6 +77,7 @@ const App = () => {
         <Route path="/nutrition-facts" element={<NutritionFactsPage />} />
         <Route path="/diet-plans" element={<DietPlanPage />} />
         <Route path="/workout-plans" element={<WorkoutPlanPage />} />
+        <Route path="/not-activated" element={<NotActivated />} />
         <Route path="/view-blog-home/:id" element={<ViewBlogHomePage />} />
         <Route
           path="/view-product-home/:id"
