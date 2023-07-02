@@ -16,9 +16,15 @@ const ActivationPageComponent = () => {
           if (activationProcess.data && activationProcess.data.success) {
             toast.success(activationProcess.data.message);
             navigate("/");
+          } else if (
+            activationProcess.response &&
+            activationProcess.response.data &&
+            activationProcess.response.data.message
+          ) {
+            navigate("/not-activated");
           }
         } catch (error) {
-          navigate("/signup");
+          console.log(error.message);
         }
       };
       activateEmail();
