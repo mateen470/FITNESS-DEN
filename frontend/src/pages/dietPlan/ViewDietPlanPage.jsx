@@ -343,11 +343,19 @@ const ViewDietPlanPage = () => {
             minHeight: "50vh",
           }}
         >
-          <Typography fontSize={"3.5vw"} color={"white"} textAlign={"center"}>
+          <Typography
+            fontSize={
+              windowWidth < 400 ? "5vw" : windowWidth < 800 ? "4.5vw" : "3.5vw"
+            }
+            color={"white"}
+            textAlign={"center"}
+          >
             You have not bought any Diet Plan!
           </Typography>
           <Typography
-            fontSize={"3vw"}
+            fontSize={
+              windowWidth < 400 ? "4.5vw" : windowWidth < 800 ? "4vw" : "3vw"
+            }
             color={"white"}
             textAlign={"center"}
             fontFamily={"Comme, sans-serif"}

@@ -103,7 +103,7 @@ const SignUp = () => {
                 height: "99vh",
                 width:
                   windowWidth < 1200 && windowHeight > 700 ? "50vw" : "auto",
-                marginLeft: "-12vw",
+                marginLeft: windowWidth > 1400 ? "-17vw" : "-12vw",
               }}
             />
           </Grid>

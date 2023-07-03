@@ -365,7 +365,7 @@ const ViewSingleProduct = () => {
                     : windowWidth < 1000 && windowWidth > 500
                     ? "3vh"
                     : windowWidth < 500
-                    ? "3.5vh"
+                    ? "3.2vh"
                     : "2.5vw"
                 }
                 color={"black"}
@@ -383,7 +383,7 @@ const ViewSingleProduct = () => {
                     : windowWidth < 1000 && windowWidth > 500
                     ? "2.5vh"
                     : windowWidth < 500
-                    ? "3vh"
+                    ? "2.6vh"
                     : "1.9vw"
                 }
                 color={"black"}

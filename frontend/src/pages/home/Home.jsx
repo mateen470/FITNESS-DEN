@@ -60,7 +60,15 @@ const Home = () => {
     };
   }, []);
   return (
-    <Box sx={{ position: "relative" }}>
+    <Box
+      sx={{
+        position: "relative",
+        backgroundImage:
+          "url(https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779141/user-smoke_artunt.svg)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
       <Hero scrollToSection={scrollToSection} />
       {windowWidth > 990 ? <ParallaxText /> : ""}
       <Box ref={sectionRef}>

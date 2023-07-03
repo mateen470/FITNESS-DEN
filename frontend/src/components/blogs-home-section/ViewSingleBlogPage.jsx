@@ -186,7 +186,7 @@ const ViewSingleBlogPage = () => {
                   ? "1.4rem"
                   : windowWidth > 500 && windowWidth < 800
                   ? "1.7rem"
-                  : "2.2rem"
+                  : "1.7rem"
               }
               color={"black"}
               fontWeight={800}

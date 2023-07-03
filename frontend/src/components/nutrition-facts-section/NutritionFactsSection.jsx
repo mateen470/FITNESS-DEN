@@ -3,21 +3,10 @@ import { Typography, Box } from "@mui/material";
 import NutritionFacts from "./NutritionFacts";
 const NutritionFactsSection = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
 
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowHeight(window.innerHeight);
     };
     window.addEventListener("resize", handleResize);
     return () => {

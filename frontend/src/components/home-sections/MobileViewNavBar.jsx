@@ -63,7 +63,7 @@ const MobileViewNavBar = () => {
         sx={{ position: "absolute", left: 15, top: 10 }}
         onClick={toggleDrawer(true)}
       >
-        <MenuIcon sx={{ color: "white" }} />
+        <MenuIcon sx={{ color: "white", fontSize: "larger" }} />
       </IconButton>
 
       <Drawer

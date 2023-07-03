@@ -80,7 +80,7 @@ const MapSection = () => {
       return;
     }
     const script = document.createElement("script");
-    script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyApkvLLh3-F8hyjI-Kb1fyGpv22FecYap4&libraries=places&callback=initMap`;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyAVH9_dhO-hUWBcQB8RORuHInVQMgNjWRs&libraries=places&callback=initMap`;
     script.defer = true;
     script.async = true;
     window.initMap = initMap;

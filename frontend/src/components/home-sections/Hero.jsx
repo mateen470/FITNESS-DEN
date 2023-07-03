@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Box, Button } from "@mui/material";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 import NavBar from "./NavBar";
+import MobileViewHeroSection from "./MobileViewHeroSection";
 
 const Hero = ({ scrollToSection }) => {
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
@@ -33,13 +34,14 @@ const Hero = ({ scrollToSection }) => {
           sx={{
             position: "relative",
             backgroundImage:
-              "url(https://res.cloudinary.com/diwvqpuuf/image/upload/v1688130266/HeroSectionMT_p7atp4.png)",
+              "url(https://res.cloudinary.com/diwvqpuuf/image/upload/v1685800269/banner_uzwlda.png)",
             backgroundPosition: "top center",
             backgroundRepeat: "no-repeat",
             backgroundSize: "100% 100%",
             minWidth: "100%",
             minHeight: `70vw`,
             mb: 0,
+            pr: 1,
           }}
         >
           <NavBar />
@@ -68,46 +70,10 @@ const Hero = ({ scrollToSection }) => {
           </Box>
         </Box>
       ) : windowWidth < 1000 ? (
-        <Box
-          sx={{
-            position: "relative",
-            backgroundImage:
-              "url(https://res.cloudinary.com/diwvqpuuf/image/upload/v1688130266/HeroSectionMT_p7atp4.png)",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "center",
-            backgroundSize: "170% 100%",
-            minHeight: `90vh`,
-            mb: 0,
-          }}
-        >
+        <Box>
           <NavBar />
-          <Box
-            sx={{
-              textAlign: "center",
-              position: "absolute",
-              bottom: "0px",
-              left:
-                windowWidth < 600 && windowWidth > 400
-                  ? "35vw"
-                  : windowWidth < 400
-                  ? "30vw"
-                  : "40vw",
-            }}
-          >
-            <Button
-              onClick={scrollToSection}
-              sx={{
-                color: "white",
-                textTransform: "none",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                fontSize: "1rem",
-              }}
-            >
-              Explore More
-              <KeyboardDoubleArrowDownIcon sx={{ fontSize: "1rem" }} />
-            </Button>
+          <Box sx={{ pt: 5 }}>
+            <MobileViewHeroSection />
           </Box>
         </Box>
       ) : (
@@ -156,3 +122,47 @@ const Hero = ({ scrollToSection }) => {
 };
 
 export default Hero;
+{
+  /* <Box
+          sx={{
+            position: "relative",
+            backgroundImage:
+              "url(https://res.cloudinary.com/diwvqpuuf/image/upload/v1688130266/HeroSectionMT_p7atp4.png)",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+            backgroundSize: "170% 100%",
+            minHeight: `90vh`,
+            mb: 0,
+          }}
+        >
+          <NavBar />
+          <Box
+            sx={{
+              textAlign: "center",
+              position: "absolute",
+              bottom: "0px",
+              left:
+                windowWidth < 600 && windowWidth > 400
+                  ? "35vw"
+                  : windowWidth < 400
+                  ? "30vw"
+                  : "40vw",
+            }}
+          >
+            <Button
+              onClick={scrollToSection}
+              sx={{
+                color: "white",
+                textTransform: "none",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                fontSize: "1rem",
+              }}
+            >
+              Explore More
+              <KeyboardDoubleArrowDownIcon sx={{ fontSize: "1rem" }} />
+            </Button>
+          </Box>
+        </Box> */
+}

@@ -163,7 +163,7 @@ const PaidOrders = () => {
                 alignItems: "center",
                 background: "rgba(255,255,255,0.3)",
                 borderRadius: 2,
-                width: "70vh",
+                width: "55vw",
                 p: 5,
               }}
             >
@@ -172,7 +172,7 @@ const PaidOrders = () => {
                   "https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779071/emptyCart_ygei0a.svg"
                 }
                 alt="emptycart"
-                style={{ width: "60vh" }}
+                style={{ width: "45vw" }}
               />
             </Box>
           </Box>
