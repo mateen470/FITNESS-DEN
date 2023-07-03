@@ -185,7 +185,7 @@ const ViewWorkoutPlanPage = () => {
               display: "flex",
               alignItems: "center",
               fontSize:
-                windowWidth < 1100 && windowHeight > 1000
+                windowWidth < 1100 && windowWidth > 1000 && windowHeight > 1000
                   ? "2vh"
                   : windowWidth < 1000
                   ? "1.2rem"
