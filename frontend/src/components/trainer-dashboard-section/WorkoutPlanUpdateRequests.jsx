@@ -125,10 +125,22 @@ const WorkoutPlanUpdateRequests = () => {
                         onClick={handleUpdate}
                         to="/update-workout-plan"
                       >
-                        <VisibilityRoundedIcon
+                        {/* <VisibilityRoundedIcon
                           id={index}
                           sx={{ color: "white", fontSize: "6vh" }}
-                        />
+                        /> */}
+                        <Typography
+                          id={index}
+                          sx={{
+                            color: "white",
+                            fontWeight: "bold",
+                            fontSize: "4vh",
+                            fontFamily: "Comme, sans-serif",
+                            borderBottom: "1px solid white",
+                          }}
+                        >
+                          View
+                        </Typography>
                       </NavLink>
                     </Button>
                   </TableCell>
