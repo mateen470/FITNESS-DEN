@@ -70,7 +70,7 @@ const Home = () => {
       }}
     >
       <Hero scrollToSection={scrollToSection} />
-      {windowWidth > 990 ? <ParallaxText /> : ""}
+      <ParallaxText />
       <Box ref={sectionRef}>
         <Services />
       </Box>

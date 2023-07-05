@@ -1,5 +1,6 @@
 import axios from "axios";
 axios.defaults.baseURL = "https://fitnessden.herokuapp.com/fitness-den/";
+// axios.defaults.baseURL = "http://localhost:5000/fitness-den/";
 let refresh = false;
 
 axios.interceptors.response.use(
