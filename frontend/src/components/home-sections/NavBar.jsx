@@ -23,7 +23,9 @@ const NavBar = () => {
   return (
     <>
       {windowWidth < 990 ? (
-        <MobileViewNavBar />
+        <Box>
+          <MobileViewNavBar />
+        </Box>
       ) : (
         <Box
           sx={{

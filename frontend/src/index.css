@@ -23,8 +23,20 @@ body {
   min-height: 100vh;
   width: 100%;
 }
+/* Hide the default scrollbar */
 body::-webkit-scrollbar {
-  display: none;
+  width: 0.5em; /* Adjust the width as needed */
+}
+
+/* Track */
+body::-webkit-scrollbar-track {
+  background-color: transparent; /* Make the track transparent */
+}
+
+/* Thumb */
+body::-webkit-scrollbar-thumb {
+  background-color: #888; /* Grey color for the thumb */
+  border-radius: 0.25em; /* Rounded corners */
 }
 a {
   color: inherit;
