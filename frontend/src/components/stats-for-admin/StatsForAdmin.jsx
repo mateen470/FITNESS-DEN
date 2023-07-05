@@ -71,7 +71,7 @@ const StatsForAdmin = () => {
                   fontWeight={800}
                   fontFamily={"Comme, sans-serif"}
                 >
-                  Total Plans Sold
+                  Total Sale
                 </Typography>
                 <Typography
                   fontSize={"4vh"}
