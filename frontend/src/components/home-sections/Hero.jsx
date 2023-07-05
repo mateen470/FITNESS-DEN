@@ -72,7 +72,16 @@ const Hero = ({ scrollToSection }) => {
       ) : windowWidth < 1000 ? (
         <Box>
           <NavBar />
-          <Box sx={{ pt: 5 }}>
+          <Box
+            sx={{
+              pt: 5,
+              position: "relative",
+              backgroundImage:
+                "url(https://res.cloudinary.com/diwvqpuuf/image/upload/v1685779141/user-smoke_artunt.svg)",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          >
             <MobileViewHeroSection />
           </Box>
         </Box>

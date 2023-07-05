@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   motion,
   useScroll,
@@ -13,6 +13,7 @@ import { wrap } from "@motionone/utils";
 function ParallaxTextBar({ children, baseVelocity = 100 }) {
   const baseX = useMotionValue(0);
   const { scrollY } = useScroll();
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const scrollVelocity = useVelocity(scrollY);
   const smoothVelocity = useSpring(scrollVelocity, {
     damping: 50,
@@ -37,6 +38,16 @@ function ParallaxTextBar({ children, baseVelocity = 100 }) {
 
     baseX.set(baseX.get() + moveBy);
   });
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     <div
       style={{
@@ -53,7 +64,7 @@ function ParallaxTextBar({ children, baseVelocity = 100 }) {
         style={{
           x,
           fontWeight: 500,
-          fontSize: "4rem",
+          fontSize: windowWidth < 500 ? "3rem" : "4rem",
           display: "flex",
           whiteSpace: "nowrap",
           display: "flex",
