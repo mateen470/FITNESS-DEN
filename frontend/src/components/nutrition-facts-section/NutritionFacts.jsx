@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Box, Container, Typography, Button } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import { toast } from "react-toastify";
 const NutritionFacts = () => {
   const [food, setFood] = useState("");
-  const [quantity, setQuantity] = useState("");
+  const [quantity, setQuantity] = useState(1);
   const [nutrition, setNutrition] = useState({});
   const [displayData, setDisplayData] = useState(false);
   const FoodKey = "8f040c9afefc06ef5365db357ba79284";
@@ -12,13 +13,18 @@ const NutritionFacts = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const handleSearch = async () => {
-    const response = await axios.get(
-      `https://api.edamam.com/api/nutrition-data?app_id=${foodID}&app_key=${FoodKey}&ingr=${quantity}%20${food}`
-    );
-    setNutrition(response.data);
-    setDisplayData(true);
-  };
+    if (food === "") toast.error("FOOD NAME CANNOT BE EMPTY!!");
+    if (food !== "") {
+      const response = await axios.get(
+        `https://api.edamam.com/api/nutrition-data?app_id=${foodID}&app_key=${FoodKey}&ingr=${quantity}%20${food}`
+      );
+      setNutrition(response.data);
+      setDisplayData(true);
+    }
 
+    if (food !== "" && Object.keys(nutrition.totalNutrients).length === 0)
+      toast.error("NO FOOD FOUND");
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -52,7 +58,7 @@ const NutritionFacts = () => {
       <Box
         sx={{
           mt: 5,
-          mb:2,
+          mb: 2,
           px: "2vw",
           width: windowWidth < 600 ? "100%" : "40%",
           display: "flex",
@@ -94,7 +100,8 @@ const NutritionFacts = () => {
         }}
       >
         <input
-          type="text"
+          type="number"
+          min="1"
           placeholder="Enter quantity..."
           value={quantity}
           onChange={(e) => setQuantity(e.target.value)}
