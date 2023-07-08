@@ -100,7 +100,7 @@ const NutritionFacts = () => {
         }}
       >
         <input
-          type="number"
+           type="text"
           min="1"
           placeholder="Enter quantity..."
           value={quantity}
