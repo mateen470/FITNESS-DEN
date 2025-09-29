@@ -55,19 +55,13 @@ frontend/
    npm install
    ```
 
-3. Create a `.env` file in the root directory and add environment variables (example):
-
-   ```
-   REACT_APP_API_URL=http://localhost:5000/api
-   ```
-
-4. Run the development server:
+3. Run the development server:
 
    ```bash
    npm start
    ```
 
-5. Build for production:
+4. Build for production:
 
    ```bash
    npm run build
