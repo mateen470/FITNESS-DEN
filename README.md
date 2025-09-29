@@ -29,15 +29,17 @@ This repository contains the **frontend** of a full-featured **MERN stack fitnes
 ## 📂 Project Structure
 
 ```
-frontend/
-├── public/           # Static assets
-├── src/
-│   ├── components/   # Reusable components
-│   ├── pages/        # App pages (Dashboard, Plans, Blog, etc.)
-│   ├── redux/        # State management (slices, store)
-│   ├── utils/        # Helpers & utilities
-│   ├── App.js        # Root component
-│   └── index.js      # Entry point
+src/
+├── Validations/      # Form validations & input checks
+├── components/       # Reusable UI components
+├── context/          # Context API providers (auth, checkout, etc.)
+├── helper/           # Utility functions & helpers
+├── pages/            # App pages (Dashboard, Blog, Shop, etc.)
+├── routes/           # Route configurations
+├── token/            # Token handling (auth, refresh, etc.)
+├── App.js            # Root application component
+├── index.css         # Global styles
+└── index.js          # Entry point
 ```
 
 ## ⚙️ Installation & Setup
